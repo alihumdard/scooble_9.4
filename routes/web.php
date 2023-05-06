@@ -14,5 +14,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/client', function () {
+    return view('clients');
+});
+Route::get('/drivers', function () {
+    return view('drivers');
+});
+Route::get('/routes', function () {
+    return view('routes');
+});
+Route::get('/calender', function () {
+    return view('calender');
+});
+Route::get('/users', function () {
+    return view('users');
+});
+Route::get('/notifications', function () {
+    return view('notifications');
+});
+Route::get('/announcmnents', function () {
+    return view('announcmnents');
+});
+Route::get('/settings', function () {
+    return view('settings');
 });
