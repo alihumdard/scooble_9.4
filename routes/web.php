@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,30 +15,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+
+ 
+Route::controller(UserController::class)->group(function () {
+
+    Route::get('/', 'index');
+    
+    Route::get('/client', 'clients');
+    
+    Route::get('/drivers', 'drivers');
+    
+    Route::get('/routes', 'routes');
+    
+    Route::get('/calender', 'calender');
+    
+    Route::get('/users', 'users');
+    
+    Route::get('/notifications', 'notifications');
+    
+    Route::get('/announcmnents', 'announcmnents');
+    
+    Route::get('/settings', 'settings');
+    
+    Route::get('/edit/{id}', 'user_edit');
+    Route::post('/user_store', 'user_store');
+
 });
-Route::get('/client', function () {
-    return view('clients');
-});
-Route::get('/drivers', function () {
-    return view('drivers');
-});
-Route::get('/routes', function () {
-    return view('routes');
-});
-Route::get('/calender', function () {
-    return view('calender');
-});
-Route::get('/users', function () {
-    return view('users');
-});
-Route::get('/notifications', function () {
-    return view('notifications');
-});
-Route::get('/announcmnents', function () {
-    return view('announcmnents');
-});
-Route::get('/settings', function () {
-    return view('settings');
-});
+
