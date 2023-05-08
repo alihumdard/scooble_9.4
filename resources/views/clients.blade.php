@@ -1,14 +1,7 @@
 @extends('layouts.main')
 
 @section('main-section')
-<script>
-  $(document).ready(function() {
-    $('#example').DataTable();
-  });
-</script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
 <!-- partial -->
 <div class="main-panel">
   <div class="content-wrapper">
@@ -75,11 +68,6 @@
       <div class="card-body px-0">
         <div class="table-responsive">
           @include('client_table')
-          <?php
-
-         // include_once "client_table.php";
-
-          ?>
         </div>
       </div>
     </div>
@@ -93,9 +81,9 @@
           <h5 class="modal-title" id="addclientLabel"></h5>
         </div> -->
         <div class="modal-body">
+      <form action="{{'/user_store'}}" style="width: 100%;" method="post" class="dropzone mx-auto" id="my-dropzone">
           <div class="row">
             <div class="col-md-12 mb-2">
-              <form action="" style="width: 100%;" method="post" class="dropzone mx-auto" id="my-dropzone">
                 <div class="row text-center" style="color: #6C757D; font-size: 40px;">
                   <div class="col-lg-12">
                     <i class="fa fa-camera"></i>
@@ -104,13 +92,15 @@
                     <label for="my-dropzone" id="dropzone-label">Upload Image</label>
                   </div>
                 </div>
-              </form>
             </div>
             <div class="col-lg-12 mb-2">
-              <input type="text" class="form-control" name="client_name" id="client_name" placeholder=" @lang('lang.name')">
+              @csrf
+              <input type="hidden" name="_previous" value="{{ url()->previous() }}">
+              <input type="hidden" name="role" value="Client">
+              <input type="text" class="form-control" name="client_name"  required id="client_name" placeholder=" @lang('lang.name')">
             </div>
             <div class="col-lg-12 mb-2">
-              <input type="text" class="form-control" name="email" id="email" placeholder=" @lang('lang.email') ">
+              <input type="text" class="form-control" name="email" required  id="email" placeholder=" @lang('lang.email') ">
             </div>
             <div class="col-lg-12 mb-2">
               <input type="text" class="form-control" name="phone" id="phone" placeholder=" @lang('lang.phone')">
@@ -140,8 +130,9 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-sm text-white px-5" data-toggle="modal" data-target="#add" style="background-color: #E45F00; border-radius: 8px;"> @lang('lang.add') </button>
+          <button  class="btn btn-sm text-white px-5"  style="background-color: #E45F00; border-radius: 8px;"> @lang('lang.add') </button>
         </div>
+      </form>
       </div>
     </div>
   </div>

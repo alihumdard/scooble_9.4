@@ -56,7 +56,7 @@
 <!-- content-wrapper ends -->
 
 <!-- Add User Modal -->
-<div class="modal fade" id="adduser" tabindex="-1" aria-labelledby="adduserLabel" aria-hidden="true">
+<div class="modal fade" id="" tabindex="-1" aria-labelledby="adduserLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -88,16 +88,16 @@
 <!-- Add User Modal End -->
 
 <!-- Confirm Modal -->
-<div class="modal fade" id="confirmmodal" tabindex="-1" aria-labelledby="confirmmodalLabel" aria-hidden="true">
+<div class="modal fade" id="adduser" tabindex="-1" aria-labelledby="confirmmodalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- <div class="modal-header">
           <h5 class="modal-title" id="confirmmodalLabel"></h5>
         </div> -->
+    <form action="{{'/user_store'}}" style="width: 100%;" method="post" class="dropzone mx-auto" id="my-dropzone">
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12 mb-2">
-            <form action="" style="width: 100%;" method="post" class="dropzone mx-auto" id="my-dropzone">
               <div class="row text-center" style="color: #6C757D; font-size: 40px;">
                 <div class="col-lg-12">
                   <i class="fa fa-camera"></i>
@@ -106,9 +106,10 @@
                   <label for="my-dropzone" id="dropzone-label">Upload Image</label>
                 </div>
               </div>
-            </form>
           </div>
           <div class="col-lg-12 mb-2">
+              @csrf
+              <input type="hidden" name="_previous" value="{{url()->previous()}}">
             <input type="text" class="form-control" name="client_name" id="client_name" placeholder="@lang('lang.name')">
           </div>
           <div class="col-lg-12 mb-2">
@@ -119,6 +120,14 @@
           </div>
           <div class="col-lg-12 mb-2">
             <input type="text" class="form-control" name="company_name" id="company_name" placeholder="@lang('lang.company_name')">
+          </div>
+          <div class="col-lg-12 mb-2">
+            <select required name="role" id="user_role" class="form-select">
+                  <option selected value="" disabled >@lang('lang.select_user_role')</option>
+                  <option value="Admin">@lang('lang.add_admin')</option>
+                  <option value="Client">@lang('lang.add_client')</option>
+                  <option value="Deriver">@lang('lang.add_driver')</option>
+          </select>
           </div>
           <div class="col-lg-12 mb-2">
             <label for="company_logo" class="form-control btn btn-sm center-block btn-file" style="border: 1px solid #CED4DA;">
@@ -144,6 +153,7 @@
       <div class="modal-footer">
         <button class="btn btn-sm text-white px-5" data-toggle="modal" data-target="#add" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
