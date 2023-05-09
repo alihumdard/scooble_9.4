@@ -14,12 +14,9 @@
         <tbody>
       
         @foreach($data as $key => $value)
-            @php
-            $datetime = DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z',$value['created_at']);
-            @endphp
             <tr>
                 <td><img src="assets/images/pic.jpg" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
-                <td>{{ $datetime->format('M d, Y'); }}</td>
+                <td>{{table_date($value['created_at'])}}}</td>
                 <td>{{ $value['address'] }}</td>
                 <td><img src="assets/images/pic.jpg" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> @lang('lang.client_name')</td>
                 @if($value['status'] == 1)

@@ -1,14 +1,21 @@
-<!-- Essential Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- DataTables Plugin -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> 
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 
 <!-- Vendor Scripts -->
-<!-- <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script> -->
+<!-- <script src="{{ asset('assets/vendors/js/vendor.bundle.basejs') }}"></script> -->
 
 <!-- Chart.js Plugin -->
 <script src="{{ asset('assets/vendors/chart.js/Chart.min.js')}}"></script>
