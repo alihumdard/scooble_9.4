@@ -4,7 +4,7 @@ return [
 
     "admin" => "ایڈمن",
     "dashboard" => "ایڈمن",
-    "clients" => "Clients",
+    "clients" => "کلائنٹ",
     "drivers" => "Drivers",
     "routes" => "Routes",
     "calendar" => "Calendar",

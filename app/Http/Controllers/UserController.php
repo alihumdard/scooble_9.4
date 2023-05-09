@@ -7,6 +7,12 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function lang_change(REQUEST $request)
+    {
+        app()->setlocale($request->lang);
+        session(["lang"=> $request->lang]);
+       return redirect()->back();
+    }
     public function index()
     {
         return view('index');

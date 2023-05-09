@@ -39,6 +39,7 @@ Route::controller(UserController::class)->group(function () {
     
     Route::get('/edit/{id}', 'user_edit');
     Route::post('/user_store', 'user_store');
+    Route::post('/lang_change', 'lang_change');
 
 });
 
