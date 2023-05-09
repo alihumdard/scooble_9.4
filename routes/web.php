@@ -16,29 +16,43 @@ use App\Http\Controllers\UserController;
 */
 
 
- 
+
 Route::controller(UserController::class)->group(function () {
 
     Route::get('/', 'index');
-    
+
     Route::get('/client', 'clients');
-    
+
     Route::get('/drivers', 'drivers');
-    
+
     Route::get('/routes', 'routes');
-    
+
     Route::get('/calender', 'calender');
-    
+
     Route::get('/users', 'users');
-    
+
     Route::get('/notifications', 'notifications');
-    
+
     Route::get('/announcmnents', 'announcmnents');
-    
+
     Route::get('/settings', 'settings');
-    
+
     Route::get('/edit/{id}', 'user_edit');
     Route::post('/user_store', 'user_store');
-
 });
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+Route::get('/forgot_password', function () {
+    return view('forgot_password');
+});
+
+Route::get('/set_password', function () {
+    return view('set_password');
+});
