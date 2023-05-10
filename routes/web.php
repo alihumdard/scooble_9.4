@@ -56,3 +56,11 @@ Route::get('/forgot_password', function () {
 Route::get('/set_password', function () {
     return view('set_password');
 });
+
+Route::get('/create_trip', function () {
+    return view('create_trip');
+});
+
+Route::get('/driver_map', function () {
+    return view('driver_map');
+});
