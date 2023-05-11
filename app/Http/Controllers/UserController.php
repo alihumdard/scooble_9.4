@@ -12,16 +12,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-<<<<<<< HEAD
-
-=======
     public function lang_change(REQUEST $request)
     {
         app()->setlocale($request->lang);
         session(["lang"=> $request->lang]);
        return redirect()->back();
     }
->>>>>>> 759855231c8a180197ece2167dadf1032e0837fe
+
     public function index()
     {
         // session()->forget('user');

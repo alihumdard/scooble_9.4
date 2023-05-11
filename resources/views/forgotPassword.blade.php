@@ -134,7 +134,7 @@
                     </div>
                     <div class="col-md-12 my-4">
                         <button class="btn text-white text-center">Send</button>
-                        <p class="mt-3">You can <a href="/login">Login here !</a></p>
+                        <p class="mt-3">You can <a href="/">Login here !</a></p>
                         </form>
                     </div>
                 </div>

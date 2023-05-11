@@ -28,11 +28,7 @@
         },
         "files":[
             "app/helpers/helpers.php"
-<<<<<<< HEAD
         ]
-=======
-        ] 
->>>>>>> 759855231c8a180197ece2167dadf1032e0837fe
     },
     "autoload-dev": {
         "psr-4": {
