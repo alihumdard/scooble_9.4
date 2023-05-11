@@ -3,7 +3,7 @@
 @section('main-section')
 <!-- partial -->
 <div class="main-panel">
-  <div class="content-wrapper">
+  <div class="content-wrapper py-0">
     <!-- <div class="page-header"> -->
     <!-- <nav aria-label="breadcrumb">
         <ul class="breadcrumb">

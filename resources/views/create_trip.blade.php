@@ -1,6 +1,16 @@
 @extends('layouts.main')
 
 @section('main-section')
+<style>
+    tbody tr {
+        cursor: move;
+    }
+
+    tbody tr td:first-child {
+        cursor: grab;
+    }
+</style>
+
 <div class="main-panel">
     <div class="content-wrapper py-0">
         <div class="card" style="border: none;">
@@ -75,7 +85,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td class="draggable-row">
                                         <svg width="15" height="20" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="1.875" cy="1.25" r="1.25" fill="#9FA2B4" />
                                             <circle cx="5.625" cy="1.25" r="1.25" fill="#9FA2B4" />
@@ -126,7 +136,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="draggable-row">
                                         <svg width="15" height="20" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="1.875" cy="1.25" r="1.25" fill="#9FA2B4" />
                                             <circle cx="5.625" cy="1.25" r="1.25" fill="#9FA2B4" />
@@ -177,7 +187,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="draggable-row">
                                         <svg width="15" height="20" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="1.875" cy="1.25" r="1.25" fill="#9FA2B4" />
                                             <circle cx="5.625" cy="1.25" r="1.25" fill="#9FA2B4" />
@@ -285,7 +295,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td class="draggable-row">
                                         <svg width="15" height="20" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="1.875" cy="1.25" r="1.25" fill="#9FA2B4" />
                                             <circle cx="5.625" cy="1.25" r="1.25" fill="#9FA2B4" />
@@ -337,7 +347,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="draggable-row">
                                         <svg width="15" height="20" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="1.875" cy="1.25" r="1.25" fill="#9FA2B4" />
                                             <circle cx="5.625" cy="1.25" r="1.25" fill="#9FA2B4" />
@@ -388,7 +398,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="draggable-row">
                                         <svg width="15" height="20" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="1.875" cy="1.25" r="1.25" fill="#9FA2B4" />
                                             <circle cx="5.625" cy="1.25" r="1.25" fill="#9FA2B4" />

@@ -64,3 +64,11 @@ Route::get('/create_trip', function () {
 Route::get('/driver_map', function () {
     return view('driver_map');
 });
+
+Route::get('/announcements_alerts', function () {
+    return view('announcements_alerts');
+});
+
+Route::get('/pdf_templates', function () {
+    return view('pdf_templates');
+});
