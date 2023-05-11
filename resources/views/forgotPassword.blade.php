@@ -120,23 +120,38 @@
                         <p class="mb-0">Please enter the email associated with your account and we'll send an email with link, where you can change your password.</p>
                     </div>
                     <div class="col-md-12">
-                        <form action="">
+                        <form action="/forgot_password" method="post" >
+                            @csrf
                             <label for="">
                                 <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.5938 0H1.40625C0.62959 0 0 0.671562 0 1.5V10.5C0 11.3284 0.62959 12 1.40625 12H13.5938C14.3704 12 15 11.3284 15 10.5V1.5C15 0.671562 14.3704 0 13.5938 0ZM13.5938 1.5V2.77516C12.9369 3.34575 11.8896 4.233 9.65077 6.10297C9.15738 6.51694 8.18004 7.51147 7.5 7.49988C6.82008 7.51159 5.84241 6.51678 5.34923 6.10297C3.11074 4.23328 2.06323 3.34584 1.40625 2.77516V1.5H13.5938ZM1.40625 10.5V4.69994C2.07756 5.27028 3.02956 6.07063 4.48061 7.28263C5.12095 7.82028 6.24234 9.00719 7.5 8.99997C8.75147 9.00719 9.85866 7.8375 10.5191 7.28288C11.9701 6.07091 12.9224 5.27034 13.5938 4.69997V10.5H1.40625Z" fill="#BDBDBD" />
                                 </svg>
                             </label>
-                            <input type="text" name="user_name_emial" id="user_name_emial" class="form-control mb-3" placeholder="Email">
-                        </form>
+                            <input type="email" name="email" value="{{(isset($email))?$email:''}}" id="email" class="form-control mb-3" placeholder="Email">
+                            @if (Session::has('message'))
+                            <lable class="text-danger"> {{ session('message') }}</lable>
+                            @endif
                     </div>
                     <div class="col-md-12 my-4">
-                        <button class="btn text-white text-center" data-toggle="modal" data-target="#forgetpassword">Send</button>
+                        <button class="btn text-white text-center">Send</button>
                         <p class="mt-3">You can <a href="/login">Login here !</a></p>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+@if (Session::has('otp'))
+    <!-- Display the modal using JavaScript/jQuery or CSS styles -->
+    <script>
+        // JavaScript/jQuery code to show the modal
+        // Replace the selector and code with your actual modal implementation
+        $(document).ready(function() {
+            $('#forgetpassword').modal('show');
+        });
+    </script>
+@endif
 
     <!-- forgetpassword Button Modal -->
     <div class="modal fade" id="forgetpassword" tabindex="-1" aria-labelledby="forgetpasswordLabel" aria-hidden="true">
@@ -156,19 +171,25 @@
                             <rect x="4" y="4" width="48" height="48" rx="24" stroke="#ECFDF3" stroke-width="8" />
                         </svg>
                         <h3 class="mt-3">Check your email</h3>
-                        <p class="mb-0">We sent a verification link to</p>
-                        <p>admin@gmail.com</p>
+                        <p class="mb-0">We sent a verification code to</p>
+                        <p>{{session('email')}}</p>
+                        <form action="/forgot_password" method="post">
+                            @csrf
+                            <input type="hidden" name='email' value="{{session('email')}}"   />
                         <div class="inputfield mb-4">
-                            <input type="number" maxlength="1" class="input" disabled />
-                            <input type="number" maxlength="1" class="input" disabled />
-                            <input type="number" maxlength="1" class="input" disabled />
-                            <input type="number" maxlength="1" class="input" disabled />
-                            <input type="number" maxlength="1" class="input" disabled />
+                            <input type="number" name='no1' maxlength="1" class="input"  />
+                            <input type="number"  name='no2' maxlength="1" class="input"  />
+                            <input type="number" name='no3' maxlength="1" class="input"  />
+                            <input type="number" name='no4'  maxlength="1" class="input"  />
+                            <input type="number" name='no5' maxlength="1" class="input"  />
                         </div>
-                        <a href="/set_password">
-                            <button class="btn btn-sm text-white" style="background-color: #452C88; border-radius: 8px; width: 20%;" onclick="validateOTP()">Verify Email</button>
-                        </a>
-                        <p>Didn’t receive the email? <a href="" style="color: #452C88;">Click to resend</a></p>
+
+                            <button class="btn btn-sm text-white" style="background-color: #452C88; border-radius: 8px; width: 20%;" >Verify Email</button>
+                            </form>
+                            @if (Session::has('otp'))
+                            <lable class="text-danger"> {{ session('otp') }}</lable>
+                            @endif
+                        <p>Didn’t receive the email? <a href="/forgot_password?email={{session('email')}}" style="color: #452C88;">Click to resend</a></p>
                         <div class="py-5 mt-5">
                             <a href="/login" class="text-dark">
                                 <p>
@@ -214,7 +235,6 @@
 
         //Update input
         const updateInputConfig = (element, disabledStatus) => {
-            element.disabled = disabledStatus;
             if (!disabledStatus) {
                 element.focus();
             } else {

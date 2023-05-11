@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('user_pic')->nullable();
             $table->string('com_name')->nullable();
             $table->string('com_pic')->nullable();
-            $table->string('status')->default('1');
+            $table->string('status')->default('0');
+            $table->integer('otp')->nullable();;
             $table->string('added_user_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

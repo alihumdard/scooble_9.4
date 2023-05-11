@@ -87,8 +87,10 @@
                         <p>You can <a href="/login">Login here !</a></p>
                     </div>
                     <div class="col-md-12">
-                        <form action="">
-                            <label for="">
+                        <form action="/register" method="post">
+                            <label for="email" >
+                                @csrf
+                                <input type="hidden" name="role" value="Client">
                                 <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.5938 0H1.40625C0.62959 0 0 0.671562 0 1.5V10.5C0 11.3284 0.62959 12 1.40625 12H13.5938C14.3704 12 15 11.3284 15 10.5V1.5C15 0.671562 14.3704 0 13.5938 0ZM13.5938 1.5V2.77516C12.9369 3.34575 11.8896 4.233 9.65077 6.10297C9.15738 6.51694 8.18004 7.51147 7.5 7.49988C6.82008 7.51159 5.84241 6.51678 5.34923 6.10297C3.11074 4.23328 2.06323 3.34584 1.40625 2.77516V1.5H13.5938ZM1.40625 10.5V4.69994C2.07756 5.27028 3.02956 6.07063 4.48061 7.28263C5.12095 7.82028 6.24234 9.00719 7.5 8.99997C8.75147 9.00719 9.85866 7.8375 10.5191 7.28288C11.9701 6.07091 12.9224 5.27034 13.5938 4.69997V10.5H1.40625Z" fill="#BDBDBD" />
                                 </svg>
@@ -100,7 +102,7 @@
                                     <path d="M7.5 10.7143C5.51088 10.7143 3.60322 11.5045 2.1967 12.911C0.790176 14.3175 0 16.2252 0 18.2143C0 18.4985 0.112883 18.771 0.313814 18.9719C0.514746 19.1728 0.787268 19.2857 1.07143 19.2857C1.35559 19.2857 1.62811 19.1728 1.82904 18.9719C2.02997 18.771 2.14286 18.4985 2.14286 18.2143C2.14286 16.7935 2.70727 15.4309 3.71193 14.4262C4.71659 13.4216 6.0792 12.8572 7.5 12.8572C8.9208 12.8572 10.2834 13.4216 11.2881 14.4262C12.2927 15.4309 12.8571 16.7935 12.8571 18.2143C12.8571 18.4985 12.97 18.771 13.171 18.9719C13.3719 19.1728 13.6444 19.2857 13.9286 19.2857C14.2127 19.2857 14.4853 19.1728 14.6862 18.9719C14.8871 18.771 15 18.4985 15 18.2143C15 16.2252 14.2098 14.3175 12.8033 12.911C11.3968 11.5045 9.48912 10.7143 7.5 10.7143Z" fill="#BDBDBD" />
                                 </svg>
                             </label>
-                            <input type="text" name="name" id="name" class="form-control mb-3" placeholder="User Name">
+                            <input type="text" name="client_name" id="name" class="form-control mb-3" placeholder="User Name">
                             <div onclick="showiconss()">
                                 <label for="" id="showicon">
                                     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -135,10 +137,10 @@
                                 </label>
                             </div>
                             <input type="password" name="confirm_password" id="confirmpassword" class="form-control mb-3" placeholder="Password">
-                        </form>
                     </div>
                     <div class="col-md-12 my-3">
                         <button class="btn text-white text-center">Login</button>
+                        </form>
                     </div>
                 </div>
             </div>

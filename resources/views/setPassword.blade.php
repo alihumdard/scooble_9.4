@@ -87,7 +87,9 @@
                         <p>You can <a href="/login">Login here !</a></p>
                     </div>
                     <div class="col-md-12">
-                        <form action="">
+                        <form action="set_password" method="post" >
+                        <input type="hidden" name='email' value="{{(isset($email))?$email:''}}" id="email">
+                            @csrf
                             <div onclick="showiconss()">
                                 <label for="" id="showicon">
                                     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,10 +124,10 @@
                                 </label>
                             </div>
                             <input type="password" name="confirm_password" id="confirmpassword" class="form-control mb-3" placeholder="Password">
-                        </form>
                     </div>
                     <div class="col-md-12 my-4">
-                        <button class="btn text-white text-center">Login</button>
+                        <button class="btn text-white text-center">Change Password</button>
+                    </form>
                     </div>
                 </div>
             </div>
