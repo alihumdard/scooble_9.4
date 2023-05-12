@@ -1,28 +1,4 @@
-<?php
-// Start the session
-session_start();
 
-//Check if the language preference has already been set in the session
-if (isset($_SESSION['lang'])) {
-  $lang = $_SESSION['lang'];
-} elseif (strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'es') !== false) {
-  $lang = 'es';
-} else {
-  $lang = 'en';
-}
-
-//Store the language preference in the session
-if (isset($_POST['lang'])) {
-  $lang = $_POST['lang'];
-  $_SESSION['lang'] = $lang;
-}
-
-// Read the contents of the language file
-// $lang_data = file_get_contents($lang . '.json');
-
-// Parse the language data as a JSON object
-// $lang_obj = json_decode($lang_data);
-?>
 <html lang="en">
 
 <head>
@@ -117,10 +93,11 @@ if (isset($_POST['lang'])) {
             </li> -->
 
           <li class="nav-item d-none d-lg-block ">
-            <form method="post">
+            <form action="/lang_change" method="post" >
+              @csrf
               <select id="lang-select" class="form-select" name="lang" onchange="this.form.submit()">
-                <option value="en" <?php if ($lang == 'en') echo 'selected'; ?>>En</option>
-                <option value="es" <?php if ($lang == 'es') echo 'selected'; ?>>Es</option>
+                <option value="en" <?= (session('lang') == 'en') ? 'selected': ''; ?>>En</option>
+                <option value="es" <?= (session('lang') == 'es') ? 'selected': ''; ?>>Es</option>
               </select>
             </form>
           </li>

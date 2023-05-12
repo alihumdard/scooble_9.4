@@ -38,37 +38,16 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/settings', 'settings');
 
     Route::get('/edit/{id}', 'user_edit');
+
     Route::post('/user_store', 'user_store');
+    Route::post('/lang_change', 'lang_change');
+
+    Route::post('/login', 'user_login');
+
+    Route::match(['get', 'post'], '/forgot_password', 'forgot_password');
+
+    Route::match(['get', 'post'], '/set_password', 'set_password');
+
+    Route::match(['get', 'post'], '/register', 'user_register');
 });
 
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/register', function () {
-    return view('register');
-});
-
-Route::get('/forgot_password', function () {
-    return view('forgot_password');
-});
-
-Route::get('/set_password', function () {
-    return view('set_password');
-});
-
-Route::get('/create_trip', function () {
-    return view('create_trip');
-});
-
-Route::get('/driver_map', function () {
-    return view('driver_map');
-});
-
-Route::get('/announcements_alerts', function () {
-    return view('announcements_alerts');
-});
-
-Route::get('/pdf_templates', function () {
-    return view('pdf_templates');
-});
