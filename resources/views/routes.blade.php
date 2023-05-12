@@ -3,16 +3,7 @@
 @section('main-section')
 <!-- partial -->
 <div class="main-panel">
-  <div class="content-wrapper">
-    <!-- <div class="page-header"> -->
-    <!-- <nav aria-label="breadcrumb">
-        <ul class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">
-            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-          </li>
-        </ul>
-      </nav> -->
-    <!-- </div> -->
+  <div class="content-wrapper py-0">
     <div class="card" style="border: none;">
       <div class="card-header bg-white">
         <h3 class="page-title">
@@ -31,7 +22,9 @@
           <div class="col-lg-8">
             <div class="row mx-1">
               <div class="col-lg-4 px-1" style="text-align: right;">
-                <button class="btn btn-sm text-white" data-toggle="modal" data-target="#createtrip" style="background-color: #E45F00; border-radius: 8px;"><i class="fa fa-plus"></i> @lang('lang.create_trip')</button>
+                <a href="/create_trip">
+                  <button class="btn btn-sm text-white" style="background-color: #E45F00; border-radius: 8px;"><i class="fa fa-plus"></i> @lang('lang.create_trip')</button>
+                </a>
               </div>
               <div class="col-lg-4 px-1">
                 <select name="filter_by_sts" id="filter_by_sts" class="form-select" style="border-radius: 10px;">

@@ -51,4 +51,3 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get', 'post'], '/register', 'user_register');
 });
 
-
