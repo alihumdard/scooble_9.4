@@ -33,7 +33,35 @@ $(document).ready(function () {
 
     });
 
+    // $(".draggable-row").draggable({
+    //     cursor: "grab",
+    //     axis: "y",
+    //     handle: "td:first-child",
+    //     opacity: 0.6,
+    //     containment: "parent",
+    //     start: function (event, ui) {
+    //         $(this).addClass("dragging");
+    //     },
+    //     stop: function (event, ui) {
+    //         $(this).removeClass("dragging");
+    //     }
+    // });
 
+    // $("tbody").sortable({
+    //     cursor: "move",
+    //     axis: "y",
+    //     handle: "td:first-child",
+    //     opacity: 0.6,
+    //     containment: "parent",
+    //     update: function (event, ui) {
+    //         // Save the new order or perform other actions
+    //         var newOrder = [];
+    //         $("tbody tr").each(function () {
+    //             newOrder.push($(this).index());
+    //         });
+    //         console.log("New order:", newOrder);
+    //     }
+    // });
 
 });
 
@@ -69,38 +97,3 @@ function handleFileChange(event) {
 
 // modal form functions end
 
-// for drag n drop table rows
-
-$(document).ready(function () {
-    $(".draggable-row").draggable({
-        cursor: "grab",
-        axis: "y",
-        handle: "td:first-child",
-        opacity: 0.6,
-        containment: "parent",
-        start: function (event, ui) {
-            $(this).addClass("dragging");
-        },
-        stop: function (event, ui) {
-            $(this).removeClass("dragging");
-        }
-    });
-
-    $("tbody").sortable({
-        cursor: "move",
-        axis: "y",
-        handle: "td:first-child",
-        opacity: 0.6,
-        containment: "parent",
-        update: function (event, ui) {
-            // Save the new order or perform other actions
-            var newOrder = [];
-            $("tbody tr").each(function () {
-                newOrder.push($(this).index());
-            });
-            console.log("New order:", newOrder);
-        }
-    });
-});
-
-// for drag n drop table rows end

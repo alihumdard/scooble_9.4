@@ -70,6 +70,14 @@
         input {
             position: relative;
         }
+
+        #password-message {
+            margin-top: 10px;
+        }
+
+        .invalid {
+            color: red;
+        }
     </style>
 </head>
 
@@ -93,7 +101,7 @@
                                     <path d="M13.5938 0H1.40625C0.62959 0 0 0.671562 0 1.5V10.5C0 11.3284 0.62959 12 1.40625 12H13.5938C14.3704 12 15 11.3284 15 10.5V1.5C15 0.671562 14.3704 0 13.5938 0ZM13.5938 1.5V2.77516C12.9369 3.34575 11.8896 4.233 9.65077 6.10297C9.15738 6.51694 8.18004 7.51147 7.5 7.49988C6.82008 7.51159 5.84241 6.51678 5.34923 6.10297C3.11074 4.23328 2.06323 3.34584 1.40625 2.77516V1.5H13.5938ZM1.40625 10.5V4.69994C2.07756 5.27028 3.02956 6.07063 4.48061 7.28263C5.12095 7.82028 6.24234 9.00719 7.5 8.99997C8.75147 9.00719 9.85866 7.8375 10.5191 7.28288C11.9701 6.07091 12.9224 5.27034 13.5938 4.69997V10.5H1.40625Z" fill="#BDBDBD" />
                                 </svg>
                             </label>
-                            <input type="email" name="email" id="email" class="form-control mb-3" placeholder="Email">
+                            <input type="email" name="email" id="email" class="form-control mb-3" placeholder="Email" required>
                             <label for="">
                                 <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.5 8.57143C8.34764 8.57143 9.17623 8.32008 9.88102 7.84916C10.5858 7.37824 11.1351 6.7089 11.4595 5.92579C11.7839 5.14268 11.8687 4.28096 11.7034 3.44961C11.538 2.61827 11.1298 1.85463 10.5305 1.25526C9.93109 0.65589 9.16745 0.247716 8.3361 0.0823507C7.50476 -0.0830145 6.64304 0.00185692 5.85993 0.326232C5.07682 0.650608 4.40748 1.19992 3.93656 1.9047C3.46564 2.60948 3.21429 3.43808 3.21429 4.28572C3.21429 5.42236 3.66582 6.51245 4.46954 7.31617C5.27327 8.1199 6.36336 8.57143 7.5 8.57143ZM7.5 2.14286C7.92382 2.14286 8.33812 2.26854 8.69051 2.504C9.0429 2.73946 9.31755 3.07412 9.47974 3.46568C9.64193 3.85724 9.68437 4.28809 9.60168 4.70377C9.519 5.11944 9.31491 5.50126 9.01523 5.80094C8.71555 6.10063 8.33372 6.30472 7.91805 6.3874C7.50238 6.47008 7.07152 6.42765 6.67997 6.26546C6.28841 6.10327 5.95374 5.82861 5.71828 5.47622C5.48282 5.12383 5.35714 4.70953 5.35714 4.28572C5.35714 3.7174 5.58291 3.17235 5.98477 2.77049C6.38664 2.36862 6.93168 2.14286 7.5 2.14286Z" fill="#BDBDBD" />
@@ -117,7 +125,8 @@
                                     </svg>
                                 </label>
                             </div>
-                            <input type="password" name="password" id="inputpassword" class="form-control mb-3" placeholder="Password">
+                            <input type="password" class="form-control" placeholder="Password" id="inputpassword" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,}" required>
+                            <div id="password-message"></div>
                             <div onclick="showiconss2()">
                                 <label for="" id="showicon2">
                                     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -180,6 +189,37 @@
                 console.log('hello');
             }
         }
+        const passwordInput = document.getElementById('inputpassword');
+        const passwordMessage = document.getElementById('password-message');
+
+        passwordInput.addEventListener('input', function() {
+            const isValid = passwordInput.checkValidity();
+
+            if (isValid) {
+                passwordMessage.innerHTML = `
+          <ul>
+            <li>Min 1 uppercase letter</li>
+            <li>Min 1 lowercase letter</li>
+            <li>Min 1 special character</li>
+            <li>Min 1 number</li>
+            <li>Min 8 characters</li>
+          </ul>
+        `;
+                passwordMessage.style.color = 'green';
+                passwordMessage.classList.remove('invalid');
+            } else {
+                passwordMessage.innerHTML = `
+          <ul class="invalid">
+            <li>Min 1 uppercase letter</li>
+            <li>Min 1 lowercase letter</li>
+            <li>Min 1 special character</li>
+            <li>Min 1 number</li>
+            <li>Min 8 characters</li>
+          </ul>
+        `;
+                passwordMessage.classList.add('invalid');
+            }
+        });
     </script>
 </body>
 

@@ -72,3 +72,15 @@ Route::get('/announcements_alerts', function () {
 Route::get('/pdf_templates', function () {
     return view('pdf_templates');
 });
+
+Route::get('/client_dashboard', function () {
+    return view('client_dashboard');
+});
+
+Route::get('/driver_dashboard', function () {
+    return view('driver_dashboard');
+});
+
+Route::get('/calendar_maintable', function () {
+    return view('calendar_maintable');
+});

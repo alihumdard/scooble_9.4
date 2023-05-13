@@ -125,7 +125,7 @@
                         </form>
                     </div>
                     <div class="col-md-12 my-4">
-                        <button class="btn text-white text-center">Login</button>
+                        <button class="btn text-white text-center">Set Password</button>
                     </div>
                 </div>
             </div>
