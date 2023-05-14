@@ -49,5 +49,7 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get', 'post'], '/set_password', 'set_password');
 
     Route::match(['get', 'post'], '/register', 'user_register');
+    
+    Route::match(['get', 'post'], '/logout', 'logout');
 });
 
