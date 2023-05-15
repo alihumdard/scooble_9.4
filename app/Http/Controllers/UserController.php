@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function index()
     {
-        // session()->forget('user');
+        
         if(session('user')){
             return view('index');
         }else{
@@ -118,7 +118,7 @@ class UserController extends Controller
 
         if ($user !== null) {
             if ($user && Hash::check($request->password, $user->password)) {
-                if ($user->status === '1') {
+                if ($user->status === '1' || $user->status === '2' ) {
                     $user = (array)$user;
                     session(['user' => $user]);
                     return redirect('/');
@@ -137,7 +137,13 @@ class UserController extends Controller
                
     }
 
-    public function forgot_password(REQUEST $request){
+    public function logout(REQUEST $request){
+        session()->forget('user');
+        return redirect('/');
+    }
+
+    public function forgot_password(REQUEST $request)
+    {
         $req = $request->all();
         if(isset($req['no1']) || isset($req['no2']) || isset($req['no3']) || isset($req['no4']) || isset($req['no5'])){
             $array = [ $req["no1"],$req["no2"],$req["no3"],$req["no4"],$req["no5"] ];
