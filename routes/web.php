@@ -38,7 +38,17 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/settings', 'settings');
 
     Route::get('/edit/{id}', 'user_edit');
+
     Route::post('/user_store', 'user_store');
+    Route::post('/lang_change', 'lang_change');
+
+    Route::post('/login', 'user_login');
+
+    Route::match(['get', 'post'], '/forgot_password', 'forgot_password');
+
+    Route::match(['get', 'post'], '/set_password', 'set_password');
+
+    Route::match(['get', 'post'], '/register', 'user_register');
 });
 
 Route::get('/login', function () {
@@ -50,11 +60,11 @@ Route::get('/register', function () {
 });
 
 Route::get('/forgot_password', function () {
-    return view('forgot_password');
+    return view('forgotPassword');
 });
 
 Route::get('/set_password', function () {
-    return view('set_password');
+    return view('setPassword');
 });
 
 Route::get('/create_trip', function () {

@@ -299,6 +299,17 @@
         </div>
     </div>
 
+@if (Session::has('otp'))
+    <!-- Display the modal using JavaScript/jQuery or CSS styles -->
+    <script>
+        // JavaScript/jQuery code to show the modal
+        // Replace the selector and code with your actual modal implementation
+        $(document).ready(function() {
+            $('#forgetpassword').modal('show');
+        });
+    </script>
+@endif
+
     <!-- forgetpassword Button Modal -->
     <div class="modal fade" id="forgetpassword" tabindex="-1" aria-labelledby="forgetpasswordLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -317,19 +328,25 @@
                             <rect x="4" y="4" width="48" height="48" rx="24" stroke="#ECFDF3" stroke-width="8" />
                         </svg>
                         <h3 class="mt-3">Check your email</h3>
-                        <p class="mb-0">We sent a verification link to</p>
-                        <p>admin@gmail.com</p>
+                        <p class="mb-0">We sent a verification code to</p>
+                        <p>{{session('email')}}</p>
+                        <form action="/forgot_password" method="post">
+                            @csrf
+                            <input type="hidden" name='email' value="{{session('email')}}"   />
                         <div class="inputfield mb-4">
-                            <input type="number" maxlength="1" class="input" disabled />
-                            <input type="number" maxlength="1" class="input" disabled />
-                            <input type="number" maxlength="1" class="input" disabled />
-                            <input type="number" maxlength="1" class="input" disabled />
-                            <input type="number" maxlength="1" class="input" disabled />
+                            <input type="number" name='no1' maxlength="1" class="input"  />
+                            <input type="number"  name='no2' maxlength="1" class="input"  />
+                            <input type="number" name='no3' maxlength="1" class="input"  />
+                            <input type="number" name='no4'  maxlength="1" class="input"  />
+                            <input type="number" name='no5' maxlength="1" class="input"  />
                         </div>
-                        <a href="/set_password">
-                            <button class="btn btn-sm text-white" style="background-color: #452C88; border-radius: 8px; width: 20%;" onclick="validateOTP()">Verify Email</button>
-                        </a>
-                        <p>Didn’t receive the email? <a href="" style="color: #452C88;">Click to resend</a></p>
+
+                            <button class="btn btn-sm text-white" style="background-color: #452C88; border-radius: 8px; width: 20%;" >Verify Email</button>
+                            </form>
+                            @if (Session::has('otp'))
+                            <lable class="text-danger"> {{ session('otp') }}</lable>
+                            @endif
+                        <p>Didn’t receive the email? <a href="/forgot_password?email={{session('email')}}" style="color: #452C88;">Click to resend</a></p>
                         <div class="py-5 mt-5">
                             <a href="/login" class="text-dark">
                                 <p>
@@ -375,7 +392,6 @@
 
         //Update input
         const updateInputConfig = (element, disabledStatus) => {
-            element.disabled = disabledStatus;
             if (!disabledStatus) {
                 element.focus();
             } else {
