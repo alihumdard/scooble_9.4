@@ -19,7 +19,7 @@ use App\Http\Controllers\UserController;
 
 Route::controller(UserController::class)->group(function () {
 
-    Route::get('/', 'index');
+    Route::match(['get', 'post'],'/', 'index');
 
     Route::get('/client', 'clients');
 

@@ -4,4 +4,7 @@ function table_date($datetime){
     return $date->format('M d, Y');
 }
 
+function end_url($apiurl){
+    return url('/api').'/'.$apiurl;
+}
 ?>
