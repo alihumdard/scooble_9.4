@@ -22,7 +22,7 @@ class UserController extends Controller
        return redirect()->back();
     }
 
-    public function index()
+    public function index(REQUEST $request)
     {
         
         if(session('user')){
@@ -117,25 +117,6 @@ class UserController extends Controller
     }
     public function user_login(REQUEST $request)
     {
-
-
-        $client = new Client();
-$options = [
-  'multipart' => [
-    [
-      'name' => 'email',
-      'contents' => 'alihumdard125@gmail.com'
-    ],
-    [
-      'name' => 'password',
-      'contents' => '12345'
-    ]
-]];
-$request = new Request('POST', 'http://127.0.0.1:8000/api/login');
-$res = $client->sendAsync($request, $options)->wait();
-$data = $res->getBody();
-
-dd($data);
 
         $user = User::where('email', $request->email)->first();
 

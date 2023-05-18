@@ -145,36 +145,9 @@
             }
         }
 
-
-        // Assuming you have included the jQuery library
-// $(document).ready(function() {
-//     $('#login-form').on('submit', function(e) {
-//         e.preventDefault();
-
-//         // Get the form data
-//         var formData = {
-//             email: $('#email').val(),
-//             password: $('#password').val()
-//         };
-
-//         // Send an AJAX request
-//         $.ajax({
-//             url: '/api/login',
-//             type: 'POST',
-//             data: formData,
-//             success: function(response) {
-//                 // Handle the success response
-//                 console.log(response);
-//             },
-//             error: function(xhr, status, error) {
-//                 // Handle the error response
-//                 console.error(xhr.responseText);
-//             }
-//         });
-//     });
-// });
-
     </script>
 </body>
 
 </html>
+
+@include('apicall')
