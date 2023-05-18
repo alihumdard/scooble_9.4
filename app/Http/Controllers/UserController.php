@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Client\ConnectionException;
 use App\Models\User;
 use App\Mail\otpVerifcation;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 
 class UserController extends Controller
@@ -15,7 +18,7 @@ class UserController extends Controller
     public function lang_change(REQUEST $request)
     {
         app()->setlocale($request->lang);
-        session(["lang"=> $request->lang]);
+        session(["lang" => $request->lang]);
        return redirect()->back();
     }
 
@@ -114,6 +117,26 @@ class UserController extends Controller
     }
     public function user_login(REQUEST $request)
     {
+
+
+        $client = new Client();
+$options = [
+  'multipart' => [
+    [
+      'name' => 'email',
+      'contents' => 'alihumdard125@gmail.com'
+    ],
+    [
+      'name' => 'password',
+      'contents' => '12345'
+    ]
+]];
+$request = new Request('POST', 'http://127.0.0.1:8000/api/login');
+$res = $client->sendAsync($request, $options)->wait();
+$data = $res->getBody();
+
+dd($data);
+
         $user = User::where('email', $request->email)->first();
 
         if ($user !== null) {

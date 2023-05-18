@@ -24,13 +24,20 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Route::get('/admin/drivers', [APIController::class, 'drivers']);
 
-    Route::get('/users', [APIController::class, 'users']);
+    Route::match(['post','get'],'/users', [APIController::class, 'users']);
 
-    Route::post('/userStore', [APIController::class, 'user_store']);
+    Route::match(['post','get'],'/userStore', [APIController::class, 'user_store']);
 
+    Route::match(['post','get'],'/announcements', [APIController::class, 'announcements']);
+
+    Route::match(['post','get'],'/announcementStore', [APIController::class, 'announcement_store']);
+
+    Route::match(['post','get'],'/notifications', [APIController::class, 'notifications']);
+
+    Route::match(['post','get'],'/notificationStore', [APIController::class, 'notification_store']);
 
 });
 
-Route::post('/login', [APIController::class, 'user_login']);
+Route::match(['post','get'],'/login', [APIController::class, 'user_login']);
 
 Route::match(['get', 'post'], '/register', [APIController::class, 'register']);

@@ -87,7 +87,7 @@
                         <p>You can <a href="/register">Register here !</a></p>
                     </div>
                     <div class="col-md-12">
-                        <form action="/login" method="post">
+                        <form id="login-form" method="post">
                             @csrf
                             <label for="">
                                 <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +111,7 @@
                                     </svg>
                                 </label>
                             </div>
-                            <input type="password" name="password" id="inputpassword" class="form-control mb-3" placeholder="Password">
+                            <input type="password" name="password" id="password" class="form-control mb-3" placeholder="Password">
                         
                         <p><a href="/forgot_password">Forgot Password?</a></p>
                     </div>
@@ -144,6 +144,36 @@
                 console.log('hello');
             }
         }
+
+
+        // Assuming you have included the jQuery library
+// $(document).ready(function() {
+//     $('#login-form').on('submit', function(e) {
+//         e.preventDefault();
+
+//         // Get the form data
+//         var formData = {
+//             email: $('#email').val(),
+//             password: $('#password').val()
+//         };
+
+//         // Send an AJAX request
+//         $.ajax({
+//             url: '/api/login',
+//             type: 'POST',
+//             data: formData,
+//             success: function(response) {
+//                 // Handle the success response
+//                 console.log(response);
+//             },
+//             error: function(xhr, status, error) {
+//                 // Handle the error response
+//                 console.error(xhr.responseText);
+//             }
+//         });
+//     });
+// });
+
     </script>
 </body>
 
