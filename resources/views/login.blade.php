@@ -304,6 +304,7 @@
       });
     });
   </script>
-</body>
 
 </html>
+
+@include('apicall')

@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,5 +48,18 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof RouteNotFoundException) {
+            return response()->json(['status' => 'error', 'message' => 'Invalid token'], 401);
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return response()->json(['status' => 'error', 'message' => 'Token has expired'], 401);
+        }
+
+        return parent::render($request, $exception);
     }
 }
