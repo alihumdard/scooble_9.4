@@ -3,7 +3,7 @@
 @section('main-section')
 
 <style>
-  
+
 </style>
 
 <!-- partial -->
@@ -28,28 +28,40 @@
           <div class="col-lg-8">
             <div class="row mx-1">
               <div class="col-lg-4 px-1" style="text-align: right;">
-                <button class="btn btn-sm text-white" data-toggle="modal" data-target="#addclient" style="background-color: #E45F00; border-radius: 8px;"><i class="fa fa-plus"></i> @lang('lang.add_client')</button>
+                <button class="btn btn-md text-white" data-toggle="modal" data-target="#addclient" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.add_client')</button>
               </div>
               <div class="col-lg-4 px-1">
-                <select name="filter_by_sts" id="filter_by_sts" class="form-select" style="border-radius: 10px;">
-                  <option value="">
-                    <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7.56221 14.0648C7.58971 14.3147 7.52097 14.5814 7.36287 14.7563C7.29927 14.8336 7.22373 14.8949 7.14058 14.9367C7.05742 14.9785 6.96827 15 6.87825 15C6.78822 15 6.69907 14.9785 6.61592 14.9367C6.53276 14.8949 6.45722 14.8336 6.39363 14.7563L3.63713 11.4151C3.56216 11.3263 3.50516 11.2176 3.47057 11.0977C3.43599 10.9777 3.42477 10.8496 3.43779 10.7235V6.45746L0.145116 1.34982C0.0334875 1.17612 -0.0168817 0.955919 0.005015 0.737342C0.0269117 0.518764 0.119294 0.319579 0.261975 0.183308C0.392582 0.0666576 0.536937 0 0.688166 0H10.3118C10.4631 0 10.6074 0.0666576 10.738 0.183308C10.8807 0.319579 10.9731 0.518764 10.995 0.737342C11.0169 0.955919 10.9665 1.17612 10.8549 1.34982L7.56221 6.45746V14.0648ZM2.09047 1.66644L4.81259 5.88254V10.4819L6.1874 12.1484V5.8742L8.90953 1.66644H2.09047Z" fill="#323C47" />
-                    </svg>
-                    @lang('lang.filter_by_status')
-                  </option>
-                </select>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text bg-white" style="border-right: none; border: 1px solid #DDDDDD;">
+                      <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.56221 14.0648C7.58971 14.3147 7.52097 14.5814 7.36287 14.7563C7.29927 14.8336 7.22373 14.8949 7.14058 14.9367C7.05742 14.9785 6.96827 15 6.87825 15C6.78822 15 6.69907 14.9785 6.61592 14.9367C6.53276 14.8949 6.45722 14.8336 6.39363 14.7563L3.63713 11.4151C3.56216 11.3263 3.50516 11.2176 3.47057 11.0977C3.43599 10.9777 3.42477 10.8496 3.43779 10.7235V6.45746L0.145116 1.34982C0.0334875 1.17612 -0.0168817 0.955919 0.005015 0.737342C0.0269117 0.518764 0.119294 0.319579 0.261975 0.183308C0.392582 0.0666576 0.536937 0 0.688166 0H10.3118C10.4631 0 10.6074 0.0666576 10.738 0.183308C10.8807 0.319579 10.9731 0.518764 10.995 0.737342C11.0169 0.955919 10.9665 1.17612 10.8549 1.34982L7.56221 6.45746V14.0648ZM2.09047 1.66644L4.81259 5.88254V10.4819L6.1874 12.1484V5.8742L8.90953 1.66644H2.09047Z" fill="#323C47" />
+                      </svg>
+                    </div>
+                  </div>
+                  <select name="filter_by_sts" id="filter_by_sts" class="form-select" style="border-left: none;">
+                    <option value="">
+                      @lang('lang.filter_by_status')
+                    </option>
+                  </select>
+                </div>
               </div>
               <div class="col-lg-4 px-1">
-                <select name="sort_by" id="sort_by" class="form-select" style="border-radius: 10px;">
-                  <option value="">
-                    <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M13.6752 0.558058C13.4311 0.313981 13.0354 0.313981 12.7913 0.558058L8.81386 4.53553C8.56978 4.77961 8.56978 5.17534 8.81386 5.41942C9.05794 5.6635 9.45366 5.6635 9.69774 5.41942L13.2333 1.88388L16.7688 5.41942C17.0129 5.6635 17.4086 5.6635 17.6527 5.41942C17.8968 5.17534 17.8968 4.77961 17.6527 4.53553L13.6752 0.558058ZM12.6083 14C12.6083 14.3452 12.8881 14.625 13.2333 14.625C13.5785 14.625 13.8583 14.3452 13.8583 14H12.6083ZM12.6083 1V14H13.8583V1H12.6083Z" fill="#323C47" />
-                      <path d="M5.625 1C5.625 0.654822 5.34518 0.375 5 0.375C4.65482 0.375 4.375 0.654822 4.375 1H5.625ZM4.55806 14.4419C4.80214 14.686 5.19786 14.686 5.44194 14.4419L9.41942 10.4645C9.6635 10.2204 9.6635 9.82466 9.41942 9.58058C9.17534 9.3365 8.77961 9.3365 8.53553 9.58058L5 13.1161L1.46447 9.58058C1.22039 9.3365 0.82466 9.3365 0.580583 9.58058C0.336505 9.82466 0.336505 10.2204 0.580583 10.4645L4.55806 14.4419ZM4.375 1V14H5.625V1H4.375Z" fill="#323C47" />
-                    </svg>
-                    @lang('lang.sort_by')
-                  </option>
-                </select>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text bg-white" style="border-right: none; border: 1px solid #DDDDDD;">
+                      <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.6752 0.558058C13.4311 0.313981 13.0354 0.313981 12.7913 0.558058L8.81386 4.53553C8.56978 4.77961 8.56978 5.17534 8.81386 5.41942C9.05794 5.6635 9.45366 5.6635 9.69774 5.41942L13.2333 1.88388L16.7688 5.41942C17.0129 5.6635 17.4086 5.6635 17.6527 5.41942C17.8968 5.17534 17.8968 4.77961 17.6527 4.53553L13.6752 0.558058ZM12.6083 14C12.6083 14.3452 12.8881 14.625 13.2333 14.625C13.5785 14.625 13.8583 14.3452 13.8583 14H12.6083ZM12.6083 1V14H13.8583V1H12.6083Z" fill="#323C47" />
+                        <path d="M5.625 1C5.625 0.654822 5.34518 0.375 5 0.375C4.65482 0.375 4.375 0.654822 4.375 1H5.625ZM4.55806 14.4419C4.80214 14.686 5.19786 14.686 5.44194 14.4419L9.41942 10.4645C9.6635 10.2204 9.6635 9.82466 9.41942 9.58058C9.17534 9.3365 8.77961 9.3365 8.53553 9.58058L5 13.1161L1.46447 9.58058C1.22039 9.3365 0.82466 9.3365 0.580583 9.58058C0.336505 9.82466 0.336505 10.2204 0.580583 10.4645L4.55806 14.4419ZM4.375 1V14H5.625V1H4.375Z" fill="#323C47" />
+                      </svg>
+                    </div>
+                  </div>
+                  <select name="sort_by" id="sort_by" class="form-select" style="border-left: none;">
+                    <option value="">
+                      @lang('lang.sort_by')
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -170,46 +182,46 @@
 
   <!-- Delete Client Modal -->
   <div class="modal fade" id="deleteclient" tabindex="-1" aria-labelledby="deleteclientLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-white">
-                <!-- <div class="modal-header">
+    <div class="modal-dialog">
+      <div class="modal-content bg-white">
+        <!-- <div class="modal-header">
           <h5 class="modal-title" id="deleteclientLabel"></h5>
         </div> -->
-                <div class="modal-body">
-                    <span class="btn p-0" style="background-color: #FEF3F2; border-radius: 50px;">
-                        <span class="btn p-0" style="background-color: #FEE4E2; color: #D11A2A; border-radius: 50px;"><i class="fa fa-trash"></i></span>
-                    </span>
-                    <div class="mt-3">
-                        <h6>@lang('lang.really_want_to_delete_client')</h6>
-                        <p>@lang('lang.client_has_assigned_drivers_trips_what_to_do_with_them')</p>
-                    </div>
-                    <div class="mt-3">
-                        <input type="checkbox" name="delete_all_drivers" id="delete_all_drivers"> Delete all drivers
-                    </div>
-                    <div class="mt-3">
-                        <select class="form-select" name="choose_options" id="choose_options">
-                            <option value="@lang('lang.choose_additional_options')">@lang('lang.choose_additional_options')</option>
-                            <option value="@lang('lang.delete_all_assigned_trips')">@lang('lang.delete_all_assigned_trips')</option>
-                            <option value="@lang('lang.delete_completed_trips')">@lang('lang.delete_completed_trips')</option>
-                            <option value="@lang('lang.Dont_delete_any_trips')">@lang('lang.Dont_delete_any_trips')</option>
-                        </select>
-                    </div>
-                    <div class="row mt-3 text-center">
-                        <div class="col-lg-6">
-                            <button class="btn btn-sm btn-outline px-5" data-toggle="modal" data-target="#deleteclient" style="background-color: #ffffff; border: 1px solid #D0D5DD; border-radius: 8px; width: 100%;">@lang('lang.cancel')</button>
-                        </div>
-                        <div class="col-lg-6">
-                            <button class="btn btn-sm btn-outline text-white px-5" data-toggle="modal" data-target="#deleteclient" style="background-color: #D92D20; border-radius: 8px; width: 100%;">@lang('lang.delete')</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="modal-footer">
+        <div class="modal-body">
+          <span class="btn p-0" style="background-color: #FEF3F2; border-radius: 50px;">
+            <span class="btn p-0" style="background-color: #FEE4E2; color: #D11A2A; border-radius: 50px;"><i class="fa fa-trash"></i></span>
+          </span>
+          <div class="mt-3">
+            <h6>@lang('lang.really_want_to_delete_client')</h6>
+            <p>@lang('lang.client_has_assigned_drivers_trips_what_to_do_with_them')</p>
+          </div>
+          <div class="mt-3">
+            <input type="checkbox" name="delete_all_drivers" id="delete_all_drivers"> Delete all drivers
+          </div>
+          <div class="mt-3">
+            <select class="form-select" name="choose_options" id="choose_options">
+              <option value="@lang('lang.choose_additional_options')">@lang('lang.choose_additional_options')</option>
+              <option value="@lang('lang.delete_all_assigned_trips')">@lang('lang.delete_all_assigned_trips')</option>
+              <option value="@lang('lang.delete_completed_trips')">@lang('lang.delete_completed_trips')</option>
+              <option value="@lang('lang.Dont_delete_any_trips')">@lang('lang.Dont_delete_any_trips')</option>
+            </select>
+          </div>
+          <div class="row mt-3 text-center">
+            <div class="col-lg-6">
+              <button class="btn btn-sm btn-outline px-5" data-toggle="modal" data-target="#deleteclient" style="background-color: #ffffff; border: 1px solid #D0D5DD; border-radius: 8px; width: 100%;">@lang('lang.cancel')</button>
+            </div>
+            <div class="col-lg-6">
+              <button class="btn btn-sm btn-outline text-white px-5" data-toggle="modal" data-target="#deleteclient" style="background-color: #D92D20; border-radius: 8px; width: 100%;">@lang('lang.delete')</button>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal-footer">
                     
                 </div> -->
-            </div>
-        </div>
+      </div>
     </div>
-    <!-- Delete Client Modal End -->
+  </div>
+  <!-- Delete Client Modal End -->
 
   <script>
     function handleFileSelect(event) {

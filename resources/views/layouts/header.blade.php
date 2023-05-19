@@ -1,4 +1,3 @@
-
 <html lang="en">
 
 <head>
@@ -93,11 +92,11 @@
             </li> -->
 
           <li class="nav-item d-none d-lg-block ">
-            <form action="/lang_change" method="post" >
+            <form action="/lang_change" method="post">
               @csrf
               <select id="lang-select" class="form-select" name="lang" onchange="this.form.submit()">
-                <option value="en" <?= (session('lang') == 'en') ? 'selected': ''; ?>>En</option>
-                <option value="es" <?= (session('lang') == 'es') ? 'selected': ''; ?>>Es</option>
+                <option value="en" <?= (session('lang') == 'en') ? 'selected' : ''; ?>>En</option>
+                <option value="es" <?= (session('lang') == 'es') ? 'selected' : ''; ?>>Es</option>
               </select>
             </form>
           </li>

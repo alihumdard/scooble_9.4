@@ -30,7 +30,9 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-lg-4">
-          <div class=" bg-white p-3" style="border-radius: 20px;">
+          <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Revenue</h5>
@@ -46,7 +48,9 @@
           </div>
         </div>
         <div class="col-lg-4">
-          <div class=" bg-white p-3" style="border-radius: 20px;">
+          <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Drivers</h5>
@@ -68,7 +72,9 @@
           </div>
         </div>
         <div class="col-lg-4">
-          <div class=" bg-white p-3" style="border-radius: 20px;">
+          <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Users</h5>
@@ -88,7 +94,9 @@
       </div>
       <div class="row">
         <div class="col-lg-4">
-          <div class=" bg-white p-3" style="border-radius: 20px;">
+          <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Total Routes</h5>
@@ -105,7 +113,9 @@
           </div>
         </div>
         <div class="col-lg-4">
-          <div class=" bg-white p-3" style="border-radius: 20px;">
+          <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Completed Trips</h5>
@@ -121,7 +131,9 @@
           </div>
         </div>
         <div class="col-lg-4">
-          <div class=" bg-white p-3" style="border-radius: 20px;">
+          <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Clients</h5>

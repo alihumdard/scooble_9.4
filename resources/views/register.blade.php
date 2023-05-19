@@ -48,10 +48,6 @@
         * ==========================================
         *
         */
-        body {
-            /*min-height: 100vh;*/
-        }
-
         input,
         .input-group-text {
             /*border-top: 0px !important;*/
