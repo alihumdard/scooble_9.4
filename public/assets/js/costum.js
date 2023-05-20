@@ -1,8 +1,6 @@
 $(document).ready(function () {
     // alert('this is working');
-    $('#example').DataTable({
-        "ordering": false
-    });
+
     $(document).on('click', '#btn_edit_client', function () {
         var id = $(this).attr('data-client_id');
         $.ajax({

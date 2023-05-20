@@ -10,10 +10,6 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- DataTables Plugin -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-
 <!-- Vendor Scripts -->
 <!-- <script src="{{ asset('assets/vendors/js/vendor.bundle.basejs') }}"></script> -->
 
