@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Client\ConnectionException;
 use App\Models\User;
+
+class UserController extends Controller
+{
+    public function index()
+    {
+        return view('index');
 use App\Mail\otpVerifcation;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -77,7 +83,7 @@ class UserController extends Controller
 
     public function user_store(REQUEST $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         ($request->id) ? $user = User::find($request->id) : $user = new User();
         $user->name     = $request->client_name;
         $user->email    = $request->email;
@@ -86,7 +92,6 @@ class UserController extends Controller
         $user->com_pic  = $request->company_logo;
         $user->address  = $request->address;
         $user->role     = $request->role;
-        $user->password = Hash::make($request->password);
         $save = $user->save();
 
         return redirect()->back();
