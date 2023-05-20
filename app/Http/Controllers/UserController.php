@@ -19,8 +19,7 @@ class UserController extends Controller
 
     public $api;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->api = new APIController();
     }
 
@@ -34,8 +33,8 @@ class UserController extends Controller
     public function index(REQUEST $request)
     {
 
-
-        if (session('user')) {
+        
+        if(session('user')){
             return view('index');
         } else {
             return view('login');
@@ -125,6 +124,7 @@ class UserController extends Controller
             return view('register');
         }
     }
+  
     public function user_login(REQUEST $request)
     {
         $login = $this->api->user_login($request);

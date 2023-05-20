@@ -210,7 +210,7 @@
                       color: #000000;
                       margin-bottom: 0px !important;
                     ">
-                  If you don’t have an account
+                  If you donâ€™t have an account
                 </p>
                 <p>
                   You can
