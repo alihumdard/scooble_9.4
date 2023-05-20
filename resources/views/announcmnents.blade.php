@@ -60,7 +60,7 @@
       </div>
       <div class="card-body px-0">
         <div class="table-responsive">
-          include("announcment_table")
+          @include("announcment_table")
         </div>
       </div>
     </div>

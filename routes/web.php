@@ -53,3 +53,46 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get', 'post'], '/logout', 'logout');
 });
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+Route::get('/forgot_password', function () {
+    return view('forgotPassword');
+});
+
+Route::get('/set_password', function () {
+    return view('setPassword');
+});
+
+Route::get('/create_trip', function () {
+    return view('create_trip');
+});
+
+Route::get('/driver_map', function () {
+    return view('driver_map');
+});
+
+Route::get('/announcements_alerts', function () {
+    return view('announcements_alerts');
+});
+
+Route::get('/pdf_templates', function () {
+    return view('pdf_templates');
+});
+
+Route::get('/client_dashboard', function () {
+    return view('client_dashboard');
+});
+
+Route::get('/driver_dashboard', function () {
+    return view('driver_dashboard');
+});
+
+Route::get('/calendar_maintable', function () {
+    return view('calendar_maintable');
+});
