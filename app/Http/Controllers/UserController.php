@@ -17,10 +17,18 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use App\Http\Controllers\API\APIController;
 
 
 class UserController extends Controller
 {
+
+    public $api;
+
+    public function __construct(){
+        $this->api = new APIController();
+    }
+
     public function lang_change(REQUEST $request)
     {
         app()->setlocale($request->lang);
@@ -30,6 +38,7 @@ class UserController extends Controller
 
     public function index(REQUEST $request)
     {
+
         
         if(session('user')){
             return view('index');
@@ -120,9 +129,13 @@ class UserController extends Controller
             return view('register');
         }
     }
-    public function user_login(REQUEST $request)
-    {
+    public function user_login(REQUEST $request){
+     $login = $this->api->user_login($request);
+      dd(json_decode($login->getContent()));
 
+        $data['status'] = json_decode($login->getContent())->status;
+        $data['token'] = json_decode($login->getContent())->token;
+        dd($data);
         $user = User::where('email', $request->email)->first();
 
         if ($user !== null) {

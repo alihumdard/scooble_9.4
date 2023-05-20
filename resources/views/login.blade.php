@@ -186,7 +186,8 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center mt-4">
-          <form action="#" method="post" style="width: 500px !important;">
+          <form action="login" id="login-form" method="post" style="width: 500px !important;">
+          @csrf
             <div class="row">
               <div class="w-100" style="padding-left: 15px;">
                 <p style="
@@ -209,7 +210,7 @@
                       color: #000000;
                       margin-bottom: 0px !important;
                     ">
-                  If you don’t have an account
+                  If you donâ€™t have an account
                 </p>
                 <p>
                   You can
