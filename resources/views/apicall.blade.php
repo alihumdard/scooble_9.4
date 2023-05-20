@@ -5,8 +5,11 @@
 $(document).ready(function() {
     alert('11');
     $('#login-form').on('submit', function(e) {
+
     e.preventDefault();
 
+    var apiurl = $(this).attr('action');
+        alert(url);
     // Get the form data
     var formData = {
         email: $('#email').val(),
@@ -15,7 +18,7 @@ $(document).ready(function() {
 
     // Send an AJAX request
     $.ajax({
-        url: "{{end_url('login')}}",
+        url: "{{end_url('"+apiurl+"')}}",
         type: 'POST',
         data: formData,
         success: function(response) {
@@ -38,5 +41,5 @@ $(document).ready(function() {
         }
     });
 });
-
+});
 </script>

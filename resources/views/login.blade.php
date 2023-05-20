@@ -87,7 +87,7 @@
                         <p>You can <a href="/register">Register here !</a></p>
                     </div>
                     <div class="col-md-12">
-                        <form id="login-form" method="post">
+                        <form action="login" id="login-form" method="post">
                             @csrf
                             <label for="">
                                 <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
