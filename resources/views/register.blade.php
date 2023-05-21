@@ -85,7 +85,7 @@
                 <div class="row">
                     <div class="pl-5 container">
                         <!-- Navbar Brand -->
-                        <a href="#" class="navbar-brand">
+                        <a href="/" class="navbar-brand">
                             <svg width="200" height="70" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_2_740)">
                                     <mask id="mask0_2_740" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="146" y="3" width="53" height="35">
@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center  mt-4">
-                    <form action="#" method="post" style="width: 500px !important;">
+                    <form action="/register" method="post" style="width: 500px !important;">
                         <div class="row">
                             <div class="w-100" style="padding-left: 15px;">
                                 <p style="font-style: normal;font-weight: 500;font-size: 30px;line-height: 45px;color: #000000 !important;">Sign Up</p>
@@ -199,7 +199,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input id="email" type="email" name="user_email" placeholder="Enter your Full Name" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;">
+                                <input id="username" type="text" name="username" placeholder="Enter your Full Name" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;">
                             </div>
                             <!-- user name -->
                             <div class="input-group col-lg-12 mb-4">
@@ -211,7 +211,7 @@
 
                                     </span>
                                 </div>
-                                <input id="username" type="text" name="username" placeholder="Enter your E-mail" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;">
+                                <input id="email" type="email" name="email" placeholder="Enter your E-mail" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;">
                             </div>
                             <!-- Password -->
                             <div class="input-group col-lg-12 mb-4">
