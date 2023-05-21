@@ -110,7 +110,7 @@ class UserController extends Controller
     {
         if ($request->all()) {
             ($request->id) ? $user = User::find($request->id) : $user = new User();
-            $user->name     = $request->client_name;
+            $user->name     = $request->username;
             $user->email    = $request->email;
             $user->phone    = $request->phone;
             $user->com_name = $request->company_name;
