@@ -187,12 +187,13 @@
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center  mt-4">
-                    <form action="#" method="post" style="width: 500px !important;">
-                        <div class="row">
+                    <form action="/set_password" method="post" style="width: 500px !important;">
+                    @csrf    
+                    <div class="row">
                             <div class="w-100" style="padding-left: 15px;">
                                 <p style="font-style: normal;font-weight: 500;font-size: 30px;line-height: 45px;color: #000000 !important;">WELCOME</p>
                                 <p>Create your password to create account.</p>
-                                <p>You can <a href="/login" class="text-warning">Login Here !</a></p>
+                                <p>You can <a href="/" class="text-warning">Login Here !</a></p>
                             </div>
                             <!-- Password -->
                             <div class="input-group col-lg-12 mb-4">

@@ -253,6 +253,8 @@
                     ">
                                     Please enter the email associated with your account and we'll send an email with link, where you can change your password.
                                 </p>
+                <form action="/forgot_password" method="post">
+                            @csrf
                             </div>
                             <div class="input-group col-lg-12 mb-4">
                                 <div class="input-group-prepend">
@@ -262,13 +264,14 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input id="email" type="email" name="user_email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
+                                <input id="email" type="email" name="email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
                             </div>
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
-                                <input type="submit" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit" value="Send" data-toggle="modal" data-target="#forgetpassword" />
-                                <p class="mt-4">You can <a class="text-warning" href="/login">Login here !</a></p>
+                                <input type="submit" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit" value="Send" data-toggle="modal"  />
+                                <p class="mt-4">You can <a class="text-warning" href="/">Login here !</a></p>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div>
