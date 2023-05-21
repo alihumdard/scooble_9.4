@@ -181,6 +181,7 @@
                 </div>
                 <div class="row d-flex justify-content-center  mt-4">
                     <form action="/register" method="post" style="width: 500px !important;">
+                    @csrf
                         <div class="row">
                             <div class="w-100" style="padding-left: 15px;">
                                 <p style="font-style: normal;font-weight: 500;font-size: 30px;line-height: 45px;color: #000000 !important;">Sign Up</p>
