@@ -49,7 +49,7 @@ class UserController extends Controller
 
     public function drivers()
     {
-        $derivers = User::where(['role' => 'Deriver'])->orderBy('id', 'desc')->get()->toArray();
+        $derivers = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->get()->toArray();
         return view('drivers', ['data' => $derivers]);
     }
 
@@ -58,6 +58,37 @@ class UserController extends Controller
         return view('routes');
     }
 
+    public function create_trip()
+    {
+        return view('create_trip');
+    }
+
+    public function driver_map()
+    {
+        return view('driver_map');
+    }
+
+    public function client_dashboard()
+    {
+        return view('client_dashboard');
+    }
+
+    public function driver_dashboard()
+    {
+        return view('driver_dashboard');
+    }
+
+    public function announcements_alerts()
+    {
+        return view('announcements_alerts');
+    }
+
+    public function pdf_templates()
+    {
+        return view('pdf_templates');
+    }
+
+
     public function calender()
     {
         return view('calender');
@@ -65,7 +96,7 @@ class UserController extends Controller
 
     public function users()
     {
-        $users = User::orderBy('id', 'desc')->get()->toArray();
+        $users = User::where(['role' => 'Admin'])->orderBy('id', 'desc')->orderBy('id', 'desc')->get()->toArray();
         return view('users', ['data' => $users]);
     }
 

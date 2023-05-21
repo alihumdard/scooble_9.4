@@ -16,7 +16,7 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Announcement;
 use App\Models\Notification;
-
+use Illuminate\Foundation\Auth\Authenticatable;
 
 class APIController extends Controller
 {
@@ -100,27 +100,24 @@ class APIController extends Controller
     }
     
 
-    public function user_login(REQUEST $request): JsonResponse
+    public function user_login(Request $request): JsonResponse
     {
         try {
-
-        $credentials = $request->only('email', 'password');
-        if ($user = User::where('email', $credentials['email'])->whereIn('status', [1,2])->first())
-        {
+            $credentials = $request->only('email', 'password');
+            if ($user = User::where('email', $credentials['email'])->whereIn('status', [1, 2])->first()) {
                 if (Auth::attempt($credentials)) {
                     $token = $user->createToken('MyApp')->plainTextToken;
-                    return response()->json(['status' => 'success','message' => 'users successfully login', 'token' => $token]);
+                    return response()->json(['status' => 'success', 'message' => 'User successfully logged in', 'token' => $token]);
                 }
-        }
-
-        return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
-      
+            }
+    
+            return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                 'message' => 'Error retrieving users', 
-                 'error' => $e->getMessage()],500
-                );
+                'message' => 'Error retrieving users',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
     

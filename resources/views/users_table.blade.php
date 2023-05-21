@@ -10,8 +10,8 @@
 </head>
 
 <body>
-
-    <table id="example" class="display" style="width:100%">
+<div id="table_reload" >
+    <table id="users-table" class="display" style="width:100%">
         <thead class="text-secondary" style="background-color: #E9EAEF;">
             <tr>
                 <th>@lang('lang.name')</th>
@@ -56,6 +56,7 @@
 
         </tbody>
     </table>
+</div>   
     <!-- Edit Client Modal -->
     <div class="modal fade" id="editclient" tabindex="-1" aria-labelledby="editclientLabel" aria-hidden="true">
         <div class="modal-dialog">

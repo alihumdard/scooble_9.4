@@ -56,5 +56,8 @@ $(document).ready(function () {
     }
 
     // modal form functions end
+
+
+    $('#users-table').DataTable();
 });
 

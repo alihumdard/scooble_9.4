@@ -33,7 +33,7 @@
           <div class="col-lg-8">
             <div class="row mx-1">
               <div class="col-lg-4 px-1" style="text-align: right;">
-                <button class="btn btn-md text-white" data-toggle="modal" data-target="#adddriver" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.add_driver')</button>
+                <button class="btn btn-md text-white" data-toggle="modal" data-target="#addclient" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.add_driver')</button>
               </div>
               <div class="col-lg-4 px-1">
                 <div class="input-group">
@@ -82,7 +82,8 @@
 
   <!-- content-wrapper ends -->
   <!-- Add Client Modal -->
-  <div class="modal fade" style="height: 30rem;" id="adddriver" tabindex="-1" aria-labelledby="adddriverLabel" aria-hidden="true">
+  <!-- Add Client Modal -->
+  <div class="modal fade" style="height: 30rem;" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content bg-white">
         <div class="modal-header">
@@ -98,7 +99,10 @@
             Add Client
           </h4>
         </div>
-        <form action="{{'/user_store'}}" method="post">
+        <form action="userStore" id="formData" method="post">
+          @csrf
+          <input type="hidden" id="role" name="role" value="Driver">
+          <input type="hidden" id="client_id" name="client_id" value=" ">
           <div class="modal-body">
             <div class="row">
               <div class="col-lg-6 mb-2">
@@ -126,19 +130,19 @@
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name" class="form-control">
+                <input type="text" required name="name" id="name" class="form-control">
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" class="form-control">
+                <input type="email" required name="email" id="email" class="form-control">
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="phone">Phone</label>
                 <input type="tel" name="phone" id="phone" class="form-control">
               </div>
               <div class="col-lg-6 mt-2">
-                <label for="company_name">Company Name</label>
-                <input type="text" name="company_name" id="company_name" class="form-control">
+                <label for="com_name">Company Name</label>
+                <input type="text" name="com_name" id="com_name" class="form-control">
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="address">Address</label>
@@ -151,7 +155,7 @@
             </div>
           </div>
           <div class="modal-footer" style="border: none;">
-            <button class="btn btn-sm text-white px-5" data-toggle="modal" data-target="#add" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
+            <button type="submit" class="btn btn-sm text-white px-5"  data-target="#add" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
           </div>
         </form>
       </div>
