@@ -1,4 +1,4 @@
- <table id="example" class="display" style="width:100%">
+ <table id="users-table" class="display" style="width:100%">
      <thead class="text-secondary" style="background-color: #E9EAEF;">
          <tr>
              <th>@lang('lang.drivers')</th>

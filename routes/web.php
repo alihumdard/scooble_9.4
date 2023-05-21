@@ -51,4 +51,16 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get', 'post'], '/register', 'user_register');
     
     Route::match(['get', 'post'], '/logout', 'logout');
+
+    Route::match(['get', 'post'], '/create_trip', 'create_trip');
+
+    Route::match(['get', 'post'], '/driver_map', 'driver_map');
+
+    Route::match(['get', 'post'], '/client_dashboard', 'client_dashboard');
+
+    Route::match(['get', 'post'], '/driver_dashboard', 'driver_dashboard');
+
+    Route::match(['get', 'post'], '/announcements_alerts', 'announcements_alerts');
+
+    Route::match(['get', 'post'], '/pdf_templates', 'pdf_templates');
 });
