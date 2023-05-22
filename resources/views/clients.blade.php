@@ -109,7 +109,7 @@
                     </svg>
                   </div>
                 </div>
-              </div>
+              </div>  
               <div class="col-lg-6 mb-2">
                 <div class="file-input-container">
                   <label class="file-input-label" for="fileInput" id="fileInput1Label1">Company Logo</label>

@@ -23,7 +23,7 @@
     </div>
     <div class="card" style="border: none;">
       <div class="card-header bg-white">
-        <form action="">
+        <form action="announcementStore" id="formData" method="post">
           <div class="row">
             <div class="col-lg-8">
               <input type="text" name="title" id="title" class="form-control" placeholder="@lang('lang.title')">
@@ -35,7 +35,7 @@
               <input type="datetime-local" name="end_date" id="end_date" class="form-control">
             </div>
             <div class="col-lg-12 mt-2">
-              <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="@lang('lang.message')..."></textarea>
+              <textarea name="desc" id="desc" cols="30" rows="10" class="form-control" placeholder="@lang('lang.message')..."></textarea>
             </div>
             <div class="col-lg-2 mt-4 text-center">
               <input type="radio" name="type" id="type" value="@lang('lang.mandatory')"> @lang('lang.mandatory')
@@ -53,7 +53,7 @@
               <input type="radio" name="type" id="type" value="@lang('lang.news')"> @lang('lang.news')
             </div>
             <div class="col-lg-2 mt-4 text-center">
-            <button class="btn px-5 text-white" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
+            <button class="btn px-5 text-white" name="submit" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
             </div>
           </div>
         </form>
