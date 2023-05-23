@@ -107,6 +107,7 @@ class APIController extends Controller
             if ($user = User::where('email', $credentials['email'])->whereIn('status', [1, 2])->first()) {
                 if (Auth::attempt($credentials)) {
                     $token = $user->createToken('MyApp')->plainTextToken;
+                    session(['user_details' => $user]);
                     return response()->json(['status' => 'success', 'message' => 'User successfully logged in', 'token' => $token]);
                 }
             }

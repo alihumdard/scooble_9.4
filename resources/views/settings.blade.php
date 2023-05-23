@@ -31,7 +31,11 @@
       </nav> -->
     </div>
     <div class="bg-white py-3">
-      <form action="">
+      <form action="userStore" id="formData" method="POST">
+        @csrf
+        <input type="hidden" name="id" value="{{$user->id}}">
+        <input type="hidden" name="role" value="{{$user->role}}">
+        <input type="hidden" name="email" value="{{$user->email}}">
         <div class="row mb-3">
           <div class="col-lg-12 text-center">
             <img src="assets/images/pic.jpg" class="" style="width: 150px; height: 150px; border-radius: 50%;" alt="text">
@@ -48,22 +52,22 @@
                 </div>
               </div>
             </div>
-            <p>Loremispsum@gmail.com</p>
+            <p>{{ $user->email}}</p>
           </div>
         </div>
         <div class="row px-3">
           <div class="row">
             <div class="col-lg-6">
-              <label style="color: #452C88;" for="full_name"><b>@lang('lang.full_name')</b></label>
-              <input type="text" class="form-control" name="full_name" id="full_name" placeholder="@lang('lang.enter_your_name')">
+              <label style="color: #452C88;" for="name"><b>@lang('lang.full_name')</b></label>
+              <input type="text" class="form-control"  value="{{$user->name}}" name="name" id="name" placeholder="@lang('lang.enter_your_name')">
             </div>
             <div class="col-lg-6">
-              <label style="color: #452C88;" for="phone_number"><b>@lang('lang.phone_number')</b></label>
-              <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="@lang('lang.enter_your_number')">
+              <label style="color: #452C88;" for="phone"><b>@lang('lang.phone_number')</b></label>
+              <input type="text" class="form-control" value="{{$user->phone}}" name="phone" id="phone" placeholder="@lang('lang.enter_your_number')">
             </div>
             <div class="col-lg-6">
               <label style="color: #452C88;" for="country"><b>@lang('lang.country')</b></label>
-              <input type="text" class="form-control" name="country" id="country" placeholder="@lang('lang.enter_country')">
+              <input type="text" class="form-control" value="{{ $user->address }}" name="address" id="country" placeholder="@lang('lang.enter_country')">
             </div>
             <div class="col-lg-6">
               <label style="color: #452C88;" for="city"><b>@lang('lang.city')</b></label>
