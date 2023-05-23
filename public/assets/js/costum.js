@@ -38,10 +38,7 @@ $(document).ready(function () {
         }
     }
 
-    function openFileInput() {
-        var fileInput = document.getElementById('fileInput');
-        fileInput.click();
-    }
+    
 
     function handleFileChange(event) {
         var fileInput = document.getElementById('fileInput');

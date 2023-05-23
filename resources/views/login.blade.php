@@ -187,7 +187,7 @@
         </div>
         <div class="row d-flex justify-content-center mt-4">
           <form action="login" id="login-form" method="post" style="width: 500px !important;">
-          @csrf
+            @csrf
             <div class="row">
               <div class="w-100" style="padding-left: 15px;">
                 <p style="
@@ -210,7 +210,7 @@
                       color: #000000;
                       margin-bottom: 0px !important;
                     ">
-                  If you donâ€™t have an account
+                  If you don't have an account
                 </p>
                 <p>
                   You can
@@ -227,7 +227,6 @@
                 </div>
                 <input id="email" type="email" name="user_email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
               </div>
-
               <!-- password -->
               <div class="input-group col-lg-12 mb-2">
                 <div class="input-group-prepend">
@@ -258,7 +257,10 @@
               </div>
               <!-- Submit Button -->
               <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
-                <input type="submit" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit" value="Sign In" />
+                <button type="submit" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
+                  <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
+                  <span id="text">Sign In</span>
+                </button>
               </div>
             </div>
           </form>

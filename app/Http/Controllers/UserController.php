@@ -94,6 +94,11 @@ class UserController extends Controller
         return view('calender');
     }
 
+    public function calendar_maintable()
+    {
+        return view('calendar_maintable');
+    }
+
     public function users()
     {
         $users = User::where(['role' => 'Admin'])->orderBy('id', 'desc')->orderBy('id', 'desc')->get()->toArray();

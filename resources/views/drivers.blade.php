@@ -79,9 +79,8 @@
       </div>
     </div>
   </div>
-
   <!-- content-wrapper ends -->
-  <!-- Add Client Modal -->
+
   <!-- Add Client Modal -->
   <div class="modal fade" style="height: 30rem;" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -155,7 +154,7 @@
             </div>
           </div>
           <div class="modal-footer" style="border: none;">
-            <button type="submit" class="btn btn-sm text-white px-5"  data-target="#add" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
+            <button type="submit" class="btn btn-sm text-white px-5" data-target="#add" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
           </div>
         </form>
       </div>

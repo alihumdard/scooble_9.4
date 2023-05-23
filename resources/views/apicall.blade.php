@@ -27,8 +27,13 @@
                 url: "/" + apiurl,
                 type: 'POST',
                 data: formData,
-
+                beforeSend: function() {
+                    $('#spinner').removeClass('d-none');
+                    $('#text').addClass('d-none');
+                },
                 success: function(response) {
+                    $('#text').removeClass('d-none');
+                    $('#spinner').addClass('d-none');
                     if (response.status === 'success') {
                         showAlert("Success", "Login Successfully", "success");
                         setInterval(function() {
@@ -64,19 +69,20 @@
                     'Authorization': 'Bearer ' + bearerToken
                 },
                 success: function(response) {
+                    console.log(formData);
                     if (response.status === 'success') {
                         $('#formData')[0].reset();
 
-                        $('#addclient').modal('hide'); 
+                        $('#addclient').modal('hide');
 
                         showAlert("Success", response.message, response.status);
                         $('#users-table').DataTable().destroy();
                         // $("#table_reload").load(location.href + " #table_reload");
-                        setTimeout(function() {
-                            location.reload();
-                            }, 1500);
+                        // setTimeout(function() {
+                        //     location.reload();
+                        // }, 1500);
                     } else {
-                        showAlert("Warnign",  response.message, response[0].status);
+                        showAlert("Warning", response.message, response.status);
                     }
                 },
                 error: function(xhr, status, error) {
@@ -88,31 +94,39 @@
 
 
         // loading tables 
-        function loadTables(apiname,role){
+        function loadTables(apiname, role) {
 
             var apiurl = "{{ end_url('') }}" + apiname;
 
-            if(role == 'Client'){
+            if (role == 'Client') {
                 $('#users-table').DataTable({
                     ajax: {
                         url: apiurl,
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('user') }}';
+                            var token = '{{ session('
+                            user ') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',
                         data: {
-                            role: role 
+                            role: role
                         }
                     },
-                    columns: [
-                        { data: 'id' },
-                        { data: 'name' },
-                        { data: 'address' },
-                        { data: 'com_name' },
-                        { 
+                    columns: [{
+                            data: 'id'
+                        },
+                        {
+                            data: 'name'
+                        },
+                        {
+                            data: 'address'
+                        },
+                        {
+                            data: 'com_name'
+                        },
+                        {
                             data: 'status',
                             render: function(data) {
                                 if (data == 1) {
@@ -126,11 +140,15 @@
                                 }
                             }
                         },
-                        { 
+                        {
                             data: 'created_at',
                             render: function(data) {
                                 var date = new Date(data);
-                                var options = { year: 'numeric', month: 'short', day: 'numeric' };
+                                var options = {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric'
+                                };
                                 return date.toLocaleDateString('en-US', options);
                             }
                         },
@@ -138,35 +156,47 @@
                 });
             }
 
-            if(role == 'Admin'){
+            if (role == 'Admin') {
                 $('#admin-table').DataTable({
                     ajax: {
                         url: apiurl,
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('user') }}';
+                            var token = '{{ session('
+                            user ') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',
                         data: {
-                            role: role 
+                            role: role
                         }
                     },
-                    columns: [
-                        { data: 'name' },
-                        { 
+                    columns: [{
+                            data: 'name'
+                        },
+                        {
                             data: 'created_at',
                             render: function(data) {
                                 var date = new Date(data);
-                                var options = { year: 'numeric', month: 'short', day: 'numeric' };
+                                var options = {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric'
+                                };
                                 return date.toLocaleDateString('en-US', options);
                             }
                         },
-                        { data: 'address' },
-                        { data: 'role' },
-                        { data: 'email' },
-                        { 
+                        {
+                            data: 'address'
+                        },
+                        {
+                            data: 'role'
+                        },
+                        {
+                            data: 'email'
+                        },
+                        {
                             data: 'status',
                             render: function(data) {
                                 if (data == 1) {
@@ -180,7 +210,7 @@
                                 }
                             }
                         },
-                        { 
+                        {
                             data: null,
                             render: function(data) {
                                 return '<span class="badge" style="background-color: #F5222D30; color: #F5222D;"><i class="fa fa-edit"></i> Edit</span> <span class="badge" style="background-color: #F5222D30; color: #F5222D;"><i class="fa fa-trash"></i> Delete</span>';
@@ -213,7 +243,7 @@
 
 
         function dismissModal(modle_id) {
-            $('#addclient').modal('hide'); 
+            $('#addclient').modal('hide');
             $('#formData')[0].reset();
         }
 
@@ -229,6 +259,4 @@
 
 
     });
-
 </script>
-

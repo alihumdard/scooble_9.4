@@ -123,15 +123,40 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-between" style="margin-top: 30px !important;">
-                        <div class="col-lg-4 col-md-4 prgrss-chart">
-                            <p class="progress_para">Active Trips </p>
+                    <div class="row justify-content-evenly" style="margin-top: 30px !important;">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="prgrss-chart">
+                                <p class="progress_para pt-2">Active Trips </p>
+                                <canvas id="myChart2" style="height: auto !important;"></canvas>
+                            </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 prgrss-chart">
-                            <p class="progress_para">Completed Trips </p>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="prgrss-chart">
+                                <p class="progress_para pt-2">Completed Trips </p>
+                                <canvas id="myChart" style="height: auto !important;"></canvas>
+                            </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 prgrss-chart">
-                            <p class="progress_para">Pending Trips </p>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="prgrss-chart">
+                                <p class="progress_para pt-2">Pending Trips </p>
+                                <canvas id="myChart3" style="height: auto !important;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 text-right">
+                        <div class="offset-lg-7 col-lg-5 col-md-5">
+                            <div>
+                                <span class="text-muted font-weight-semibold">Previous Month:</span>
+                                <b>Feburary,2023</b>
+                                <span style="border: 1px solid #ACADAE; cursor: pointer ;padding: 0px 6px;">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 justify-content-center">
+                        <div class="col-lg-12">
+                            <canvas id="Chart-Line" width="800" height="400"></canvas>
                         </div>
                     </div>
                 </div>
@@ -159,6 +184,10 @@
             </div>
         </div>
     </div>
-</div>
-<!-- content-wrapper ends -->
-@endsection
+
+    <!-- content-wrapper ends -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/top_divs_chart.js"></script>
+
+    @endsection

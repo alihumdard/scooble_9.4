@@ -29,6 +29,8 @@ Route::controller(UserController::class)->group(function () {
 
     Route::get('/calender', 'calender');
 
+    Route::get('/calendar_maintable', 'calendar_maintable');
+
     Route::get('/users', 'users');
 
     Route::get('/notifications', 'notifications');

@@ -43,6 +43,9 @@
                     <option value="">
                       @lang('lang.filter_by_status')
                     </option>
+                    @foreach($data as $key => $value)
+                    <option value="{{ $value['status'] }}">{{ $value['status'] }}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
@@ -93,7 +96,7 @@
             Add Client
           </h4>
         </div>
-        <form action="userStore" id="formData" method="post">
+        <form action="userStore" id="formData" method="post" enctype="multipart/form-data">
           @csrf
           <input type="hidden" id="role" name="role" value="Client">
           <input type="hidden" id="client_id" name="client_id" value=" ">
@@ -109,7 +112,7 @@
                     </svg>
                   </div>
                 </div>
-              </div>  
+              </div>
               <div class="col-lg-6 mb-2">
                 <div class="file-input-container">
                   <label class="file-input-label" for="fileInput" id="fileInput1Label1">Company Logo</label>
@@ -149,7 +152,7 @@
             </div>
           </div>
           <div class="modal-footer" style="border: none;">
-            <button type="submit" class="btn btn-sm text-white px-5"  data-target="#add" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
+            <button type="submit" class="btn btn-sm text-white px-5" data-target="#add" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
           </div>
         </form>
       </div>
@@ -233,6 +236,10 @@
       var fileName = file.name;
       var company_logo = document.getElementById("company_logo");
       company_logo.textContent = fileName;
+    }
+    function openFileInput() {
+        var fileInput = document.getElementById('fileInput');
+        fileInput.click();
     }
   </script>
 
