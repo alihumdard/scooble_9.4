@@ -264,7 +264,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input id="email" type="email" name="email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
+                                <input id="email" type="email" name="email" placeholder="Enter your email address" value="{{session('email')}}" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
                             </div>
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">

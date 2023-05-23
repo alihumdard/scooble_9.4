@@ -20,26 +20,27 @@
                 <td><img src="assets/images/pic.jpg" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
                 <td>{{ $value['address'] }}</td>
                 <td>{{ $value['com_name'] }}</td>
+                
                 @if($value['status'] == 1)
                 <td>
-                    <button class="btn">
-                        <span class="badge" data-toggle="modal" data-target="#user_sts" style="background-color: #31A6132E; color: #31A613;"> Active </span>
+                    <button class="btn btn_status">
+                        <span class="badge"  data-client_id="{{$value['id']}}"  style="background-color: #31A6132E; color: #31A613;"> Active </span>
                     </button>
                 </td>
                 @elseif($value['status'] == 2)
                 <td>
-                    <button class="btn">
-                        <span class="badge" data-toggle="modal" data-target="#user_sts" style="background-color: #4D4D4D1F; color: #8F9090;"> Pendding </span>
+                    <button class="btn btn_status">
+                        <span class="badge"  data-client_id="{{$value['id']}}"  style="background-color: #4D4D4D1F; color: #8F9090;"> Pendding </span>
                     </button>
                 </td>
                 @else
                 <td>
-                    <button class="btn">
-                        <span class="badge" data-toggle="modal" data-target="#user_sts" style="background-color: #F5222D30; color: #F5222D;"> Suspend </span>
+                    <button class="btn btn_status">
+                        <span class="badge"  data-client_id="{{$value['id']}}"   style="background-color: #F5222D30; color: #F5222D;"> Suspend </span>
                     </button>
                 </td>
-
                 @endif
+
                 <td>{{table_date($value['created_at'])}}</td>
                 <td style="width: 80px;">
                     <button id="btn_edit_client" class="btn p-0" data-client_id="{{$value['id']}}"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -189,10 +190,9 @@
                         <path d="M23.5 28L26.5 31L32.5 25M38 28C38 33.5228 33.5228 38 28 38C22.4772 38 18 33.5228 18 28C18 22.4772 22.4772 18 28 18C33.5228 18 38 22.4772 38 28Z" stroke="#039855" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         <rect x="4" y="4" width="48" height="48" rx="24" stroke="#ECFDF3" stroke-width="8" />
                     </svg>
-                    <select name="user_sts" id="user_sts" class="form-select mt-3">
-                        <option value="Activate">Activate</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Suspend">Suspend</option>
+                    <select name="status" id="status" class="form-select mt-3">
+                        <option value="1">Activate</option>
+                        <option value="3">Suspend</option>
                     </select>
                 </div>
                 <div class="modal-footer">

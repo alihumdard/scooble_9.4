@@ -65,4 +65,6 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get', 'post'], '/announcements_alerts', 'announcements_alerts');
 
     Route::match(['get', 'post'], '/pdf_templates', 'pdf_templates');
+
+    Route::match(['get', 'post'], '/change_status', 'change_status');
 });

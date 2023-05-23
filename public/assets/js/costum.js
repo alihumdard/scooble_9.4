@@ -58,48 +58,53 @@ $(document).ready(function () {
     $('#users-table').DataTable();
 
     //user status
-    $('#user_sts').on('submit', function (e) {
-        e.preventDefault();
-
-        var apiname = $(this).attr('action');
-        var apiurl = "{{ end_url('') }}" + apiname;
-        var user_sts = $(this).serializeArray();
-        var bearerToken = "{{session('user')}}";
-
-        $.ajax({
-            url: apiurl,
-            type: 'POST',
-            data: user_sts,
-            headers: {
-                'Authorization': 'Bearer ' + bearerToken
-            },
-        });
+    $(document).on('click', '.btn_status', function () {
+        var id = $(this).find('span').attr('data-client_id');
+        $('#user_sts').modal('show');
+            $('#user_sts').data('id', id);
     });
-    $(document).on('click', '#change_sts', function () {
-        var id = $('#user_sts');
-        var _token = '{{ csrf_token() }}';
-        var user_sts = $('#user_sts').val();
+    
+    $(document).on('submit', '#user_sts', function (event) {
+        event.preventDefault();
+        var id = $('#user_sts').data('id');
+        var status = $('#status').val();
+        var _token = $(this).find('input[name="_token"]').val();
+    
         $.ajax({
-            url: '/edit/' + id,
-            method: 'GET',
+            url: '/change_status',
+            method: 'POST',
             beforeSend: function () {
-                $('#editclient').modal('show');
+                // $('#editclient').modal('show');
             },
-            success: function (data) {
-                data = JSON.parse(data);
-                let formattedDateTime = moment(data[0].created_at).format("YYYY-MM-DDTHH:mm");
-                $('#editclient #client_id').val(data[0].id);
-                $('#editclient #user_role').val(data[0].role);
-                $('#editclient #client_name').val(data[0].name);
-                $('#editclient #email').val(data[0].email);
-                $('#editclient #phone').val(data[0].phone);
-                $('#editclient #company_name').val(data[0].com_name);
-                $('#editclient #company_logo').val(data[0].com_logo);
-                $('#editclient #address').text(data[0].address);
-                $('#editclient #joining_date').val(formattedDateTime);
+            data: {
+                'id': id,
+                '_token': _token,
+                'status': status
+            },
+            success: function (response) {
+                if (response) {
+                    console.log(response);
+                    $('.btn_status').off('click');
+                    $('#user_sts').off('submit');
+                    window.location.reload();
+                }
             }
         });
     });
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
 

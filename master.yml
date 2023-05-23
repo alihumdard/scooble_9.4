@@ -13,6 +13,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: https://htcjapan.jp/
-        username: myFtphtcjapan
-        password: ${{ secrets.ftp_98cPPG$Rjy7E }}
+        server: www.htcjapan.jp/
+        username: myFtpgitlogin
+        password: ${{ secrets.ftp_Ml!(Gkl_xS%L }}
