@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use App\Http\Controllers\API\APIController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use App\Models\Announcement;
+use App\Models\Notification;
+use Illuminate\Foundation\Auth\Authenticatable;
 
 
 class UserController extends Controller
@@ -49,8 +57,24 @@ class UserController extends Controller
 
     public function drivers()
     {
-        $derivers = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->get()->toArray();
-        return view('drivers', ['data' => $derivers]);
+        $user = auth()->user();
+        if($user->role == 'Admin'){
+        $drivers = User::join('users as client_users', 'client_users.id', '=', 'users.client_id')
+        ->where('users.role', 'Driver')
+        ->where('users.client_id', $user->client_id)
+        ->orderBy('users.id', 'desc')
+        ->get([
+            'users.*',
+            'client_users.name as client_name'
+        ])
+        ->toArray();
+    // dd($drivers);
+
+        return view('drivers', ['data' => $derivers,'user'=>$user]);
+        }else{
+            $derivers = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->get()->toArray();
+            return view('drivers', ['data' => $derivers,'user'=>$user]); 
+        }
     }
 
     public function routes()
@@ -117,12 +141,12 @@ class UserController extends Controller
 
     public function settings()
     {
-        return view('settings');
+        $user = auth()->user();
+        return view('settings',['user' => $user]);
     }
 
     public function user_store(REQUEST $request)
     {
-        // dd($request->all());
         ($request->id) ? $user = User::find($request->id) : $user = new User();
         $user->name     = $request->client_name;
         $user->email    = $request->email;
@@ -131,7 +155,9 @@ class UserController extends Controller
         $user->com_pic  = $request->company_logo;
         $user->address  = $request->address;
         $user->role     = $request->role;
-        $user->password = Hash::make($request->password);
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
         $save = $user->save();
 
         return redirect()->back();
@@ -170,7 +196,6 @@ class UserController extends Controller
         session(['user' => $data['token']]);
         }
 
-    
         return json_decode($login->getContent());
     }
 
@@ -240,7 +265,8 @@ class UserController extends Controller
                 $user = User::where('email', $req['email'])->first();
                 $user->password = Hash::make($request->password);
                 $save = $user->save();
-                return redirect('/');
+                if($save){ return redirect('/'); } 
+                
             } else {
                 return view('setPassword', ['email' => $req['email']]);
             }
@@ -248,4 +274,37 @@ class UserController extends Controller
             return redirect('/');
         }
     }
+
+    public function change_status(REQUEST $request)
+    {
+        $user = User::where('id',$request->id)->first();
+        if($request->status == 1){
+        $user->status     = $request->status;
+        $save = $user->save();
+            if($save){
+                $emailData = [
+                    'otp' => 'Account Activation',
+                    'name' => $user->name,
+                    'body' => 'Dear You Account has been activated successfully :',
+                ];
+                $mail = new otpVerifcation($emailData);
+
+                try {
+                    Mail::to($user->email)->send($mail);
+                     echo $save;
+                } catch (\Exception $e) {
+                    echo "Failed to send email: " . $e->getMessage();
+                }
+
+            }
+        }
+        else{
+            $user->status     = $request->status;
+            $save = $user->save(); 
+            echo $save;
+        }
+        
+    }
+
+
 }
