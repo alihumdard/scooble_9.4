@@ -27,30 +27,7 @@ $(document).ready(function () {
 
     // modal form functions
 
-    function updateLabel() {
-        var fileInput1 = document.getElementById('fileInput1');
-        var fileInput1Label1 = document.getElementById('fileInput1Label1');
-
-        if (fileInput1.files.length > 0) {
-            fileInput1Label1.textContent = fileInput1.files[0].name;
-        } else {
-            fileInput1Label1.textContent = 'Company Logo';
-        }
-    }
-
     
-
-    function handleFileChange(event) {
-        var fileInput = document.getElementById('fileInput');
-        var fileDropzone = document.getElementById('fileDropzone');
-        var fileDropzoneText = document.querySelector('.file-dropzone-text');
-
-        if (fileInput.files.length > 0) {
-            fileDropzoneText.textContent = fileInput.files[0].name;
-        } else {
-            fileDropzoneText.textContent = 'Click here to browse files';
-        }
-    }
 
     // modal form functions end
 

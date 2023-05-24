@@ -1,7 +1,7 @@
- <div class="table">
      <table id="users-table" class="display" style="width:100%">
          <thead class="text-secondary" style="background-color: #E9EAEF;">
-             <tr>
+             <tr style="font-size: small;">
+                 <th>#</th>
                  <th>@lang('lang.drivers')</th>
                  <th>@lang('lang.joining_date')</th>
                  <th>@lang('lang.address')</th>
@@ -13,7 +13,8 @@
          </thead>
          <tbody>
              @foreach($data as $key => $value)
-             <tr>
+             <tr style="font-size: small;">
+                <td>{{$value['id']}}</td>
                  <td><img src="assets/images/pic.jpg" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
                  <td>{{table_date($value['created_at'])}}</td>
                  <td>{{ $value['address'] }}</td>
@@ -57,7 +58,6 @@
              @endforeach
          </tbody>
      </table>
- </div>
  <!-- Edit Client Modal -->
  <div class="modal fade" style="height: 30rem;" id="editclient" tabindex="-1" aria-labelledby="editclientLabel" aria-hidden="true">
      <div class="modal-dialog modal-lg">

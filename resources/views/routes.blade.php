@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-      <div class="card-body px-0">
+      <div class="card-body px-4">
         <div class="table-responsive">
           @include('routes_table')
         </div>
