@@ -21527,8 +21527,8 @@ dl li {
 
 .prgrss-chart {
 
-  /* max-width: 250px !important; */
-  height: 250px !important;
+  max-width: 250px !important;
+  height: 20em !important;
   background: #FFFFFF !important;
   border-radius: 12px !important;
 }
