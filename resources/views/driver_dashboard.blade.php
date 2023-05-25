@@ -91,11 +91,7 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5">
                             <div>
-                                <span class="text-muted font-weight-semibold">Show:</span>
-                                <b>03-09, December 2023</b>
-                                <span style="border: 1px solid #ACADAE; cursor: pointer ;padding: 0px 6px;">
-                                    <i class="fa fa-caret-down"></i>
-                                </span>
+                                <b>Completed Trips</b>
                             </div>
                         </div>
                     </div>
@@ -184,25 +180,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <form action="" method="#">
-                                <select name="" class="form-select" id="">
-                                    <option disabled selected value="null">Filter by clients</option>
-                                    <option value=""><i class="fa fa-edit"></i> Earth</option>
-                                    <option value="">B</option>
-                                    <option value="">C</option>
-                                    <option value="">D</option>
-                                </select>
-                            </form>
-                        </div>
-                        <div class="col-lg-4">
-                            <span class="">
-                                <a class="text-muted font-weight-semibold" href="#">Show more..</a>
-                            </span>
-                        </div>
-                    </div>
+                <div class="col-lg-4 col-md-4 mt-4">
                     @include('aside')
                 </div>
             </div>

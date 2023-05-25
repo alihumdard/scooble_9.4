@@ -25,7 +25,10 @@
     }
 
     .svg:hover {
-      filter: invert(1);
+      filter: invert();
+    }
+    .nav-item:hover{
+      color: black !important;
     }
   </style>
 </head>
@@ -56,45 +59,11 @@
         <a class="navbar-brand brand-logo" href="{{'/'}}"><img src="assets/images/Logo.png" alt="logo" /></a>
         <a class="navbar-brand brand-logo-mini" href="{{'/'}}"><img src="assets/images/scooble.png" alt="logo" /></a>
       </div>
-      <div class="navbar-menu-wrapper bg-transparent d-flex align-items-stretch">
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="mdi mdi-menu"></span>
         </button>
-        <!-- <div class="search-field d-none d-md-block">
-            <form class="d-flex align-items-center h-100" action="#">
-              <div class="input-group">
-                <div class="input-group-prepend bg-transparent">
-                  <i class="input-group-text border-0 mdi mdi-magnify"></i>
-                </div>
-                <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
-              </div>
-            </form>
-          </div> -->
         <ul class="navbar-nav navbar-nav-right">
-          <!-- <li class="nav-item nav-profile dropdown">
-              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="nav-profile-img">
-                  <img src="assets/images/faces/face1.jpg" alt="image">
-                  <span class="availability-status online"></span>
-                </div>
-                <div class="nav-profile-text">
-                  <p class="mb-1 text-black">David Greymaax</p>
-                </div>
-              </a>
-              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
-              </div>
-            </li> -->
-          <!-- <li class="nav-item d-none d-lg-block full-screen-link">
-              <a class="nav-link">
-                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-              </a>
-            </li> -->
-
           <li class="nav-item d-none d-lg-block mt-3">
             <form action="/lang_change" method="post">
               @csrf
@@ -104,53 +73,7 @@
               </select>
             </form>
           </li>
-          <li class="nav-item d-none d-lg-block ">
-            <a class="nav-link">
-              <i class="mdi mdi-plus btn  p-1" style="background: #E45F00;color: #fff ; border-radius: 6px;" id=""></i>
-            </a>
-          </li>
           <!-- <li class="nav-item dropdown">
-              <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="mdi mdi-email-outline"></i>
-                <span class="count-symbol bg-warning"></span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                <h6 class="p-3 mb-0">Messages</h6>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="assets/images/faces/face4.jpg" alt="image" class="profile-pic">
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
-                    <p class="text-gray mb-0"> 1 Minutes ago </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="assets/images/faces/face2.jpg" alt="image" class="profile-pic">
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
-                    <p class="text-gray mb-0"> 15 Minutes ago </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="assets/images/faces/face3.jpg" alt="image" class="profile-pic">
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
-                    <p class="text-gray mb-0"> 18 Minutes ago </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <h6 class="p-3 mb-0 text-center">4 new messages</h6>
-              </div>
-            </li> -->
-          <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <i class="fa fa-bell"></i>
               <span class="count-symbol bg-danger"></span>
@@ -196,17 +119,37 @@
               <div class="dropdown-divider"></div>
               <h6 class="p-3 mb-0 text-center">See all notifications</h6>
             </div>
-          </li>
-          <li class="nav-item nav-logout d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <i class="fa fa-user-circle" style="font-size: 28px !important;"></i>
+          </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+              <img src="assets/images/user.png" style="width: 100%; height: 60%;" alt="">
             </a>
-          </li>
-          <!-- <li class="nav-item nav-settings d-none d-lg-block">
-              <a class="nav-link" href="#">
-                <i class="mdi mdi-format-line-spacing"></i>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <h6 class="p-3 mb-0">Manage Profile & Notifications</h6>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item" href="/notifications">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-info">
+                    <i class="mdi mdi-bell"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <h5 class="text-dark ellipsis mb-0"> Notifications </h5>
+                </div>
               </a>
-            </li> -->
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item" href="/settings">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-warning">
+                    <i class="mdi mdi-settings"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <h5 class="text-dark ellipsis mb-0">Profile Settings</h5>
+                </div>
+              </a>
+            </div>
+          </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="mdi mdi-menu"></span>
@@ -232,7 +175,7 @@
               <!-- <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/'}}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.54 0H5.92C7.33 0 8.46 1.15 8.46 2.561V5.97C8.46 7.39 7.33 8.53 5.92 8.53H2.54C1.14 8.53 0 7.39 0 5.97V2.561C0 1.15 1.14 0 2.54 0ZM2.54 11.4697H5.92C7.33 11.4697 8.46 12.6107 8.46 14.0307V17.4397C8.46 18.8497 7.33 19.9997 5.92 19.9997H2.54C1.14 19.9997 0 18.8497 0 17.4397V14.0307C0 12.6107 1.14 11.4697 2.54 11.4697ZM17.4601 0H14.0801C12.6701 0 11.5401 1.15 11.5401 2.561V5.97C11.5401 7.39 12.6701 8.53 14.0801 8.53H17.4601C18.8601 8.53 20.0001 7.39 20.0001 5.97V2.561C20.0001 1.15 18.8601 0 17.4601 0ZM14.0801 11.4697H17.4601C18.8601 11.4697 20.0001 12.6107 20.0001 14.0307V17.4397C20.0001 18.8497 18.8601 19.9997 17.4601 19.9997H14.0801C12.6701 19.9997 11.5401 18.8497 11.5401 17.4397V14.0307C11.5401 12.6107 12.6701 11.4697 14.0801 11.4697Z" fill="white" />
@@ -240,7 +183,7 @@
               <span class="menu-title ml-2">@lang('lang.dashboard') </span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/client'}}">
               <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.8576 5.98446C19.3853 5.98446 19.8684 5.71825 20.2227 5.28788C20.5987 4.83115 20.8314 4.1931 20.8314 3.48206C20.8314 2.73797 20.7572 2.07559 20.468 1.63218C20.205 1.22902 19.7172 0.979618 18.8576 0.979618C17.9981 0.979618 17.5102 1.22902 17.2473 1.63218C16.9581 2.07557 16.8839 2.73797 16.8839 3.48206C16.8839 4.19315 17.1165 4.83118 17.4926 5.28792C17.8469 5.71827 18.3299 5.98446 18.8576 5.98446ZM20.9765 5.90778C20.4392 6.5604 19.6904 6.96408 18.8576 6.96408C18.0248 6.96408 17.276 6.56041 16.7387 5.90781C16.2232 5.28162 15.9043 4.42355 15.9043 3.48206C15.9043 2.57365 16.0112 1.73985 16.4284 1.10029C16.8718 0.420497 17.6158 0 18.8576 0C20.0994 0 20.8434 0.420497 21.2868 1.10029C21.704 1.73984 21.811 2.57365 21.811 3.48206C21.811 4.42354 21.4921 5.28162 20.9765 5.90778Z" fill="white" />
@@ -253,7 +196,7 @@
               <span class="menu-title ml-2"> @lang('lang.client') </span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{ '/drivers'}}">
               <svg width="17" height="24" viewBox="0 0 17 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M3.09148 20.3718H7.52588V15.9374C5.19759 16.1948 3.34889 18.0435 3.09148 20.3718ZM8.64214 15.9374V20.3718H13.0765C12.8191 18.0435 10.9704 16.1948 8.64214 15.9374ZM13.0766 21.4881C12.9986 22.194 12.7746 22.855 12.4355 23.4412L13.4018 24.0001C13.9245 23.0965 14.2234 22.0473 14.2234 20.93C14.2234 17.5393 11.4747 14.7905 8.08401 14.7905C4.69332 14.7905 1.94458 17.5393 1.94458 20.93C1.94458 22.0473 2.24357 23.0965 2.76626 24.0001L3.73249 23.4412C3.39343 22.855 3.1694 22.194 3.09143 21.4881H13.0766Z" fill="white" />
@@ -267,7 +210,7 @@
               <span class="menu-title ml-2"> @lang('lang.drivers') </span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/routes'}}">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.46997 9C7.40297 9 8.96997 7.433 8.96997 5.5C8.96997 3.567 7.40297 2 5.46997 2C3.53697 2 1.96997 3.567 1.96997 5.5C1.96997 7.433 3.53697 9 5.46997 9Z" stroke="white" stroke-width="1.5" />
@@ -279,7 +222,7 @@
               <span class="menu-title ml-2"> @lang('lang.routes')</span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'calender'}}">
               <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4109 0.768617L13.4119 1.51824C16.1665 1.73413 17.9862 3.61119 17.9891 6.48975L18 14.9155C18.0039 18.054 16.0322 19.985 12.8718 19.99L5.15188 20C2.01119 20.004 0.0148166 18.027 0.0108673 14.8795L6.64975e-06 6.55272C-0.00394266 3.65517 1.75153 1.78311 4.50617 1.53024L4.50518 0.780611C4.5042 0.340832 4.83001 0.00999726 5.26444 0.00999726C5.69886 0.00899776 6.02468 0.338833 6.02567 0.778612L6.02666 1.47826L11.8914 1.47027L11.8904 0.770616C11.8894 0.330837 12.2152 0.00100177 12.6497 2.26549e-06C13.0742 -0.000997234 13.4099 0.328838 13.4109 0.768617ZM1.52148 6.86157L16.4696 6.84158V6.49175C16.4272 4.34283 15.349 3.21539 13.4138 3.04748L13.4148 3.81709C13.4148 4.24688 13.0801 4.5877 12.6556 4.5877C12.2212 4.5887 11.8943 4.24887 11.8943 3.81909L11.8934 3.0095L6.02863 3.01749L6.02962 3.82609C6.02962 4.25687 5.70479 4.5967 5.27036 4.5967C4.83594 4.5977 4.50913 4.25887 4.50913 3.82809L4.50815 3.05847C2.58286 3.25137 1.51753 4.38281 1.52049 6.55072L1.52148 6.86157ZM12.2399 11.4043V11.4153C12.2498 11.8751 12.625 12.2239 13.0801 12.2139C13.5244 12.2029 13.8789 11.8221 13.869 11.3623C13.8483 10.9225 13.4918 10.5637 13.0485 10.5647C12.5944 10.5747 12.2389 10.9445 12.2399 11.4043ZM13.0554 15.892C12.6013 15.882 12.235 15.5032 12.234 15.0435C12.2241 14.5837 12.5884 14.2029 13.0426 14.1919H13.0525C13.5165 14.1919 13.8927 14.5707 13.8927 15.0405C13.8937 15.5102 13.5185 15.891 13.0554 15.892ZM8.17212 11.4203C8.19187 11.8801 8.56804 12.2389 9.02221 12.2189C9.46651 12.1979 9.82096 11.8181 9.80121 11.3583C9.79035 10.9085 9.42504 10.5587 8.98074 10.5597C8.52657 10.5797 8.17113 10.9605 8.17212 11.4203ZM9.02616 15.8471C8.57199 15.8671 8.1968 15.5082 8.17607 15.0485C8.17607 14.5887 8.53052 14.2089 8.98469 14.1879C9.42899 14.1869 9.79529 14.5367 9.80516 14.9855C9.82589 15.4463 9.47046 15.8261 9.02616 15.8471ZM4.10433 11.4553C4.12408 11.915 4.50025 12.2749 4.95442 12.2539C5.39872 12.2339 5.75317 11.8531 5.73243 11.3933C5.72256 10.9435 5.35725 10.5937 4.91196 10.5947C4.45779 10.6147 4.10334 10.9955 4.10433 11.4553ZM4.95837 15.8521C4.5042 15.8731 4.12901 15.5132 4.10828 15.0535C4.10729 14.5937 4.46273 14.2129 4.9169 14.1929C5.3612 14.1919 5.7275 14.5417 5.73737 14.9915C5.7581 15.4513 5.40365 15.8321 4.95837 15.8521Z" fill="white" />
@@ -287,7 +230,7 @@
               <span class="menu-title ml-2"> @lang('lang.calendar') </span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/users'}}">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.14 21.62C17.26 21.88 16.22 22 15 22H8.99998C7.77998 22 6.73999 21.88 5.85999 21.62C6.07999 19.02 8.74998 16.97 12 16.97C15.25 16.97 17.92 19.02 18.14 21.62Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -297,16 +240,16 @@
               <span class="menu-title ml-2"> @lang('lang.users') </span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'announcmnents'}}">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.1783 16.5241L19.5521 3.01716C19.1579 1.54862 17.353 1.00759 16.2133 2.01629L13.9278 4.039C11.3845 6.28991 8.35111 7.91891 5.06775 8.79698C2.31938 9.53199 0.690561 12.3597 1.42698 15.1028C2.16341 17.8459 4.99058 19.4819 7.73896 18.7469C11.0223 17.8688 14.4654 17.7657 17.7956 18.4459L20.7882 19.0571C22.2806 19.3619 23.5725 17.9926 23.1783 16.5241Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M7.53931 8.09998L11.7001 23.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-              <span class="menu-title ml-2"> @lang('lang.announcments') </span>
+              <span class="menu-title ml-2"> @lang('lang.announcements') </span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/notifications'}}">
               <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.8251 19.1312L21.186 14.2589V9.18582C21.186 4.12075 17.0652 0 12.0002 0C6.93509 0 2.81435 4.12075 2.81435 9.18582V14.2589L0.175114 19.1312C0.0554271 19.3521 -0.00481165 19.6003 0.000300254 19.8515C0.00541215 20.1028 0.0756993 20.3483 0.204274 20.5642C0.33285 20.7801 0.515302 20.9589 0.733755 21.083C0.952207 21.2072 1.19917 21.2724 1.45043 21.2724H6.70418C6.6898 21.4317 6.682 21.5927 6.682 21.7559C6.682 23.1663 7.2423 24.519 8.23964 25.5164C9.23697 26.5137 10.5897 27.074 12.0001 27.074C13.4106 27.074 14.7632 26.5137 15.7606 25.5164C16.7579 24.519 17.3182 23.1663 17.3182 21.7559C17.3182 21.5927 17.3104 21.4317 17.296 21.2724H22.5498C22.801 21.2724 23.0479 21.2071 23.2664 21.0829C23.4848 20.9588 23.6672 20.78 23.7958 20.5642C23.9243 20.3483 23.9946 20.1027 23.9997 19.8515C24.0048 19.6004 23.9446 19.3521 23.8249 19.1312H23.8251ZM15.3844 21.7559C15.3848 22.221 15.2893 22.6811 15.1039 23.1077C14.9185 23.5342 14.6472 23.9179 14.3069 24.2349C13.9666 24.552 13.5646 24.7954 13.126 24.9501C12.6875 25.1049 12.2217 25.1675 11.7578 25.1342C11.2939 25.1009 10.8419 24.9723 10.4299 24.7565C10.0179 24.5408 9.65482 24.2424 9.3633 23.88C9.07178 23.5176 8.85807 23.0991 8.73552 22.6504C8.61297 22.2018 8.58421 21.7327 8.65103 21.2724H15.3492C15.3725 21.4325 15.3842 21.5941 15.3844 21.7559ZM2.26211 19.3386L4.7482 14.749V9.18582C4.7482 7.26248 5.51225 5.41792 6.87225 4.05791C8.23226 2.6979 10.0768 1.93386 12.0002 1.93386C13.9235 1.93386 15.7681 2.6979 17.1281 4.05791C18.4881 5.41792 19.2521 7.26248 19.2521 9.18582V14.749L21.7381 19.3386H2.26211Z" fill="white" />
@@ -314,15 +257,15 @@
               <span class="menu-title ml-2"> @lang('lang.notifications') </span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/settings'}}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M18.4022 11.5801C18.7599 11.7701 19.0358 12.0701 19.23 12.3701C19.6081 12.9901 19.5775 13.7501 19.2096 14.4201L18.4942 15.6201C18.1161 16.2601 17.4109 16.6601 16.6853 16.6601C16.3277 16.6601 15.9291 16.5601 15.6021 16.3601C15.3364 16.1901 15.0298 16.1301 14.7027 16.1301C13.691 16.1301 12.8428 16.9601 12.8121 17.9501C12.8121 19.1001 11.8719 20.0001 10.6967 20.0001H9.3068C8.12133 20.0001 7.18113 19.1001 7.18113 17.9501C7.16069 16.9601 6.31247 16.1301 5.30073 16.1301C4.96348 16.1301 4.6569 16.1901 4.40141 16.3601C4.07438 16.5601 3.6656 16.6601 3.31813 16.6601C2.58232 16.6601 1.87717 16.2601 1.49905 15.6201L0.793898 14.4201C0.415773 13.7701 0.395334 12.9901 0.773459 12.3701C0.936972 12.0701 1.24356 11.7701 1.59102 11.5801C1.87717 11.4401 2.06112 11.2101 2.23486 10.9401C2.74584 10.0801 2.43925 8.95012 1.57059 8.44012C0.558848 7.87012 0.231821 6.60012 0.814337 5.61012L1.49905 4.43012C2.09178 3.44012 3.35901 3.09012 4.38097 3.67012C5.27007 4.15012 6.42488 3.83012 6.94608 2.98012C7.10959 2.70012 7.20157 2.40012 7.18113 2.10012C7.16069 1.71012 7.27311 1.34012 7.46728 1.04012C7.8454 0.420122 8.53012 0.0201221 9.27614 0.00012207H10.7171C11.4734 0.00012207 12.1581 0.420122 12.5362 1.04012C12.7201 1.34012 12.8428 1.71012 12.8121 2.10012C12.7917 2.40012 12.8837 2.70012 13.0472 2.98012C13.5684 3.83012 14.7232 4.15012 15.6225 3.67012C16.6342 3.09012 17.9117 3.44012 18.4942 4.43012L19.1789 5.61012C19.7716 6.60012 19.4446 7.87012 18.4227 8.44012C17.554 8.95012 17.2474 10.0801 17.7686 10.9401C17.9321 11.2101 18.1161 11.4401 18.4022 11.5801ZM7.10959 10.0101C7.10959 11.5801 8.40748 12.8301 10.012 12.8301C11.6164 12.8301 12.8837 11.5801 12.8837 10.0101C12.8837 8.44012 11.6164 7.18012 10.012 7.18012C8.40748 7.18012 7.10959 8.44012 7.10959 10.0101Z" fill="white" />
               </svg>
-              <span class="menu-title ml-2"> @lang('lang.setting') </span>
+              <span class="menu-title ml-2"> @lang('lang.settings') </span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/create_trip">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.6667 0H3.33333C2.44928 0 1.60143 0.35119 0.976311 0.976311C0.35119 1.60143 0 2.44928 0 3.33333V16.6667C0 17.5507 0.35119 18.3986 0.976311 19.0237C1.60143 19.6488 2.44928 20 3.33333 20H16.6667C17.5507 20 18.3986 19.6488 19.0237 19.0237C19.6488 18.3986 20 17.5507 20 16.6667V3.33333C20 2.44928 19.6488 1.60143 19.0237 0.976311C18.3986 0.35119 17.5507 0 16.6667 0ZM17.7778 16.6667C17.7778 16.9614 17.6607 17.244 17.4523 17.4523C17.244 17.6607 16.9614 17.7778 16.6667 17.7778H3.33333C3.03865 17.7778 2.75603 17.6607 2.54766 17.4523C2.33929 17.244 2.22222 16.9614 2.22222 16.6667V3.33333C2.22222 3.03865 2.33929 2.75603 2.54766 2.54766C2.75603 2.33929 3.03865 2.22222 3.33333 2.22222H16.6667C16.9614 2.22222 17.244 2.33929 17.4523 2.54766C17.6607 2.75603 17.7778 3.03865 17.7778 3.33333V16.6667Z" fill="white" />
@@ -331,7 +274,7 @@
               <span class="menu-title ml-2">Create Trip</span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/driver_map">
               <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.14286 0C12.9257 0 16 3.04 16 6.8C16 11.8971 9.14286 19.4286 9.14286 19.4286C9.14286 19.4286 2.28571 11.8971 2.28571 6.8C2.28571 3.04 5.36 0 9.14286 0ZM9.14286 4.57143C8.53665 4.57143 7.95527 4.81224 7.52661 5.2409C7.09796 5.66955 6.85714 6.25093 6.85714 6.85714C6.85714 7.15731 6.91626 7.45453 7.03113 7.73185C7.146 8.00916 7.31437 8.26114 7.52661 8.47339C7.95527 8.90204 8.53665 9.14286 9.14286 9.14286C9.74907 9.14286 10.3304 8.90204 10.7591 8.47339C11.1878 8.04473 11.4286 7.46335 11.4286 6.85714C11.4286 6.25093 11.1878 5.66955 10.7591 5.2409C10.3304 4.81224 9.74907 4.57143 9.14286 4.57143ZM18.2857 19.4286C18.2857 21.9543 14.1943 24 9.14286 24C4.09143 24 0 21.9543 0 19.4286C0 17.9543 1.39429 16.64 3.55429 15.8057L4.28571 16.8457C3.05143 17.36 2.28571 18.0686 2.28571 18.8571C2.28571 20.4343 5.36 21.7143 9.14286 21.7143C12.9257 21.7143 16 20.4343 16 18.8571C16 18.0686 15.2343 17.36 14 16.8457L14.7314 15.8057C16.8914 16.64 18.2857 17.9543 18.2857 19.4286Z" fill="white" />
@@ -339,7 +282,7 @@
               <span class="menu-title ml-2">Map</span>
             </a>
           </li>
-          <li class="nav-item mt-3">
+          <li class="nav-item mb-2">
             <a class="nav-link svg ml-5" href="{{'/client_dashboard'}}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.54 0H5.92C7.33 0 8.46 1.15 8.46 2.561V5.97C8.46 7.39 7.33 8.53 5.92 8.53H2.54C1.14 8.53 0 7.39 0 5.97V2.561C0 1.15 1.14 0 2.54 0ZM2.54 11.4697H5.92C7.33 11.4697 8.46 12.6107 8.46 14.0307V17.4397C8.46 18.8497 7.33 19.9997 5.92 19.9997H2.54C1.14 19.9997 0 18.8497 0 17.4397V14.0307C0 12.6107 1.14 11.4697 2.54 11.4697ZM17.4601 0H14.0801C12.6701 0 11.5401 1.15 11.5401 2.561V5.97C11.5401 7.39 12.6701 8.53 14.0801 8.53H17.4601C18.8601 8.53 20.0001 7.39 20.0001 5.97V2.561C20.0001 1.15 18.8601 0 17.4601 0ZM14.0801 11.4697H17.4601C18.8601 11.4697 20.0001 12.6107 20.0001 14.0307V17.4397C20.0001 18.8497 18.8601 19.9997 17.4601 19.9997H14.0801C12.6701 19.9997 11.5401 18.8497 11.5401 17.4397V14.0307C11.5401 12.6107 12.6701 11.4697 14.0801 11.4697Z" fill="white" />
@@ -347,7 +290,7 @@
               <span class="menu-title ml-2">Client Dashboard</span>
             </a>
           </li>
-          <li class="nav-item mt-3">
+          <li class="nav-item mb-2">
             <a class="nav-link svg ml-5" href="{{'/driver_dashboard'}}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.54 0H5.92C7.33 0 8.46 1.15 8.46 2.561V5.97C8.46 7.39 7.33 8.53 5.92 8.53H2.54C1.14 8.53 0 7.39 0 5.97V2.561C0 1.15 1.14 0 2.54 0ZM2.54 11.4697H5.92C7.33 11.4697 8.46 12.6107 8.46 14.0307V17.4397C8.46 18.8497 7.33 19.9997 5.92 19.9997H2.54C1.14 19.9997 0 18.8497 0 17.4397V14.0307C0 12.6107 1.14 11.4697 2.54 11.4697ZM17.4601 0H14.0801C12.6701 0 11.5401 1.15 11.5401 2.561V5.97C11.5401 7.39 12.6701 8.53 14.0801 8.53H17.4601C18.8601 8.53 20.0001 7.39 20.0001 5.97V2.561C20.0001 1.15 18.8601 0 17.4601 0ZM14.0801 11.4697H17.4601C18.8601 11.4697 20.0001 12.6107 20.0001 14.0307V17.4397C20.0001 18.8497 18.8601 19.9997 17.4601 19.9997H14.0801C12.6701 19.9997 11.5401 18.8497 11.5401 17.4397V14.0307C11.5401 12.6107 12.6701 11.4697 14.0801 11.4697Z" fill="white" />
@@ -355,12 +298,12 @@
               <span class="menu-title ml-2">Driver Dashboard</span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/announcements_alerts">
               <span class="menu-title ml-2">Announcements Alerts</span>
             </a>
           </li>
-          <li class="nav-item mt-3 p-0">
+          <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/pdf_templates">
               <span class="menu-title ml-2">PDF Templates</span>
             </a>

@@ -59,8 +59,8 @@
 -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h5 style="color: #452C88;">Active Routes</h5>
-                                <h3 style="color: #E45F00;">10</h3>
+                                <h5 class="mb-0" style="color: #452C88;">Active Routes</h5>
+                                <h4 class="mb-0" style="color: #E45F00;">10</h4>
                             </div>
                             <div>
                                 <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,8 +78,8 @@
 -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h5 style="color: #452C88;">Completed Trips</h5>
-                                <h3 style="color: #E45F00;">500</h3>
+                                <h5 class="mb-0" style="color: #452C88;">Completed Trips</h5>
+                                <h4 class="mb-0" style="color: #E45F00;">500</h4>
                             </div>
                             <div>
                                 <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,8 +96,9 @@
 -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h5 style="color: #452C88;">Days Left</h5>
-                                <h3 style="color: #E45F00;">500</h3>
+                                <h5 class="mb-0" style="color: #452C88;">Days Left</h5>
+                                <h4 class="mb-0" style="color: #E45F00;">500</h4>
+                                <p class="mb-0" style="font-size: smaller;">Expiry Date: <span style="color: #452C88;">5/15/2023</span></p>
                             </div>
                             <div>
                                 <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">

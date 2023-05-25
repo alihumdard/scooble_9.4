@@ -59,7 +59,7 @@
                         <p>
                             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
                         </p>
-                        <button class="btn dismiss-btn px-5 mt-5">Dismiss</button>
+                        <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                         <p>
                             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
                         </p>
-                        <button class="btn dismiss-btn px-5 mt-5">Dismiss</button>
+                        <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                         <p>
                             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
                         </p>
-                        <button class="btn dismiss-btn px-5 mt-5">Dismiss</button>
+                        <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
                         <p>
                             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
                         </p>
-                        <button class="btn dismiss-btn px-5 mt-5">Dismiss</button>
+                        <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
                     </div>
                 </div>
             </div>
@@ -163,7 +163,7 @@
                         <p>
                             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
                         </p>
-                        <button class="btn dismiss-btn px-5 mt-5">Dismiss</button>
+                        <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
                     </div>
                 </div>
             </div>
