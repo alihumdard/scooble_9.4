@@ -16,21 +16,14 @@
 <!-- partial -->
 <div class="main-panel">
   <div class="content-wrapper py-0">
-    <div class="page-header">
-      <h3 class="page-title">
+    <div style="border: none;">
+      <div class="bg-white" style="border-radius: 20px;">
+        <div class="p-3">
+    <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white me-2">
           <i class="fa fa-gear"></i>
         </span> @lang('lang.settings')
       </h3>
-      <!-- <nav aria-label="breadcrumb">
-        <ul class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">
-            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-          </li>
-        </ul>
-      </nav> -->
-    </div>
-    <div class="bg-white py-3">
       <form action="userStore" id="formData" method="POST">
         @csrf
         <input type="hidden" name="id" value="{{$user->id}}">

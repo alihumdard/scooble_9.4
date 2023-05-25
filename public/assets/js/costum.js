@@ -7,20 +7,21 @@ $(document).ready(function () {
             url: '/edit/' + id,
             method: 'GET',
             beforeSend: function () {
-                $('#editclient').modal('show');
+                $('#addclient').modal('show');
             },
             success: function (data) {
                 data = JSON.parse(data);
                 let formattedDateTime = moment(data[0].created_at).format("YYYY-MM-DDTHH:mm");
-                $('#editclient #client_id').val(data[0].id);
-                $('#editclient #user_role').val(data[0].role);
-                $('#editclient #client_name').val(data[0].name);
-                $('#editclient #email').val(data[0].email);
-                $('#editclient #phone').val(data[0].phone);
-                $('#editclient #company_name').val(data[0].com_name);
-                $('#editclient #company_logo').val(data[0].com_logo);
-                $('#editclient #address').text(data[0].address);
-                $('#editclient #joining_date').val(formattedDateTime);
+                $('#addclient #client_id').val(data[0].id);
+                $('#addclient #role').val(data[0].role);
+                $('#addclient #name').val(data[0].name);
+                $('#addclient #phone').val(data[0].phone);
+                $('#addclient #email').val(data[0].email);
+                $('#addclient #com_name').val(data[0].com_name);
+                $('#addclient #com_pic').val(data[0].com_logo);
+                $('#addclient #address').text(data[0].address);
+                $('#addclient #btn_save').html('save').css('background-color', '#233A85');
+                $('#addclient #joining_date').val(formattedDateTime);
             }
         });
     });
@@ -75,7 +76,11 @@ $(document).ready(function () {
 
 
 
-
+    $('#btn_cancel').click(function() {
+        alert();
+        // Dismiss the modal
+        $('#addclient').modal('hide');
+      });
 
 
 

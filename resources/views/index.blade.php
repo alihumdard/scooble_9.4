@@ -17,7 +17,7 @@
 
 <!-- partial -->
 <div class="main-panel">
-  <div class="content-wrapper py-0">
+  <div class="content-wrapper py-0 px-3">
     <div class="page-header">
       <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white me-2 py-2">
@@ -30,9 +30,9 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-lg-4">
-          <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
+          <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3); 
+            -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Revenue</h5>
@@ -49,8 +49,8 @@
         </div>
         <div class="col-lg-4">
           <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
+            -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Drivers</h5>
@@ -73,8 +73,8 @@
         </div>
         <div class="col-lg-4">
           <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
+            -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Users</h5>
@@ -95,8 +95,8 @@
       <div class="row">
         <div class="col-lg-4">
           <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
+            -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Total Routes</h5>
@@ -114,8 +114,8 @@
         </div>
         <div class="col-lg-4">
           <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
+              -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+              -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Completed Trips</h5>
@@ -132,8 +132,8 @@
         </div>
         <div class="col-lg-4">
           <div class=" bg-white p-3" style="border-radius: 20px; box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
--moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
+              -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);
+              -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
             <div class="d-flex justify-content-between">
               <div>
                 <h5 style="color: #452C88;">Clients</h5>
@@ -198,11 +198,6 @@
               </div>
             </div>
           </div>
-          <div class="row mt-4 justify-content-center">
-            <div class="col-lg-12">
-              <canvas id="Chart-Line" width="800" height="400"></canvas>
-            </div>
-          </div>
         </div>
         <div class="col-lg-4 col-md-4">
           <div class="row">
@@ -225,6 +220,11 @@
           </div>
           @include('aside')
         </div>
+        <div class="row mt-4 ml-1">
+          <div class="col-lg-12 bg-white px-0">
+            <canvas id="Chart-Line" width="1000" height="300"></canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -233,17 +233,26 @@
 <script>
   var ourLineChart = document.getElementById('Chart-Line').getContext('2d');
   var myChart = new Chart(ourLineChart, {
-    type: 'line', //
+    type: 'line',
     data: {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
       datasets: [{
-        data: [50, 10, 30, 15, 25, 24],
-        label: 'our datasheet',
-        fill: true,
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderWidth: 1,
-        borderColor: "blue"
-      }]
+          data: [50, 10, 30, 15, 25, 24],
+          label: 'Line 1',
+          fill: true,
+          backgroundColor: "rgba(54, 100, 235, 0.2)",
+          borderWidth: 3,
+          borderColor: "#5C4B9D"
+        },
+        {
+          data: [20, 35, 18, 28, 40, 12],
+          label: 'Line 2',
+          fill: true,
+          backgroundColor: "rgba(100, 99, 132, 0.2)",
+          borderWidth: 3,
+          borderColor: "#EAE7F1"
+        }
+      ]
     },
     options: {
       responsive: false,
