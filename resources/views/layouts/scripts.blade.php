@@ -1,6 +1,6 @@
 <title>Your Page Title</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="{{ asset('assets/dist/css/bootstrap.min.css') }}">
+
 
 <!-- Vendor Bundle Base CSS -->
 <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
@@ -15,16 +15,17 @@
 <link rel="shortcut icon" href="{{ asset('assets/images/scooble.png') }}" />
 
 <!-- Fontawesome Kit -->
-<script src="https://kit.fontawesome.com/c35c4a5799.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="assets/font-web/css/all.css">
 
 <!-- jQuery library -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-
+<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="{{ asset('assets/dist/css/bootstrap.min.css') }}">
 <!-- Popper JS -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
 
 <!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
 
 <!-- Vendor Scripts -->
 <!-- <script src="{{ asset('assets/vendors/js/vendor.bundle.basejs') }}"></script> -->

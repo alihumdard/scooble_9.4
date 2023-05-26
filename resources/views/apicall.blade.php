@@ -58,7 +58,7 @@
 
             var apiname = $(this).attr('action');
             var apiurl = "{{ end_url('') }}" + apiname;
-            var formData = $(this).serializeArray();
+            var formData = new FormData(this);
             var bearerToken = "{{session('user')}}";
 
             $.ajax({
@@ -68,7 +68,15 @@
                 headers: {
                     'Authorization': 'Bearer ' + bearerToken
                 },
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#spinner').removeClass('d-none');
+                    $('#add_btn').addClass('d-none');
+                },
                 success: function(response) {
+                    $('#spinner').addClass('d-none');
+                    $('#add_btn').removeClass('d-none');
                     console.log(formData);
                     if (response.status === 'success') {
                         $('#formData')[0].reset();
@@ -78,18 +86,21 @@
                         showAlert("Success", response.message, response.status);
                         $('#users-table').DataTable().destroy();
                         $("#table_reload").load(location.href + " #table_reload");
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1500);
+                        // setTimeout(function() {
+                        //     location.reload();
+                        // }, 1500);
                     } else {
                         showAlert("Warning", response.message, response.status);
                     }
                 },
                 error: function(xhr, status, error) {
+                    $('#spinner').addClass('d-none');
+                    $('#add_btn').removeClass('d-none');
                     showAlert("Error", response.message, response.status);
                 }
             });
         });
+
 
 
 
@@ -105,7 +116,8 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('user') }}';
+                            var token = '{{ session('
+                            user ') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',
@@ -162,7 +174,8 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('user') }}';
+                            var token = '{{ session('
+                            user ') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',

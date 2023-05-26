@@ -81,7 +81,7 @@
                     @foreach($data as $key => $value)
                     <tr style="font-size: small;">
                       <td>{{$value['id']}}</td>
-                      <td><img src="assets/images/pic.jpg" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
+                      <td><img src="{{ storage_path().$value['user_pic'] }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
                       <td>{{table_date($value['created_at'])}}</td>
                       <td>{{ $value['address'] }}</td>
                       <td>{{ $value['role'] }}</td>
@@ -179,7 +179,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="userStore" id="formData" method="post">
+        <form action="userStore" id="formData" method="post" enctype="multipart/form-data">
           @csrf
           <input type="hidden" id="role" name="role" value="Admin">
           <input type="hidden" id="client_id" name="id">
@@ -213,7 +213,7 @@
                 <label for="address">Address</label>
                 <input type="text" name="address" id="address" class="form-control">
               </div>
-              <div class="col-lg-6 mt-2">
+              <div class="col-lg-6 mt-3">
                 <div class="row py-4">
                   <div class="col-lg-6">
                     <button data-bs-dismiss="modal" data-dismiss="modal" type="button" class="btn btn-sm btn-outline px-5" style="background-color: #ffffff; border: 1px solid #D0D5DD; border-radius: 8px; width: 100%;">@lang('lang.cancel')</button>
