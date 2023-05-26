@@ -86,7 +86,7 @@
                   @foreach($data as $key => $value)
                   <tr style="font-size: small;">
                     <td>{{$value['id']}}</td>
-                    <td><img src="assets/images/pic.jpg" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
+                    <td><img src="{{ asset('storage/' . $value['user_pic']); }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
                     <td>{{ $value['address'] }}</td>
                     <td>{{ $value['com_name'] }}</td>
 
@@ -192,13 +192,16 @@
                 <label for="address">Address</label>
                 <input type="text" name="address" id="address" class="form-control">
               </div>
-              <div class="col-lg-6 mt-2">
+              <div class="col-lg-6 mt-3">
                 <div class="row py-4">
                   <div class="col-lg-6">
                     <button type="button" class="btn btn-sm btn-outline px-5" data-dismiss="modal" data-bs-dismiss="modal" style="background-color: #ffffff; border: 1px solid #D0D5DD; border-radius: 8px; width: 100%;">@lang('lang.cancel')</button>
                   </div>
                   <div class="col-lg-6">
-                    <button type="submit" class="btn btn-sm text-white px-5" data-target="#add" style="background-color: #E45F00; border-radius: 8px; width: 100%;">@lang('lang.add')</button>
+                    <button type="submit" class="btn btn-sm text-white px-5" data-target="#add" style="background-color: #E45F00; border-radius: 8px; width: 100%;">
+                      <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
+                    <span id="add_btn">@lang('lang.add')</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -299,7 +302,10 @@
             </select>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-sm text-white px-5" id="change_sts" name="change_sts" type="submit" style="background-color: #233A85; border-radius: 8px;">@lang('lang.ok')</button>
+            <button class="btn btn-sm text-white px-5" id="change_sts" name="change_sts" type="submit" style="background-color: #233A85; border-radius: 8px;">
+            <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
+                    <span id="add_btn">@lang('lang.ok')</span>
+          </button>
           </div>
         </form>
       </div>

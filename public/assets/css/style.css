@@ -21640,21 +21640,6 @@ dl li {
   position: relative;
 }
 
-.dismiss-btn {
-  background-color: #233A85;
-  color: #FFFFFF;
-  border-radius: 10px;
-  box-shadow: 3px 4px 12px -2px rgba(35, 58, 133, 0.5);
-  -webkit-box-shadow: 3px 4px 12px -2px rgba(35, 58, 133, 0.5);
-  -moz-box-shadow: 3px 4px 12px -2px rgba(35, 58, 133, 0.5);
-}
-
-.dismiss-btn:hover {
-  background-color: #233A85;
-  color: #FFFFFF;
-  border-radius: 10px;
-}
-
 .alert-icon {
   position: absolute;
   display: flex;

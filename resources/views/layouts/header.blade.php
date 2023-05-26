@@ -23,12 +23,18 @@
       height: 52px !important;
       border-radius: 5px !important;
     }
-
-    .svg:hover {
-      filter: invert();
+    li.nav-item:hover{
+      background-color: transparent !important;
     }
-    .nav-item:hover{
+
+    /* .svg:hover {
+      filter: invert();
+    } */
+    /* .nav-item:hover{
       color: black !important;
+    } */
+    a.nav-link:hover{
+      color: #fff !important;
     }
   </style>
 </head>
