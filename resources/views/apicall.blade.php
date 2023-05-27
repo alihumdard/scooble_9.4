@@ -60,7 +60,6 @@
             var apiurl = "{{ end_url('') }}" + apiname;
             var formData = new FormData(this);
             var bearerToken = "{{session('user')}}";
-
             $.ajax({
                 url: apiurl,
                 type: 'POST',
