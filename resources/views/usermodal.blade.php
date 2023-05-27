@@ -1,3 +1,9 @@
+  <style>
+    .form-image {
+      object-fit: contain;
+    }
+  </style>
+
   <!-- Add Client Modal -->
   <div class="modal fade" style="height: 30rem;" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -27,11 +33,25 @@
             <div class="row">
               <div class="col-lg-6 mb-2">
                 <label for="user_pic">Upload Image</label>
-                <input type="file" name="user_pic" id="user_pic" class="form-control">
+                <div class="row">
+                  <div class="col-lg-10 px-0">
+                    <input type="file" name="user_pic" id="user_pic" class="form-control">
+                  </div>
+                  <div class="col-lg-2">
+                    <img class="form-image" src="assets/images/pic.jpg" style="width: 100%; height: 100%; border-radius: 50%;" alt="No Image">
+                  </div>
+                </div>
               </div>
               <div class="col-lg-6 mb-2">
                 <label for="com_pic">Company Logo</label>
-                <input type="file" name="com_pic" id="com_pic" class="form-control">
+                <div class="row">
+                  <div class="col-lg-10 px-0">
+                    <input type="file" name="com_pic" id="com_pic" class="form-control">
+                  </div>
+                  <div class="col-lg-2">
+                    <img class="form-image" src="assets/images/pic.jpg" style="width: 100%; height: 100%; border-radius: 50%;" alt="No Image">
+                  </div>
+                </div>
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="name">Name</label>
@@ -61,7 +81,7 @@
                   <div class="col-lg-6">
                     <button type="submit" id="btn_save" class="btn btn-sm text-white px-5" data-target="#add" style="background-color: #E45F00; border-radius: 8px; width: 100%;">
                       <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
-                    <span id="add_btn">@lang('lang.add')</span>
+                      <span id="add_btn">@lang('lang.add')</span>
                     </button>
                   </div>
                 </div>
