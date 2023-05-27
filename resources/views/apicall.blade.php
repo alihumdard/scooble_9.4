@@ -52,7 +52,7 @@
             });
         });
 
-        // Adding user data in through the api...
+        // Adding  data in through the api...
         $('#formData').on('submit', function(e) {
             e.preventDefault();
 
@@ -100,8 +100,54 @@
             });
         });
 
-
-
+        // get api .....
+        $(document).on('click', '#btn_edit_client', function () {
+            var id = $(this).data('client_id');
+            var apiname = $(this).data('api_name');
+            var apiurl = "{{ end_url('') }}" + apiname;
+            var bearerToken = "{{session('user')}}";
+            $.ajax({
+                url: apiurl+'?id='+id,
+                type: 'GET',
+                data: { 'id': id },
+                headers: {
+                    'Authorization': 'Bearer ' + bearerToken
+                },
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#addclient').modal('show');
+                    // $('#spinner').removeClass('d-none');
+                    // $('#add_btn').addClass('d-none');
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        let responseData = response.data[0];
+                        let formattedDateTime = moment(responseData.created_at).format("YYYY-MM-DDTHH:mm");
+                        $('#addclient #btn_save').html('save').css('background-color', '#233A85');
+                        $('#addclient #user_pic').attr('src', "{{ asset('storage') }}/" + responseData.user_pic).removeClass('d-none');
+                        $('#addclient #com_pic').attr('src', "{{ asset('storage') }}/" + responseData.com_pic).removeClass('d-none');
+                        $('#addclient #id').val(responseData.id);
+                        $('#addclient #client_id').val(responseData.client_id);
+                        $('#addclient #role').val(responseData.role);
+                        $('#addclient #name').val(responseData.name);
+                        $('#addclient #phone').val(responseData.phone);
+                        $('#addclient #email').val(responseData.email);
+                        $('#addclient #com_name').val(responseData.com_name);
+                        $('#addclient #address').val(responseData.address);
+                        $('#addclient #joining_date').val(formattedDateTime);
+                    } 
+                    else {
+                        showAlert("Warning", response.message, response.status);
+                        }
+                },
+                error: function(xhr, status, error) {
+                    $('#spinner').addClass('d-none');
+                    $('#add_btn').removeClass('d-none');
+                    showAlert("Error", response.message, response.status);
+                }
+            });
+        });
 
         // loading tables 
         function loadTables(apiname, role) {
@@ -232,31 +278,10 @@
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         function dismissModal(modle_id) {
             $('#addclient').modal('hide');
             $('#formData')[0].reset();
         }
-
 
         function showAlert(title, message, type) {
             swal({
@@ -265,7 +290,6 @@
                 icon: type
             });
         }
-
 
 
     });
