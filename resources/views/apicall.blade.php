@@ -117,8 +117,6 @@
                 processData: false,
                 beforeSend: function() {
                     $('#addclient').modal('show');
-                    // $('#spinner').removeClass('d-none');
-                    // $('#add_btn').addClass('d-none');
                 },
                 success: function(response) {
                     if (response.status === 'success') {
@@ -161,8 +159,7 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('
-                            user ') }}';
+                            var token = '{{ session('user') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',
@@ -219,8 +216,7 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('
-                            user ') }}';
+                            var token = '{{ session('user') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',

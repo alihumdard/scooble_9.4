@@ -149,7 +149,16 @@ class UserController extends Controller
 
     public function announcmnents()
     {
-        return view('announcmnents');
+        $user = auth()->user();
+        $page_name = 'announcmnents';
+
+        if(!view_permission($user->role,$page_name)){
+            return redirect()->back();  
+        }
+
+        $announcmnents = Announcement::orderBy('id', 'desc')->get()->toArray();
+
+        return view('announcmnents', ['data' => $announcmnents]);
     }
 
     public function settings()

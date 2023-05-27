@@ -28,36 +28,30 @@
           @csrf
           <input type="hidden" id="role" name="role" value="{{isset($add_user) ? $add_user : ''}}">
           <input type="hidden" id="id" name="id">
-          <input type="hidden" id="client_id" name="client_id" value="{{$user->id}}">
+          <input type="hidden" id="client_id" name="client_id" value="{{isset($user->id) ? $user->id : ''}}">
           <div class="modal-body pt-0">
             <div class="row">
               <div class="col-lg-6 mb-2">
                 <label for="user_pic">Upload Image</label>
                 <div class="row">
-                  <div class="col-lg-10 px-0">
+                  <div class="col-lg-10">
                     <input type="file" name="user_pic" id="user_pic" class="form-control">
                   </div>
                   <div class="col-lg-2">
-                    <img class="form-image" src="assets/images/pic.jpg" style="width: 100%; height: 100%; border-radius: 50%;" alt="No Image">
+                    <img src="abc.png" width="100%" height="100%" style="border-radius: 50%;" id="user_pic" class="d-none" alt="No image selected">
                   </div>
                 </div>
-              </div>
-              <div class="col-lg-6 mb-2 pt-3">
-              <img src="abc.png" width="70px" height="70px" style="border-radius: 50%;" id="user_pic" class="d-none" alt="No image selected" >
               </div>
               <div class="col-lg-6 mb-2">
                 <label for="com_pic">Company Logo</label>
                 <div class="row">
-                  <div class="col-lg-10 px-0">
+                  <div class="col-lg-10">
                     <input type="file" name="com_pic" id="com_pic" class="form-control">
                   </div>
                   <div class="col-lg-2">
-                    <img class="form-image" src="assets/images/pic.jpg" style="width: 100%; height: 100%; border-radius: 50%;" alt="No Image">
+                    <img src="abc.png" width="100%" height="  100%" style="border-radius: 50%;" id="com_pic" class="d-none" alt="No image selected">
                   </div>
                 </div>
-              </div>
-              <div class="col-lg-6 mb-2 pt-3">
-              <img src="abc.png" width="70px" height="70px" style="border-radius: 50%;" id="com_pic"  class="d-none"  alt="No image selected" >
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="name">Name</label>
