@@ -143,7 +143,7 @@
             </div>
           </form>
         </div>
-      </div>
+      </div> 
     </div>
     <!-- content-wrapper ends -->
     <script>
@@ -200,10 +200,10 @@
           // Passwords do not match, prevent form submission
           event.preventDefault();
           swal({
-                title: "Danger!",
-                text: "Passwords do not match",
-                icon: "warning"
-            });
+            title: "Danger!",
+            text: "Passwords do not match",
+            icon: "warning"
+          });
         }
       }
 
