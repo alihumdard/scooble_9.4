@@ -138,7 +138,12 @@
   <!-- content-wrapper ends -->
 
   <!-- Add Client Modal -->
-  <div class="modal fade" style="height: 30rem;" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
+  @php
+  $user_role_static = 'Client';
+  @endphp
+
+  @include('usermodal')
+  <!-- <div class="modal fade" style="height: 30rem;" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content bg-white">
         <div class="modal-header pb-0" style="border-bottom: none;">
@@ -198,7 +203,7 @@
                     <button type="button" class="btn btn-sm btn-outline px-5" data-dismiss="modal" data-bs-dismiss="modal" style="background-color: #ffffff; border: 1px solid #D0D5DD; border-radius: 8px; width: 100%;">@lang('lang.cancel')</button>
                   </div>
                   <div class="col-lg-6">
-                    <button type="submit" class="btn btn-sm text-white px-5" data-target="#add" style="background-color: #E45F00; border-radius: 8px; width: 100%;">
+                    <button type="submit" id="btn_save" class="btn btn-sm text-white px-5" data-target="#add" style="background-color: #E45F00; border-radius: 8px; width: 100%;">
                       <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
                     <span id="add_btn">@lang('lang.add')</span>
                     </button>
@@ -210,7 +215,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Add Client Modal End -->
 
   <!-- Add Button Modal -->
