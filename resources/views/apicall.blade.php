@@ -117,8 +117,6 @@
                 processData: false,
                 beforeSend: function() {
                     $('#addclient').modal('show');
-                    // $('#spinner').removeClass('d-none');
-                    // $('#add_btn').addClass('d-none');
                 },
                 success: function(response) {
                     if (response.status === 'success') {
