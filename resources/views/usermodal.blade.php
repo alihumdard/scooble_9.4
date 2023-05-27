@@ -20,18 +20,24 @@
         </div>
         <form action="userStore" id="formData" method="post" enctype="multipart/form-data">
           @csrf
-          <input type="hidden" id="role" name="role" value="{{$user_role_static}}">
-          <input type="hidden" id="client_id" name="id">
-
+          <input type="hidden" id="role" name="role" value="{{isset($add_user) ? $add_user : ''}}">
+          <input type="hidden" id="id" name="id">
+          <input type="hidden" id="client_id" name="client_id" value="{{$user->id}}">
           <div class="modal-body pt-0">
             <div class="row">
-              <div class="col-lg-6 mb-2">
-                <label for="user_pic">Upload Image</label>
+              <div class="col-lg-6 mb-2">  
+              <label for="user_pic">User Image</label>
                 <input type="file" name="user_pic" id="user_pic" class="form-control">
+              </div>
+              <div class="col-lg-6 mb-2 pt-3">
+              <img src="abc.png" width="70px" height="70px" style="border-radius: 50%;" id="user_pic" class="d-none" alt="No image selected" >
               </div>
               <div class="col-lg-6 mb-2">
                 <label for="com_pic">Company Logo</label>
                 <input type="file" name="com_pic" id="com_pic" class="form-control">
+              </div>
+              <div class="col-lg-6 mb-2 pt-3">
+              <img src="abc.png" width="70px" height="70px" style="border-radius: 50%;" id="com_pic"  class="d-none"  alt="No image selected" >
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="name">Name</label>

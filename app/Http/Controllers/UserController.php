@@ -75,23 +75,29 @@ class UserController extends Controller
     public function drivers()
     {
         $user = auth()->user();
-        if($user->role == 'Admin'){
-        $drivers = User::join('users as client_users', 'client_users.id', '=', 'users.client_id')
-        ->where('users.role', 'Driver')
-        ->where('users.client_id', $user->client_id)
-        ->orderBy('users.id', 'desc')
-        ->get([
-            'users.*',
-            'client_users.name as client_name'
-        ])
-        ->toArray();
-    // dd($drivers);
+        $page_name = 'drivers';
 
-        return view('drivers', ['data' => $derivers,'user'=>$user]);
-        }else{
-            $derivers = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->get()->toArray();
-            return view('drivers', ['data' => $derivers,'user'=>$user]); 
+        if(!view_permission($user->role,$page_name)){
+            return redirect()->back();  
         }
+
+        if($user->role == user_roles('1')){
+
+            $drivers = User::join('users as c', 'users.client_id', '=', 'c.id')
+            ->where('users.role', 'Driver')
+            ->select('users.*', 'c.name as client_name', 'c.user_pic as client_pic')
+            ->orderBy('users.id', 'desc')
+            ->get()
+            ->toArray();   
+
+            return view('drivers', ['data' => $drivers,'user'=>$user]);
+        } 
+        else{
+
+            $derivers = User::where(['role' => 'Driver','client_id' => $user->id])->orderBy('id', 'desc')->get()->toArray();
+            return view('drivers', ['data' => $derivers,'user'=>$user ,'add_user'=> user_roles('3')]); 
+        }
+
     }
 
     public function routes()

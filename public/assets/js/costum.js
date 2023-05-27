@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // alert('this is working');
 
-    $(document).on('click', '#btn_edit_client', function () {
+    $(document).on('click', '#abc', function () {
         var id = $(this).attr('data-client_id');
         $.ajax({
             url: '/edit/' + id,
