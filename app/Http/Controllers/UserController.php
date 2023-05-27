@@ -41,10 +41,27 @@ class UserController extends Controller
     public function index(REQUEST $request)
     {
 
-        
         if(session('user')){
-            return view('index');
-        } else {
+
+            $user = auth()->user();
+            session(['user_details' => $user]);
+
+// user roles 1 for admin, 2 for client , 3 for Driver....
+            if($user->role == user_roles('2')){
+                return view('client_dashboard',['user'=>$user] );
+            }
+
+            else if($user->role == user_roles('3')){
+                return view('driver_dashboard',['user'=>$user]);
+            }
+
+            else{
+                return view('index',['user'=>$user]);
+            }
+
+        }
+        else {
+
             return view('login');
         }
     }
@@ -91,17 +108,7 @@ class UserController extends Controller
     {
         return view('driver_map');
     }
-
-    public function client_dashboard()
-    {
-        return view('client_dashboard');
-    }
-
-    public function driver_dashboard()
-    {
-        return view('driver_dashboard');
-    }
-
+    
     public function announcements_alerts()
     {
         return view('announcements_alerts');
@@ -201,7 +208,7 @@ class UserController extends Controller
 
     public function logout(REQUEST $request)
     {
-        session()->forget('user');
+        session()->flush();
         return redirect('/');
     }
 

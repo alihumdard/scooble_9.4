@@ -33,9 +33,9 @@ Route::controller(UserController::class)->group(function () {
 
     Route::get('/users', 'users');
 
-    Route::get('/notifications', 'notifications');
-
     Route::get('/announcmnents', 'announcmnents');
+    
+    Route::get('/notifications', 'notifications');
 
     Route::get('/settings', 'settings');
 
@@ -57,10 +57,6 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get', 'post'], '/create_trip', 'create_trip');
 
     Route::match(['get', 'post'], '/driver_map', 'driver_map');
-
-    Route::match(['get', 'post'], '/client_dashboard', 'client_dashboard');
-
-    Route::match(['get', 'post'], '/driver_dashboard', 'driver_dashboard');
 
     Route::match(['get', 'post'], '/announcements_alerts', 'announcements_alerts');
 

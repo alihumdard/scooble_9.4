@@ -13,7 +13,6 @@ $(document).ready(function () {
                 data = JSON.parse(data);
                 let formattedDateTime = moment(data[0].created_at).format("YYYY-MM-DDTHH:mm");
                 $('#addclient #btn_save').html('save').css('background-color', '#233A85');
-                $('#addclient').prepend('data[0].com_pic);
                 $('#addclient #user_pic').val(data[0].user_pic);
                 $('#addclient #client_id').val(data[0].id);
                 $('#addclient #role').val(data[0].role);

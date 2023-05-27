@@ -1,3 +1,10 @@
+@php
+$user_roel = session('user_details')->role;
+$user_name = session('user_details')->name;
+$user_pic = session('user_details')->user_pic;
+
+@endphp
+
 <html lang="en">
 
 <head>
@@ -170,17 +177,19 @@
           <li class="nav-item nav-profile border-bottom border-top">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img style="border-radius: 12px !important;" src="assets/images/faces/face1.jpg" alt="profile">
+                <img style="border-radius: 12px !important;" src="{{ asset('storage/' .$user_pic) }}" alt="profile">
                 <span class="login-status online"></span>
                 <!--change to offline or busy as needed-->
               </div>
               <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">Lorem ipsum</span>
-                <span class="text-secondary text-small"> @lang('lang.admin') </span>
+                <span class="font-weight-bold mb-2">{{$user_name}}</span>
+                <span class="text-secondary text-small"> {{$user_roel}} </span>
               </div>
               <!-- <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
             </a>
           </li>
+          
+          @if(view_permission($user_roel,'index'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/'}}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -189,6 +198,9 @@
               <span class="menu-title ml-2">@lang('lang.dashboard') </span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'clients'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/client'}}">
               <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -202,6 +214,9 @@
               <span class="menu-title ml-2"> @lang('lang.client') </span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'drivers'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{ '/drivers'}}">
               <svg width="17" height="24" viewBox="0 0 17 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,6 +231,9 @@
               <span class="menu-title ml-2"> @lang('lang.drivers') </span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'routes'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/routes'}}">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -228,6 +246,9 @@
               <span class="menu-title ml-2"> @lang('lang.routes')</span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'calender'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'calender'}}">
               <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -236,6 +257,9 @@
               <span class="menu-title ml-2"> @lang('lang.calendar') </span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'users'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/users'}}">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -246,6 +270,9 @@
               <span class="menu-title ml-2"> @lang('lang.users') </span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'announcmnents'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'announcmnents'}}">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -255,6 +282,9 @@
               <span class="menu-title ml-2"> @lang('lang.announcements') </span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'notifications'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/notifications'}}">
               <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -263,6 +293,9 @@
               <span class="menu-title ml-2"> @lang('lang.notifications') </span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'settings'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/settings'}}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -271,6 +304,9 @@
               <span class="menu-title ml-2"> @lang('lang.settings') </span>
             </a>
           </li>
+          @endif 
+
+          @if(view_permission($user_roel,'create_trip'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/create_trip">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -280,6 +316,9 @@
               <span class="menu-title ml-2">Create Trip</span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'driver_map'))  
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/driver_map">
               <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -288,32 +327,25 @@
               <span class="menu-title ml-2">Map</span>
             </a>
           </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link svg ml-5" href="{{'/client_dashboard'}}">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.54 0H5.92C7.33 0 8.46 1.15 8.46 2.561V5.97C8.46 7.39 7.33 8.53 5.92 8.53H2.54C1.14 8.53 0 7.39 0 5.97V2.561C0 1.15 1.14 0 2.54 0ZM2.54 11.4697H5.92C7.33 11.4697 8.46 12.6107 8.46 14.0307V17.4397C8.46 18.8497 7.33 19.9997 5.92 19.9997H2.54C1.14 19.9997 0 18.8497 0 17.4397V14.0307C0 12.6107 1.14 11.4697 2.54 11.4697ZM17.4601 0H14.0801C12.6701 0 11.5401 1.15 11.5401 2.561V5.97C11.5401 7.39 12.6701 8.53 14.0801 8.53H17.4601C18.8601 8.53 20.0001 7.39 20.0001 5.97V2.561C20.0001 1.15 18.8601 0 17.4601 0ZM14.0801 11.4697H17.4601C18.8601 11.4697 20.0001 12.6107 20.0001 14.0307V17.4397C20.0001 18.8497 18.8601 19.9997 17.4601 19.9997H14.0801C12.6701 19.9997 11.5401 18.8497 11.5401 17.4397V14.0307C11.5401 12.6107 12.6701 11.4697 14.0801 11.4697Z" fill="white" />
-              </svg>
-              <span class="menu-title ml-2">Client Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link svg ml-5" href="{{'/driver_dashboard'}}">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.54 0H5.92C7.33 0 8.46 1.15 8.46 2.561V5.97C8.46 7.39 7.33 8.53 5.92 8.53H2.54C1.14 8.53 0 7.39 0 5.97V2.561C0 1.15 1.14 0 2.54 0ZM2.54 11.4697H5.92C7.33 11.4697 8.46 12.6107 8.46 14.0307V17.4397C8.46 18.8497 7.33 19.9997 5.92 19.9997H2.54C1.14 19.9997 0 18.8497 0 17.4397V14.0307C0 12.6107 1.14 11.4697 2.54 11.4697ZM17.4601 0H14.0801C12.6701 0 11.5401 1.15 11.5401 2.561V5.97C11.5401 7.39 12.6701 8.53 14.0801 8.53H17.4601C18.8601 8.53 20.0001 7.39 20.0001 5.97V2.561C20.0001 1.15 18.8601 0 17.4601 0ZM14.0801 11.4697H17.4601C18.8601 11.4697 20.0001 12.6107 20.0001 14.0307V17.4397C20.0001 18.8497 18.8601 19.9997 17.4601 19.9997H14.0801C12.6701 19.9997 11.5401 18.8497 11.5401 17.4397V14.0307C11.5401 12.6107 12.6701 11.4697 14.0801 11.4697Z" fill="white" />
-              </svg>
-              <span class="menu-title ml-2">Driver Dashboard</span>
-            </a>
-          </li>
+          @endif
+
+          @if(view_permission($user_roel,'announcements_alerts'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/announcements_alerts">
               <span class="menu-title ml-2">Announcements Alerts</span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'pdf_templates'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/pdf_templates">
               <span class="menu-title ml-2">PDF Templates</span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission($user_roel,'logout'))
           <li class="nav-item">
             <a class="nav-link logout_li" href="/logout">
               <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -323,5 +355,7 @@
               <span class="menu-title ml-2"> @lang('lang.logout') </span>
             </a>
           </li>
+          @endif
+
         </ul>
       </nav>
