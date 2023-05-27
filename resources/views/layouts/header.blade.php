@@ -1,8 +1,7 @@
 @php
-$user_role = session('user_details')->role;
-$user_name = session('user_details')->name;
-$user_pic = session('user_details')->user_pic;
-
+use App\Models\User;
+$user_id = session('user_details')->id;
+$user = User::find($user_id);
 @endphp
 
 <html lang="en">
@@ -177,19 +176,19 @@ $user_pic = session('user_details')->user_pic;
           <li class="nav-item nav-profile border-bottom border-top">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img style="border-radius: 12px !important;" src="{{ asset('storage/' .$user_pic) }}" alt="profile">
+                <img style="border-radius: 12px !important;" src="{{ asset('storage/' .$user->user_pic) }}" alt="profile">
                 <span class="login-status online"></span>
                 <!--change to offline or busy as needed-->
               </div>
               <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">{{$user_name}}</span>
-                <span class="text-secondary text-small"> {{$user_role}} </span>
+                <span class="font-weight-bold mb-2">{{$user->name}}</span>
+                <span class="text-secondary text-small"> {{$user->role}} </span>
               </div>
               <!-- <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
             </a>
           </li>
           
-          @if(view_permission($user_role,'index'))
+          @if(view_permission('index'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/'}}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +199,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'clients'))
+          @if(view_permission('clients'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/client'}}">
               <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,7 +215,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'drivers'))
+          @if(view_permission('drivers'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{ '/drivers'}}">
               <svg width="17" height="24" viewBox="0 0 17 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -233,7 +232,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'routes'))
+          @if(view_permission('routes'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/routes'}}">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -248,7 +247,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'calender'))
+          @if(view_permission('calender'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'calender'}}">
               <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -259,7 +258,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'users'))
+          @if(view_permission('users'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/users'}}">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -272,7 +271,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'announcmnents'))
+          @if(view_permission('announcmnents'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'announcmnents'}}">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -284,7 +283,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'notifications'))
+          @if(view_permission('notifications'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/notifications'}}">
               <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -295,7 +294,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'settings'))
+          @if(view_permission('settings'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/settings'}}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -306,7 +305,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif 
 
-          @if(view_permission($user_role,'create_trip'))
+          @if(view_permission('create_trip'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/create_trip">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -318,7 +317,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'driver_map'))  
+          @if(view_permission('driver_map'))  
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/driver_map">
               <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -329,7 +328,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'announcements_alerts'))
+          @if(view_permission('announcements_alerts'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/announcements_alerts">
               <span class="menu-title ml-2">Announcements Alerts</span>
@@ -337,7 +336,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'pdf_templates'))
+          @if(view_permission('pdf_templates'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/pdf_templates">
               <span class="menu-title ml-2">PDF Templates</span>
@@ -345,7 +344,7 @@ $user_pic = session('user_details')->user_pic;
           </li>
           @endif
 
-          @if(view_permission($user_role,'logout'))
+          @if(view_permission('logout'))
           <li class="nav-item">
             <a class="nav-link logout_li" href="/logout">
               <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -68,8 +68,16 @@ class UserController extends Controller
 
     public function clients()
     {
+        $user = auth()->user();
+        $page_name = 'clients';
+
+        if(!view_permission($page_name)){
+            return redirect()->back();  
+        }
+
         $clients = User::where(['role' => 'Client'])->orderBy('id', 'desc')->get()->toArray();
-        return view('clients', ['data' => $clients]);
+        return view('clients', ['data' => $clients,'user'=>$user ,'add_as_user'=> user_roles('2')]);
+
     }
 
     public function drivers()
@@ -77,7 +85,7 @@ class UserController extends Controller
         $user = auth()->user();
         $page_name = 'drivers';
 
-        if(!view_permission($user->role,$page_name)){
+        if(!view_permission($page_name)){
             return redirect()->back();  
         }
 
@@ -90,12 +98,12 @@ class UserController extends Controller
             ->get()
             ->toArray();   
 
-            return view('drivers', ['data' => $drivers,'user'=>$user]);
+            return view('drivers', ['data' => $drivers,'user'=>$user,'add_as_user'=> user_roles('3')]);
         } 
         else{
 
             $derivers = User::where(['role' => 'Driver','client_id' => $user->id])->orderBy('id', 'desc')->get()->toArray();
-            return view('drivers', ['data' => $derivers,'user'=>$user ,'add_user'=> user_roles('3')]); 
+            return view('drivers', ['data' => $derivers,'user'=>$user ,'add_as_user'=> user_roles('3')]); 
         }
 
     }
@@ -138,8 +146,15 @@ class UserController extends Controller
 
     public function users()
     {
+        $user = auth()->user();
+        $page_name = 'users';
+
+        if(!view_permission($page_name)){
+            return redirect()->back();  
+        }
+
         $users = User::where(['role' => 'Admin'])->orderBy('id', 'desc')->orderBy('id', 'desc')->get()->toArray();
-        return view('users', ['data' => $users]);
+        return view('users', ['data' => $users ,'user'=>$user ,'add_as_user'=> user_roles('1')]);
     }
 
     public function notifications()

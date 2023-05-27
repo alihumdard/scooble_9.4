@@ -38,8 +38,8 @@ function user_role_no($role_no){
     }    
 }
 
-function view_permission($user_role, $page_name) {
-
+function view_permission($page_name) {
+    $user_role = session('user_details')->role;
     switch ($user_role) {
         
         case 'Admin':
