@@ -161,8 +161,7 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('
-                            user ') }}';
+                            var token = '{{ session('user') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',
@@ -219,8 +218,7 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('
-                            user ') }}';
+                            var token = '{{ session('user') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',
