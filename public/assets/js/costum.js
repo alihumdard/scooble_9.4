@@ -12,15 +12,16 @@ $(document).ready(function () {
             success: function (data) {
                 data = JSON.parse(data);
                 let formattedDateTime = moment(data[0].created_at).format("YYYY-MM-DDTHH:mm");
+                $('#addclient #btn_save').html('save').css('background-color', '#233A85');
+                $('#addclient').prepend('data[0].com_pic);
+                $('#addclient #user_pic').val(data[0].user_pic);
                 $('#addclient #client_id').val(data[0].id);
                 $('#addclient #role').val(data[0].role);
                 $('#addclient #name').val(data[0].name);
                 $('#addclient #phone').val(data[0].phone);
                 $('#addclient #email').val(data[0].email);
                 $('#addclient #com_name').val(data[0].com_name);
-                $('#addclient #com_pic').val(data[0].com_logo);
-                $('#addclient #address').text(data[0].address);
-                $('#addclient #btn_save').html('save').css('background-color', '#233A85');
+                $('#addclient #address').val(data[0].address);
                 $('#addclient #joining_date').val(formattedDateTime);
             }
         });

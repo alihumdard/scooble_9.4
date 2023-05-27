@@ -81,7 +81,7 @@
                     @foreach($data as $key => $value)
                     <tr style="font-size: small;">
                       <td>{{$value['id']}}</td>
-                      <td><img src="{{ storage_path().$value['user_pic'] }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
+                      <td><img src="{{ asset('storage/' . $value['user_pic']) }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
                       <td>{{table_date($value['created_at'])}}</td>
                       <td>{{ $value['address'] }}</td>
                       <td>{{ $value['role'] }}</td>
@@ -163,7 +163,13 @@
     </div>
   </div>
   <!-- Add User Modal End -->
-  <div class="modal fade" style="height: 30rem;" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
+  @php
+  $user_role_static = 'Admin';
+  @endphp
+
+  @include('usermodal')
+
+  <!-- <div class="modal fade" style="height: 30rem;" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content bg-white">
         <div class="modal-header pb-0" style="border-bottom: none;">
@@ -230,7 +236,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Delete Client Modal -->
   <div class="modal fade" id="deleteclient" tabindex="-1" aria-labelledby="deleteclientLabel" aria-hidden="true">
