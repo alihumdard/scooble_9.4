@@ -33,7 +33,7 @@ Route::controller(UserController::class)->group(function () {
 
     Route::get('/users', 'users');
 
-    Route::get('/announcmnents', 'announcmnents');
+    Route::match(['get', 'post'],'/announcements', 'announcements');
     
     Route::get('/notifications', 'notifications');
 

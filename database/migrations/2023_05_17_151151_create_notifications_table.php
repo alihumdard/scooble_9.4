@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('desc')->nullable();
+            $table->text('desc')->nullable();
             $table->integer('user_id');
             $table->string('status')->default('on');
             $table->integer('created_by');

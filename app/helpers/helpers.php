@@ -50,9 +50,9 @@ function view_permission($page_name) {
                 case 'drivers':
                 case 'calender':
                 case 'users':
-                case 'announcmnents':
+                case 'announcements':
                 case 'notifications':  
-                case 'announcements_alerts': 
+                // case 'announcements_alerts': 
                 case 'pdf_templates': 
                 case 'logout': 
 

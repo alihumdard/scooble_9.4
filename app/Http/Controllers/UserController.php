@@ -20,6 +20,7 @@ use Illuminate\Validation\Rule;
 use App\Models\Announcement;
 use App\Models\Notification;
 use Illuminate\Foundation\Auth\Authenticatable;
+use Carbon\Carbon;
 
 
 class UserController extends Controller
@@ -38,34 +39,40 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function index(REQUEST $request)
+    public function index(Request $request)
     {
-
         if(session('user')){
 
             $user = auth()->user();
             session(['user_details' => $user]);
+            $now = Carbon::now('Asia/Karachi');
+            $current_date = $now->format('Y-m-d H:i:s');
 
-// user roles 1 for admin, 2 for client , 3 for Driver....
+            // User roles: 1 for admin, 2 for client, 3 for driver
             if($user->role == user_roles('2')){
-                return view('client_dashboard',['user'=>$user] );
+            
+                $announcements = Announcement::where('start_date', '<=', $current_date)
+                    ->where('end_date', '>=', $current_date)
+                    ->get()->toArray();
+                
+                return view('client_dashboard', ['user' => $user, 'announcements' => $announcements]);
             }
 
             else if($user->role == user_roles('3')){
-                return view('driver_dashboard',['user'=>$user]);
+
+                return view('driver_dashboard', ['user' => $user]);
             }
 
             else{
-                return view('index',['user'=>$user]);
-            }
 
+                return view('index', ['user' => $user]);
+            }
         }
         else {
-
             return view('login');
         }
     }
-
+    
     public function clients()
     {
         $user = auth()->user();
@@ -159,25 +166,50 @@ class UserController extends Controller
 
     public function notifications()
     {
-        return view('notifications');
+        $user = auth()->user();
+        $page_name = 'notifications';
+    
+        if (!view_permission($page_name)) {
+            return redirect()->back();
+        }
+        
+        $notifications  = Notification::where('user_id',$user->id)->get()->toArray();
+        return view('notifications', ['data'=>$notifications , 'user' => $user]);
     }
 
-    public function announcmnents()
+    public function announcements(Request $request)
     {
         $user = auth()->user();
-        $page_name = 'announcmnents';
-
-        if(!view_permission($user->role,$page_name)){
-            return redirect()->back();  
+        $page_name = 'announcements';
+    
+        if (!view_permission($page_name)) {
+            return redirect()->back();
         }
+    
+        if ($request->has('id')) {
+            
+            $announcmnent  = Announcement::where('id',$request->id)->get()->toArray();
+            $announcmnents = Announcement::orderBy('id', 'desc')->get()->toArray();
+            return view('announcements', ['data' => $announcmnents, 'user' => $user, 'announcmnent'=>$announcmnent[0]]);
+        } 
+        else {
 
-        $announcmnents = Announcement::orderBy('id', 'desc')->get()->toArray();
-
-        return view('announcmnents', ['data' => $announcmnents]);
+            $announcmnents = Announcement::orderBy('id', 'desc')->get()->toArray();
+            return view('announcements', ['data' => $announcmnents, 'user' => $user]);
+        }
+    
     }
+    
 
     public function settings()
     {
+        $user = auth()->user();
+        $page_name = 'settings';
+    
+        if (!view_permission($page_name)) {
+            return redirect()->back();
+        }
+
         $user = auth()->user();
         return view('settings',['user' => $user]);
     }
