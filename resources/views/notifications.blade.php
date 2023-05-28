@@ -27,21 +27,29 @@
           </span>
         </div>
       </div>
+      @if(count($data) > 0)
+          @foreach($data as $key => $value)
+              <div class="row bg-white mb-3" style="border-radius: 20px;">
+                  <div class="col-lg-1 col-1 my-auto">
+                      <input type="checkbox" name="select" id="select">
+                  </div>
+                  <div class="col-lg-8 col-8 p-3" style="border-left: 5px solid #452C88;">
+                      <h6>{{$value['title']}}</h6>
+                      <p>{{$value['desc']}}</p>
+                  </div>
+                  <div class="col-lg-2 col-2 text-center my-auto">
+                      <p>{{table_date($value['created_at'])}}</p>
+                  </div>
+              </div>
+          @endforeach
+      @else
+          <div class="row bg-white mb-3" style="border-radius: 20px;">
+              <div class="col-12 text-center py-4">
+                  <p>No notifications available</p>
+              </div>
+          </div>
+      @endif
 
-      @foreach($data as $key => $value)
-      <div class="row bg-white mb-3" style="border-radius: 20px;">
-        <div class="col-lg-1 col-1 my-auto">
-          <input type="checkbox" name="select" id="select">
-        </div>
-        <div class="col-lg-8 col-8 p-3" style="border-left: 5px solid #452C88;">
-          <h6>{{$value['title']}}</h6>
-          <p>{{$value['desc']}}</p>
-        </div>
-        <div class="col-lg-2 col-2 text-center my-auto">
-          <p>{{table_date($value['created_at'])}}</p>
-        </div>
-      </div>
-      @endforeach
 
     </div>
   </div>
