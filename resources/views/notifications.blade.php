@@ -27,54 +27,22 @@
           </span>
         </div>
       </div>
+
+      @foreach($data as $key => $value)
       <div class="row bg-white mb-3" style="border-radius: 20px;">
         <div class="col-lg-1 col-1 my-auto">
           <input type="checkbox" name="select" id="select">
         </div>
         <div class="col-lg-8 col-8 p-3" style="border-left: 5px solid #452C88;">
-          <h6>New user has registered by Client Name</h6>
-          <p>In a laoreet purus. Integer turpis quam, laoreet In a laoreet purus. Integer turpis quam, laoreet In a laoreet purus. Integer turpis quam, laoreet.</p>
+          <h6>{{$value['title']}}</h6>
+          <p>{{$value['desc']}}</p>
         </div>
         <div class="col-lg-2 col-2 text-center my-auto">
-          <p>15 May 2023</p>
+          <p>{{table_date($value['created_at'])}}</p>
         </div>
       </div>
-      <div class="row bg-white mb-3" style="border-radius: 20px;">
-        <div class="col-lg-1 col-1 my-auto">
-          <input type="checkbox" name="select" id="select">
-        </div>
-        <div class="col-lg-8 col-8 p-3" style="border-left: 5px solid #452C88;">
-          <h6>New user has registered by Client Name</h6>
-          <p>In a laoreet purus. Integer turpis quam, laoreet In a laoreet purus. Integer turpis quam, laoreet In a laoreet purus. Integer turpis quam, laoreet.</p>
-        </div>
-        <div class="col-lg-2 col-2 text-center my-auto">
-          <p>15 May 2023</p>
-        </div>
-      </div>
-      <div class="row bg-white mb-3" style="border-radius: 20px;">
-        <div class="col-lg-1 col-1 my-auto">
-          <input type="checkbox" name="select" id="select">
-        </div>
-        <div class="col-lg-8 col-8 p-3" style="border-left: 5px solid #452C88;">
-          <h6>New user has registered by Client Name</h6>
-          <p>In a laoreet purus. Integer turpis quam, laoreet In a laoreet purus. Integer turpis quam, laoreet In a laoreet purus. Integer turpis quam, laoreet.</p>
-        </div>
-        <div class="col-lg-2 col-2 text-center my-auto">
-          <p>15 May 2023</p>
-        </div>
-      </div>
-      <div class="row bg-white mb-3" style="border-radius: 20px;">
-        <div class="col-lg-1 col-1 my-auto">
-          <input type="checkbox" name="select" id="select">
-        </div>
-        <div class="col-lg-8 col-8 p-3" style="border-left: 5px solid #452C88;">
-          <h6>New user has registered by Client Name</h6>
-          <p>In a laoreet purus. Integer turpis quam, laoreet In a laoreet purus. Integer turpis quam, laoreet In a laoreet purus. Integer turpis quam, laoreet.</p>
-        </div>
-        <div class="col-lg-2 col-2 text-center my-auto">
-          <p>15 May 2023</p>
-        </div>
-      </div>
+      @endforeach
+
     </div>
   </div>
 </div>

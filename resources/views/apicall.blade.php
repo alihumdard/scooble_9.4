@@ -86,7 +86,7 @@
                         $('#users-table').DataTable().destroy();
                         // $("#table_reload").load(location.href + " #table_reload");
                         setTimeout(function() {
-                            location.reload();
+                            window.location.href = window.location.href;
                         }, 1500);
                     } else {
                         showAlert("Warning", response.message, response.status);
