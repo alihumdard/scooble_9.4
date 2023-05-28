@@ -122,7 +122,15 @@ class UserController extends Controller
 
     public function create_trip()
     {
-        return view('create_trip');
+        $user = auth()->user();
+        $page_name = 'create_trip';
+
+        if(!view_permission($page_name)){
+            return redirect()->back();  
+        }
+
+        $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
+        return view('create_trip',['user'=>$user ,'driver_list'=>$deriver_list]);
     }
 
     public function driver_map()

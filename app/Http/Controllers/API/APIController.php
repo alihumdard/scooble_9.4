@@ -16,6 +16,8 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Announcement;
 use App\Models\Notification;
+use App\Models\Trip;
+use App\Models\Address;
 use Illuminate\Foundation\Auth\Authenticatable;
 
 class APIController extends Controller
@@ -402,5 +404,72 @@ class APIController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Error storing Notification', 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function trip_store(Request $request): JsonResponse
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required',
+        //     'desc' => 'required',
+        //     'start_point' => 'required',
+        //     'end_point' => 'required',
+        //     'trip_date' => 'required|date',
+        //     'driver_id' => 'required|integer',
+        //     'created_by' => 'required|integer',
+        //     'addresses.*.id' => 'integer',
+        //     'addresses.*.title' => 'required',
+        //     'addresses.*.desc' => 'required',
+        // ]);
+    
+        // if ($validator->fails()) {
+        //     return response()->json(['status' => 'error', 'message' => $validator->errors()], 400);
+        // }
+    
+        try {
+            $trip = ($request->id) ? Trip::find($request->id) : new Trip();
+    
+            $isExistingTrip = $trip->exists;
+    
+            $trip->title = $request->title;
+            $trip->desc = $request->desc;
+            $trip->start_point = $request->start_point;
+            $trip->end_point = $request->end_point;
+            $trip->trip_date = $request->trip_date;
+            $trip->driver_id = $request->driver_id;
+            $trip->created_by = $request->created_by;
+    
+            $save = $trip->save();
+    
+            // Save associated addresses
+            if ($request->has('addresses')) {
+                $addresses = $request->input('addresses');
+    
+                foreach ($addresses as $addressData) {
+                    if (isset($addressData['id'])) {
+
+                        $address = Address::find($addressData['id']);
+                        if (!$address) {
+                            continue; 
+                        }
+
+                    } else {
+
+                        $address = new Address();
+                    }
+    
+                    $address->title = $addressData['title'];
+                    $address->desc = $addressData['desc'];
+                    
+                    $trip->addresses()->save($address);
+                }
+            }
+    
+            $message = $isExistingTrip ? 'Trip updated successfully' : 'Trip added successfully';
+            return response()->json(['status' => 'success', 'message' => $message, 'data' => $save]);
+    
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error storing trip', 'error' => $e->getMessage()], 500);
+        }
+    }
+    
 
 }

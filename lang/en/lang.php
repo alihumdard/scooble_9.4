@@ -3,6 +3,7 @@
 return [
 
     "admin" => "Admin",
+    "select_driver" => "Select driver",
     "dashboard" => "Dashboard",
     "clients" => "Clients",
     "drivers" => "Drivers",
