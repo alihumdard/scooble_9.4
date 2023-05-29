@@ -3,6 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key= AIzaSyDiLEdVTvtivG3FxHhcIp553F6XdxE-vnQ&libraries=places"></script>
 
 
 <script>
@@ -46,9 +47,23 @@
                 $(document).on('click', '#btn_address_detail', function() {
                     var addressName = $('#addressTile').val();
                     var addressDesc = $('#addressDesc').val();
-                    var picture = $('#addressPicture').is(':checked');
-                    var signature = $('#addressSignature').is(':checked');
-                    var note = $('#addressNote').is(':checked');
+                    var picture     = $('#addressPicture').is(':checked');
+                    var signature   = $('#addressSignature').is(':checked');
+                    var note        = $('#addressNote').is(':checked');
+                    var addressResult;
+                    verifyAddress(addressName)
+                        .then(function(result) {
+                            addressResult = result;
+                            table_row(result);
+                            console.log(result); // "Valid" or "Invalid"
+                        })
+                        .catch(function(error) {
+                            result = ''
+                            table_row(result);
+                            console.error(error);
+                        });
+
+                 function  table_row(addressResult){ 
 
                     var newRow = '<tr>\
                                         <td class="draggable-row">\
@@ -73,7 +88,7 @@
                                         <td>\
                                             <input type="checkbox" name="note" '+ (note ? 'checked' : '')+' id="note">\
                                         </td>\
-                                        <td><span class="badge" style="background-color: #F5222D30; color: #F5222D;">invalid</span></td>\
+                                        <td><span class="badge" style="background-color: '+(addressResult ? '#31A613' : '#F5222D30')+' ; color: '+(addressResult ? 'black' : '#F5222D')+' ;">'+(addressResult ? 'Valid' : 'Invalid')+'</span></td>\
                                         <td>\
                                         <button class="btn p-0" data-toggle="modal" data-target="#edittrip">\
                                                 \<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">\
@@ -102,25 +117,69 @@
                                         </td>\
                                     </tr>';
                     
-                    $('#table_address').append(newRow);
-                    $('<option>', {
-                        value: addressName,
-                        text: addressName
-                    }).appendTo('#start_address');
+                    
+                                    $('#table_address').append(newRow);
+                                    $('<option>', {
+                                        value: addressName,
+                                        text: addressName
+                                    }).appendTo('#start_address');
 
-                    $('<option>', {
-                        value: addressName,
-                        text: addressName
-                    }).prependTo('#end_address').prop('selected', true);
+                                    $('<option>', {
+                                        value: addressName,
+                                        text: addressName
+                                    }).prependTo('#end_address').prop('selected', true);
 
-                    $('#addressTile').val('');
-                    $('#addressDesc').val('');
-                    $('#addressPicture').prop('checked', false);
-                    $('#addressSignature').prop('checked', false);
-                    $('#addressNote').prop('checked', false);
-                    $('#addAddressModal').removeClass('show');
+                                    $('#addressTile').val('');
+                                    $('#addressDesc').val('');
+                                    $('#addressPicture').prop('checked', false);
+                                    $('#addressSignature').prop('checked', false);
+                                    $('#addressNote').prop('checked', false);
+                                    $('#addAddressModal').removeClass('show');
+                                    
+                    
+                                }
+
+
+
+
+
+
+
+
+                 
 
                 });
+
+
+                function verifyAddress(address) {
+                    return new Promise(function(resolve, reject) {
+                        var geocoder = new google.maps.Geocoder();
+
+                        geocoder.geocode({ address: address }, function(results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            var formattedAddress = results[0].formatted_address;
+                            var isValidAddress = isAddressValid(results[0]);
+
+                            if (isValidAddress) {
+                            resolve("Valid");
+                            } else {
+                            resolve("Invalid");
+                            }
+                        } else {
+                            reject("Geocoding failed. Status: " + status);
+                        }
+                        });
+                    });
+                    }
+
+                    function isAddressValid(result) {
+                    if (result.address_components && result.address_components.length > 0) {
+                        if (result.formatted_address) {
+                        return true;
+                        }
+                    }
+                    return false;
+                    }
 
 
 
