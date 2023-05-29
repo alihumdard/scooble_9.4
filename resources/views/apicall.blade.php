@@ -20,10 +20,113 @@
                 const firstRow = rows.first();
                 const lastRow = rows.last();
 
+<<<<<<< .mine
+<<<<<<< .mine
                 // Get the address values from the first and last rows
                 const firstAddress = firstRow.find("td:nth-child(2)").text();
                 const lastAddress = lastRow.find("td:nth-child(2)").text();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+                $(".draggable-modal").draggable({
+                    cursor: "grab",
+                    handle: ".modal-header"
+                });
+                
+    
+                $(document).on('click', '#btn_address_detail', function() {
+                    var addressName = $('#addressTile').val();
+                    var addressDesc = $('#addressDesc').val();
+                    var picture     = $('#addressPicture').is(':checked');
+                    var signature   = $('#addressSignature').is(':checked');
+                    var note        = $('#addressNote').is(':checked');
+                    var addressResult;
+                    verifyAddress(addressName)
+                        .then(function(result) {
+                            addressResult = result;
+                            table_row(result);
+                            console.log(result); // "Valid" or "Invalid"
+                        })
+                        .catch(function(error) {
+                            result = ''
+                            table_row(result);
+                            console.error(error);
+                        });
+=======
+                // Get the address values from the first and last rows
+                const firstAddress = firstRow.find("td:nth-child(2)").text();
+                const lastAddress = lastRow.find("td:nth-child(2)").text();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
+>>>>>>> .theirs
+
+<<<<<<< .mine
+<<<<<<< .mine
                 // Update the start and end address fields
                 startAddressSelect.val(firstAddress);
                 endAddressSelect.val(lastAddress);
@@ -75,6 +178,160 @@
             var note = $('#addressNote').is(':checked');
 
             var newRow = '<tr>\
+=======
+                 function  table_row(addressResult){ 
+=======
+                // Update the start and end address fields
+                startAddressSelect.val(firstAddress);
+                endAddressSelect.val(lastAddress);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
+
+            // Draggable and Sortable functionality
+            $(".draggable-row").draggable({
+                cursor: "grab",
+                axis: "y",
+                handle: "td:first-child",
+                opacity: 0.6,
+                containment: "parent",
+                start: function(event, ui) {
+                    $(this).addClass("dragging");
+                },
+                stop: function(event, ui) {
+                    $(this).removeClass("dragging");
+                    updateFormFields(); // Call updateFormFields after dragging stops
+                }
+            });
+
+            $("tbody").sortable({
+                cursor: "move",
+                axis: "y",
+                handle: "td:first-child",
+                opacity: 0.6,
+                containment: "parent",
+                update: function(event, ui) {
+                    updateFormFields(); // Call updateFormFields after sorting updates
+                }
+            });
+
+            $(".draggable-modal").draggable({
+                cursor: "grab",
+                handle: ".modal-header"
+            });
+
+            // Call the updateFormFields function initially
+            updateFormFields();
+        });
+
+
+
+        $(document).on('click', '#btn_address_detail', function() {
+            var addressName = $('#addressTile').val();
+            var addressDesc = $('#addressDesc').val();
+            var picture = $('#addressPicture').is(':checked');
+            var signature = $('#addressSignature').is(':checked');
+            var note = $('#addressNote').is(':checked');
+
+            var newRow = '<tr>\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
                                         <td class="draggable-row">\
                                             <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">\
                                                 <circle cx="19" cy="6" r="5.5" stroke="#230B34" />\
@@ -125,18 +382,127 @@
                                             </button>\
                                         </td>\
                                     </tr>';
+<<<<<<< .mine
+<<<<<<< .mine
 
+
+
+
+
+
+
+=======
+                    
+                    
+                                    $('#table_address').append(newRow);
+                                    $('<option>', {
+                                        value: addressName,
+                                        text: addressName
+                                    }).appendTo('#start_address');
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
+>>>>>>> .theirs
+
+<<<<<<< .mine
+<<<<<<< .mine
+            $('#table_address').append(newRow);
+            $('<option>', {
+                value: addressName,
+                text: addressName
+            }).appendTo('#start_address');
+=======
+                                    $('<option>', {
+                                        value: addressName,
+                                        text: addressName
+                                    }).prependTo('#end_address').prop('selected', true);
+=======
             $('#table_address').append(newRow);
             $('<option>', {
                 value: addressName,
                 text: addressName
             }).appendTo('#start_address');
 
+
+
+
+
+
+>>>>>>> .theirs
+
+<<<<<<< .mine
+>>>>>>> .theirs
+
+<<<<<<< .mine
             $('<option>', {
                 value: addressName,
                 text: addressName
             }).prependTo('#end_address').prop('selected', true);
 
+
+
+
+
+=======
+                                    $('#addressTile').val('');
+                                    $('#addressDesc').val('');
+                                    $('#addressPicture').prop('checked', false);
+                                    $('#addressSignature').prop('checked', false);
+                                    $('#addressNote').prop('checked', false);
+                                    $('#addAddressModal').removeClass('show');
+                                    
+                    
+                                }
+=======
+            $('<option>', {
+                value: addressName,
+                text: addressName
+            }).prependTo('#end_address').prop('selected', true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
+>>>>>>> .theirs
+
+<<<<<<< .mine
+<<<<<<< .mine
+            $('#addressTile').val('');
+            $('#addressDesc').val('');
+            $('#addressPicture').prop('checked', false);
+            $('#addressSignature').prop('checked', false);
+            // $('#addressNote').prop('checked', false);
+            // $('#addAddressModal').removeClass('show');
+=======
             $('#addressTile').val('');
             $('#addressDesc').val('');
             $('#addressPicture').prop('checked', false);
@@ -144,12 +510,141 @@
             // $('#addressNote').prop('checked', false);
             // $('#addAddressModal').removeClass('show');
 
+>>>>>>> .theirs
+
         });
 
 
 
+=======
 
 
+<<<<<<< .mine
+
+
+
+
+
+                 
+
+                });
+>>>>>>> .theirs
+
+        });
+
+                function verifyAddress(address) {
+                    return new Promise(function(resolve, reject) {
+                        var geocoder = new google.maps.Geocoder();
+
+                        geocoder.geocode({ address: address }, function(results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            var formattedAddress = results[0].formatted_address;
+                            var isValidAddress = isAddressValid(results[0]);
+
+                            if (isValidAddress) {
+                            resolve("Valid");
+                            } else {
+                            resolve("Invalid");
+                            }
+                        } else {
+                            reject("Geocoding failed. Status: " + status);
+                        }
+                        });
+                    });
+                    }
+
+<<<<<<< .mine
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+                    function isAddressValid(result) {
+                    if (result.address_components && result.address_components.length > 0) {
+                        if (result.formatted_address) {
+                        return true;
+                        }
+                    }
+                    return false;
+                    }
+
+
+
+
+
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
+>>>>>>> .theirs
         // loadTables('users','Client');
         // loadTables('users','Admin');
         //login user through API ....        
