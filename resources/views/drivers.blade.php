@@ -75,7 +75,6 @@
                     <th>@lang('lang.address')</th>
                     <th>@lang('lang.drivers')client</th>
                     <th>@lang('lang.status')</th>
-                    <th>@lang('lang.note')</th>
                     <th>@lang('lang.actions')</th>
                   </tr>
                 </thead>
@@ -106,8 +105,6 @@
                       </button>
                     </td>
                     @endif
-
-                    <td>Write Here......</td>
                     <td style="width: 80px;">
                       <button id="btn_edit_client" class="btn p-0" data-client_id="{{$value['id']}}" data-api_name ="{{'users'}}">
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">

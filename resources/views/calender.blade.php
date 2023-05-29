@@ -45,22 +45,22 @@
 							<div class="row">
 								<div class="col-md-3">
 									<div class="sticky-top mb-3">
-										<div class="card">
-											<div class="card-header">
-												<h4 class="card-title">Draggable Events</h4>
+										<div class="card mb-2">
+											<div class="card-header bg-primary">
+												<h4 class="card-title text-white">Draggable Events</h4>
 											</div>
 											<div class="card-body">
 												<!-- the events -->
 												<div id="external-events">
-													<div class="external-event bg-success">Lunch</div>
-													<div class="external-event bg-warning">Go home</div>
-													<div class="external-event bg-info">Do homework</div>
-													<div class="external-event bg-primary">Work on UI design</div>
-													<div class="external-event bg-danger">Sleep tight</div>
+													<div class="external-event bg-success px-2 py-1 mb-1 rounded text-white">Lunch</div>
+													<div class="external-event bg-warning px-2 py-1 mb-1 rounded text-white">Go home</div>
+													<div class="external-event bg-info px-2 py-1 mb-1 rounded text-white">Do homework</div>
+													<div class="external-event bg-primary px-2 py-1 mb-1 rounded text-white">Work on UI design</div>
+													<div class="external-event bg-danger px-2 py-1 mb-1 rounded text-white">Sleep tight</div>
 													<div class="checkbox">
 														<label for="drop-remove">
 															<input type="checkbox" id="drop-remove">
-															remove after drop
+															<span style="font-size: small;">remove after drop</span>
 														</label>
 													</div>
 												</div>
@@ -69,8 +69,8 @@
 										</div>
 										<!-- /.card -->
 										<div class="card">
-											<div class="card-header">
-												<h3 class="card-title">Create Event</h3>
+											<div class="card-header bg-primary">
+												<h3 class="card-title text-white">Create Event</h3>
 											</div>
 											<div class="card-body">
 												<div class="btn-group" style="width: 100%; margin-bottom: 10px;">
@@ -278,7 +278,7 @@
 				// Add color effect to button
 				$('#add-new-event').css({
 					'background-color': currColor,
-					'border-color': currColor
+					'border-color': currColor,
 				})
 			})
 			$('#add-new-event').click(function(e) {
@@ -294,7 +294,10 @@
 				event.css({
 					'background-color': currColor,
 					'border-color': currColor,
-					'color': '#fff'
+					'color': '#fff',
+					'padding': '5px',
+					'border-radius': '5px',
+					'margin-bottom': '5px'
 				}).addClass('external-event')
 				event.text(val)
 				$('#external-events').prepend(event)
