@@ -236,14 +236,121 @@
         });
 
         // saving trip in through the api...
+           // saving trip through the API
         $('#saveTrip').on('submit', function(e) {
             e.preventDefault();
-            alert();
             var apiname = $(this).attr('action');
             var apiurl = "{{ end_url('') }}" + apiname;
-            var formData = new FormData(this);
             var bearerToken = "{{session('user')}}";
-            console.log(formData);
+
+            const rowData = [];
+
+            $("#table_address tbody tr").each(function() {
+                    
+                const row = $(this);
+                const cells = row.find("td").not(":last"); 
+                const rowValues = {};
+
+                    cells.each(function(index) {
+                        let fieldName;
+                        if (index === 0) {
+                        fieldName = "id"; 
+                        }
+                        
+                        else if (index === 1) {
+                        fieldName = "title"; 
+                        } 
+
+                        else if (index === 2) {
+                        fieldName = "desc"; 
+                        } 
+
+                        else if (index === 6) {
+                        fieldName = "status";
+                        } 
+                        
+                        else {
+                        fieldName = 'field' + (index + 1); 
+                        }
+                        const cellValue = $(this).text().trim();
+                        rowValues[fieldName] = cellValue;
+                    });
+
+                    const checkboxes = row.find("input[type=checkbox]");
+                    checkboxes.each(function(index) {
+                        let checkboxName;
+                        if (index === 0) {
+                        checkboxName = "trip_pic"; 
+                        } else if (index === 1) {
+                        checkboxName = "trip_signature"; 
+                        } else if (index === 2) {
+                        checkboxName = "trip_note"; 
+                        }
+                        const checkboxValue = $(this).is(":checked") ? 1 : 0; 
+                        rowValues[checkboxName] = checkboxValue;
+                    });
+                    
+                    // Remove unwanted fields
+                    delete rowValues.field4;
+                    delete rowValues.field5;
+                    delete rowValues.field6;
+                    // delete rowValues.field1;
+
+                    rowData.push(rowValues);
+            });
+
+            const formInputs = {};
+            $(this).find('input[name], textarea[name], select[name]').each(function() {
+            const inputName = $(this).attr('name');
+            const inputValue = $(this).val().trim();
+            formInputs[inputName] = inputValue;
+            });
+
+            delete formInputs.picture;
+            delete formInputs.signature;
+            delete formInputs.note;
+
+            const payload = {
+            address: rowData,
+            trip_detail: formInputs
+            };
+
+
+            $.ajax({
+                url: apiurl,
+                type: 'POST',
+                data: JSON.stringify(payload),
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + bearerToken
+                },
+                beforeSend: function() {
+                    $('#spinner').removeClass('d-none');
+                    $('#add_btn').addClass('d-none');
+                },
+                success: function(response) {
+                    $('#spinner').addClass('d-none');
+                    $('#add_btn').removeClass('d-none');
+
+                    if (response.status === 'success') {
+                        $('#addclient').modal('hide');
+
+                        showAlert("Success", response.message, response.status);
+                        setTimeout(function() {
+                            window.location.replace("/routes");
+                        }, 1500);
+
+                    } else {
+                        showAlert("Warning", response.message, response.status);
+                    }
+                    
+                },
+                error: function(xhr, status, error) {
+                    $('#spinner').addClass('d-none');
+                    $('#add_btn').removeClass('d-none');
+                    showAlert("Error", response.message, response.status);
+                }
+            });
         });
 
 
@@ -278,7 +385,7 @@
                         $('#addclient').modal('hide');
 
                         showAlert("Success", response.message, response.status);
-                        $('#users-table').DataTable().destroy();
+                        // $('#users-table').DataTable().destroy();
                         // $("#table_reload").load(location.href + " #table_reload");
                         setTimeout(function() {
                             window.location.href = window.location.href;

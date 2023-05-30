@@ -425,41 +425,41 @@ class APIController extends Controller
         // }
     
         try {
-            $trip = ($request->id) ? Trip::find($request->id) : new Trip();
+            $trip = ($request->trip_detail['id']) ? Trip::find($request->trip_detail['id']) : new Trip();
     
             $isExistingTrip = $trip->exists;
     
-            $trip->title = $request->title;
-            $trip->desc = $request->desc;
-            $trip->start_point = $request->start_point;
-            $trip->end_point = $request->end_point;
-            $trip->trip_date = $request->trip_date;
-            $trip->driver_id = $request->driver_id;
-            $trip->created_by = $request->created_by;
+            $trip->title = $request->trip_detail['title'];
+            $trip->desc = $request->trip_detail['desc'];
+            $trip->start_point = $request->trip_detail['start_point'];
+            $trip->end_point = $request->trip_detail['end_point'];
+            $trip->trip_date = $request->trip_detail['trip_date'];
+            $trip->driver_id = $request->trip_detail['driver_id'];
+            $trip->created_by = Auth::id();
     
             $save = $trip->save();
-    
+
             // Save associated addresses
-            if ($request->has('addresses')) {
-                $addresses = $request->input('addresses');
-    
+            if ($request->has('address')) {
+
+                $addresses = $request->input('address');
+                
                 foreach ($addresses as $addressData) {
-                    if (isset($addressData['id'])) {
 
-                        $address = Address::find($addressData['id']);
-                        if (!$address) {
-                            continue; 
-                        }
-
-                    } else {
-
-                        $address = new Address();
-                    }
+                    $address = ($addressData['id']) ? Address::find($addressData['id']) : new Address();
+                    
+                    $isExistingAddress = $address->exists;
     
                     $address->title = $addressData['title'];
                     $address->desc = $addressData['desc'];
-                    
-                    $trip->addresses()->save($address);
+                    $address->status = $addressData['status'];
+                    $address->trip_pic = $addressData['trip_pic'];
+                    $address->trip_signature = $addressData['trip_signature'];
+                    $address->trip_note = $addressData['trip_note'];
+                    $address->trip_id = $trip->id;
+                    $address->created_by = Auth::id();
+                    $address = $address->save();
+
                 }
             }
     
