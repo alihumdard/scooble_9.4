@@ -277,7 +277,7 @@
                     </div>
                     <div class="row mt-3 text-center">
                         <div class="col-lg-12">
-                            <button class="btn text-white" style="background-color: #233A85; width: 70%;">Confirm Location</button>
+                            <button type="button" id="address_confirm" data-dismiss="modal" class="btn text-white" style="background-color: #233A85; width: 70%;">Confirm Location</button>
                         </div>
                     </div>
                 </div>
@@ -287,88 +287,93 @@
     <!-- viewlocation Modal End -->
 
     <script>
-    $("#map_button").on("click", function initMap() {
-        // Set the initial location
-        var initialLocation = {
-            lat: 0,
-            lng: 0
-        };
+        $("#map_button").on("click", function initMap() {
+            // Set the initial location
+            var initialLocation = {
+                lat: 0,
+                lng: 0
+            };
 
-        // Create the map
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: initialLocation,
-            zoom: 12
-        });
+            // Create the map
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: initialLocation,
+                zoom: 12
+            });
 
-        // Initialize the marker variable
-        var marker = null;
+            // Initialize the marker variable
+            var marker = null;
 
-        // Add a click event listener to the map
-        map.addListener('click', function(event) {
-            // Retrieve the clicked coordinates
-            var clickedLocation = event.latLng;
+            // Add a click event listener to the map
+            map.addListener('click', function(event) {
+                // Retrieve the clicked coordinates
+                var clickedLocation = event.latLng;
 
-            // Perform geocoding to get the value of the location
-            geocodeLatLng(clickedLocation);
-            
-            // Remove previous marker, if any
-            if (marker) {
-                marker.setMap(null);
+                // Perform geocoding to get the value of the location
+                geocodeLatLng(clickedLocation);
+
+                // Remove previous marker, if any
+                if (marker) {
+                    marker.setMap(null);
+                }
+
+                // Create a new marker at the clicked location
+                marker = new google.maps.Marker({
+                    position: clickedLocation,
+                    map: map,
+                    title: 'Selected Location'
+                });
+            });
+
+            // Get the user's current location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    // Center the map on the user's location
+                    map.setCenter(userLocation);
+
+                    // Create a marker at the user's location
+                    var marker = new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        title: 'Your Location'
+                    });
+                }, function() {
+                    console.log('Error: The Geolocation service failed.');
+                });
+            } else {
+                console.log('Error: Your browser doesn\'t support geolocation.');
             }
 
-            // Create a new marker at the clicked location
-            marker = new google.maps.Marker({
-                position: clickedLocation,
-                map: map,
-                title: 'Selected Location'
-            });
-        });
+            function geocodeLatLng(location) {
+                var geocoder = new google.maps.Geocoder();
 
-        // Get the user's current location
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                
-                // Center the map on the user's location
-                map.setCenter(userLocation);
-
-                // Create a marker at the user's location
-                var marker = new google.maps.Marker({
-                    position: userLocation,
-                    map: map,
-                    title: 'Your Location'
-                });
-            }, function() {
-                console.log('Error: The Geolocation service failed.');
-            });
-        } else {
-            console.log('Error: Your browser doesn\'t support geolocation.');
-        }
-
-        function geocodeLatLng(location) {
-            var geocoder = new google.maps.Geocoder();
-
-            geocoder.geocode({
-                'location': location
-            }, function(results, status) {
-                if (status === 'OK') {
-                    if (results[0]) {
-                        var address = results[0].formatted_address;
-                        console.log('Selected location:', address);
-                        // Do something with the address value
+                geocoder.geocode({
+                    'location': location
+                }, function(results, status) {
+                    if (status === 'OK') {
+                        if (results[0]) {
+                            var address = results[0].formatted_address;
+                            $(document).on('click', '#address_confirm', function() {
+                                $('#addressTile').val(address);
+                                // $('#viewlocation').prop('checked', false);
+                                // $('#viewlocation').removeClass('show');
+                            });
+                            console.log('Selected location:', address);
+                            // Do something with the address value
+                        } else {
+                            console.log('No results found');
+                        }
                     } else {
-                        console.log('No results found');
+                        console.log('Geocoder failed due to: ' + status);
                     }
-                } else {
-                    console.log('Geocoder failed due to: ' + status);
-                }
-            });
-        }
-    });
-</script>
+                });
+            }
+        });
+    </script>
 
 
 
