@@ -1,16 +1,14 @@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiLEdVTvtivG3FxHhcIp553F6XdxE-vnQ&libraries=places"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiLEdVTvtivG3FxHhcIp553F6XdxE-vnQ&libraries=places"></script>
 
 
 <script>
     $(document).ready(function() {
 
-        $(document).ready(function() {
             function updateFormFields() {
                 const rows = $("#table_address tbody tr");
                 const startAddressSelect = $("#start_address");
@@ -20,318 +18,73 @@
                 const firstRow = rows.first();
                 const lastRow = rows.last();
 
-<<<<<<< .mine
-<<<<<<< .mine
                 // Get the address values from the first and last rows
                 const firstAddress = firstRow.find("td:nth-child(2)").text();
                 const lastAddress = lastRow.find("td:nth-child(2)").text();
 
+                // Update the start and end address fields
+                startAddressSelect.val(firstAddress);
+                endAddressSelect.val(lastAddress);
+            }
 
+            // Draggable and Sortable functionality
+            $(".draggable-row").draggable({
+                cursor: "grab",
+                axis: "y",
+                handle: "td:first-child",
+                opacity: 0.6,
+                containment: "parent",
+                start: function(event, ui) {
+                    $(this).addClass("dragging");
+                },
+                stop: function(event, ui) {
+                    $(this).removeClass("dragging");
+                    updateFormFields(); // Call updateFormFields after dragging stops
+                }
+            });
 
+            $("tbody").sortable({
+                cursor: "move",
+                axis: "y",
+                handle: "td:first-child",
+                opacity: 0.6,
+                containment: "parent",
+                update: function(event, ui) {
+                    updateFormFields(); // Call updateFormFields after sorting updates
+                }
+            });
 
+            $(".draggable-modal").draggable({
+                cursor: "grab",
+                handle: ".modal-header"
+            });
 
+            // Call the updateFormFields function initially
+            updateFormFields();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-                $(".draggable-modal").draggable({
-                    cursor: "grab",
-                    handle: ".modal-header"
+        $(document).on('click', '#btn_address_detail', function() {
+            var addressName = $('#addressTile').val();
+            var addressDesc = $('#addressDesc').val();
+            var picture = $('#addressPicture').is(':checked');
+            var signature = $('#addressSignature').is(':checked');
+            var note = $('#addressNote').is(':checked');
+            var addressResult;
+            verifyAddress(addressName)
+                .then(function(result) {
+                    addressResult = result;
+                    table_row(result);
+                    console.log(result); // "Valid" or "Invalid"
+                })
+                .catch(function(error) {
+                    result = ''
+                    table_row(result);
+                    console.error(error);
                 });
-                
-    
-                $(document).on('click', '#btn_address_detail', function() {
-                    var addressName = $('#addressTile').val();
-                    var addressDesc = $('#addressDesc').val();
-                    var picture     = $('#addressPicture').is(':checked');
-                    var signature   = $('#addressSignature').is(':checked');
-                    var note        = $('#addressNote').is(':checked');
-                    var addressResult;
-                    verifyAddress(addressName)
-                        .then(function(result) {
-                            addressResult = result;
-                            table_row(result);
-                            console.log(result); // "Valid" or "Invalid"
-                        })
-                        .catch(function(error) {
-                            result = ''
-                            table_row(result);
-                            console.error(error);
-                        });
-=======
-                // Get the address values from the first and last rows
-                const firstAddress = firstRow.find("td:nth-child(2)").text();
-                const lastAddress = lastRow.find("td:nth-child(2)").text();
 
 
+            function table_row(addressResult) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
->>>>>>> .theirs
-
-<<<<<<< .mine
-<<<<<<< .mine
-                // Update the start and end address fields
-                startAddressSelect.val(firstAddress);
-                endAddressSelect.val(lastAddress);
-            }
-
-            // Draggable and Sortable functionality
-            $(".draggable-row").draggable({
-                cursor: "grab",
-                axis: "y",
-                handle: "td:first-child",
-                opacity: 0.6,
-                containment: "parent",
-                start: function(event, ui) {
-                    $(this).addClass("dragging");
-                },
-                stop: function(event, ui) {
-                    $(this).removeClass("dragging");
-                    updateFormFields(); // Call updateFormFields after dragging stops
-                }
-            });
-
-            $("tbody").sortable({
-                cursor: "move",
-                axis: "y",
-                handle: "td:first-child",
-                opacity: 0.6,
-                containment: "parent",
-                update: function(event, ui) {
-                    updateFormFields(); // Call updateFormFields after sorting updates
-                }
-            });
-
-            $(".draggable-modal").draggable({
-                cursor: "grab",
-                handle: ".modal-header"
-            });
-
-            // Call the updateFormFields function initially
-            updateFormFields();
-        });
-
-
-
-        $(document).on('click', '#btn_address_detail', function() {
-            var addressName = $('#addressTile').val();
-            var addressDesc = $('#addressDesc').val();
-            var picture = $('#addressPicture').is(':checked');
-            var signature = $('#addressSignature').is(':checked');
-            var note = $('#addressNote').is(':checked');
-
-            var newRow = '<tr>\
-=======
-                 function  table_row(addressResult){ 
-=======
-                // Update the start and end address fields
-                startAddressSelect.val(firstAddress);
-                endAddressSelect.val(lastAddress);
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
-
-            // Draggable and Sortable functionality
-            $(".draggable-row").draggable({
-                cursor: "grab",
-                axis: "y",
-                handle: "td:first-child",
-                opacity: 0.6,
-                containment: "parent",
-                start: function(event, ui) {
-                    $(this).addClass("dragging");
-                },
-                stop: function(event, ui) {
-                    $(this).removeClass("dragging");
-                    updateFormFields(); // Call updateFormFields after dragging stops
-                }
-            });
-
-            $("tbody").sortable({
-                cursor: "move",
-                axis: "y",
-                handle: "td:first-child",
-                opacity: 0.6,
-                containment: "parent",
-                update: function(event, ui) {
-                    updateFormFields(); // Call updateFormFields after sorting updates
-                }
-            });
-
-            $(".draggable-modal").draggable({
-                cursor: "grab",
-                handle: ".modal-header"
-            });
-
-            // Call the updateFormFields function initially
-            updateFormFields();
-        });
-
-
-
-        $(document).on('click', '#btn_address_detail', function() {
-            var addressName = $('#addressTile').val();
-            var addressDesc = $('#addressDesc').val();
-            var picture = $('#addressPicture').is(':checked');
-            var signature = $('#addressSignature').is(':checked');
-            var note = $('#addressNote').is(':checked');
-
-            var newRow = '<tr>\
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
+                var newRow = '<tr>\
                                         <td class="draggable-row">\
                                             <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">\
                                                 <circle cx="19" cy="6" r="5.5" stroke="#230B34" />\
@@ -354,7 +107,7 @@
                                         <td>\
                                             <input type="checkbox" name="note" ' + (note ? 'checked' : '') + ' id="note">\
                                         </td>\
-                                        <td><span class="badge" style="background-color: #F5222D30; color: #F5222D;">invalid</span></td>\
+                                        <td><span class="badge" style="background-color: ' + (addressResult ? '#31A613' : '#F5222D30') + ' ; color: ' + (addressResult ? 'black' : '#F5222D') + ' ;">' + (addressResult ? 'Valid' : 'Invalid') + '</span></td>\
                                         <td>\
                                         <button type="button" class="btn p-0" data-toggle="modal" data-target="#edittrip">\
                                                 \<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">\
@@ -382,269 +135,61 @@
                                             </button>\
                                         </td>\
                                     </tr>';
-<<<<<<< .mine
-<<<<<<< .mine
 
+                $('#table_address').append(newRow);
+                $('<option>', {
+                    value: addressName,
+                    text: addressName
+                }).appendTo('#start_address');
 
+                $('<option>', {
+                    value: addressName,
+                    text: addressName
+                }).prependTo('#end_address').prop('selected', true);
 
+                $('#addressTile').val('');
+                $('#addressDesc').val('');
+                $('#addressPicture').prop('checked', false);
+                $('#addressSignature').prop('checked', false);
+                // $('#addressNote').prop('checked', false);
+                // $('#addAddressModal').removeClass('show');
 
-
-
-
-=======
-                    
-                    
-                                    $('#table_address').append(newRow);
-                                    $('<option>', {
-                                        value: addressName,
-                                        text: addressName
-                                    }).appendTo('#start_address');
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
->>>>>>> .theirs
-
-<<<<<<< .mine
-<<<<<<< .mine
-            $('#table_address').append(newRow);
-            $('<option>', {
-                value: addressName,
-                text: addressName
-            }).appendTo('#start_address');
-=======
-                                    $('<option>', {
-                                        value: addressName,
-                                        text: addressName
-                                    }).prependTo('#end_address').prop('selected', true);
-=======
-            $('#table_address').append(newRow);
-            $('<option>', {
-                value: addressName,
-                text: addressName
-            }).appendTo('#start_address');
-
-
-
-
-
-
->>>>>>> .theirs
-
-<<<<<<< .mine
->>>>>>> .theirs
-
-<<<<<<< .mine
-            $('<option>', {
-                value: addressName,
-                text: addressName
-            }).prependTo('#end_address').prop('selected', true);
-
-
-
-
-
-=======
-                                    $('#addressTile').val('');
-                                    $('#addressDesc').val('');
-                                    $('#addressPicture').prop('checked', false);
-                                    $('#addressSignature').prop('checked', false);
-                                    $('#addressNote').prop('checked', false);
-                                    $('#addAddressModal').removeClass('show');
-                                    
-                    
-                                }
-=======
-            $('<option>', {
-                value: addressName,
-                text: addressName
-            }).prependTo('#end_address').prop('selected', true);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
->>>>>>> .theirs
-
-<<<<<<< .mine
-<<<<<<< .mine
-            $('#addressTile').val('');
-            $('#addressDesc').val('');
-            $('#addressPicture').prop('checked', false);
-            $('#addressSignature').prop('checked', false);
-            // $('#addressNote').prop('checked', false);
-            // $('#addAddressModal').removeClass('show');
-=======
-            $('#addressTile').val('');
-            $('#addressDesc').val('');
-            $('#addressPicture').prop('checked', false);
-            $('#addressSignature').prop('checked', false);
-            // $('#addressNote').prop('checked', false);
-            // $('#addAddressModal').removeClass('show');
-
->>>>>>> .theirs
-
+            };
         });
 
+        function verifyAddress(address) {
+            return new Promise(function(resolve, reject) {
+                var geocoder = new google.maps.Geocoder();
 
+                geocoder.geocode({
+                    address: address
+                }, function(results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        var formattedAddress = results[0].formatted_address;
+                        var isValidAddress = isAddressValid(results[0]);
 
-=======
-
-
-<<<<<<< .mine
-
-
-
-
-
-                 
-
-                });
->>>>>>> .theirs
-
-        });
-
-                function verifyAddress(address) {
-                    return new Promise(function(resolve, reject) {
-                        var geocoder = new google.maps.Geocoder();
-
-                        geocoder.geocode({ address: address }, function(results, status) {
-                        if (status === google.maps.GeocoderStatus.OK) {
-                            var formattedAddress = results[0].formatted_address;
-                            var isValidAddress = isAddressValid(results[0]);
-
-                            if (isValidAddress) {
+                        if (isValidAddress) {
                             resolve("Valid");
-                            } else {
-                            resolve("Invalid");
-                            }
                         } else {
-                            reject("Geocoding failed. Status: " + status);
+                            resolve("Invalid");
                         }
-                        });
-                    });
+                    } else {
+                        reject("Geocoding failed. Status: " + status);
                     }
+                });
+            });
+        }
+
+        function isAddressValid(result) {
+            if (result.address_components && result.address_components.length > 0) {
+                if (result.formatted_address) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-<<<<<<< .mine
 
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-                    function isAddressValid(result) {
-                    if (result.address_components && result.address_components.length > 0) {
-                        if (result.formatted_address) {
-                        return true;
-                        }
-                    }
-                    return false;
-                    }
-
-
-
-
-
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
->>>>>>> .theirs
         // loadTables('users','Client');
         // loadTables('users','Admin');
         //login user through API ....        
@@ -927,7 +472,6 @@
                 icon: type
             });
         }
-
 
     });
 </script>
