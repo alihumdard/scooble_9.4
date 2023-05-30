@@ -274,49 +274,90 @@
     <!-- viewlocation Modal End -->
 
     <script>
-            $("#map_button").on("click", function initMap() {
-                // Set the initial location
-                var initialLocation = {
-                    lat: 37.7749,
-                    lng: -122.4194
+    $("#map_button").on("click", function initMap() {
+        // Set the initial location
+        var initialLocation = {
+            lat: 0,
+            lng: 0
+        };
+
+        // Create the map
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: initialLocation,
+            zoom: 12
+        });
+
+        // Initialize the marker variable
+        var marker = null;
+
+        // Add a click event listener to the map
+        map.addListener('click', function(event) {
+            // Retrieve the clicked coordinates
+            var clickedLocation = event.latLng;
+
+            // Perform geocoding to get the value of the location
+            geocodeLatLng(clickedLocation);
+            
+            // Remove previous marker, if any
+            if (marker) {
+                marker.setMap(null);
+            }
+
+            // Create a new marker at the clicked location
+            marker = new google.maps.Marker({
+                position: clickedLocation,
+                map: map,
+                title: 'Selected Location'
+            });
+        });
+
+        // Get the user's current location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
                 };
+                
+                // Center the map on the user's location
+                map.setCenter(userLocation);
 
-                // Create the map
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    center: initialLocation,
-                    zoom: 12
+                // Create a marker at the user's location
+                var marker = new google.maps.Marker({
+                    position: userLocation,
+                    map: map,
+                    title: 'Your Location'
                 });
+            }, function() {
+                console.log('Error: The Geolocation service failed.');
+            });
+        } else {
+            console.log('Error: Your browser doesn\'t support geolocation.');
+        }
 
-                // Add a click event listener to the map
-                map.addListener('click', function(event) {
-                    // Retrieve the clicked coordinates
-                    var clickedLocation = event.latLng;
+        function geocodeLatLng(location) {
+            var geocoder = new google.maps.Geocoder();
 
-                    // Perform geocoding to get the value of the location
-                    geocodeLatLng(clickedLocation);
-                });
-
-                function geocodeLatLng(location) {
-                    var geocoder = new google.maps.Geocoder();
-
-                    geocoder.geocode({
-                        'location': location
-                    }, function(results, status) {
-                        if (status === 'OK') {
-                            if (results[0]) {
-                                var address = results[0].formatted_address;
-                                console.log('Selected location:', address);
-                                // Do something with the address value
-                            } else {
-                                console.log('No results found');
-                            }
-                        } else {
-                            console.log('Geocoder failed due to: ' + status);
-                        }
-                    });
+            geocoder.geocode({
+                'location': location
+            }, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        var address = results[0].formatted_address;
+                        console.log('Selected location:', address);
+                        // Do something with the address value
+                    } else {
+                        console.log('No results found');
+                    }
+                } else {
+                    console.log('Geocoder failed due to: ' + status);
                 }
             });
-    </script>
+        }
+    });
+</script>
+
+
 
 
     @endsection
