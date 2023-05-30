@@ -256,5 +256,41 @@
       </div>
     </div>
     <!-- Delete Client Modal End -->
+    <!-- User Status Modal -->
+  <div class="modal fade" id="user_sts" tabindex="-1" aria-labelledby="user_stsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="user_stsLabel"></h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="post" id="user_sts">
+          @csrf
+          <input type="hidden" name="_previous" value="{{url()->previous()}}">
+          <input type="hidden" id="client_id" name="id">
+          <div class="modal-body">
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="48" height="48" rx="24" fill="#D1FADF" />
+              <path d="M23.5 28L26.5 31L32.5 25M38 28C38 33.5228 33.5228 38 28 38C22.4772 38 18 33.5228 18 28C18 22.4772 22.4772 18 28 18C33.5228 18 38 22.4772 38 28Z" stroke="#039855" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="4" y="4" width="48" height="48" rx="24" stroke="#ECFDF3" stroke-width="8" />
+            </svg>
+            <select name="status" id="status" class="form-select mt-3">
+              <option value="1">Activate</option>
+              <option value="3">Suspend</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-sm text-white px-5" id="change_sts" name="change_sts" type="submit" style="background-color: #233A85; border-radius: 8px;">
+            <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
+                    <span id="add_btn">@lang('lang.ok')</span>
+          </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- User Status Modal End -->
 
     @endsection
