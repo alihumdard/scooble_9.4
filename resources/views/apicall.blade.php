@@ -3,69 +3,88 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key= AIzaSyDiLEdVTvtivG3FxHhcIp553F6XdxE-vnQ&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiLEdVTvtivG3FxHhcIp553F6XdxE-vnQ&libraries=places"></script>
 
 
 <script>
     $(document).ready(function() {
 
-                $(".draggable-row").draggable({
-                    cursor: "grab",
-                    axis: "y",
-                    handle: "td:first-child",
-                    opacity: 0.6,
-                    containment: "parent",
-                    start: function(event, ui) {
-                        $(this).addClass("dragging");
-                    },
-                    stop: function(event, ui) {
-                        $(this).removeClass("dragging");
-                    }
+            function updateFormFields() {
+                const rows = $("#table_address tbody tr");
+                const startAddressSelect = $("#start_address");
+                const endAddressSelect = $("#end_address");
+
+                // Get the first and last row of the table
+                const firstRow = rows.first();
+                const lastRow = rows.last();
+
+                // Get the address values from the first and last rows
+                const firstAddress = firstRow.find("td:nth-child(2)").text();
+                const lastAddress = lastRow.find("td:nth-child(2)").text();
+
+                // Update the start and end address fields
+                startAddressSelect.val(firstAddress);
+                endAddressSelect.val(lastAddress);
+            }
+
+            // Draggable and Sortable functionality
+            $(".draggable-row").draggable({
+                cursor: "grab",
+                axis: "y",
+                handle: "td:first-child",
+                opacity: 0.6,
+                containment: "parent",
+                start: function(event, ui) {
+                    $(this).addClass("dragging");
+                },
+                stop: function(event, ui) {
+                    $(this).removeClass("dragging");
+                    updateFormFields(); // Call updateFormFields after dragging stops
+                }
+            });
+
+            $("tbody").sortable({
+                cursor: "move",
+                axis: "y",
+                handle: "td:first-child",
+                opacity: 0.6,
+                containment: "parent",
+                update: function(event, ui) {
+                    updateFormFields(); // Call updateFormFields after sorting updates
+                }
+            });
+
+            $(".draggable-modal").draggable({
+                cursor: "grab",
+                handle: ".modal-header"
+            });
+
+            // Call the updateFormFields function initially
+            updateFormFields();
+
+        $(document).on('click', '#btn_address_detail', function() {
+            var addressName = $('#addressTile').val();
+            var addressDesc = $('#addressDesc').val();
+            var picture = $('#addressPicture').is(':checked');
+            var signature = $('#addressSignature').is(':checked');
+            var note = $('#addressNote').is(':checked');
+            var addressResult;
+            verifyAddress(addressName)
+                .then(function(result) {
+                    addressResult = result;
+                    table_row(result);
+                    console.log(result); // "Valid" or "Invalid"
+                })
+                .catch(function(error) {
+                    result = ''
+                    table_row(result);
+                    console.error(error);
                 });
 
-                $("tbody").sortable({
-                    cursor: "move",
-                    axis: "y",
-                    handle: "td:first-child",
-                    opacity: 0.6,
-                    containment: "parent",
-                    update: function(event, ui) {
-                        var newOrder = [];
-                        $("tbody tr").each(function() {
-                            newOrder.push($(this).index());
-                        });
-                        console.log("New order:", newOrder);
-                    }
-                });
 
-                $(".draggable-modal").draggable({
-                    cursor: "grab",
-                    handle: ".modal-header"
-                });
-                
-    
-                $(document).on('click', '#btn_address_detail', function() {
-                    var addressName = $('#addressTile').val();
-                    var addressDesc = $('#addressDesc').val();
-                    var picture     = $('#addressPicture').is(':checked');
-                    var signature   = $('#addressSignature').is(':checked');
-                    var note        = $('#addressNote').is(':checked');
-                    var addressResult;
-                    verifyAddress(addressName)
-                        .then(function(result) {
-                            addressResult = result;
-                            table_row(result);
-                            console.log(result); // "Valid" or "Invalid"
-                        })
-                        .catch(function(error) {
-                            result = ''
-                            table_row(result);
-                            console.error(error);
-                        });
+            function table_row(addressResult) {
 
-                 function  table_row(addressResult){ 
-
-                    var newRow = '<tr>\
+                var newRow = '<tr>\
                                         <td class="draggable-row">\
                                             <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">\
                                                 <circle cx="19" cy="6" r="5.5" stroke="#230B34" />\
@@ -77,32 +96,32 @@
                                                 <circle cx="5.625" cy="9.75" r="1.25" fill="#9FA2B4" />\
                                             </svg>\
                                         </td>\
-                                        <td>'+ addressName +'</td>\
-                                        <td>'+addressDesc +'</td>\
+                                        <td>' + addressName + '</td>\
+                                        <td>' + addressDesc + '</td>\
                                         <td>\
-                                            <input type="checkbox" name="picture" '+(picture ? 'checked' : '')+' id="picture">\
+                                            <input type="checkbox" name="picture" ' + (picture ? 'checked' : '') + ' id="picture">\
                                         </td>\
                                         <td>\
-                                            <input type="checkbox" name="signature" '+ (signature ? 'checked' : '')+' id="signature">\
+                                            <input type="checkbox" name="signature" ' + (signature ? 'checked' : '') + ' id="signature">\
                                         </td>\
                                         <td>\
-                                            <input type="checkbox" name="note" '+ (note ? 'checked' : '')+' id="note">\
+                                            <input type="checkbox" name="note" ' + (note ? 'checked' : '') + ' id="note">\
                                         </td>\
-                                        <td><span class="badge" style="background-color: '+(addressResult ? '#31A613' : '#F5222D30')+' ; color: '+(addressResult ? 'black' : '#F5222D')+' ;">'+(addressResult ? 'Valid' : 'Invalid')+'</span></td>\
+                                        <td><span class="badge" style="background-color: ' + (addressResult ? '#31A613' : '#F5222D30') + ' ; color: ' + (addressResult ? 'black' : '#F5222D') + ' ;">' + (addressResult ? 'Valid' : 'Invalid') + '</span></td>\
                                         <td>\
-                                        <button class="btn p-0" data-toggle="modal" data-target="#edittrip">\
+                                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#edittrip">\
                                                 \<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">\
                                                     <circle opacity="0.1" cx="18" cy="18" r="18" fill="#452C88" />\
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1634 23.6195L22.3139 15.6658C22.6482 15.2368 22.767 14.741 22.6556 14.236C22.559 13.777 22.2768 13.3406 21.8534 13.0095L20.8208 12.1893C19.922 11.4744 18.8078 11.5497 18.169 12.3699L17.4782 13.2661C17.3891 13.3782 17.4114 13.5438 17.5228 13.6341C17.5228 13.6341 19.2684 15.0337 19.3055 15.0638C19.4244 15.1766 19.5135 15.3271 19.5358 15.5077C19.5729 15.8614 19.3278 16.1925 18.9638 16.2376C18.793 16.2602 18.6296 16.2075 18.5107 16.1097L16.676 14.6499C16.5868 14.5829 16.4531 14.5972 16.3788 14.6875L12.0185 20.3311C11.7363 20.6848 11.6397 21.1438 11.7363 21.5878L12.2934 24.0032C12.3231 24.1312 12.4345 24.2215 12.5682 24.2215L15.0195 24.1914C15.4652 24.1838 15.8812 23.9807 16.1634 23.6195ZM19.5955 22.8673H23.5925C23.9825 22.8673 24.2997 23.1886 24.2997 23.5837C24.2997 23.9795 23.9825 24.3 23.5925 24.3H19.5955C19.2055 24.3 18.8883 23.9795 18.8883 23.5837C18.8883 23.1886 19.2055 22.8673 19.5955 22.8673Z" fill="#452C88" />\
                                                 </svg>\
                                             </button>\
-                                            <a href="">\
+                                            <button type="button" class="btn p-0">\
                                                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">\
                                                     <circle opacity="0.1" cx="18" cy="18" r="18" fill="#DF6F79" />\
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M23.491 13.743C23.7361 13.743 23.9401 13.9465 23.9401 14.2054V14.4448C23.9401 14.6975 23.7361 14.9072 23.491 14.9072H13.0498C12.8041 14.9072 12.6001 14.6975 12.6001 14.4448V14.2054C12.6001 13.9465 12.8041 13.743 13.0498 13.743H14.8867C15.2599 13.743 15.5846 13.4778 15.6685 13.1036L15.7647 12.6739C15.9142 12.0887 16.4062 11.7 16.9693 11.7H19.5709C20.1278 11.7 20.6253 12.0887 20.7693 12.6431L20.8723 13.1029C20.9556 13.4778 21.2803 13.743 21.6541 13.743H23.491ZM22.5578 22.4943C22.7496 20.707 23.0853 16.4609 23.0853 16.418C23.0976 16.2883 23.0553 16.1654 22.9714 16.0665C22.8813 15.9739 22.7673 15.9191 22.6417 15.9191H13.9033C13.7771 15.9191 13.657 15.9739 13.5737 16.0665C13.4891 16.1654 13.4474 16.2883 13.4536 16.418C13.4547 16.4259 13.4667 16.5755 13.4869 16.8255C13.5764 17.9364 13.8256 21.0303 13.9866 22.4943C14.1006 23.5729 14.8083 24.2507 15.8333 24.2753C16.6243 24.2936 17.4392 24.2999 18.2725 24.2999C19.0574 24.2999 19.8545 24.2936 20.67 24.2753C21.7306 24.257 22.4377 23.5911 22.5578 22.4943Z" fill="#D11A2A" />\
                                                 </svg>\
-                                            </a>\
-                                            <button class="btn p-0" data-toggle="modal" data-target="#viewlocation">\
+                                            </button>\
+                                            <button type="button" class="btn p-0" data-toggle="modal" data-target="#viewlocation">\
                                                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\
                                                     <circle opacity="0.1" cx="18" cy="18" r="18" fill="#E45F00" />\
                                                     <rect x="12" y="12" width="12" height="12" fill="url(#pattern0)" />\
@@ -116,73 +135,59 @@
                                             </button>\
                                         </td>\
                                     </tr>';
-                    
-                    
-                                    $('#table_address').append(newRow);
-                                    $('<option>', {
-                                        value: addressName,
-                                        text: addressName
-                                    }).appendTo('#start_address');
 
-                                    $('<option>', {
-                                        value: addressName,
-                                        text: addressName
-                                    }).prependTo('#end_address').prop('selected', true);
+                $('#table_address').append(newRow);
+                $('<option>', {
+                    value: addressName,
+                    text: addressName
+                }).appendTo('#start_address');
 
-                                    $('#addressTile').val('');
-                                    $('#addressDesc').val('');
-                                    $('#addressPicture').prop('checked', false);
-                                    $('#addressSignature').prop('checked', false);
-                                    $('#addressNote').prop('checked', false);
-                                    $('#addAddressModal').removeClass('show');
-                                    
-                    
-                                }
+                $('<option>', {
+                    value: addressName,
+                    text: addressName
+                }).prependTo('#end_address').prop('selected', true);
 
+                $('#addressTile').val('');
+                $('#addressDesc').val('');
+                $('#addressPicture').prop('checked', false);
+                $('#addressSignature').prop('checked', false);
+                // $('#addressNote').prop('checked', false);
+                // $('#addAddressModal').removeClass('show');
 
+            };
+        });
 
+        function verifyAddress(address) {
+            return new Promise(function(resolve, reject) {
+                var geocoder = new google.maps.Geocoder();
 
+                geocoder.geocode({
+                    address: address
+                }, function(results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        var formattedAddress = results[0].formatted_address;
+                        var isValidAddress = isAddressValid(results[0]);
 
-
-
-
-                 
-
-                });
-
-
-                function verifyAddress(address) {
-                    return new Promise(function(resolve, reject) {
-                        var geocoder = new google.maps.Geocoder();
-
-                        geocoder.geocode({ address: address }, function(results, status) {
-                        if (status === google.maps.GeocoderStatus.OK) {
-                            var formattedAddress = results[0].formatted_address;
-                            var isValidAddress = isAddressValid(results[0]);
-
-                            if (isValidAddress) {
+                        if (isValidAddress) {
                             resolve("Valid");
-                            } else {
-                            resolve("Invalid");
-                            }
                         } else {
-                            reject("Geocoding failed. Status: " + status);
+                            resolve("Invalid");
                         }
-                        });
-                    });
+                    } else {
+                        reject("Geocoding failed. Status: " + status);
                     }
+                });
+            });
+        }
 
-                    function isAddressValid(result) {
-                    if (result.address_components && result.address_components.length > 0) {
-                        if (result.formatted_address) {
-                        return true;
-                        }
-                    }
-                    return false;
-                    }
-
-
-
+        function isAddressValid(result) {
+            if (result.address_components && result.address_components.length > 0) {
+                if (result.formatted_address) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
         // loadTables('users','Client');
@@ -279,15 +284,17 @@
         });
 
         // get api .....
-        $(document).on('click', '#btn_edit_client', function () {
+        $(document).on('click', '#btn_edit_client', function() {
             var id = $(this).data('client_id');
             var apiname = $(this).data('api_name');
             var apiurl = "{{ end_url('') }}" + apiname;
             var bearerToken = "{{session('user')}}";
             $.ajax({
-                url: apiurl+'?id='+id,
+                url: apiurl + '?id=' + id,
                 type: 'GET',
-                data: { 'id': id },
+                data: {
+                    'id': id
+                },
                 headers: {
                     'Authorization': 'Bearer ' + bearerToken
                 },
@@ -312,10 +319,9 @@
                         $('#addclient #com_name').val(responseData.com_name);
                         $('#addclient #address').val(responseData.address);
                         $('#addclient #joining_date').val(formattedDateTime);
-                    } 
-                    else {
+                    } else {
                         showAlert("Warning", response.message, response.status);
-                        }
+                    }
                 },
                 error: function(xhr, status, error) {
                     $('#spinner').addClass('d-none');
@@ -337,7 +343,8 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('user') }}';
+                            var token = '{{ session('
+                            user ') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',
@@ -394,7 +401,8 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend: function(xhr) {
-                            var token = '{{ session('user') }}';
+                            var token = '{{ session('
+                            user ') }}';
                             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                         },
                         dataSrc: 'data',
@@ -464,7 +472,6 @@
                 icon: type
             });
         }
-
 
     });
 </script>
