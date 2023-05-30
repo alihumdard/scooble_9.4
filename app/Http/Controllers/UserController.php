@@ -21,6 +21,8 @@ use App\Models\Announcement;
 use App\Models\Notification;
 use Illuminate\Foundation\Auth\Authenticatable;
 use Carbon\Carbon;
+use App\Models\Trip;
+use App\Models\Address;
 
 
 class UserController extends Controller
@@ -117,10 +119,48 @@ class UserController extends Controller
 
     public function routes()
     {
-        return view('routes');
+        $user = auth()->user();
+        $page_name = 'routes';
+
+        if(!view_permission($page_name)){
+            return redirect()->back();  
+        }
+
+        if($user->role == user_roles('1')){
+
+            $trips = Trip::join('users', 'users.id', '=', 'trips.driver_id')
+            ->select('trips.*', 'users.id as driver_id', 'users.name', 'users.user_pic')
+            ->orderBy('trips.id', 'desc')
+            ->get()
+            ->toArray();
+           
+
+            return view('routes', ['data' => $trips,'user'=>$user]);
+        } 
+
+        else if($user->role == user_roles('2')){
+            $trips = Trip::join('users', 'users.id', '=', 'trips.driver_id')
+            ->where('trips.created_by', $user->id)
+            ->select('trips.*', 'users.id as driver_id', 'users.name', 'users.user_pic')
+            ->orderBy('trips.id', 'desc')
+            ->get()
+            ->toArray();
+            return view('routes', ['data' => $trips,'user'=>$user]);
+        }
+        
+        else {
+            $trips = Trip::join('users', 'users.id', '=', 'trips.driver_id')
+            ->where('trips.driver_id', $user->id)
+            ->select('trips.*', 'users.id as driver_id', 'users.name', 'users.user_pic')
+            ->orderBy('trips.id', 'desc')
+            ->get()
+            ->toArray();
+            return view('routes', ['data' => $trips,'user'=>$user]);
+        } 
+
     }
 
-    public function create_trip()
+    public function create_trip(Request $request)
     {
         $user = auth()->user();
         $page_name = 'create_trip';
@@ -129,8 +169,23 @@ class UserController extends Controller
             return redirect()->back();  
         }
 
+        if ($request->has('id')) {
+            
+            $trip = Trip::with(['addresses' => function ($query) {
+                $query->orderBy('id', 'ASC');
+            }])->find($request->id);
+            
+            $tripData = $trip->toArray();
+            $tripData['addresses'] = $trip->addresses->toArray();
+            
+            $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
+            return view('create_trip',['data'=>$tripData, 'user'=>$user ,'driver_list'=>$deriver_list]);
+            
+        }
+        else{
         $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
         return view('create_trip',['user'=>$user ,'driver_list'=>$deriver_list]);
+        }
     }
 
     public function driver_map()
