@@ -53,7 +53,7 @@ function view_permission($page_name) {
                 case 'users':
                 case 'announcements':
                 case 'notifications': 
-                case 'create_trip':     
+                // case 'create_trip':     
             // case 'announcements_alerts': 
                 case 'pdf_templates': 
                 case 'logout': 
