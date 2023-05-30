@@ -65,42 +65,51 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
+
+                <!-- address address with google maap -->
                     <div class="tab-pane container active" id="home">
-                        <form action="storeTrip" method="post" id="">
+                        <form action="storeTrip" id ="saveTrip" method="post" id="">
                             <div class="row">
+
                                 <div class="col-lg-6 my-2">
                                     <label for="title">Title:</label>
-                                    <input type="text" name="address_title" id="address_title" placeholder="@lang('lang.title')" class="form-control">
+                                    <input type="text" name="title" id="title" placeholder="@lang('lang.title')" class="form-control">
                                 </div>
+
                                 <div class="col-lg-3 my-2">
-                                    <label for="date">Date:</label>
-                                    <input type="datetime-local" name="date" id="date" class="form-control">
+                                    <label for="trip_date">Date:</label>
+                                    <input type="datetime-local" name="trip_date" id="trip_date" class="form-control">
                                 </div>
+
                                 <div class="col-lg-3 my-2">
-                                    <label for="drivers">Drivers:</label>
-                                    <select name="drivers" id="drivers" class="form-select">
+                                    <label for="driver_id">Drivers:</label>
+                                    <select name="driver_id" id="driver_id" class="form-select">
                                         <option disabled selected>@lang('lang.select_driver')</option>
                                         @foreach($driver_list as $value)
                                         <option value="{{$value['id']}}">{{$value['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="col-lg-12 mb-2">
-                                    <label for="trip_description">Trip Description:</label>
-                                    <textarea name="trip_description" id="trip_description" class="form-control" placeholder="@lang('lang.trip_description')"></textarea>
+                                    <label for="trip_desc">Trip Description:</label>
+                                    <textarea name="desc" id="trip_desc" class="form-control" placeholder="@lang('lang.trip_description')"></textarea>
                                 </div>
+
                                 <div class="col-lg-4">
-                                    <label for="start_point">Start Point:</label>
+                                    <label for="start_address">Start Point:</label>
                                     <select name="start_point" id="start_address" class="form-select">
-                                        <!-- <option value="">@lang('lang.start_point')</option> -->
+                                        
                                     </select>
                                 </div>
+
                                 <div class="col-lg-4">
-                                    <label for="end_point">End Point:</label>
+                                    <label for="end_address">End Point:</label>
                                     <select name="end_point" id="end_address" class="form-select">
-                                        <!-- <option value="">@lang('lang.end_point')</option> -->
+                                      
                                     </select>
                                 </div>
+
                                 <div class="col-lg-4 mt-4">
                                     <button type="button" data-toggle="modal" data-target="#addAddressModal" class="btn text-white" style="background-color: #E45F00; width: 100%; border-radius: 8px;">@lang('lang.add_new_address')</button>
                                 </div>
@@ -126,11 +135,15 @@
                                     </tbody>
                                 </table>
                                 <div class="col-lg-4 float-right text-right">
-                                    <button type="submit" class="btn text-white" style="background-color: rgb(35, 58, 133); width: 100%; border-radius: 8px;">Save Trip</button>
+                                    <button type="submit" id="btn_save_trip" class="btn text-white" style="background-color: rgb(35, 58, 133); width: 100%; border-radius: 8px;">Save Trip</button>
                                 </div>
                             </div>
                         </form>
                     </div>
+
+
+
+                <!-- import address from file -->
                     <div class="tab-pane container fade" id="menu1">
                         <form action="storeTrip" method="post">
                             <div class="row">

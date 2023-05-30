@@ -235,6 +235,18 @@
             });
         });
 
+        // saving trip in through the api...
+        $('#saveTrip').on('submit', function(e) {
+            e.preventDefault();
+            alert();
+            var apiname = $(this).attr('action');
+            var apiurl = "{{ end_url('') }}" + apiname;
+            var formData = new FormData(this);
+            var bearerToken = "{{session('user')}}";
+            console.log(formData);
+        });
+
+
         // Adding  data in through the api...
         $('#formData').on('submit', function(e) {
             e.preventDefault();
