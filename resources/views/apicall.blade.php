@@ -9,82 +9,86 @@
 <script>
     $(document).ready(function() {
 
-            function updateFormFields() {
-                const rows = $("#table_address tbody tr");
-                const startAddressSelect = $("#start_address");
-                const endAddressSelect = $("#end_address");
+        function updateFormFields() {
+            const rows = $("#table_address tbody tr");
+            const startAddressSelect = $("#start_address");
+            const endAddressSelect = $("#end_address");
 
-                // Get the first and last row of the table
-                const firstRow = rows.first();
-                const lastRow = rows.last();
+            // Get the first and last row of the table
+            const firstRow = rows.first();
+            const lastRow = rows.last();
 
-                // Get the address values from the first and last rows
-                const firstAddress = firstRow.find("td:nth-child(2)").text();
-                const lastAddress = lastRow.find("td:nth-child(2)").text();
+            // Get the address values from the first and last rows
+            const firstAddress = firstRow.find("td:nth-child(2)").text();
+            const lastAddress = lastRow.find("td:nth-child(2)").text();
 
-                // Update the start and end address fields
-                startAddressSelect.val(firstAddress);
-                endAddressSelect.val(lastAddress);
+            // Update the start and end address fields
+            startAddressSelect.val(firstAddress);
+            endAddressSelect.val(lastAddress);
+        }
+
+        // Draggable and Sortable functionality
+        $(".draggable-row").draggable({
+            cursor: "grab",
+            axis: "y",
+            handle: "td:first-child",
+            opacity: 0.6,
+            containment: "parent",
+            start: function(event, ui) {
+                $(this).addClass("dragging");
+            },
+            stop: function(event, ui) {
+                $(this).removeClass("dragging");
+                updateFormFields(); // Call updateFormFields after dragging stops
             }
+        });
 
-            // Draggable and Sortable functionality
-            $(".draggable-row").draggable({
-                cursor: "grab",
-                axis: "y",
-                handle: "td:first-child",
-                opacity: 0.6,
-                containment: "parent",
-                start: function(event, ui) {
-                    $(this).addClass("dragging");
-                },
-                stop: function(event, ui) {
-                    $(this).removeClass("dragging");
-                    updateFormFields(); // Call updateFormFields after dragging stops
-                }
-            });
+        $("tbody").sortable({
+            cursor: "move",
+            axis: "y",
+            handle: "td:first-child",
+            opacity: 0.6,
+            containment: "parent",
+            update: function(event, ui) {
+                updateFormFields(); // Call updateFormFields after sorting updates
+            }
+        });
 
-            $("tbody").sortable({
-                cursor: "move",
-                axis: "y",
-                handle: "td:first-child",
-                opacity: 0.6,
-                containment: "parent",
-                update: function(event, ui) {
-                    updateFormFields(); // Call updateFormFields after sorting updates
-                }
-            });
+        $(".draggable-modal").draggable({
+            cursor: "grab",
+            handle: ".modal-header"
+        });
 
-            $(".draggable-modal").draggable({
-                cursor: "grab",
-                handle: ".modal-header"
-            });
-
-            // Call the updateFormFields function initially
-            updateFormFields();
+        // Call the updateFormFields function initially
+        updateFormFields();
 
         $(document).on('click', '#btn_address_detail', function() {
             var addressName = $('#addressTile').val();
             var addressDesc = $('#addressDesc').val();
-            var picture = $('#addressPicture').is(':checked');
-            var signature = $('#addressSignature').is(':checked');
-            var note = $('#addressNote').is(':checked');
-            var addressResult;
-            verifyAddress(addressName)
-                .then(function(result) {
-                    addressResult = result;
-                    table_row(result);
-                    console.log(result); // "Valid" or "Invalid"
-                })
-                .catch(function(error) {
-                    result = ''
-                    table_row(result);
-                    console.error(error);
-                });
+            if (addressName === '' || addressDesc === '') {
+                (addressName === '') ? $('.validation-error-title').empty().append('<label class="text-danger">*Address name is required</label>'): '';
+                (addressDesc === '') ? $('.validation-error-desc').empty().append('<label class="text-danger">*Address description is required</label>'): '';
+            } else {
+                var picture = $('#addressPicture').is(':checked');
+                var signature = $('#addressSignature').is(':checked');
+                var note = $('#addressNote').is(':checked');
+                var addressResult;
+                verifyAddress(addressName)
+                    .then(function(result) {
+                        addressResult = result;
+                        table_row(result);
+                        console.log(result); // "Valid" or "Invalid"
+                    })
+                    .catch(function(error) {
+                        result = ''
+                        table_row(result);
+                        console.error(error);
+                    });
 
 
-            function table_row(addressResult) {
+                function table_row(addressResult) {
 
-                var newRow = '<tr>\
+                    var newRow = '<tr>\
                                         <td class="draggable-row">\
                                             <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">\
                                                 <circle cx="19" cy="6" r="5.5" stroke="#230B34" />\
@@ -136,25 +140,26 @@
                                         </td>\
                                     </tr>';
 
-                $('#table_address').append(newRow);
-                $('<option>', {
-                    value: addressName,
-                    text: addressName
-                }).appendTo('#start_address');
+                    $('#table_address').append(newRow);
+                    $('<option>', {
+                        value: addressName,
+                        text: addressName
+                    }).appendTo('#start_address');
 
-                $('<option>', {
-                    value: addressName,
-                    text: addressName
-                }).prependTo('#end_address').prop('selected', true);
+                    $('<option>', {
+                        value: addressName,
+                        text: addressName
+                    }).prependTo('#end_address').prop('selected', true);
 
-                $('#addressTile').val('');
-                $('#addressDesc').val('');
-                $('#addressPicture').prop('checked', false);
-                $('#addressSignature').prop('checked', false);
-                // $('#addressNote').prop('checked', false);
-                // $('#addAddressModal').removeClass('show');
+                    $('#addressTile').val('');
+                    $('#addressDesc').val('');
+                    $('#addressPicture').prop('checked', false);
+                    $('#addressSignature').prop('checked', false);
+                    // $('#addressNote').prop('checked', false);
+                    // $('#addAddressModal').removeClass('show');
 
-            };
+                };
+            }
         });
 
         function verifyAddress(address) {
@@ -236,7 +241,6 @@
         });
 
         // saving trip in through the api...
-           // saving trip through the API
         $('#saveTrip').on('submit', function(e) {
             e.preventDefault();
             var apiname = $(this).attr('action');
@@ -246,64 +250,56 @@
             const rowData = [];
 
             $("#table_address tbody tr").each(function() {
-                    
+
                 const row = $(this);
-                const cells = row.find("td").not(":last"); 
+                const cells = row.find("td").not(":last");
                 const rowValues = {};
 
-                    cells.each(function(index) {
-                        let fieldName;
-                        if (index === 0) {
-                        fieldName = "id"; 
-                        }
-                        
-                        else if (index === 1) {
-                        fieldName = "title"; 
-                        } 
-
-                        else if (index === 2) {
-                        fieldName = "desc"; 
-                        } 
-
-                        else if (index === 6) {
+                cells.each(function(index) {
+                    let fieldName;
+                    if (index === 0) {
+                        fieldName = "id";
+                    } else if (index === 1) {
+                        fieldName = "title";
+                    } else if (index === 2) {
+                        fieldName = "desc";
+                    } else if (index === 6) {
                         fieldName = "status";
-                        } 
-                        
-                        else {
-                        fieldName = 'field' + (index + 1); 
-                        }
-                        const cellValue = $(this).text().trim();
-                        rowValues[fieldName] = cellValue;
-                    });
+                    } else {
+                        fieldName = 'field' + (index + 1);
+                    }
+                    const cellValue = $(this).text().trim();
+                    rowValues[fieldName] = cellValue;
+                });
 
-                    const checkboxes = row.find("input[type=checkbox]");
-                    checkboxes.each(function(index) {
-                        let checkboxName;
-                        if (index === 0) {
-                        checkboxName = "trip_pic"; 
-                        } else if (index === 1) {
-                        checkboxName = "trip_signature"; 
-                        } else if (index === 2) {
-                        checkboxName = "trip_note"; 
-                        }
-                        const checkboxValue = $(this).is(":checked") ? 1 : 0; 
-                        rowValues[checkboxName] = checkboxValue;
-                    });
-                    
-                    // Remove unwanted fields
-                    delete rowValues.field4;
-                    delete rowValues.field5;
-                    delete rowValues.field6;
-                    // delete rowValues.field1;
+                const checkboxes = row.find("input[type=checkbox]");
+                checkboxes.each(function(index) {
+                    let checkboxName;
+                    if (index === 0) {
+                        checkboxName = "trip_pic";
+                    } else if (index === 1) {
+                        checkboxName = "trip_signature";
+                    } else if (index === 2) {
+                        checkboxName = "trip_note";
+                    }
+                    const checkboxValue = $(this).is(":checked") ? 1 : 0;
+                    rowValues[checkboxName] = checkboxValue;
+                });
 
-                    rowData.push(rowValues);
+                // Remove unwanted fields
+                delete rowValues.field4;
+                delete rowValues.field5;
+                delete rowValues.field6;
+                // delete rowValues.field1;
+
+                rowData.push(rowValues);
             });
 
             const formInputs = {};
             $(this).find('input[name], textarea[name], select[name]').each(function() {
-            const inputName = $(this).attr('name');
-            const inputValue = $(this).val().trim();
-            formInputs[inputName] = inputValue;
+                const inputName = $(this).attr('name');
+                const inputValue = $(this).val().trim();
+                formInputs[inputName] = inputValue;
             });
 
             delete formInputs.picture;
@@ -311,8 +307,8 @@
             delete formInputs.note;
 
             const payload = {
-            address: rowData,
-            trip_detail: formInputs
+                address: rowData,
+                trip_detail: formInputs
             };
 
 
@@ -321,8 +317,8 @@
                 type: 'POST',
                 data: JSON.stringify(payload),
                 headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + bearerToken
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + bearerToken
                 },
                 beforeSend: function() {
                     $('#spinner').removeClass('d-none');
@@ -343,7 +339,7 @@
                     } else {
                         showAlert("Warning", response.message, response.status);
                     }
-                    
+
                 },
                 error: function(xhr, status, error) {
                     $('#spinner').addClass('d-none');

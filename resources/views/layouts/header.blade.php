@@ -176,7 +176,7 @@ $user = User::find($user_id);
           <li class="nav-item nav-profile border-bottom border-top">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img style="border-radius: 12px !important;" src="{{ asset('storage/' .$user->user_pic) }}" alt="profile">
+                <img style="border-radius: 12px !important;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user_icon.png'}}" alt="profile">
                 <span class="login-status online"></span>
                 <!--change to offline or busy as needed-->
               </div>

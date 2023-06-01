@@ -77,7 +77,7 @@
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
                 <div id="dropzone" class="dropzone">
-                  <img id="profileImage" src="{{ asset('storage/' . $user->user_pic) }}" style="width: 150px; height: 150px; border-radius: 50%;" alt="text">
+                  <img id="profileImage" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user_icon.png'}}" style="width: 150px; height: 150px; border-radius: 50%;" alt="text">
                   <div class="file-input-container">
                     <input class="file-input" type="file" name="user_pic" id="fileInput1">
                     <div class="upload-icon" onclick="document.getElementById('fileInput1').click()">
