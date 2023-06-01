@@ -5,43 +5,45 @@
             <th>@lang('lang.trip_date')</th>
             <th>@lang('lang.start_point')</th>
             <th>@lang('lang.end_point')</th>
-            <th>@lang('lang.name')</th>
+            <th>Client Name</th>
+            <th>Driver Name</th>
             <th>@lang('lang.status')</th>
             <th>@lang('lang.actions')</th>
         </tr>
     </thead>
     <tbody>
-    @foreach($data as $key => $value)
+        @foreach($data as $key => $value)
         <tr style="font-size: small;">
             <td>{{ $value['title'] }}</td>
             <td>{{table_date($value['created_at'])}}</td>
             <td>{{ $value['start_point'] }}</td>
             <td>{{ $value['end_point'] }}</td>
+            <td></td>
             <td><img src="{{ asset('storage/' . $value['user_pic']) }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
             @if($value['status'] == 'on')
-                      <td>
-                        <button class="btn btn_status">
-                          <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #31A6132E; color: #31A613;"> Active </span>
-                        </button>
-                      </td>
+            <td>
+                <button class="btn btn_status">
+                    <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #31A6132E; color: #31A613;"> Active </span>
+                </button>
+            </td>
             @else
-                      <td>
-                        <button class="btn btn_status">
-                          <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #F5222D30; color: #F5222D;"> Suspend </span>
-                        </button>
-                      </td>
+            <td>
+                <button class="btn btn_status">
+                    <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #F5222D30; color: #F5222D;"> Suspend </span>
+                </button>
+            </td>
             @endif
-           <td>
-           <form method="POST" action="/create_trip" >
-                      @csrf
-                      <input type="hidden" name="id" value="{{$value['id']}}">
-                      <button id="btn_edit_announcement" class="btn p-0" >
+            <td>
+                <form method="POST" action="/create_trip">
+                    @csrf
+                    <input type="hidden" name="id" value="{{$value['id']}}">
+                    <button id="btn_edit_announcement" class="btn p-0">
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle opacity="0.1" cx="18" cy="18" r="18" fill="#233A85" />
-                          <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1634 23.6195L22.3139 15.6658C22.6482 15.2368 22.767 14.741 22.6556 14.236C22.559 13.777 22.2768 13.3406 21.8534 13.0095L20.8208 12.1893C19.922 11.4744 18.8078 11.5497 18.169 12.3699L17.4782 13.2661C17.3891 13.3782 17.4114 13.5438 17.5228 13.6341C17.5228 13.6341 19.2684 15.0337 19.3055 15.0638C19.4244 15.1766 19.5135 15.3271 19.5358 15.5077C19.5729 15.8614 19.3278 16.1925 18.9638 16.2376C18.793 16.2602 18.6296 16.2075 18.5107 16.1097L16.676 14.6499C16.5868 14.5829 16.4531 14.5972 16.3788 14.6875L12.0185 20.3311C11.7363 20.6848 11.6397 21.1438 11.7363 21.5878L12.2934 24.0032C12.3231 24.1312 12.4345 24.2215 12.5682 24.2215L15.0195 24.1914C15.4652 24.1838 15.8812 23.9807 16.1634 23.6195ZM19.5955 22.8673H23.5925C23.9825 22.8673 24.2997 23.1886 24.2997 23.5837C24.2997 23.9795 23.9825 24.3 23.5925 24.3H19.5955C19.2055 24.3 18.8883 23.9795 18.8883 23.5837C18.8883 23.1886 19.2055 22.8673 19.5955 22.8673Z" fill="#233A85" />
+                            <circle opacity="0.1" cx="18" cy="18" r="18" fill="#233A85" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1634 23.6195L22.3139 15.6658C22.6482 15.2368 22.767 14.741 22.6556 14.236C22.559 13.777 22.2768 13.3406 21.8534 13.0095L20.8208 12.1893C19.922 11.4744 18.8078 11.5497 18.169 12.3699L17.4782 13.2661C17.3891 13.3782 17.4114 13.5438 17.5228 13.6341C17.5228 13.6341 19.2684 15.0337 19.3055 15.0638C19.4244 15.1766 19.5135 15.3271 19.5358 15.5077C19.5729 15.8614 19.3278 16.1925 18.9638 16.2376C18.793 16.2602 18.6296 16.2075 18.5107 16.1097L16.676 14.6499C16.5868 14.5829 16.4531 14.5972 16.3788 14.6875L12.0185 20.3311C11.7363 20.6848 11.6397 21.1438 11.7363 21.5878L12.2934 24.0032C12.3231 24.1312 12.4345 24.2215 12.5682 24.2215L15.0195 24.1914C15.4652 24.1838 15.8812 23.9807 16.1634 23.6195ZM19.5955 22.8673H23.5925C23.9825 22.8673 24.2997 23.1886 24.2997 23.5837C24.2997 23.9795 23.9825 24.3 23.5925 24.3H19.5955C19.2055 24.3 18.8883 23.9795 18.8883 23.5837C18.8883 23.1886 19.2055 22.8673 19.5955 22.8673Z" fill="#233A85" />
                         </svg>
-                      </button>
-           </form>
+                    </button>
+                </form>
                 <button class="btn p-0" data-toggle="modal" data-target="#deleteroute">
                     <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle opacity="0.1" cx="18" cy="18" r="18" fill="#DF6F79" />
@@ -70,7 +72,7 @@
             </td>
         </tr>
 
-    @endforeach
+        @endforeach
 
         <!-- <tr style="font-size: small;">
             <td>Lorem Ipsum</td>
