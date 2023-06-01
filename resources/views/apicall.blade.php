@@ -66,9 +66,12 @@
             var addressName = $('#addressTile').val();
             var addressDesc = $('#addressDesc').val();
             if (addressName === '' || addressDesc === '') {
-                (addressName === '') ? $('.validation-error-title').empty().append('<label class="text-danger">*Address name is required</label>'): '';
-                (addressDesc === '') ? $('.validation-error-desc').empty().append('<label class="text-danger">*Address description is required</label>'): '';
+                (addressName === '') ? $('.validation-error-title').empty().append('<label class="text-danger">*Address name is required</label>'): $('.validation-error-title').empty();
+                (addressDesc === '') ? $('.validation-error-desc').empty().append('<label class="text-danger">*Address description is required</label>'): $('.validation-error-desc').empty();
             } else {
+                $('.validation-error-title').empty();
+                $('.validation-error-desc').empty();
+                $('#btn_address_detail').prop('disabled', true);
                 var picture = $('#addressPicture').is(':checked');
                 var signature = $('#addressSignature').is(':checked');
                 var note = $('#addressNote').is(':checked');
@@ -155,7 +158,8 @@
                     $('#addressDesc').val('');
                     $('#addressPicture').prop('checked', false);
                     $('#addressSignature').prop('checked', false);
-                    // $('#addressNote').prop('checked', false);
+                    $('#addressNote').prop('checked', false);
+                    $('#btn_address_detail').prop('disabled', false);
                     // $('#addAddressModal').removeClass('show');
 
                 };
