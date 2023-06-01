@@ -81,7 +81,7 @@
                                     <label for="trip_date">Date:</label>
                                     <input required type="date" name="trip_date" id="trip_date" value="{{ $data['trip_date'] ?? '' }}" class="form-control">
                                 </div>
-                                <div class="col-lg-3 my-2">
+                                <!-- <div class="col-lg-3 my-2">
                                     <label for="driver_id">Clients:</label>
                                     <select required name="driver_id" id="driver_id" class="form-select">
                                         <option disabled selected>Select Client</option>
@@ -91,8 +91,7 @@
                                         </option>
                                         @endforeach
                                     </select>
-
-                                </div>
+                                </div> -->
 
                                 <div class="col-lg-3 my-2">
                                     <label for="driver_id">Drivers:</label>
