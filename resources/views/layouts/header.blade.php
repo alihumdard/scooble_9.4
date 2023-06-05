@@ -29,7 +29,8 @@ $user = User::find($user_id);
       height: 52px !important;
       border-radius: 5px !important;
     }
-    li.nav-item:hover{
+
+    li.nav-item:hover {
       background-color: transparent !important;
     }
 
@@ -39,7 +40,7 @@ $user = User::find($user_id);
     /* .nav-item:hover{
       color: black !important;
     } */
-    a.nav-link:hover{
+    a.nav-link:hover {
       color: #fff !important;
     }
   </style>
@@ -47,34 +48,15 @@ $user = User::find($user_id);
 
 <body>
   <div class="container-scroller">
-    <!--  <div class="row p-0 m-0 proBanner" id="proBanner">
-        <div class="col-md-12 p-0 m-0">
-          <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-            <div class="ps-lg-1">
-              <div class="d-flex align-items-center justify-content-between">
-                <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-                <a href="https://www.bootstrapdash.com/product/purple-bootstrap-admin-template/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-              </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <a href="https://www.bootstrapdash.com/product/purple-bootstrap-admin-template/"><i class="mdi mdi-home me-3 text-white"></i></a>
-              <button id="bannerClose" class="btn border-0 p-0">
-                <i class="mdi mdi-close text-white me-0"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> -->
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo" href="{{'/'}}"><img src="assets/images/Logo.png" alt="logo" /></a>
         <a class="navbar-brand brand-logo-mini" href="{{'/'}}"><img src="assets/images/scooble.png" alt="logo" /></a>
       </div>
-      <div class="navbar-menu-wrapper d-flex align-items-stretch">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-          <span class="mdi mdi-menu"></span>
-        </button>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch" style="background-color: #452C88 !important; box-shadow: 0px 2px 8px 2px rgba(69,44,136,0.4);
+-webkit-box-shadow: 0px 2px 8px 2px rgba(69,44,136,0.4);
+-moz-box-shadow: 0px 2px 8px 2px rgba(69,44,136,0.4);">
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item d-none d-lg-block mt-3">
             <form action="/lang_change" method="post">
@@ -85,53 +67,6 @@ $user = User::find($user_id);
               </select>
             </form>
           </li>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-              <i class="fa fa-bell"></i>
-              <span class="count-symbol bg-danger"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-              <h6 class="p-3 mb-0">Notifications</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-success">
-                    <i class="mdi mdi-calendar"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-                  <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-warning">
-                    <i class="mdi mdi-settings"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-                  <p class="text-gray ellipsis mb-0"> Update dashboard </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-info">
-                    <i class="mdi mdi-link-variant"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-                  <p class="text-gray ellipsis mb-0"> New admin wow! </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <h6 class="p-3 mb-0 text-center">See all notifications</h6>
-            </div>
-          </li> -->
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <img src="assets/images/user.png" style="width: 100%; height: 60%;" alt="">
@@ -146,7 +81,7 @@ $user = User::find($user_id);
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h5 class="text-dark ellipsis mb-0"> Notifications </h5>
+                  <h6 class="text-dark ellipsis mb-0"> Notifications </h6>
                 </div>
               </a>
               <div class="dropdown-divider"></div>
@@ -157,7 +92,7 @@ $user = User::find($user_id);
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h5 class="text-dark ellipsis mb-0">Profile Settings</h5>
+                  <h6 class="text-dark ellipsis mb-0">Profile Settings</h6>
                 </div>
               </a>
             </div>
@@ -176,7 +111,7 @@ $user = User::find($user_id);
           <li class="nav-item nav-profile border-bottom border-top">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img style="border-radius: 12px !important;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user_icon.png'}}" alt="profile">
+                <img style="border-radius: 12px !important;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
                 <span class="login-status online"></span>
                 <!--change to offline or busy as needed-->
               </div>
@@ -187,7 +122,6 @@ $user = User::find($user_id);
               <!-- <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
             </a>
           </li>
-          
           @if(view_permission('index'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/'}}">
@@ -303,7 +237,7 @@ $user = User::find($user_id);
               <span class="menu-title ml-2"> @lang('lang.settings') </span>
             </a>
           </li>
-          @endif 
+          @endif
 
           @if(view_permission('create_trip'))
           <!-- <li class="nav-item mb-2 p-0">
@@ -314,10 +248,10 @@ $user = User::find($user_id);
               </svg>
               <span class="menu-title ml-2">Create Trip</span>
             </a>
-          </li> -->
+            </li> -->
           @endif
 
-          @if(view_permission('driver_map'))  
+          @if(view_permission('driver_map'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/driver_map">
               <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -343,6 +277,16 @@ $user = User::find($user_id);
             </a>
           </li>
           @endif
+          <li class="nav-item mb-2 p-0">
+            <a class="nav-link svg ml-5" href="/landing_page">
+              <span class="menu-title ml-2">Landing Page1</span>
+            </a>
+          </li>
+          <li class="nav-item mb-2 p-0">
+            <a class="nav-link svg ml-5" href="/landing_page1">
+              <span class="menu-title ml-2">Landing Page2</span>
+            </a>
+          </li>
 
           @if(view_permission('logout'))
           <li class="nav-item">
@@ -355,6 +299,5 @@ $user = User::find($user_id);
             </a>
           </li>
           @endif
-
         </ul>
       </nav>
