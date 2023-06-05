@@ -63,4 +63,8 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get', 'post'], '/pdf_templates', 'pdf_templates');
 
     Route::match(['get', 'post'], '/change_status', 'change_status');
+
+    Route::match(['get', 'post'], '/landing_page', 'landing_page');
+
+    Route::match(['get', 'post'], '/landing_page1', 'landing_page1');
 });

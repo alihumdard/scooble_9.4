@@ -203,6 +203,16 @@ class UserController extends Controller
         return view('pdf_templates');
     }
 
+    public function landing_page()
+    {
+        return view('landing_page');
+    }
+
+    public function landing_page1()
+    {
+        return view('landing_page1');
+    }
+
 
     public function calender()
     {

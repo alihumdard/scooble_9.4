@@ -139,25 +139,25 @@
                                         </td>\
                                     </tr>';
 
-                    $('#tabe_importaddress').append(newRow);
+                    $('#table_address').append(newRow);
                     $('<option>', {
                         value: addressName,
                         text: addressName
-                    }).appendTo('#start_point');
+                    }).appendTo('#start_address');
 
                     $('<option>', {
                         value: addressName,
                         text: addressName
-                    }).prependTo('#end_point').prop('selected', true);
+                    }).prependTo('#end_address').prop('selected', true);
                     $('#importAddress').val('');
                     // $('#addAddressModal').removeClass('show');
         }
 
         // updation of import address form fields
         function update_import_FormFields() {
-            const rows = $("#tabe_importaddress tbody tr");
-            const startAddressSelect = $("#start_point");
-            const endAddressSelect = $("#end_point");
+            const rows = $("#table_address tbody tr");
+            const startAddressSelect = $("#start_address");
+            const endAddressSelect = $("#end_address");
 
             // Get the first and last row of the table
             const firstRow = rows.first();

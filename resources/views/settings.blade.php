@@ -77,7 +77,7 @@
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
                 <div id="dropzone" class="dropzone">
-                  <img id="profileImage" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user_icon.png'}}" style="width: 150px; height: 150px; border-radius: 50%;" alt="text">
+                  <img id="profileImage" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" style="width: 150px; height: 150px; border-radius: 50%;" alt="text">
                   <div class="file-input-container">
                     <input class="file-input" type="file" name="user_pic" id="fileInput1">
                     <div class="upload-icon" onclick="document.getElementById('fileInput1').click()">
@@ -137,13 +137,16 @@
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4 my-4 text-center">
-                  <button class="btn text-white btn-sm" type="submit" name="update" style="background-color: #E45F00;" onclick="validateForm(event)">@lang('lang.update')</button>
+                  <button class="btn text-white btn-sm" type="submit" name="update" style="background-color: #E45F00; width: 100%;" onclick="validateForm(event)">
+                    <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
+                    <span id="add_btn">@lang('lang.update')</span>
+                  </button>
                 </div>
               </div>
             </div>
           </form>
         </div>
-      </div> 
+      </div>
     </div>
     <!-- content-wrapper ends -->
     <script>
