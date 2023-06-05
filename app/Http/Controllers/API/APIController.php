@@ -443,24 +443,42 @@ class APIController extends Controller
             if ($request->has('address')) {
 
                 $addresses = $request->input('address');
-                
+                $existingAddressIds = [];
                 foreach ($addresses as $addressData) {
+                    if (isset($addressData['id'])) {
+                        $address = Address::find($addressData['id']);
+                        if ($address) {
+                            $address->title = $addressData['title'];
+                            $address->desc = $addressData['desc'];
+                            $address->status = $addressData['status'];
+                            $address->trip_pic = $addressData['trip_pic'];
+                            $address->trip_signature = $addressData['trip_signature'];
+                            $address->trip_note = $addressData['trip_note'];
+                            $address->trip_id = $trip->id;
+                            $address->created_by = Auth::id();
+                            $address->save();
+                            $existingAddressIds[] = $address->id;
 
-                    $address = ($addressData['id']) ? Address::find($addressData['id']) : new Address();
-                    
-                    $isExistingAddress = $address->exists;
-    
-                    $address->title = $addressData['title'];
-                    $address->desc = $addressData['desc'];
-                    $address->status = $addressData['status'];
-                    $address->trip_pic = $addressData['trip_pic'];
-                    $address->trip_signature = $addressData['trip_signature'];
-                    $address->trip_note = $addressData['trip_note'];
-                    $address->trip_id = $trip->id;
-                    $address->created_by = Auth::id();
-                    $address = $address->save();
-
+                        }
+                    } else {
+                        $address = new Address();
+                        $address->title = $addressData['title'];
+                        $address->desc = $addressData['desc'];
+                        $address->status = $addressData['status'];
+                        $address->trip_pic = $addressData['trip_pic'];
+                        $address->trip_signature = $addressData['trip_signature'];
+                        $address->trip_note = $addressData['trip_note'];
+                        $address->trip_id = $trip->id;
+                        $address->created_by = Auth::id();
+                        $address->save();
+        
+                        $existingAddressIds[] = $address->id;
+                    }
                 }
+        
+                Address::where('trip_id', $trip->id)
+                    ->whereNotIn('id', $existingAddressIds)
+                    ->delete();
             }
     
             $message = $isExistingTrip ? 'Trip updated successfully' : 'Trip added successfully';

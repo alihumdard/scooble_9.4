@@ -91,6 +91,7 @@
                                     <label for="trip_date">Date:</label>
                                     <input required type="date" name="trip_date" id="trip_date" value="{{ $data['trip_date'] ?? '' }}" class="form-control">
                                 </div>
+
                                 <div class="col-lg-3 my-2">
                                     <label for="driver_id">Drivers:</label>
                                     <select required name="driver_id" id="driver_id" class="form-select">
@@ -101,8 +102,21 @@
                                         </option>
                                         @endforeach
                                     </select>
-
                                 </div>
+
+                                @if(isset($client_list) && $client_list != '')
+                                    <div class="col-lg-3 my-2">
+                                        <label for="driver_id">Clients :</label>
+                                        <select required name="driver_id" id="driver_id" class="form-select">
+                                            <option disabled selected>@lang('lang.select_driver')</option>
+                                            @foreach($client_list as $value)
+                                            <option value="{{ $value['id'] }}" {{ isset($data['driver_id']) && $data['driver_id'] == $value['id'] ? 'selected' : '' }}>
+                                                {{ $value['name'] }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
 
                                 <div class="col-lg-12 mb-2">
                                     <label for="trip_desc">Trip Description:</label>
@@ -193,7 +207,7 @@
                                                 <input type="checkbox" name="note" {{ $address['trip_note'] ? 'checked' : '' }} id="note">
                                             </td>
                                             <td>
-                                                <span class="badge" style="background-color: {{ $address['status']=='valid' ? '#31A613' : '#F5222D30' }}; color: {{ $address['status'] == 'invaid' ? 'black' : '#F5222D' }}">
+                                                <span class="badge" style="background-color: {{ ($address['status'] == 'Valid') ? '#31A613' : '#F5222D30' }}; color: {{ ($address['status'] == 'Valid') ? 'black' : '#F5222D' }};">
                                                     {{ $address['status'] }}
                                                 </span>
                                             </td>
@@ -230,7 +244,10 @@
 
                                 </table>
                                 <div class="col-lg-4 float-right text-right">
-                                    <button type="submit" id="btn_save_trip" class="btn text-white" style="background-color: rgb(35, 58, 133); width: 100%; border-radius: 8px;">Save Trip</button>
+                                    <button type="submit" id="btn_save_trip" class="btn text-white" style="background-color: rgb(35, 58, 133); width: 100%; border-radius: 8px;">
+                                        <div class="btn_spinner spinner-border spinner-border-sm text-white d-none" ></div>
+                                        <span id="text">Save Trip</span>
+                                     </button>
                                 </div>
                             </div>
                         </form>
@@ -278,7 +295,7 @@
                             </div>
                         </form>
                     </div>
-                    <button type="button" id="btn_address_detail" class="btn btn-primary mr-3 ml-auto px-4 mb-3" style="background-color: #E45F00; border-radius: 5px;">Save</button>
+                    <button type="button" id="btn_address_detail" data-row-id='' class="btn btn-primary mr-3 ml-auto px-4 mb-3" style="background-color: #E45F00; border-radius: 5px;">Save</button>
                 </div>
             </div>
         </div>
@@ -397,72 +414,6 @@
             }
         });
 
-        // $(document).ready(function() {
-        //     $('#fileInput').on('change', function(e) {
-        //         var file = e.target.files[0];
-        //         var extension = file.name.split('.').pop().toLowerCase();
-
-        //         if (extension === 'csv') {
-        //             var reader = new FileReader();
-
-        //             reader.onload = function(e) {
-        //                 // Handle CSV file content here
-        //                 var contents = e.target.result;
-        //                 var rows = contents.split('\n');
-
-        //                 // Clear existing table rows
-        //                 $('#dataTable tbody').empty();
-
-        //                 // Parse and add data rows
-        //                 rows.forEach(function(row) {
-        //                     var cells = row.split(',');
-        //                     var rowData = '<tr>';
-
-        //                     cells.forEach(function(cell) {
-        //                         rowData += '<td>' + cell + '</td>';
-        //                     });
-
-        //                     rowData += '</tr>';
-        //                     $('#dataTable tbody').append(rowData);
-        //                 });
-        //             };
-
-        //             reader.readAsText(file);
-        //         } else if (extension === 'xlsx') {
-        //             var reader = new FileReader();
-
-        //             reader.onload = function(e) {
-        //                 var data = new Uint8Array(e.target.result);
-        //                 var workbook = XLSX.read(data, {
-        //                     type: 'array'
-        //                 });
-        //                 var worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        //                 var jsonData = XLSX.utils.sheet_to_json(worksheet, {
-        //                     header: 1
-        //                 });
-
-        //                 // Clear existing table rows
-        //                 $('#dataTable tbody').empty();
-
-        //                 // Parse and add data rows
-        //                 jsonData.forEach(function(row) {
-        //                     var rowData = '<tr>';
-
-        //                     row.forEach(function(cell) {
-        //                         rowData += '<td>' + cell + '</td>';
-        //                     });
-
-        //                     rowData += '</tr>';
-        //                     $('#dataTable tbody').append(rowData);
-        //                 });
-        //             };
-
-        //             reader.readAsArrayBuffer(file);
-        //         } else {
-        //             alert('Only .csv and .xlsx files are allowed.');
-        //         }
-        //     });
-        // });
     </script>
 
     @endsection
