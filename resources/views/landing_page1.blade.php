@@ -47,16 +47,16 @@
   <!-- ======================Hero-Section-start====================== -->
   <section id="home">
 
-    <div class="container-fluid ">
+    <div class="container">
       <div class="row">
 
         <!-- ================header-text-start================ -->
         <div class="col-md-5 ">
-          <div class=" main-heading d-flex  align-items-center mx-1 h-100">
+          <div class="main-heading d-flex  align-items-center mx-1 h-100">
             <div class="p-5 mb-5">
-              <h1 style="font-weight: 700; color: #452C88; line-height: 3.75rem;">Your <span
+              <h2 style="color: #452C88;">Your <span
                   style="color: #E45F00;">Easiest</span> way <br>
-                to delivery</h1>
+                to delivery</h2>
               <p class="fw-normal fs-6 mt-3" style="  color:#808191; text-align: justify; line-height: 1.5rem; ">
                 Lorem ipsum dolor sit amet, consectetur
                 adipiscing elit, sed do eiusmod tempor
@@ -72,7 +72,7 @@
         <!-- ================header-img-start================== -->
         <div class="col-md-7">
           <div class="img-div  d-flex align-items-center justify-content-center ">
-            <img style="width: 80%;" class=" h-100 mb-5" src="assets/images/header-img.svg" alt="image">
+            <img style="width: 60%;" class=" h-100 mb-5" src="assets/images/header-img.svg" alt="image">
           </div>
         </div>
         <!-- ================header-img-End==================== -->
@@ -86,8 +86,8 @@
   <div class="container-fluid">
     <!-- ===============heading-start=============== -->
     <div>
-      <h1 style="color: #452C88; " class="fw-bold fs-1 text-center">Selected Pakage</h1>
-      <p class="text-center fs-5 fw-medium" style="color:#999999; line-height:2.3125rem;">Delivery offers on-demand
+      <h2 style="color: #452C88; " class="text-center">Selected Pakage</h2>
+      <p class="text-center fw-medium" style="color:#999999;">Delivery offers on-demand
         delivery and courier services for <br>
         business and consumers</p>
     </div>
@@ -95,25 +95,24 @@
 
   <!-- ==================payment-section-start================== -->
   <div class="container ">
-    <div class="mt-5 d-flex align-items-center justify-content-center flex-column h-100 w-100"
-      style="box-shadow: 1px 4px 20px 2px #00000040;   ">
+    <div class="mt-5 d-flex align-items-center justify-content-center flex-column"
+      style="box-shadow: 1px 4px 20px 2px #00000040;">
       <div class="container pt-5 pb-5 pe-4 ps-4">
         <div class="row">
-          <div class="col-md-6 ">
+          <div class="col-md-6 mx-auto" style="width: 40%; height: 100%;">
 
             <!-- ==================plan-1-Start========================= -->
             <div class="container">
               <div class="plan-boxss" style="box-shadow: 5px 4px 15px 0px #00000040;">
-                <div class="p-3">
+                <div class="p-1">
                   <h2 class=" text-center  pt-3 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">Small
                     Company
                   </h2>
-                  <p class="text-center fw-medium mt-2" style="font-size: 14px;">Fast start your business with this</p>
-                  <p class="fw-semibold mt-3 text-center" style="font-size: 15px;">&#8364 20 <span
-                      class="fw-normal">/mon</span></p>
+                  <p class="text-center fw-medium mt-2">Fast start your business with this</p>
+                  <p class="fw-semibold mt-1 text-center">&#8364 20 <span class="fw-normal">/mon</span></p>
                 </div>
                 <!-- ==========list=========== -->
-                <div class="p-3">
+                <div class="px-3">
                   <ul class=" text-decoration-none list-unstyled ">
                     <li style=" font-size: 14px;" class="fw-medium ms-3">Client Panel <img style="width: 14px;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                         class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
@@ -129,50 +128,49 @@
 
                 <!-- ===========border============= -->
                 <div>
-                  <img class="w-100" clas src="assets/images/plan-img.svg" alt="">
+                  <img class="" style="width: 100%;" clas src="assets/images/plan-img.svg" alt="">
                 </div>
                 <!-- ===========border-end============= -->
               </div>
             </div>
             <!-- ==================plan-1-End=========================== -->
           </div>
-          <div class="col-md-5">
-            <div class="mt-1">
-
+          <div class="col-md-6">
+            <div class="">
               <div class="d-flex flex-column align-items-center ">
-                <button style="width:204px ; height:79px ; background: #452C88; box-shadow: 1px 4px 20px 2px #00000040;"
+                <button style="width:150px ; height:50px ; background: #452C88; box-shadow: 1px 4px 20px 2px #00000040;"
                   class="btn text-white">
-                  <img src="assets/images/Pay Vaya.svg" alt="">
+                  <img src="assets/images/Pay Vaya.svg" style="width: 70%; height: 70%;" alt="">
                 </button>
 
                 <button
-                  style="width:204px ; height:79px ; background: #FF9900; box-shadow: 1px 4px 20px 2px #00000040; margin-top: 2.5rem;"
+                  style="width:150px ; height:50px ; background: #FF9900; box-shadow: 1px 4px 20px 2px #00000040; margin-top: 2.5rem;"
                   class="btn text-white">
-                  <img src="assets/images/paypal.svg" alt="">
+                  <img src="assets/images/paypal.svg" style="width: 70%; height: 70%;" alt="">
                 </button>
 
                 <button
-                  style="width:204px ; height:79px ; background: #E6F6FF; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
+                  style="width:150px ; height:50px ; background: #E6F6FF; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
                   class="btn text-white">
-                  <img src="assets/images/gpay.svg" alt="">
+                  <img src="assets/images/gpay.svg" style="width: 70%; height: 70%;" alt="">
                 </button>
 
                 <button
-                  style="width:204px ; height:79px ; background: #FFFFFF; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
+                  style="width:150px ; height:50px ; background: #FFFFFF; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
                   class="btn text-white">
-                  <img src="assets/images/visa.svg" alt="">
+                  <img src="assets/images/visa.svg" style="width: 70%; height: 70%;" alt="">
                 </button>
 
                 <button
-                  style="width:204px ; height:79px ; background: #F8F8F8; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
+                  style="width:150px ; height:50px ; background: #F8F8F8; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
                   class="btn text-white">
-                  <img src="assets/images/mastercard.svg" alt="">
+                  <img src="assets/images/mastercard.svg" style="width: 70%; height: 70%;" alt="">
                 </button>
 
                 <button
-                  style="width:204px ; height:79px ; background:#E45F00; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
+                  style="width:150px ; height:50px ; background:#E45F00; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
                   class="btn text-white">
-                  <img src="assets/images/Bank Transfer.svg" alt="">
+                  <img src="assets/images/Bank Transfer.svg" style="width: 70%; height: 70%;" alt="">
                 </button>
 
               </div>
@@ -189,15 +187,15 @@
   <div><img class="mt-5" src="assets/images/line.svg" alt=""></div>
   <!-- ====================Footer-start=============================== -->
   <footer class="mt-5">
-    <div class="container-fluid mt-5">
+    <div class="container mt-5">
       <div class="row">
         <div class="col-md-6">
           <div class="contaner-fluid">
             <div class="row">
               <div class="col-md-6 mt-3">
                 <div class="ms-5">
-                  <h2 class="fw-bolder" style="color: #452C88; font-size: 30px;">Company</h2>
-                  <p style="color:#ACADAE ; font-size: 20px; line-height: 33px;" class="mt-4">Best delivery services
+                  <h3 class="fw-bolder" style="color: #452C88;">Company</h3>
+                  <p style="color:#ACADAE ; line-height: 33px;" class="mt-4">Best delivery services
                     inGermany. Using bymore
                     than
                     3,000,00people in the world</p>
@@ -205,8 +203,8 @@
               </div>
               <div class="col-md-6 mt-3">
                 <div class="ms-5">
-                  <h2 class="fw-bolder" style="color: #452C88; font-size: 30px;">Quick Links</h2>
-                  <ul class="list-unstyled" style=" font-size: 20px">
+                  <h3 class="fw-bolder" style="color: #452C88;">Quick Links</h3>
+                  <ul class="list-unstyled">
                     <a href="#" class="text-decoration-none">
                       <li style="color:#ACADAE ;" class="mt-4">Pricing</li>
                     </a>
@@ -236,8 +234,8 @@
             <div class="row">
               <div class="col-md-5 mt-3">
                 <div class="ms-4">
-                  <h2 class="fw-bolder" style="color: #452C88; font-size: 30px;">Quick Links</h2>
-                  <ul class="list-unstyled" style=" font-size: 20px">
+                  <h3 class="fw-bolder" style="color: #452C88;">Quick Links</h3>
+                  <ul class="list-unstyled">
                     <a href="#" class="text-decoration-none">
                       <li style="color:#ACADAE ;" class="mt-4">Privacy Policy</li>
                     </a>
