@@ -70,10 +70,14 @@
                 <thead class="text-secondary" style="background-color: #E9EAEF;">
                   <tr style="font-size: small;">
                     <th>#</th>
-                    <th>@lang('lang.drivers')</th>
+                    <th>@lang('lang.drivers') Names</th>
                     <th>@lang('lang.joining_date')</th>
                     <th>@lang('lang.address')</th>
-                    <th>@lang('lang.drivers')client</th>
+
+                    @if($user->role != 'Client')
+                    <th>@lang('lang.drivers') client</th>
+                    @endif
+
                     <th>@lang('lang.status')</th>
                     <th>@lang('lang.actions')</th>
                   </tr>
@@ -85,7 +89,11 @@
                     <td><img src="{{ asset('storage/' . $value['user_pic']); }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
                     <td>{{table_date($value['created_at'])}}</td>
                     <td>{{ $value['address'] }}</td>
+                   
+                    @if($user->role != 'Client')
                     <td><img src="{{(isset($value['client_pic'])) ? asset('storage/' . $value['client_pic']) :  asset('storage/' . $user->user_pic)}}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{(isset($value['client_name'])) ? $value['client_name'] : $user->name}}</td>
+                    @endif
+
                     @if($value['status'] == 1)
                     <td>
                       <button class="btn btn_status">
