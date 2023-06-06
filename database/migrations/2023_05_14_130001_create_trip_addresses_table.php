@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('trip_signature');
             $table->string('trip_note');
             $table->integer('trip_id');
+            $table->integer('order_no');
             $table->string('status')->default('on');
             $table->integer('created_by');
             $table->timestamps();

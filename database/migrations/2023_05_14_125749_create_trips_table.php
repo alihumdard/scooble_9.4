@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('end_point');
             $table->date('trip_date');
             $table->integer('driver_id');
+            $table->integer('client_id');
             $table->string('status')->default('on');
             $table->integer('created_by');
             $table->timestamps();

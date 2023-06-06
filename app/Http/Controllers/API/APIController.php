@@ -435,6 +435,14 @@ class APIController extends Controller
             $trip->end_point = $request->trip_detail['end_point'];
             $trip->trip_date = $request->trip_detail['trip_date'];
             $trip->driver_id = $request->trip_detail['driver_id'];
+
+            if(isset($request->trip_detail['client_id']) && !empty($request->trip_detail['client_id'])){
+                $trip->client_id = $request->trip_detail['client_id'];
+            }
+            else{
+                $trip->client_id =  Auth::id();
+            }
+
             $trip->created_by = Auth::id();
     
             $save = $trip->save();
@@ -444,7 +452,7 @@ class APIController extends Controller
 
                 $addresses = $request->input('address');
                 $existingAddressIds = [];
-                foreach ($addresses as $addressData) {
+                foreach ($addresses as $index => $addressData) {
                     if (isset($addressData['id'])) {
                         $address = Address::find($addressData['id']);
                         if ($address) {
@@ -455,6 +463,7 @@ class APIController extends Controller
                             $address->trip_signature = $addressData['trip_signature'];
                             $address->trip_note = $addressData['trip_note'];
                             $address->trip_id = $trip->id;
+                            $address->order_no = $index +1 ;
                             $address->created_by = Auth::id();
                             $address->save();
                             $existingAddressIds[] = $address->id;
@@ -469,6 +478,7 @@ class APIController extends Controller
                         $address->trip_signature = $addressData['trip_signature'];
                         $address->trip_note = $addressData['trip_note'];
                         $address->trip_id = $trip->id;
+                        $address->order_no = $index +1;
                         $address->created_by = Auth::id();
                         $address->save();
         

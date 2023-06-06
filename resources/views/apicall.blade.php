@@ -399,13 +399,14 @@
         });
 
         // saving trip in through the api...
-        $(document).on('submit', '#saveTrip, #saveTrip_import', function(e) {
-         e.preventDefault();
+        $(document).on('submit', '#saveTrip', function(e) {
+            e.preventDefault();
             var apiname = $(this).attr('action');
             var apiurl = "{{ end_url('') }}" + apiname;
             var bearerToken = "{{session('user')}}";
 
             const rowData = [];
+            const invalidAddresses = [];
 
             const form = $(this);
             const table = form.find('table');
@@ -430,7 +431,13 @@
                         fieldName = 'field' + (index + 1);
                     }
                     const cellValue = $(this).text().trim();
-                    rowValues[fieldName] = cellValue;
+
+                    if (index === 6 && cellValue === 'Invalid') {
+                        const addressTitle = rowValues.title || '';
+                        invalidAddresses.push(addressTitle);
+                    } else {
+                        rowValues[fieldName] = cellValue;
+                    }
                 });
 
                 const checkboxes = row.find("input[type=checkbox]");
@@ -455,6 +462,16 @@
 
                 rowData.push(rowValues);
             });
+
+            if (invalidAddresses.length > 0) {
+                var alertMessage = 'Invalid addresses detected Correct or Remove these :\n';
+                for (var i = 0; i < invalidAddresses.length; i++) {
+                    alertMessage += (i + 1) + '. ' + invalidAddresses[i] + '\n';
+                }
+                alert(alertMessage);
+                return;
+            }
+
 
             const formInputs = {};
             $(this).find('input[name], textarea[name], select[name]').each(function() {

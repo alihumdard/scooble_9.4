@@ -51,7 +51,7 @@ class UserController extends Controller
             $current_date = $now->format('Y-m-d H:i:s');
 
             // User roles: 1 for admin, 2 for client, 3 for driver
-            if($user->role == user_roles('2')){
+            if(isset($user->role) && $user->role == user_roles('2')){
             
                 $announcements = Announcement::where('start_date', '<=', $current_date)
                     ->where('end_date', '>=', $current_date)
@@ -60,7 +60,7 @@ class UserController extends Controller
                 return view('client_dashboard', ['user' => $user, 'announcements' => $announcements]);
             }
 
-            else if($user->role == user_roles('3')){
+            else if(isset($user->role) && $user->role == user_roles('3')){
 
                 return view('driver_dashboard', ['user' => $user]);
             }
@@ -98,7 +98,7 @@ class UserController extends Controller
             return redirect()->back();  
         }
 
-        if($user->role == user_roles('1')){
+        if(isset($user->role) && $user->role == user_roles('1')){
 
             $drivers = User::join('users as c', 'users.client_id', '=', 'c.id')
             ->where('users.role', 'Driver')
@@ -126,22 +126,22 @@ class UserController extends Controller
             return redirect()->back();  
         }
 
-        if($user->role == user_roles('1')){
+        if(isset($user->role) && $user->role == user_roles('1')){
 
-            $trips = Trip::join('users', 'users.id', '=', 'trips.driver_id')
-            ->select('trips.*', 'users.id as driver_id', 'users.name', 'users.user_pic')
+            $trips = Trip::join('users as drivers', 'drivers.id', '=', 'trips.driver_id')
+            ->join('users as clients', 'clients.id', '=', 'trips.client_id')
+            ->select('trips.*', 'drivers.id as driver_id', 'drivers.name as driver_name', 'drivers.user_pic as driver_pic', 'clients.user_pic as client_pic', 'clients.name as client_name')
             ->orderBy('trips.id', 'desc')
             ->get()
             ->toArray();
-           
 
             return view('routes', ['data' => $trips,'user'=>$user]);
         } 
 
-        else if($user->role == user_roles('2')){
+        else if(isset($user->role) && $user->role == user_roles('2')){
             $trips = Trip::join('users', 'users.id', '=', 'trips.driver_id')
-            ->where('trips.created_by', $user->id)
-            ->select('trips.*', 'users.id as driver_id', 'users.name', 'users.user_pic')
+            ->where('trips.client_id', $user->id)
+            ->select('trips.*', 'users.id as driver_id', 'users.name as driver_name', 'users.user_pic  as driver_pic')
             ->orderBy('trips.id', 'desc')
             ->get()
             ->toArray();
@@ -149,9 +149,9 @@ class UserController extends Controller
         }
         
         else {
-            $trips = Trip::join('users', 'users.id', '=', 'trips.driver_id')
+            $trips = Trip::join('users', 'users.id', '=', 'trips.client_id')
             ->where('trips.driver_id', $user->id)
-            ->select('trips.*', 'users.id as driver_id', 'users.name', 'users.user_pic')
+            ->select('trips.*', 'users.id as client_id', 'users.name as client_name', 'users.user_pic  as client_pic')
             ->orderBy('trips.id', 'desc')
             ->get()
             ->toArray();
@@ -171,19 +171,33 @@ class UserController extends Controller
 
         if ($request->has('id')) {
             
-            $trip = Trip::with(['addresses' => function ($query) {
-                $query->orderBy('id', 'ASC');
-            }])->find($request->id);
+            if(isset($user->role) && $user->role == user_roles('1')){   
+                $trip = Trip::with(['addresses' => function ($query) {
+                    $query->orderBy('order_no', 'ASC');
+                }])->find($request->id);
+                
+                $tripData = $trip->toArray();
+                $tripData['addresses'] = $trip->addresses->toArray();
+                
+                $client_list = User::where(['role' => 'Client'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
+                $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
+                return view('create_trip',['data'=>$tripData, 'user'=>$user ,'driver_list'=>$deriver_list, 'client_list'=>$client_list]);
+            }
             
-            $tripData = $trip->toArray();
-            $tripData['addresses'] = $trip->addresses->toArray();
-            
-            $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
-            return view('create_trip',['data'=>$tripData, 'user'=>$user ,'driver_list'=>$deriver_list]);
-            
+            else{
+                $trip = Trip::with(['addresses' => function ($query) {
+                    $query->orderBy('order_no', 'ASC');
+                }])->find($request->id);
+                
+                $tripData = $trip->toArray();
+                $tripData['addresses'] = $trip->addresses->toArray();
+                
+                $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
+                return view('create_trip',['data'=>$tripData, 'user'=>$user ,'driver_list'=>$deriver_list]);
+            }
         }
         else{
-            if($user->role == user_roles('1')){    
+            if(isset($user->role) && $user->role == user_roles('1')){    
                 $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
                 $client_list = User::where(['role' => 'Client'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
                 return view('create_trip',['user'=>$user ,'driver_list'=>$deriver_list , 'client_list'=>$client_list]);

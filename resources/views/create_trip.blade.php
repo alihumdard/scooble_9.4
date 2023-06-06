@@ -106,11 +106,11 @@
 
                                 @if(isset($client_list) && $client_list != '')
                                     <div class="col-lg-3 my-2">
-                                        <label for="driver_id">Clients :</label>
-                                        <select required name="driver_id" id="driver_id" class="form-select">
-                                            <option disabled selected>@lang('lang.select_driver')</option>
+                                        <label for="client_id">Clients :</label>
+                                        <select required name="client_id" id="client_id" class="form-select">
+                                            <option disabled selected>select_client </option>
                                             @foreach($client_list as $value)
-                                            <option value="{{ $value['id'] }}" {{ isset($data['driver_id']) && $data['driver_id'] == $value['id'] ? 'selected' : '' }}>
+                                            <option value="{{ $value['id'] }}" {{ isset($data['client_id']) && $data['client_id'] == $value['id'] ? 'selected' : '' }}>
                                                 {{ $value['name'] }}
                                             </option>
                                             @endforeach
