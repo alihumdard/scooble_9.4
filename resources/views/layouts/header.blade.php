@@ -43,6 +43,14 @@ $user = User::find($user_id);
     a.nav-link:hover {
       color: #fff !important;
     }
+
+    .preview-icon {
+      font-size: 25px;
+      color: white;
+    }
+    .nav-link:hover{
+      color: black !important;
+    }
   </style>
 </head>
 
@@ -67,23 +75,25 @@ $user = User::find($user_id);
               </select>
             </form>
           </li>
+          <li class="nav-item ml-2">
+            <a href="/notifications">
+              <div class="preview-icon">
+                <i class="mdi mdi-bell"></i>
+              </div>
+            </a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-              <img src="assets/images/user.png" style="width: 100%; height: 60%;" alt="">
+              <div class="nav-profile-image">
+                <img style="border-radius: 50% !important; width: 50px;  height: 50px;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
+                <span class="login-status online"></span>
+                <!--change to offline or busy as needed-->
+              </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-              <h6 class="p-3 mb-0">Manage Profile & Notifications</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item" href="/notifications">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-info">
-                    <i class="mdi mdi-bell"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="text-dark ellipsis mb-0"> Notifications </h6>
-                </div>
-              </a>
+              <div class="m-3">
+                <h6> {{$user->name}} <span style="font-size: 13px;">({{$user->role}})</span></h6>
+              </div>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item preview-item" href="/settings">
                 <div class="preview-thumbnail">
@@ -94,6 +104,14 @@ $user = User::find($user_id);
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                   <h6 class="text-dark ellipsis mb-0">Profile Settings</h6>
                 </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="nav-link logout_li" href="/logout">
+                <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.7907 5.75V3.375C13.7907 2.74511 13.5457 2.14102 13.1096 1.69562C12.6734 1.25022 12.0819 1 11.4651 1H3.32558C2.7088 1 2.11728 1.25022 1.68115 1.69562C1.24502 2.14102 1 2.74511 1 3.375V17.625C1 18.2549 1.24502 18.859 1.68115 19.3044C2.11728 19.7498 2.7088 20 3.32558 20H11.4651C12.0819 20 12.6734 19.7498 13.1096 19.3044C13.5457 18.859 13.7907 18.2549 13.7907 17.625V15.25" stroke="#452C88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M4.72095 10.5H21M21 10.5L17.5116 6.9375M21 10.5L17.5116 14.0625" stroke="#452C88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="ml-2" style="font-size: small;"> @lang('lang.logout') </span>
               </a>
             </div>
           </li>
@@ -108,20 +126,6 @@ $user = User::find($user_id);
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item nav-profile border-bottom border-top">
-            <a href="#" class="nav-link">
-              <div class="nav-profile-image">
-                <img style="border-radius: 12px !important;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
-                <span class="login-status online"></span>
-                <!--change to offline or busy as needed-->
-              </div>
-              <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">{{$user->name}}</span>
-                <span class="text-secondary text-small"> {{$user->role}} </span>
-              </div>
-              <!-- <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
-            </a>
-          </li>
           @if(view_permission('index'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="{{'/'}}">

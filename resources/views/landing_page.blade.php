@@ -47,12 +47,12 @@
   <!-- ======================Hero-Section-start====================== -->
   <section id="home">
 
-    <div class="container-fluid ">
+    <div class="container">
       <div class="row">
 
         <!-- ================header-text-start================ -->
         <div class="col-md-5 ">
-          <div class="d-flex  align-items-center mx-1  main-heading">
+          <div class="d-flex align-items-center mx-1  main-heading">
             <div class="p-5 mb-5 ">
               <h1 style="font-weight: 700; color: #452C88; ">Your <span style="color: #E45F00;">Easiest</span> way <span
                   class="main-heading-br"><br></span>
@@ -72,7 +72,7 @@
         <!-- ================header-img-start================== -->
         <div class="col-md-7">
           <div class="img-div  d-flex align-items-center justify-content-center ">
-            <img style="width: 80%;" class=" h-100 mb-5" src="assets/images/header-img.svg" alt="image">
+            <img style="width: 60%;" class=" h-100 mb-5" src="assets/images/header-img.svg" alt="image">
           </div>
         </div>
         <!-- ================header-img-End==================== -->
@@ -86,8 +86,8 @@
     <div class="container-fluid">
       <!-- ===============heading-start=============== -->
       <div>
-        <h1 style="color: #452C88; " class="fw-bold fs-1 text-center">Services</h1>
-        <p class="text-center fs-5 fw-medium" style="color:#999999; line-height:2.3125rem;">Delivery offers on-demand
+        <h2 style="color: #452C88; " class="text-center">Services</h2>
+        <p class="text-center fs-6 fw-medium" style="color:#999999; line-height:2.3125rem;">Delivery offers on-demand
           delivery and courier services <br> for
           business and consumers</p>
       </div>
@@ -98,12 +98,12 @@
           <!-- =================service-box-1-Start================= -->
           <div class="col-md-4">
             <div>
-              <div style="height: 300px;">
+              <div style="height: 200px;">
                 <img class="h-100 w-100 " src="assets/images/services-img-1.svg" alt="image">
               </div>
               <div class="service-box">
-                <h1 style="color:#452C88; font-weight: 700; font-size: 2.1875rem; line-height:2.8125rem;"
-                  class="text-center fs-3">Documents And <br> Packages</h1>
+                <h2 style="color:#452C88;"
+                  class="text-center fs-3">Documents And <br> Packages</h2>
                 <p style="color:#ABABAB;" class="fw-normal text-center mt-3">Lorem ipsum dolor sit amet, consectetur
                   adipiscing elit,
                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim </p>
@@ -115,11 +115,11 @@
           <!-- =================service-box-2-Start================= -->
           <div class="col-md-4">
             <div>
-              <div style="height: 300px;">
+              <div style="height: 200px;">
                 <img class="h-100 w-100" src="assets/images/services-img-2.svg" alt="image">
               </div>
               <div class="service-box">
-                <h1 style="color:#452C88; font-weight: 700; font-size: 2.1875rem; line-height:2.8125rem;"
+                <h1 style="color:#452C88;"
                   class="text-center fs-3">Heavy And Bulky <br> Goods</h1>
                 <p style="color:#ABABAB;" class="fw-normal text-center mt-3">Lorem ipsum dolor sit amet, consectetur
                   adipiscing elit,
@@ -131,11 +131,11 @@
           <!-- =================service-box-3-Start================= -->
           <div class="col-md-4">
             <div>
-              <div style="height: 300px;">
+              <div style="height: 200px;">
                 <img class="h-100 w-100" src="assets/images/services-img-3.svg" alt="image">
               </div>
               <div class="service-box">
-                <h1 style="color:#452C88; font-weight: 700; font-size: 2.1875rem; line-height:2.8125rem;"
+                <h1 style="color:#452C88;"
                   class="text-center fs-3">Warehouse/ <br> Fulfillment</h1>
                 <p style="color:#ABABAB;" class="fw-normal text-center mt-3">Lorem ipsum dolor sit amet, consectetur
                   adipiscing elit,
@@ -158,11 +158,11 @@
     <div class="container-fluid ">
       <!-- ==================heading-start======================= -->
       <div>
-        <h1 class="text-center fw-semibold" style="line-height: 45px; font-size: 30px;">Choose the plan that’s right for
+        <h2 class="text-center fw-semibold" style="">Choose the plan that’s right for
           <br>
           your business
-        </h1>
-        <p class="text-center mt-4"><span class="fw-semibold" style="font-size: 17px;">Start with free plan</span> to
+        </h2>
+        <p class="text-center mt-4"><span class="fw-semibold">Start with free plan</span> to
           try our platform for anunlimited period of time.
           <a href="#" style="text-decoration: none; color: #4361EE;">Get Started</a>
         </p>
@@ -173,8 +173,8 @@
         <div class="row g-lg-5">
           <!-- ==================plan-1-Start========================= -->
           <div class="col-md-4 mt-5">
-            <div class="plan-box  " style="box-shadow: 5px 4px 15px 0px #00000040;">
-              <div class="p-3">
+            <div class="plan-box" style="box-shadow: 5px 4px 15px 0px #00000040;">
+              <div class="py-1 px-3">
                 <h2 class=" text-center  pt-2 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">Start up
                 </h2>
                 <p class="text-center fw-medium mt-1" style="font-size: 14px;">Fast start your business with this</p>
@@ -182,7 +182,7 @@
                     class="fw-normal">/mon</span></p>
               </div>
               <!-- ==========list=========== -->
-              <div class="p-2">
+              <div class="py-1 px-3">
                 <ul class=" text-decoration-none list-unstyled ">
                   <li  style=" font-size: 14px;" class="fw-medium ms-3">Client Panel <img style="width: 14px;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                       class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
@@ -197,8 +197,8 @@
               <!-- ==========list-end=========== -->
               <div class="buttons justify-content-center h-100 w-100 d-flex mt-5">
                 <a href="billing.html " style="position: absolute; ">
-                  <button class="btn fw-semibold  " 
-                    style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; height: 50px; width:150px; font-size:18px; color:black; background: white; " >
+                  <button class="btn btn-md fw-semibold  " 
+                    style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; color:black; background: white; " >
                     SIGN UP NOW</button>
                 </a>
               </div>
@@ -215,7 +215,7 @@
           <!-- ==================plan-2-Start========================= -->
           <div class="col-md-4 mt-5">
             <div class="plan-box  " style="box-shadow: 5px 4px 15px 0px #00000040;">
-              <div class="p-2">
+              <div class="py-1 px-3">
                 <h2 class=" text-center  pt-2 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">Small Company
                 </h2>
                 <p class="text-center fw-medium mt-2" style="font-size: 14px;">Fast start your business with this</p>
@@ -223,7 +223,7 @@
                     class="fw-normal">/mon</span></p>
               </div>
               <!-- ==========list=========== -->
-              <div class="p-3">
+              <div class="py-1 px-3">
                 <ul class=" text-decoration-none list-unstyled ">
                   <li style=" font-size: 14px;" class="fw-medium ms-3">Client Panel <img style="width: 14px;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                       class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
@@ -238,8 +238,8 @@
               <!-- ==========list-end=========== -->
               <div class="buttons justify-content-center h-100 w-100 d-flex mt-5">
                 <a href="billing.html" style="position:absolute;">
-                  <button class="btn fw-semibold text-white  "
-                    style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; height: 50px; width:150px; font-size:18px; background-color: #E45F00;">
+                  <button class="btn btn-md fw-semibold text-white  "
+                    style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; background-color: #E45F00;">
                     SIGN UP NOW</button>
                 </a>
               </div>
@@ -255,7 +255,7 @@
           <!-- ==================plan-3-Start========================= -->
           <div class="col-md-4 mt-5">
             <div class="plan-box  " style="box-shadow: 5px 4px 15px 0px #00000040;">
-              <div class="p-2">
+              <div class="py-1 px-3">
                 <h2 class=" text-center  pt-2 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">Advance
                 </h2>
                 <p class="text-center fw-medium mt-2" style="font-size: 14px;">Fast start your business with this</p>
@@ -263,7 +263,7 @@
                     class="fw-normal">/mon</span></p>
               </div>
               <!-- ==========list=========== -->
-              <div class="p-3">
+              <div class="py-1 px-3">
                 <ul class=" text-decoration-none list-unstyled ">
                   <li style=" font-size: 14px;" class="fw-medium ms-3">Client Panel <img style="width: 14px;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                       class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
@@ -278,8 +278,8 @@
               <!-- ==========list-end=========== -->
               <div class="buttons justify-content-center h-100 w-100 d-flex mt-5">
                 <a href="billing.html"  style="position: absolute;">
-                  <button class="btn fw-semibold text-white  "
-                    style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; height: 50px; width:150px; font-size:18px; background-color:#452C88;">
+                  <button class="btn btn-md fw-semibold text-white  "
+                    style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; background-color:#452C88;">
                     SIGN UP NOW</button>
                 </a>
               </div>
@@ -301,15 +301,15 @@
   <div class="mt-5"><img class="mt-5" src="assets/images/line.svg" alt=""></div>
   <!-- ====================Footer-start=============================== -->
   <footer class="mt-5">
-    <div class="container-fluid mt-5">
+    <div class="container mt-5">
       <div class="row">
         <div class="col-md-6">
           <div class="contaner-fluid">
             <div class="row">
               <div class="col-md-6 mt-3">
                 <div class="ms-5">
-                  <h2 class="fw-bolder" style="color: #452C88; font-size: 30px;">Company</h2>
-                  <p style="color:#ACADAE ; font-size: 20px; line-height: 33px;" class="mt-4">Best delivery services
+                  <h3 class="fw-bolder" style="color: #452C88;">Company</h3>
+                  <p style="color:#ACADAE ; line-height: 33px;" class="mt-4">Best delivery services
                     inGermany. Using bymore
                     than
                     3,000,00people in the world</p>
@@ -317,8 +317,8 @@
               </div>
               <div class="col-md-6 mt-3">
                 <div class="ms-5">
-                  <h2 class="fw-bolder" style="color: #452C88; font-size: 30px;">Quick Links</h2>
-                  <ul class="list-unstyled" style=" font-size: 20px">
+                  <h3 class="fw-bolder" style="color: #452C88;">Quick Links</h3>
+                  <ul class="list-unstyled">
                     <a href="#" class="text-decoration-none">
                       <li style="color:#ACADAE ;" class="mt-4">Pricing</li>
                     </a>
@@ -348,8 +348,8 @@
             <div class="row">
               <div class="col-md-5 mt-3">
                 <div class="ms-4">
-                  <h2 class="fw-bolder" style="color: #452C88; font-size: 30px;">Quick Links</h2>
-                  <ul class="list-unstyled" style=" font-size: 20px">
+                  <h3 class="fw-bolder" style="color: #452C88;">Quick Links</h3>
+                  <ul class="list-unstyled">
                     <a href="#" class="text-decoration-none">
                       <li style="color:#ACADAE ;" class="mt-4">Privacy Policy</li>
                     </a>
