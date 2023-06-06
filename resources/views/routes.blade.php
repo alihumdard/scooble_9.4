@@ -23,9 +23,11 @@
             <div class="col-lg-8">
               <div class="row mx-1">
                 <div class="col-lg-4 px-1" style="text-align: right;">
+                @if($user->role != 'Driver')
                   <a href="/create_trip">
                     <button class="btn btn-md text-white" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.create_trip')</button>
                   </a>
+                @endif
                 </div>
                 <div class="col-lg-4 px-1">
                   <div class="input-group">
@@ -73,8 +75,15 @@
                     <th>@lang('lang.trip_date')</th>
                     <th>@lang('lang.start_point')</th>
                     <th>@lang('lang.end_point')</th>
+                    
+                    @if($user->role != 'Client')
                     <th>Client Name</th>
+                    @endif
+                    
+                    @if($user->role != 'Driver')
                     <th>Driver Name</th>
+                    @endif
+
                     <th>@lang('lang.status')</th>
                     <th>@lang('lang.actions')</th>
                   </tr>
@@ -86,8 +95,15 @@
                     <td>{{table_date($value['created_at'])}}</td>
                     <td>{{ $value['start_point'] }}</td>
                     <td>{{ $value['end_point'] }}</td>
-                    <td></td>
-                    <td><img src="{{ asset('storage/' . $value['user_pic']) }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
+
+                    @if($user->role != 'Client')
+                    <td> <img src="{{ asset('storage/' . $value['client_pic']) }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['client_name'] }} </td>
+                    @endif
+
+                    @if($user->role != 'Driver')
+                    <td><img src="{{ asset('storage/' . $value['driver_pic']) }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['driver_name'] }} </td>
+                    @endif
+
                     @if($value['status'] == 'on')
                     <td>
                       <button class="btn btn_status">
@@ -102,6 +118,8 @@
                     </td>
                     @endif
                     <td style="width: 100%;" class="d-flex">
+
+                    @if($user->role != 'Driver')
                       <form method="POST" action="/create_trip" class="mb-0">
                         @csrf
                         <input type="hidden" name="id" value="{{$value['id']}}">
@@ -118,6 +136,7 @@
                           <path fill-rule="evenodd" clip-rule="evenodd" d="M23.4909 13.743C23.7359 13.743 23.94 13.9465 23.94 14.2054V14.4448C23.94 14.6975 23.7359 14.9072 23.4909 14.9072H13.0497C12.804 14.9072 12.6 14.6975 12.6 14.4448V14.2054C12.6 13.9465 12.804 13.743 13.0497 13.743H14.8866C15.2597 13.743 15.5845 13.4778 15.6684 13.1036L15.7646 12.6739C15.9141 12.0887 16.4061 11.7 16.9692 11.7H19.5708C20.1277 11.7 20.6252 12.0887 20.7692 12.6431L20.8721 13.1029C20.9555 13.4778 21.2802 13.743 21.654 13.743H23.4909ZM22.5577 22.4943C22.7495 20.707 23.0852 16.4609 23.0852 16.418C23.0975 16.2883 23.0552 16.1654 22.9713 16.0665C22.8812 15.9739 22.7672 15.9191 22.6416 15.9191H13.9032C13.777 15.9191 13.6569 15.9739 13.5735 16.0665C13.489 16.1654 13.4473 16.2883 13.4534 16.418C13.4546 16.4259 13.4666 16.5755 13.4868 16.8255C13.5762 17.9364 13.8255 21.0303 13.9865 22.4943C14.1005 23.5729 14.8081 24.2507 15.8332 24.2753C16.6242 24.2936 17.4391 24.2999 18.2724 24.2999C19.0573 24.2999 19.8544 24.2936 20.6699 24.2753C21.7305 24.257 22.4376 23.5911 22.5577 22.4943Z" fill="#D11A2A" />
                         </svg>
                       </button>
+                      @endif
                       <button class="btn p-0">
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <circle opacity="0.1" cx="18" cy="18" r="18" fill="#452C88" />
