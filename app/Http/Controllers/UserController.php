@@ -208,9 +208,31 @@ class UserController extends Controller
         }
     }
 
-    public function driver_map()
+    public function driver_map(Request $request)
     {
-        return view('driver_map');
+        $user = auth()->user();
+        $page_name = 'driver_map';
+
+        if(!view_permission($page_name)){
+            return redirect()->back();  
+        }
+
+        if ($request->has('id')) {
+            
+            if(isset($user->role) && $user->role == user_roles('3')){   
+                $trip = Trip::with(['addresses' => function ($query) {
+                    $query->orderBy('order_no', 'ASC');
+                }])->find($request->id);
+                
+                $tripData = $trip->toArray();
+                $tripData['addresses'] = $trip->addresses->toArray();
+                return view('driver_map',['data'=>$tripData, 'user'=>$user]);
+            }
+        }    
+        else{
+            return redirect()->back();
+         }
+        
     }
     
     public function announcements_alerts()
@@ -358,7 +380,7 @@ class UserController extends Controller
         session(['user' => $data['token']]);
         }
 
-        return json_decode($login->getContent());
+        echo($login->getContent());
     }
 
     public function logout(REQUEST $request)
