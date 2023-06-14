@@ -105,22 +105,22 @@
             <div class="container">
               <div class="plan-boxss" style="box-shadow: 5px 4px 15px 0px #00000040;">
                 <div class="p-1">
-                  <h2 class=" text-center  pt-3 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">Small
-                    Company
+                  <h2 class=" text-center  pt-3 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">
+                  {{$data->title}}
                   </h2>
-                  <p class="text-center fw-medium mt-2">Fast start your business with this</p>
-                  <p class="fw-semibold mt-1 text-center">&#8364 20 <span class="fw-normal">/mon</span></p>
+                  <p class="text-center fw-medium mt-2">{{$data->desc}}</p>
+                  <p class="fw-semibold mt-1 text-center">&#8364 {{$data->price}} <span class="fw-normal">/mon</span></p>
                 </div>
                 <!-- ==========list=========== -->
                 <div class="px-3">
                   <ul class=" text-decoration-none list-unstyled ">
                     <li style=" font-size: 14px;" class="fw-medium ms-3">Client Panel <img style="width: 14px;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                         class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                    <li style=" font-size: 14px; margin-top: 2rem;" class="fw-medium ms-3 ">Single User <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
+                    <li style=" font-size: 14px; margin-top: 2rem;" class="fw-medium ms-3 ">{{$data->users}} Users <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                         style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                    <li style=" font-size: 14px; margin-top: 2rem;" class="fw-medium ms-3 ">5 Drivers <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
+                    <li style=" font-size: 14px; margin-top: 2rem;" class="fw-medium ms-3 ">{{$data->drivers}} Drivers <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                         style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                    <li style=" font-size: 14px; margin-top: 2rem;" class="fw-medium ms-3 ">50 Google Map API Call <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
+                    <li style=" font-size: 14px; margin-top: 2rem;" class="fw-medium ms-3 ">{{$data->map_api_call}} Google Map API Call <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                         style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
                   </ul>
                 </div>
@@ -143,11 +143,30 @@
                   <img src="assets/images/Pay Vaya.svg" style="width: 70%; height: 70%;" alt="">
                 </button>
 
-                <button
-                  style="width:150px ; height:50px ; background: #FF9900; box-shadow: 1px 4px 20px 2px #00000040; margin-top: 2.5rem;"
-                  class="btn text-white">
-                  <img src="assets/images/paypal.svg" style="width: 70%; height: 70%;" alt="">
-                </button>
+                <form id="paypalForm" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <!-- Add your PayPal form input fields here -->
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="costumer1.cadcammasters2021@gmail.com">
+                <input type="hidden" name="item_name" value="Subscription">
+                <input type="hidden" name="amount" value="{{$data->price}}">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="sandbox" value="1">
+                             
+                  <input type="hidden" name="custom" value="123456789">
+                  <input type="hidden" name="notify_url" value="{{ route('paypal.ipn') }}">
+                  <input type="hidden" name="no_note" value="1">
+                  <input type="hidden" name="no_shipping" value="1">
+                  <input type="hidden" name="rm" value="2">
+                  <input type="hidden" name="invoice" value="SUB-123456">
+                  <input type="hidden" name="cancel_return" value="{{ route('subscription.cancel') }}">
+                  <input type="hidden" name="return" value="{{ route('subscription.success') }}">
+                  <input type="hidden" name="lc" value="en_PK">
+                  <input type="hidden" name="address_country" value="PK">
+              </form>
+
+              <button onclick="submitPaypalForm()" style="width:150px; height:50px; background: #FF9900; box-shadow: 1px 4px 20px 2px #00000040; margin-top: 2.5rem;" class="btn text-white">
+                <img src="assets/images/paypal.svg" style="width: 70%; height: 70%;" alt="">
+              </button>
 
                 <button
                   style="width:150px ; height:50px ; background: #E6F6FF; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
@@ -268,5 +287,10 @@
 <script>
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+<script>
+  function submitPaypalForm() {
+    document.getElementById('paypalForm').submit();
+  }
 </script>
 </html>

@@ -171,55 +171,16 @@
 
       <div class="container mt-5">
         <div class="row g-lg-5">
-          <!-- ==================plan-1-Start========================= -->
-          <div class="col-md-4 mt-5">
-            <div class="plan-box" style="box-shadow: 5px 4px 15px 0px #00000040;">
-              <div class="py-1 px-3">
-                <h2 class=" text-center  pt-2 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">Start up
-                </h2>
-                <p class="text-center fw-medium mt-1" style="font-size: 14px;">Fast start your business with this</p>
-                <p class="fw-semibold mt-3 text-center" style="font-size: 15px;">&#8364 10 <span
-                    class="fw-normal">/mon</span></p>
-              </div>
-              <!-- ==========list=========== -->
-              <div class="py-1 px-3">
-                <ul class=" text-decoration-none list-unstyled ">
-                  <li  style=" font-size: 14px;" class="fw-medium ms-3">Client Panel <img style="width: 14px;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
-                      class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">Single User <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
-                      style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">5 Drivers <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
-                      style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">50 Google Map API Call <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
-                      style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                </ul>
-              </div>
-              <!-- ==========list-end=========== -->
-              <div class="buttons justify-content-center h-100 w-100 d-flex mt-5">
-                <a href="billing.html " style="position: absolute; ">
-                  <button class="btn btn-md fw-semibold  " 
-                    style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; color:black; background: white; " >
-                    SIGN UP NOW</button>
-                </a>
-              </div>
-              <!-- ===========border============= -->
-              <div>
-                <img class="w-100" clas src="assets/images/plan-img.svg" alt="">
-              </div>
-              <!-- ===========border-end============= -->
-            </div>
-          </div>
-          <!-- ==================plan-1-End=========================== -->
-
 
           <!-- ==================plan-2-Start========================= -->
+          @foreach($data as $key => $value)
           <div class="col-md-4 mt-5">
             <div class="plan-box  " style="box-shadow: 5px 4px 15px 0px #00000040;">
               <div class="py-1 px-3">
-                <h2 class=" text-center  pt-2 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">Small Company
+                <h2 class=" text-center  pt-2 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">{{$value['title']}}
                 </h2>
-                <p class="text-center fw-medium mt-2" style="font-size: 14px;">Fast start your business with this</p>
-                <p class="fw-semibold mt-3 text-center" style="font-size: 15px;">&#8364 20 <span
+                <p class="text-center fw-medium mt-2" style="font-size: 14px;">{{$value['desc']}}</p>
+                <p class="fw-semibold mt-3 text-center" style="font-size: 15px;">&#8364 {{$value['price']}} <span
                     class="fw-normal">/mon</span></p>
               </div>
               <!-- ==========list=========== -->
@@ -227,21 +188,23 @@
                 <ul class=" text-decoration-none list-unstyled ">
                   <li style=" font-size: 14px;" class="fw-medium ms-3">Client Panel <img style="width: 14px;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                       class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">Single User <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
+                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">  {{$value['users']}} Users <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                       style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">5 Drivers <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
+                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">{{$value['drivers']}} Drivers <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                       style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">50 Google Map API Call <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
+                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">{{$value['map_api_call']}} Google Map API Call <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
                       style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
                 </ul>
               </div>
               <!-- ==========list-end=========== -->
               <div class="buttons justify-content-center h-100 w-100 d-flex mt-5">
-                <a href="billing.html" style="position:absolute;">
+              <form method="POST" action="/home" >
+                      @csrf
+                  <input type="hidden" name="id" value="{{$value['id']}}">
                   <button class="btn btn-md fw-semibold text-white  "
                     style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; background-color: #E45F00;">
-                    SIGN UP NOW</button>
-                </a>
+                    SUBSCRIBE NOW</button>
+                </form>
               </div>
               <!-- ===========border============= -->
               <div>
@@ -250,48 +213,8 @@
               <!-- ===========border-end============= -->
             </div>
           </div>
-          <!-- ==================plan-2-End=========================== -->
-
-          <!-- ==================plan-3-Start========================= -->
-          <div class="col-md-4 mt-5">
-            <div class="plan-box  " style="box-shadow: 5px 4px 15px 0px #00000040;">
-              <div class="py-1 px-3">
-                <h2 class=" text-center  pt-2 " style="color: #E45F00; font-weight: 700; font-size: 22px;  ">Advance
-                </h2>
-                <p class="text-center fw-medium mt-2" style="font-size: 14px;">Fast start your business with this</p>
-                <p class="fw-semibold mt-3 text-center" style="font-size: 15px;">&#8364 50 <span
-                    class="fw-normal">/mon</span></p>
-              </div>
-              <!-- ==========list=========== -->
-              <div class="py-1 px-3">
-                <ul class=" text-decoration-none list-unstyled ">
-                  <li style=" font-size: 14px;" class="fw-medium ms-3">Client Panel <img style="width: 14px;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
-                      class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">Single User <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
-                      style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">5 Drivers <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
-                      style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                  <li style=" font-size: 14px; margin-top: 1.5rem;" class="fw-medium ms-3 ">50 Google Map API Call <img data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="lorem ipsum the true inpsum"  
-                      style="width: 14px;" class="float-end pt-1 me-3" src="assets/images/plan-icon.svg" alt=""></li>
-                </ul>
-              </div>
-              <!-- ==========list-end=========== -->
-              <div class="buttons justify-content-center h-100 w-100 d-flex mt-5">
-                <a href="billing.html"  style="position: absolute;">
-                  <button class="btn btn-md fw-semibold text-white  "
-                    style="box-shadow: 4px 2px 7px 0px #00000033;box-shadow: -3px -1px 7px 0px #00000040; background-color:#452C88;">
-                    SIGN UP NOW</button>
-                </a>
-              </div>
-              <!-- ===========border============= -->
-              <div>
-                <img class="w-100" clas src="assets/images/plan-img.svg" alt="">
-              </div>
-              <!-- ===========border-end============= -->
-            </div>
-          </div>
-          <!-- ==================plan-3-End=========================== -->
-
+          @endforeach
+    
         </div>
       </div>
 

@@ -73,6 +73,8 @@ function view_permission($page_name) {
                 case 'notifications':    
                 case 'create_trip': 
                 case 'logout': 
+                case 'home': 
+                case 'subscription': 
 
                     return true;
                 default:

@@ -15,13 +15,15 @@ class CreatePackagesTable extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->string('package_title');
-            $table->text('package_desc');
-            $table->decimal('package_price', 8, 2);
-            $table->unsignedBigInteger('users');
-            $table->unsignedBigInteger('drivers');
+            $table->string('title');
+            $table->text('desc');
+            $table->string('price');
+            $table->string('users');
+            $table->string('drivers');
             $table->string('map_api_call');
             $table->string('type');
+            $table->string('status')->default('on');
+            $table->integer('created_by');     
             $table->timestamps();
         });
     }

@@ -377,9 +377,12 @@
                     $('#text').addClass('d-none');
                 },
                 success: function(response) {
+                    
+                    var responseArray = JSON.parse(response);
+                    console.log(responseArray);
                     $('#text').removeClass('d-none');
                     $('#spinner').addClass('d-none');
-                    if (response.status === 'success') {
+                    if (responseArray.status === 'success') {
                         showAlert("Success", "Login Successfully", "success");
                         setInterval(function() {
                             window.location.href = '/';
