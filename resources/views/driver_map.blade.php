@@ -4,11 +4,26 @@
 
 <style>
     .draggable {
-        background-color: #f1f1f1;
-        padding: 10px;
-        margin-bottom: 10px;
         cursor: grab;
     }
+
+    .draggable.dragging {
+        opacity: 0.5;
+    }
+
+    .droppable {
+        background-color: lightgray;
+    }
+
+    .droppable:hover {
+        background-color: gray;
+    }
+
+
+    #map {
+            height: 400px;
+            width: 100%;
+        }
 </style>
 
 <!-- partial -->
@@ -25,7 +40,7 @@
                 </h3>
                 <div class="row my-3">
                     <div class="col-lg-3">
-                        <span style="color: #ACADAE;">Today: </span> <span>23 December, 2023</span>
+                        <span style="color: #ACADAE;">Today: </span> <span> {{ date('d F, Y') }}</span>
                     </div>
                     <div class="col-lg-9 text-right">
                         <button class="btn text-white btn-sm" style="background-color: #0F771A; border-radius: 6px;">Start Trip</button>
@@ -44,105 +59,39 @@
                             </svg>
                             <span style="font-size: larger;">Trip Title</span>
                         </div>
-                        <div style="overflow-y: scroll; height: 40%;">
-                            <div class="px-2">
-                                <div class="card bg-white mb-2 draggable" style="border-radius: 20px; border: none; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);">
-                                    <div class="card-body p-0 py-2 px-2">
-                                        <div class="d-flex justify-content-between border-bottom">
-                                            <p style="color: #ACADAE; font-size: smaller;">23 December, 2023</p>
-                                            <svg width="15" height="15" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8 4C8 6.20915 6.20915 8 4 8C1.79085 8 0 6.20915 0 4C0 1.79085 1.79085 0 4 0C6.20915 0 8 1.79085 8 4ZM3.53732 6.11797L6.50506 3.15023C6.60584 3.04945 6.60584 2.88605 6.50506 2.78527L6.14011 2.42032C6.03934 2.31953 5.87594 2.31953 5.77515 2.42032L3.35484 4.84061L2.22485 3.71063C2.12408 3.60985 1.96068 3.60985 1.85989 3.71063L1.49494 4.07558C1.39416 4.17635 1.39416 4.33976 1.49494 4.44053L3.17235 6.11795C3.27315 6.21874 3.43653 6.21874 3.53732 6.11797Z" fill="#0F771A" />
-                                            </svg>
-                                            <p style="color: #0F771A;">Completed</p>
-                                        </div>
-                                        <div class="px-2 py-2">
-                                            <span>Waypoint Address</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bg-white mb-2 draggable" style="border-radius: 20px; border: none; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);">
-                                    <div class="card-body p-0 py-2 px-2">
-                                        <div class="d-flex justify-content-between border-bottom">
-                                            <p style="color: #ACADAE; font-size: smaller;">23 December, 2023</p>
-                                            <svg width="15" height="15" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx="4" cy="4" r="4" fill="#233A85" />
-                                            </svg>
-                                            <p style="color: #233A85;">Ongoing</p>
-                                            <svg width="15" height="15" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.14076 4.76329C2.28309 -0.258295 9.72273 -0.252496 10.8593 4.76909C11.5261 7.71478 9.69373 10.2082 8.08752 11.7506C6.922 12.8755 5.07805 12.8755 3.9067 11.7506C2.30628 10.2082 0.473925 7.70898 1.14076 4.76329Z" stroke="#ACADAE" stroke-opacity="0.3" />
-                                                <path d="M7.16002 7.35533L4.86377 5.05908" stroke="#ACADAE" stroke-opacity="0.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.13658 5.08228L4.84033 7.3785" stroke="#ACADAE" stroke-opacity="0.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <div class="px-2 py-2">
-                                            <span>Waypoint Address</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bg-white mb-2 draggable" style="border-radius: 20px; border: none; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);">
-                                    <div class="card-body p-0 py-2 px-2">
-                                        <div class="d-flex justify-content-between border-bottom">
-                                            <p style="color: #ACADAE; font-size: smaller;">23 December, 2023</p>
-                                            <svg width="15" height="15" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx="4" cy="4" r="3.5" stroke="#ACADAE" />
-                                            </svg>
-                                            <p style="color: #ACADAE;">Skipped</p>
-                                            <svg width="15" height="15" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.14076 4.76329C2.28309 -0.258295 9.72273 -0.252496 10.8593 4.76909C11.5261 7.71478 9.69373 10.2082 8.08752 11.7506C6.922 12.8755 5.07805 12.8755 3.9067 11.7506C2.30628 10.2082 0.473925 7.70898 1.14076 4.76329Z" stroke="#ACADAE" stroke-opacity="0.3" />
-                                                <path d="M7.16002 7.35533L4.86377 5.05908" stroke="#ACADAE" stroke-opacity="0.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.13658 5.08228L4.84033 7.3785" stroke="#ACADAE" stroke-opacity="0.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <div class="px-2 py-2">
-                                            <span>Waypoint Address</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bg-white mb-2 draggable" style="border-radius: 20px; border: none; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);">
-                                    <div class="card-body p-0 py-2 px-2">
-                                        <div class="d-flex justify-content-between border-bottom">
-                                            <p style="color: #ACADAE; font-size: smaller;">23 December, 2023</p>
-                                            <svg width="15" height="15" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx="4" cy="4" r="3.5" stroke="#ACADAE" />
-                                            </svg>
-                                            <p style="color: #ACADAE;">Skipped</p>
-                                            <svg width="15" height="15" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.14076 4.76329C2.28309 -0.258295 9.72273 -0.252496 10.8593 4.76909C11.5261 7.71478 9.69373 10.2082 8.08752 11.7506C6.922 12.8755 5.07805 12.8755 3.9067 11.7506C2.30628 10.2082 0.473925 7.70898 1.14076 4.76329Z" stroke="#ACADAE" stroke-opacity="0.3" />
-                                                <path d="M7.16002 7.35533L4.86377 5.05908" stroke="#ACADAE" stroke-opacity="0.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.13658 5.08228L4.84033 7.3785" stroke="#ACADAE" stroke-opacity="0.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <div class="px-2 py-2">
-                                            <span>Waypoint Address</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bg-white mb-2 draggable" style="border-radius: 20px; border: none; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
--moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);">
-                                    <div class="card-body p-0 py-2 px-2">
-                                        <div class="d-flex justify-content-between border-bottom">
-                                            <p style="color: #ACADAE; font-size: smaller;">23 December, 2023</p>
-                                            <svg width="15" height="15" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8 4C8 6.20915 6.20915 8 4 8C1.79085 8 0 6.20915 0 4C0 1.79085 1.79085 0 4 0C6.20915 0 8 1.79085 8 4ZM3.53732 6.11797L6.50506 3.15023C6.60584 3.04945 6.60584 2.88605 6.50506 2.78527L6.14011 2.42032C6.03934 2.31953 5.87594 2.31953 5.77515 2.42032L3.35484 4.84061L2.22485 3.71063C2.12408 3.60985 1.96068 3.60985 1.85989 3.71063L1.49494 4.07558C1.39416 4.17635 1.39416 4.33976 1.49494 4.44053L3.17235 6.11795C3.27315 6.21874 3.43653 6.21874 3.53732 6.11797Z" fill="#0F771A" />
-                                            </svg>
-                                            <p style="color: #0F771A;">Completed</p>
-                                        </div>
-                                        <div class="px-2 py-2">
-                                            <span>Waypoint Address</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        <div style="overflow-y: scroll; height: 400px; position: relative">
+    <div class="px-2" id="address-container">
+        @isset($data['addresses'])
+        @foreach($data['addresses'] as $address)
+        <div class="d-none">{{$address['id']}}</div>
+        <div class="d-none">{{$address['desc']}}</div>
+        <div class="d-none">{{$address['status']}}</div>
+
+        <div class="card bg-white mb-2 draggable" style="border-radius: 20px; border: none; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);" draggable="true">
+            <div class="card-body p-0 py-2 px-2 margin:0; top:0">
+                <div class="d-flex justify-content-between border-bottom">
+                    <p style="color: #ACADAE; font-size: smaller;">23 December, 2023</p>
+                    <svg width="15" height="15" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="4" cy="4" r="4" fill="#233A85" />
+                    </svg>
+                    <p style="color: #233A85;">Ongoing</p>
+                    <svg width="15" height="15" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.14076 4.76329C2.28309 -0.258295 9.72273 -0.252496 10.8593 4.76909C11.5261 7.71478 9.69373 10.2082 8.08752 11.7506C6.922 12.8755 5.07805 12.8755 3.9067 11.7506C2.30628 10.2082 0.473925 7.70898 1.14076 4.76329Z" stroke="#ACADAE" stroke-opacity="0.3" />
+                        <path d="M7.16002 7.35533L4.86377 5.05908" stroke="#ACADAE" stroke-opacity="0.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M7.13658 5.08228L4.84033 7.3785" stroke="#ACADAE" stroke-opacity="0.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="px-2 py-2">
+                    <span>{{ $address['title'] }}</span>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        @endisset
+    </div>
+</div>
+
                         <div class="mt-3 text-right">
                             <button class="btn btn-sm text-white" style="background-color: #233A85;">Update</button>
                             <button class="btn btn-sm text-white" style="background-color: #233A85;">Optimize</button>
@@ -205,54 +154,161 @@
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        <div class="mapouter">
-                            <div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=current location&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://capcuttemplate.org/">Capcut Template</a></div>
-                            <style>
-                                .mapouter {
-                                    position: relative;
-                                    text-align: right;
-                                    width: 100%;
-                                    height: 100%;
-                                }
-
-                                .gmap_canvas {
-                                    overflow: hidden;
-                                    background: none !important;
-                                    width: 100%;
-                                    height: 100%;
-                                }
-
-                                .gmap_iframe {
-                                    height: 100% !important;
-                                }
-                            </style>
-                        </div>
+                        <div id="map">
+                            </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $(".draggable").draggable({
-                containment: "parent",
-                scroll: false,
-                cursor: "move",
-                start: function(event, ui) {
-                    ui.helper.data("startPosition", ui.position.top);
-                },
-                drag: function(event, ui) {
-                    var startPosition = ui.helper.data("startPosition");
-                    var draggedPosition = ui.position.top;
-                    var offset = draggedPosition - startPosition;
+        var dragItem = null;
+        var map;
 
-                    $(".draggable").each(function() {
-                        if ($(this).is(ui.helper)) return; // Skip the dragged element
-                        var currentTop = $(this).position().top;
-                        $(this).css("top", currentTop + offset);
-                    });
+        function handleDragStart(e) {
+        dragItem = this;
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.innerHTML);
+        this.classList.add('dragging');
+        }
+
+        function handleDragOver(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        e.dataTransfer.dropEffect = 'move';
+        this.classList.add('droppable');
+        return false;
+        }
+
+        function handleDragLeave() {
+        this.classList.remove('droppable');
+        }
+
+        function handleDrop(e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        if (dragItem !== this && dragItem.parentNode === this.parentNode) {
+            var dragIndex = Array.from(dragItem.parentNode.children).indexOf(dragItem);
+            var dropIndex = Array.from(this.parentNode.children).indexOf(this);
+
+            if (dragIndex < dropIndex) {
+            this.parentNode.insertBefore(dragItem, this.nextSibling);
+            } else {
+            this.parentNode.insertBefore(dragItem, this);
+            }
+
+            var addressElements = document.querySelectorAll('#address-container .card-body span');
+            var addresses = [];
+            addressElements.forEach(function (element) {
+            addresses.push(element.textContent);
+            });
+
+            generateRoute(addresses);
+        }
+        this.classList.remove('droppable');
+        dragItem.classList.remove('dragging');
+        return false;
+        }
+
+        function generateRoute(addresses) {
+        console.log(addresses);
+        var geocoder = new google.maps.Geocoder();
+        var locations = [];
+
+        // Convert address strings to coordinates using geocoding
+        $.each(addresses, function(index, address) {
+            geocoder.geocode({ address: address }, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                var location = results[0].geometry.location;
+                locations.push(location);
+
+                // Create markers for each location
+                var marker = new google.maps.Marker({
+                position: location,
+                map: map
+                });
+
+                // Set the map center to the first location
+                if (locations.length === 1) {
+                map.setCenter(location);
                 }
+
+                // Calculate and display the route
+                if (locations.length > 1) {
+                var directionsService = new google.maps.DirectionsService();
+                var directionsDisplay = new google.maps.DirectionsRenderer({
+                    suppressMarkers: true, // Hide default markers
+                    map: map
+                });
+
+                var origin = locations[0];
+                var destination = locations[locations.length - 1];
+
+                var waypoints = locations.slice(1, locations.length - 1).map(function(location) {
+                    return {
+                    location: location,
+                    stopover: true
+                    };
+                });
+
+                var request = {
+                    origin: origin,
+                    destination: destination,
+                    waypoints: waypoints,
+                    optimizeWaypoints: true,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+
+                directionsService.route(request, function (result, status) {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(result);
+                    } else {
+                    console.log("Directions request failed: " + status);
+                    }
+                });
+                }
+            } else {
+                console.log("Geocode was not successful for the following reason: " + status);
+            }
             });
         });
+        }
+
+        function initializeMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12
+        });
+
+        var draggableItems = document.querySelectorAll('.draggable');
+        draggableItems.forEach(function (item) {
+            item.addEventListener('dragstart', handleDragStart, false);
+            item.addEventListener('dragover', handleDragOver, false);
+            item.addEventListener('dragleave', handleDragLeave, false);
+            item.addEventListener('drop', handleDrop, false);
+        });
+
+        var addressElements = document.querySelectorAll('#address-container .card-body span');
+        var addresses = [];
+        addressElements.forEach(function (element) {
+            addresses.push(element.textContent);
+        });
+
+        generateRoute(addresses);
+        }
+
+        // Load the Google Maps API asynchronously
+        function loadGoogleMaps() {
+        var script = document.createElement('script');
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA3YWssMkDiW3F1noE6AVbiJEL40MR0IFU&libraries=places";
+        script.onload = initializeMap;
+        document.body.appendChild(script);
+        }
+
+        loadGoogleMaps();
     </script>
     @endsection

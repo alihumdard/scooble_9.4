@@ -4,7 +4,6 @@
 <script src="https://cdn.rawgit.com/SheetJS/js-xlsx/master/dist/xlsx.full.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiLEdVTvtivG3FxHhcIp553F6XdxE-vnQ&libraries=places"></script>
 
 
 <script>

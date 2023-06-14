@@ -223,7 +223,7 @@
                     </svg>
                   </span>
                 </div>
-                <input id="email" type="email" name="user_email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
+                <input id="email" type="email" name="email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
               </div>
               <!-- password -->
               <div class="input-group col-lg-12 mb-2">
