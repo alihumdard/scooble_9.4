@@ -64,7 +64,14 @@ Route::controller(UserController::class)->group(function () {
 
     Route::match(['get', 'post'], '/change_status', 'change_status');
 
-    Route::match(['get', 'post'], '/landing_page', 'landing_page');
+    Route::match(['get', 'post'], '/home', 'home');
 
-    Route::match(['get', 'post'], '/landing_page1', 'landing_page1');
+    Route::match(['get', 'post'], '/subscription', 'subscription');
+
+    Route::match(['get', 'post'], '/paypal/ipn', 'handleIPN')->name('paypal.ipn');
+
+    Route::match(['get', 'post'], '/subscription/success',  'success')->name('subscription.success');
+
+    Route::match(['get', 'post'], '/subscription/cancel', 'cancel')->name('subscription.cancel');
+
 });

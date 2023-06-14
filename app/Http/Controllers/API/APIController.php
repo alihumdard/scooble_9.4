@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Announcement;
 use App\Models\Notification;
 use App\Models\Trip;
+use App\Models\Package;
 use App\Models\Address;
 use Illuminate\Foundation\Auth\Authenticatable;
 
@@ -499,5 +500,82 @@ class APIController extends Controller
         }
     }
     
+    public function packages(Request $request): JsonResponse
+    {
+        try {
+            $type = $request->input('type');
+            $title = $request->input('title');
+            $price = $request->input('price');
+            $id = $request->input('id');
+    
+            $query = Package::orderBy('id', 'ASC');
+    
+            if ($type) {
+                $query->where('type', $type);
+            }
+    
+            if ($title) {
+                $query->where('title', 'LIKE', '%' . $title . '%');
+            }
+    
+            if ($price) {
+                $query->where('price', $price);
+            }
+
+            if ($id) {
+                $query->where('id', $id);
+            }
+            
+            $announcement = $query->get();
+    
+            if ($announcement->isEmpty()) {
+                return response()->json(['status' => 'empty', 'message' => 'No Package found'], 404);
+            }
+    
+            return response()->json(['status' => 'success', 'message' => 'Package retrieved successfully', 'data' => $announcement]);
+    
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error retrieving package', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function package_store(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'desc' => 'required',
+            'type' => 'required',
+            'price' => 'required',
+            'users' => 'required',
+            'drivers' => 'required',
+            'map_api_call' => 'required'
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'message' => $validator->errors()], 400);
+        }
+    
+        try {
+            $package = ($request->id) ? Package::find($request->id) : new Package(); 
+             
+            $isExistPackage = $package->exists;
+
+            $package->title        = $request->title;
+            $package->desc         = $request->desc;
+            $package->type         = $request->type;
+            $package->map_api_call = $request->map_api_call;
+            $package->price        = $request->price;
+            $package->users        = $request->users;
+            $package->drivers      = $request->drivers;
+            $package->created_by   = Auth::id();
+            $save = $package->save();
+    
+            $message = $isExistPackage ? 'Package updated successfully' : 'Package saved successfully';
+            return response()->json(['status' => 'success', 'message' => $message, 'data' => $save]);
+    
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error storing Package', 'error' => $e->getMessage()], 500);
+        }
+    }
 
 }

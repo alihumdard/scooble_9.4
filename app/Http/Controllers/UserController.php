@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\Announcement;
+use App\Models\Package;
 use App\Models\Notification;
 use Illuminate\Foundation\Auth\Authenticatable;
 use Carbon\Carbon;
@@ -245,14 +246,30 @@ class UserController extends Controller
         return view('pdf_templates');
     }
 
-    public function landing_page()
+    public function home(Request $request)
     {
-        return view('landing_page');
+        $user = auth()->user();
+        $page_name = 'home';
+    
+        if (!view_permission($page_name)) {
+            return redirect()->back();
+        }
+        
+        if ($request->has('id')) {
+            
+            $package  = Package::where('id',$request->id)->first();
+            return view('subscription', ['data' => $package, 'user' => $user]);
+        } 
+        else {
+
+        $package = Package::orderBy('id', 'ASC')->get()->toArray();
+        return view('home', ['data' => $package, 'user' => $user]);
+        }
     }
 
-    public function landing_page1()
+    public function subscription()
     {
-        return view('landing_page1');
+        return view('subscription');
     }
 
 
@@ -490,5 +507,76 @@ class UserController extends Controller
         
     }
 
+    public function handleIPN(Request $request)
+    {
+ 
+        if ($this->verifyIPN($request->all())) {
+
+            $paymentStatus = $request->input('payment_status');
+            $subscriptionId = $request->input('subscr_id');
+            
+            if ($paymentStatus === 'Completed') {
+
+            } elseif ($paymentStatus === 'Failed') {
+
+            }
+            
+            return response('OK', 200);
+        }
+        
+        return response('Bad Request', 400);
+    }
+    
+    private function verifyIPN(array $data)
+    {
+        
+        
+        $url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+        
+        $data['cmd'] = '_notify-validate';
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Host: www.sandbox.paypal.com',
+            'Connection: close',
+        ]);
+        
+        $response = curl_exec($ch);
+        
+        curl_close($ch);
+        
+        if ($response === 'VERIFIED') {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public function success(Request $request)
+    {
+        
+        
+        $subscriptionId = $request->input('subscription_id');
+        
+        return 'subscription.success';
+      
+    }
+    
+    public function cancel(Request $request)
+    {
+        
+        
+        $subscriptionId = $request->input('subscription_id');
+        
+        
+        return 'subscription.cancel';
+    }
+    
 
 }
