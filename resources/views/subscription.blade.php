@@ -143,30 +143,15 @@
                   <img src="assets/images/Pay Vaya.svg" style="width: 70%; height: 70%;" alt="">
                 </button>
 
-                <form id="paypalForm" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                <!-- Add your PayPal form input fields here -->
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="business" value="costumer1.cadcammasters2021@gmail.com">
-                <input type="hidden" name="item_name" value="Subscription">
+                <form id="paypalForm" action="{{route('paypal.pay')}}" method="post">
+                @csrf
                 <input type="hidden" name="amount" value="{{$data->price}}">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="hidden" name="sandbox" value="1">
-                             
-                  <input type="hidden" name="custom" value="123456789">
-                  <input type="hidden" name="notify_url" value="{{ route('paypal.ipn') }}">
-                  <input type="hidden" name="no_note" value="1">
-                  <input type="hidden" name="no_shipping" value="1">
-                  <input type="hidden" name="rm" value="2">
-                  <input type="hidden" name="invoice" value="SUB-123456">
-                  <input type="hidden" name="cancel_return" value="{{ route('subscription.cancel') }}">
-                  <input type="hidden" name="return" value="{{ route('subscription.success') }}">
-                  <input type="hidden" name="lc" value="en_PK">
-                  <input type="hidden" name="address_country" value="PK">
-              </form>
+                 <button  style="width:150px; height:50px; background: #FF9900; box-shadow: 1px 4px 20px 2px #00000040; margin-top: 2.5rem;" class="btn text-white">
+                  <img src="assets/images/paypal.svg" style="width: 70%; height: 70%;" alt="">
+                  </button>
+                </form>
 
-              <button onclick="submitPaypalForm()" style="width:150px; height:50px; background: #FF9900; box-shadow: 1px 4px 20px 2px #00000040; margin-top: 2.5rem;" class="btn text-white">
-                <img src="assets/images/paypal.svg" style="width: 70%; height: 70%;" alt="">
-              </button>
+           
 
                 <button
                   style="width:150px ; height:50px ; background: #E6F6FF; box-shadow: 1px 4px 20px 2px #00000040;margin-top: 2.5rem;"
