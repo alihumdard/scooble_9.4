@@ -24,6 +24,8 @@ use Illuminate\Foundation\Auth\Authenticatable;
 use Carbon\Carbon;
 use App\Models\Trip;
 use App\Models\Address;
+use Omnipay\Omnipay;
+use App\Models\Payment;
 
 
 class UserController extends Controller
@@ -31,8 +33,15 @@ class UserController extends Controller
 
     public $api;
 
+    private $gateway;
+    private $user;
     public function __construct(){
+        $this->user = auth()->user();
         $this->api = new APIController();
+        $this->gateway = Omnipay::create('PayPal_Rest');
+        $this->gateway->setClientId(env('PAYPAL_CLIENT_ID'));
+        $this->gateway->setSecret(env('PAYPAL_CLIENT_SECRET'));
+        $this->gateway->setTestMode(true);
     }
 
     public function lang_change(REQUEST $request)
@@ -507,75 +516,70 @@ class UserController extends Controller
         
     }
 
-    public function handleIPN(Request $request)
+    public function pay(Request $request)
     {
- 
-        if ($this->verifyIPN($request->all())) {
+    
+        try {
 
-            $paymentStatus = $request->input('payment_status');
-            $subscriptionId = $request->input('subscr_id');
-            
-            if ($paymentStatus === 'Completed') {
+            $response = $this->gateway->purchase(array(
+                'amount' => $request->amount,
+                'currency' => env('PAYPAL_CURRENCY'),
+                'returnUrl' => url('success'),
+                'cancelUrl' => url('error')
+            ))->send();
 
-            } elseif ($paymentStatus === 'Failed') {
-
+            if ($response->isRedirect()) {
+                $response->redirect();
             }
-            
-            return response('OK', 200);
+            else{
+                return $response->getMessage();
+            }
+
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
-        
-        return response('Bad Request', 400);
     }
-    
-    private function verifyIPN(array $data)
-    {
-        
-        
-        $url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-        
-        $data['cmd'] = '_notify-validate';
-        
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Host: www.sandbox.paypal.com',
-            'Connection: close',
-        ]);
-        
-        $response = curl_exec($ch);
-        
-        curl_close($ch);
-        
-        if ($response === 'VERIFIED') {
-            return true;
-        }
-        
-        return false;
-    }
-    
+
     public function success(Request $request)
     {
-        
-        
-        $subscriptionId = $request->input('subscription_id');
-        
-        return 'subscription.success';
-      
+        if ($request->input('paymentId') && $request->input('PayerID')) {
+            $transaction = $this->gateway->completePurchase(array(
+                'payer_id' => $request->input('PayerID'),
+                'transactionReference' => $request->input('paymentId')
+            ));
+
+            $response = $transaction->send();
+
+            if ($response->isSuccessful()) {
+
+                $arr = $response->getData();
+                $payment = new Payment();
+                $payment->payment_id = $arr['id'];
+                $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
+                $payment->payer_email = $arr['payer']['payer_info']['email'];
+                $payment->amount = $arr['transactions'][0]['amount']['total'];
+                $payment->currency = env('PAYPAL_CURRENCY');
+                $payment->payment_status = $arr['state'];
+                $payment->package_id = 1;
+                $payment->created_by = Auth::id();;
+
+                $payment->save();
+
+                return redirect()->back()->with('success', 'Your subscription is now active.');
+
+            }
+            else{
+                return $response->getMessage();
+            }
+        }
+        else{
+            return redirect()->back()->with('error', 'Payment declined!!.');
+        }
     }
-    
-    public function cancel(Request $request)
+
+    public function errors(Request $request)
     {
-        
-        
-        $subscriptionId = $request->input('subscription_id');
-        
-        
-        return 'subscription.cancel';
+        return redirect()->back()->with('error', 'Payment declined!!.');
     }
     
 
