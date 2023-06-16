@@ -1,7 +1,11 @@
 @php
-use App\Models\User;
-$user_id = session('user_details')->id;
-$user = User::find($user_id);
+    use App\Models\User;
+
+    $user = null;
+    if (session()->has('user_details')) {
+        $user_id = session('user_details')->id;
+        $user = User::find($user_id);
+    }
 @endphp
 
 <html lang="en">
@@ -133,8 +137,8 @@ $user = User::find($user_id);
                 <!--change to offline or busy as needed-->
               </div>
               <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">{{$user->name}}</span>
-                <span class="text-secondary text-small">{{$user->role}}</span>
+                <span class="font-weight-bold mb-2">{{(isset($user->name)) ? $user->name : 'Guest'}}</span>
+                <span class="text-secondary text-small">{{(isset($user->role)) ? $user->role : 'Guest'}}</span>
               </div>
               <!-- <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
             </a>
@@ -294,22 +298,16 @@ $user = User::find($user_id);
             </a>
           </li>
           @endif
-
-          @if(view_permission('home'))
           <li class="nav-item mb-2 p-0">
-            <a class="nav-link svg ml-5" href="/home">
-              <span class="menu-title ml-2"> Home</span>
+            <a class="nav-link svg ml-5" href="/landing_page">
+              <span class="menu-title ml-2">Landing Page1</span>
             </a>
           </li>
-          @endif
-
-          @if(view_permission('subscription'))
           <li class="nav-item mb-2 p-0">
-            <a class="nav-link svg ml-5" href="/subscription">
-              <span class="menu-title ml-2"> Subscritions </span>
+            <a class="nav-link svg ml-5" href="/landing_page1">
+              <span class="menu-title ml-2">Landing Page2</span>
             </a>
           </li>
-          @endif
 
           @if(view_permission('logout'))
           <li class="nav-item">

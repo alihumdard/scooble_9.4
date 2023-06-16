@@ -325,7 +325,7 @@
         </div>
     </div>
     <!-- viewlocation Modal End -->
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3YWssMkDiW3F1noE6AVbiJEL40MR0IFU&libraries=places"></script>
     <script>
         $("#map_button").on("click", function initMap() {
             // Set the initial location
