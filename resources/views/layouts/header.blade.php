@@ -298,16 +298,22 @@
             </a>
           </li>
           @endif
+
+          @if(view_permission('home'))
           <li class="nav-item mb-2 p-0">
-            <a class="nav-link svg ml-5" href="/landing_page">
-              <span class="menu-title ml-2">Landing Page1</span>
+            <a class="nav-link svg ml-5" href="/home">
+              <span class="menu-title ml-2"> Home</span>
             </a>
           </li>
+          @endif
+
+          @if(view_permission('subscription'))
           <li class="nav-item mb-2 p-0">
-            <a class="nav-link svg ml-5" href="/landing_page1">
-              <span class="menu-title ml-2">Landing Page2</span>
+            <a class="nav-link svg ml-5" href="/subscription">
+              <span class="menu-title ml-2"> Subscritions </span>
             </a>
           </li>
+          @endif
 
           @if(view_permission('logout'))
           <li class="nav-item">
