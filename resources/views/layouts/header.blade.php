@@ -273,14 +273,14 @@
           @endif
 
           @if(view_permission('driver_map'))
-          <li class="nav-item mb-2 p-0">
+          <!-- <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/driver_map">
               <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.14286 0C12.9257 0 16 3.04 16 6.8C16 11.8971 9.14286 19.4286 9.14286 19.4286C9.14286 19.4286 2.28571 11.8971 2.28571 6.8C2.28571 3.04 5.36 0 9.14286 0ZM9.14286 4.57143C8.53665 4.57143 7.95527 4.81224 7.52661 5.2409C7.09796 5.66955 6.85714 6.25093 6.85714 6.85714C6.85714 7.15731 6.91626 7.45453 7.03113 7.73185C7.146 8.00916 7.31437 8.26114 7.52661 8.47339C7.95527 8.90204 8.53665 9.14286 9.14286 9.14286C9.74907 9.14286 10.3304 8.90204 10.7591 8.47339C11.1878 8.04473 11.4286 7.46335 11.4286 6.85714C11.4286 6.25093 11.1878 5.66955 10.7591 5.2409C10.3304 4.81224 9.74907 4.57143 9.14286 4.57143ZM18.2857 19.4286C18.2857 21.9543 14.1943 24 9.14286 24C4.09143 24 0 21.9543 0 19.4286C0 17.9543 1.39429 16.64 3.55429 15.8057L4.28571 16.8457C3.05143 17.36 2.28571 18.0686 2.28571 18.8571C2.28571 20.4343 5.36 21.7143 9.14286 21.7143C12.9257 21.7143 16 20.4343 16 18.8571C16 18.0686 15.2343 17.36 14 16.8457L14.7314 15.8057C16.8914 16.64 18.2857 17.9543 18.2857 19.4286Z" fill="white" />
               </svg>
               <span class="menu-title ml-2">Map</span>
             </a>
-          </li>
+          </li> -->
           @endif
 
           @if(view_permission('announcements_alerts'))
@@ -299,21 +299,21 @@
           </li>
           @endif
 
-          @if(view_permission('home'))
+          <!-- @if(view_permission('home')) -->
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/home">
               <span class="menu-title ml-2"> Home</span>
             </a>
           </li>
-          @endif
+          <!-- @endif -->
 
-          @if(view_permission('subscription'))
-          <li class="nav-item mb-2 p-0">
+          <!-- @if(view_permission('subscription')) -->
+          <!-- <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/subscription">
               <span class="menu-title ml-2"> Subscritions </span>
             </a>
-          </li>
-          @endif
+          </li> -->
+          <!-- @endif -->
 
           @if(view_permission('logout'))
           <li class="nav-item">

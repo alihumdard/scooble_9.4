@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Client\ConnectionException;
 use App\Models\User;
 use App\Mail\otpVerifcation;
+use App\Mail\SubscriptionPurchased;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,7 @@ use App\Models\Trip;
 use App\Models\Address;
 use Omnipay\Omnipay;
 use App\Models\Payment;
-
+use App\Jobs\SendSubscriptionPurchasedEmail;
 
 class UserController extends Controller
 {
@@ -35,6 +36,8 @@ class UserController extends Controller
 
     private $gateway;
     private $user;
+    private $payment;
+
     public function __construct(){
         $this->user = auth()->user();
         $this->api = new APIController();
@@ -53,26 +56,60 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        if(session('user')){
+        $user = auth()->user();
 
-            $user = auth()->user();
+        if($user){
             session(['user_details' => $user]);
             $now = Carbon::now('Asia/Karachi');
             $current_date = $now->format('Y-m-d H:i:s');
+            $currentDate = Carbon::now();
 
             // User roles: 1 for admin, 2 for client, 3 for driver
             if(isset($user->role) && $user->role == user_roles('2')){
-            
-                $announcements = Announcement::where('start_date', '<=', $current_date)
-                    ->where('end_date', '>=', $current_date)
-                    ->get()->toArray();
-                
-                return view('client_dashboard', ['user' => $user, 'announcements' => $announcements]);
+
+                if( $user->sub_exp_date){
+                    
+                    $expirationDate = Carbon::createFromFormat('Y-m-d', $user->sub_exp_date);
+                    if ($currentDate->gt($expirationDate)) { 
+
+                        return view('subscription_expired', ['user' => $user]);
+                    }
+                    else {
+
+                        $announcements = Announcement::where('start_date', '<=', $current_date)
+                        ->where('end_date', '>=', $current_date)
+                        ->get()->toArray();
+                    
+                        return view('client_dashboard', ['user' => $user, 'announcements' => $announcements]);
+                    }
+                }else{
+                    return redirect('/home');
+                }
+
             }
 
             else if(isset($user->role) && $user->role == user_roles('3')){
+                
+                $client = User::where(['role' => 'Client', 'id' => $user->client_id])->first();
 
-                return view('driver_dashboard', ['user' => $user]);
+                if ($client) {
+                    if( $client->sub_exp_date){
+                        $expirationDate = Carbon::createFromFormat('Y-m-d', $client->sub_exp_date);
+                    
+                        if ($currentDate->gt($expirationDate)) {
+                            return redirect('/subscription-expired_driver');
+                        }
+                        else{
+                            return view('driver_dashboard', ['user' => $user]);
+                        }
+                    }else{
+                        return redirect('/subscription-expired_driver');
+                    }
+
+                } else {
+                    return redirect('/login');
+                }
+
             }
 
             else{
@@ -257,22 +294,16 @@ class UserController extends Controller
 
     public function home(Request $request)
     {
-        $user = auth()->user();
-        $page_name = 'home';
-    
-        if (!view_permission($page_name)) {
-            return redirect()->back();
-        }
         
         if ($request->has('id')) {
             
             $package  = Package::where('id',$request->id)->first();
-            return view('subscription', ['data' => $package, 'user' => $user]);
+            return view('subscription', ['data' => $package]);
         } 
         else {
 
         $package = Package::orderBy('id', 'ASC')->get()->toArray();
-        return view('home', ['data' => $package, 'user' => $user]);
+        return view('home', ['data' => $package]);
         }
     }
 
@@ -378,11 +409,28 @@ class UserController extends Controller
         $user = User::where(['id' => $id])->get()->toArray();
         return json_encode($user);
     }
+
     public function user_register(REQUEST $request)
     {
         if ($request->all()) {
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'password' => 'required',
+                'confirm_password' => 'required|same:password',
+                'email' => [
+                    'required',
+                    'email',
+                    Rule::unique('users')->ignore($request->id),
+                ],
+            ]);            
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
             ($request->id) ? $user = User::find($request->id) : $user = new User();
-            $user->name     = $request->username;
+            $user->name     = $request->name;
             $user->email    = $request->email;
             $user->phone    = $request->phone;
             $user->com_name = $request->company_name;
@@ -399,20 +447,31 @@ class UserController extends Controller
   
     public function user_login(REQUEST $request)
     {
-        $login = $this->api->user_login($request);
-        $data['status'] = json_decode($login->getContent())->status;
-        if($data['status']== "success"){
-        $data['token'] = json_decode($login->getContent())->token;
-        session(['user' => $data['token']]);
-        }
+        $user = auth()->user();
+        if(!$user){
+            if($request->all()){
 
-        echo($login->getContent());
+                $login = $this->api->user_login($request);
+                $data['status'] = json_decode($login->getContent())->status;
+
+                if($data['status']== "success"){
+                    $data['token'] = json_decode($login->getContent())->token;
+                    session(['user' => $data['token']]);
+                }
+
+                echo($login->getContent());       
+            }else{
+                return view('login');
+            }
+        }else{
+                return redirect('/');
+        }
     }
 
     public function logout(REQUEST $request)
     {
         session()->flush();
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function forgot_password(REQUEST $request)
@@ -440,7 +499,7 @@ class UserController extends Controller
                     $emailData = [
                         'otp' => $otp,
                         'name' => $user->name,
-                        'body' => 'This is a testing email for OTP verification. Your OTP is:',
+                        'body' => 'Thank you for choosing our services. We are pleased to provide you with the OTP verification.',
                     ];
                     $mail = new otpVerifcation($emailData);
 
@@ -518,31 +577,55 @@ class UserController extends Controller
 
     public function pay(Request $request)
     {
-    
         try {
 
-            $response = $this->gateway->purchase(array(
-                'amount' => $request->amount,
-                'currency' => env('PAYPAL_CURRENCY'),
-                'returnUrl' => url('success'),
-                'cancelUrl' => url('error')
-            ))->send();
+            $payment = new Payment();
+            $payment->amount = $request->amount;
+            $payment->currency = env('PAYPAL_CURRENCY');
+            $payment->package_id = $request->package_id;
+            $payment->payment_method = 'PayPal';
+            $payment->created_by = Auth::id();
+            $payment->save();
 
+            $payment = Payment::where('created_by', Auth::id())->latest()->first();
+
+            $response = $this->gateway->purchase(array(
+                'amount'    => $request->amount,
+                'currency'  => env('PAYPAL_CURRENCY'),
+                'returnUrl' => url('payment_success'),
+                'cancelUrl' => url('payment_cancel')
+            ))->send();
+    
             if ($response->isRedirect()) {
-                $response->redirect();
-            }
-            else{
-                return $response->getMessage();
+                    $response->redirect();
+            } 
+
+            else {
+
+                if ($payment) {
+                    $this->fail_trans($response->getMessage(), null, null, 'error');
+                }
+
+                return redirect()->back()->with('error', 'Payment could not proceed futher contact to Admin!!.');
             }
 
         } catch (\Throwable $th) {
-            return $th->getMessage();
+
+            if ($payment) {
+                $this->fail_trans(null, $th->getMessage(), null, 'server_error');
+            }
+
+            return redirect()->back()->with('error', 'PayPal is declined to Connet. Check Your Network or Contact to Admin.');
         }
     }
-
-    public function success(Request $request)
+    
+    public function payment_success(Request $request)
     {
+        $payment = Payment::where('created_by', Auth::id())->latest()->first();
+        $user = auth()->user();
+
         if ($request->input('paymentId') && $request->input('PayerID')) {
+
             $transaction = $this->gateway->completePurchase(array(
                 'payer_id' => $request->input('PayerID'),
                 'transactionReference' => $request->input('paymentId')
@@ -553,34 +636,73 @@ class UserController extends Controller
             if ($response->isSuccessful()) {
 
                 $arr = $response->getData();
-                $payment = new Payment();
-                $payment->payment_id = $arr['id'];
-                $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
-                $payment->payer_email = $arr['payer']['payer_info']['email'];
-                $payment->amount = $arr['transactions'][0]['amount']['total'];
-                $payment->currency = env('PAYPAL_CURRENCY');
-                $payment->payment_status = $arr['state'];
-                $payment->package_id = 1;
-                $payment->created_by = Auth::id();;
 
-                $payment->save();
+                if ($payment) {
+                    $payment->payment_id = $arr['id'];
+                    $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
+                    $payment->payer_email = $arr['payer']['payer_info']['email'];
+                    $payment->amount = $arr['transactions'][0]['amount']['total'];
+                    $payment->currency = env('PAYPAL_CURRENCY');
+                    $payment->payment_status = $arr['state'];
+                    $payment->transaction_status = $arr['state'];
+                    $payment->payment_token = $request->input('token');;
+                    $payment->save();
 
-                return redirect()->back()->with('success', 'Your subscription is now active.');
+                    $user->sub_id  = $payment->id;
+                    $user->sub_exp_date  = $payment->exp_date;
+                    $user->sub_package_id = $payment->package_id;
+                    $saved = $user->save();
+
+                    if($saved){
+                        $emailData = [
+                            'package_name' => $payment->package->title,
+                            'name' => $user->name,
+                            'body' => 'Congratulations! You have successfully subscribed to our package.',
+                        ];
+
+                        SendSubscriptionPurchasedEmail::dispatch($user, $payment)->onQueue('emails');
+    
+                    }
+
+
+                }
+
+                return redirect('/')->with('success', 'Your subscription is now active.');
 
             }
             else{
-                return $response->getMessage();
+                if ($payment) {
+                    $this->fail_trans($response->getMessage(), null, null, 'error');
+                    return redirect()->back()->with('error', 'Payment Could Completed!!.');
+                }
             }
         }
         else{
-            return redirect()->back()->with('error', 'Payment declined!!.');
+            if ($payment) {
+                $this->fail_trans($response->getMessage(), null, null, 'error');
+                return redirect()->back()->with('error', 'Payment declined!!.');
+            }
         }
     }
 
-    public function errors(Request $request)
-    {
-        return redirect()->back()->with('error', 'Payment declined!!.');
+    public function payment_cancel(Request $request)
+    {  
+        $this->fail_trans(null, null, $request->input('token'), 'cancel');
+
+        return redirect()->back()->with('error', 'Your Decliened Payment and Cancel Subscription.');
     }
     
+    public function fail_trans($transaction_error=null, $server_error=null, $token=null, $status=null){
+        
+        $payment = Payment::where('created_by', Auth::id())->latest()->first();
+        
+        if ($payment) {
+            $payment->transaction_error = $transaction_error;
+            $payment->server_error      = $server_error;    
+            $payment->payment_token     = $token;
+            $payment->payment_status    = $status;
+            $payment->save();
+        }
+    }
 
 }

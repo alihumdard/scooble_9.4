@@ -3,36 +3,33 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_id');
-            $table->string('payer_id');
-            $table->string('payer_email');
+            $table->string('payment_id')->nullable();
+            $table->string('payer_id')->nullable();
+            $table->string('payer_email')->nullable();
             $table->float('amount', 10, 2);
             $table->string('currency');
-            $table->string('payment_status');
-            $table->integer('package_id');     
-            $table->string('status')->default('on');
-            $table->integer('created_by');     
+            $table->string('payment_status')->default('attempt');
+            $table->integer('package_id');
+            $table->string('payment_method');
+            $table->text('transaction_error')->nullable();
+            $table->text('server_error')->nullable();
+            $table->text('payment_token')->nullable();
+            $table->string('transaction_status')->default('fail');
+            $table->date('exp_date')->default(Carbon::now()->addDays(30));
+            $table->integer('created_by');
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('payments');

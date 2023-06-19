@@ -9,17 +9,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class otpVerifcation extends Mailable
+class SubscriptionPurchased extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $emailData;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct( array $emailData)
+
+    public $emailData;
+
+    public function __construct(array $emailData)
     {
         $this->emailData = $emailData;
     }
@@ -32,7 +34,7 @@ class otpVerifcation extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Otp Verifcation',
+            subject: 'Subscription Purchased',
         );
     }
 
@@ -44,7 +46,7 @@ class otpVerifcation extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email_opt',
+            view: 'email_subscription',
         );
     }
 
