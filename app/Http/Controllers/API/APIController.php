@@ -20,6 +20,8 @@ use App\Models\Trip;
 use App\Models\Package;
 use App\Models\Address;
 use Illuminate\Foundation\Auth\Authenticatable;
+use App\Jobs\UserProfileEmail;
+use Illuminate\Support\Str;
 
 class APIController extends Controller
 {
@@ -140,7 +142,8 @@ class APIController extends Controller
         ]);
     
         if ($validator->fails()) {
-            return response()->json(['status' => 'error', 'message' => $validator->errors()], 400);
+            return response()->json(['status' => 'error', 'message' => $validator->errors()]);
+
         }
     
         try {
@@ -159,8 +162,11 @@ class APIController extends Controller
             
             if ($request->password) {
                 $user->password = Hash::make($request->password);
+            } else {
+                $randomPassword = Str::random(8);
+                $user->password = Hash::make($randomPassword);
             }
-    
+            
 
             $oldComPicPath = $user->com_pic;
             $oldUserPicPath = $user->user_pic;
@@ -187,6 +193,21 @@ class APIController extends Controller
 
             $save = $user->save();
     
+            if($save){
+                if ($request->password) {
+
+                }else{
+                    $emailData = [
+                        'password' => $randomPassword,
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'body' => "Congratulations! You profile has been created successfully on this Email.",
+                    ];
+
+                    UserProfileEmail::dispatch($emailData)->onQueue('emails');
+
+                }
+            }
             $message = $isExistingUser ? 'User updated successfully' : 'User added successfully';
             return response()->json(['status' => 'success', 'message' => $message, 'data' => $save]);
     

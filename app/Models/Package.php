@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'package_id');
+    }
 }

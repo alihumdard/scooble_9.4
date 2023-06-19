@@ -402,6 +402,7 @@
 
         // saving trip in through the api...
         $(document).on('submit', '#saveTrip', function(e) {
+
             e.preventDefault();
             var apiname = $(this).attr('action');
             var apiurl = "{{ end_url('') }}" + apiname;
@@ -529,9 +530,9 @@
             });
         });
 
-
         // Adding  data in through the api...
         $('#formData').on('submit', function(e) {
+
             e.preventDefault();
             var button = $(this);
             var spinner = button.find('.btn_spinner');
@@ -559,30 +560,47 @@
                      buttonText.addClass('d-none');
                 },
                 success: function(response) {
+                    console.log(response);
                     spinner.addClass('d-none');
                     buttonText.removeClass('d-none');
                     button.prop('disabled', false);
                     console.log(formData);
                     if (response.status === 'success') {
+
                         $('#formData')[0].reset();
-
                         $('#addclient').modal('hide');
-
                         showAlert("Success", response.message, response.status);
-                        // $('#users-table').DataTable().destroy();
-                        // $("#table_reload").load(location.href + " #table_reload");
+
                         setTimeout(function() {
                             window.location.href = window.location.href;
                         }, 1500);
-                    } else {
-                        showAlert("Warning", response.message, response.status);
+
+                    }
+                    
+                    else if(response.status === 'error'){
+
+                        console.log(response.message);
+                        $('.error-label').remove();
+
+                        $.each(response.message, function(field, errorMessages) {
+                            var inputField = $('input[name="' + field + '"]');
+
+                            $.each(errorMessages, function(index, errorMessage) {
+                                var errorLabel = $('<label class="error-label text-danger">* ' + errorMessage + '</label>');
+                                inputField.addClass('error');
+                                inputField.after(errorLabel);
+                            });
+                        });
+
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.log(status);
+
                     spinner.addClass('d-none');
                     buttonText.removeClass('d-none');
                     button.prop('disabled', false);
-                    showAlert("Error", response.message, response.status);
+                    // showAlert("Error", response.message, response.status);
                 }
             });
         });
@@ -776,6 +794,11 @@
                 icon: type
             });
         }
+
+        $('input').on('input', function() {
+            $(this).removeClass('error');
+            $(this).next('.error-label').remove();
+        });
 
     });
 </script>

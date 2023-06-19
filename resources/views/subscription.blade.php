@@ -146,6 +146,7 @@
                 <form id="paypalForm" action="{{route('paypal.pay')}}" method="post">
                 @csrf
                 <input type="hidden" name="amount" value="{{$data->price}}">
+                <input type="hidden" name="package_id" value="{{$data->id}}">
                  <button  style="width:150px; height:50px; background: #FF9900; box-shadow: 1px 4px 20px 2px #00000040; margin-top: 2.5rem;" class="btn text-white">
                   <img src="assets/images/paypal.svg" style="width: 70%; height: 70%;" alt="">
                   </button>
