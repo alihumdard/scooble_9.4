@@ -299,6 +299,18 @@
           </li>
           @endif
 
+          @if(view_permission('packages'))
+          <li class="nav-item mb-2 p-0">
+            <a class="nav-link svg ml-5" href="{{'/packages'}}">
+              <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.1783 16.5241L19.5521 3.01716C19.1579 1.54862 17.353 1.00759 16.2133 2.01629L13.9278 4.039C11.3845 6.28991 8.35111 7.91891 5.06775 8.79698C2.31938 9.53199 0.690561 12.3597 1.42698 15.1028C2.16341 17.8459 4.99058 19.4819 7.73896 18.7469C11.0223 17.8688 14.4654 17.7657 17.7956 18.4459L20.7882 19.0571C22.2806 19.3619 23.5725 17.9926 23.1783 16.5241Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M7.53931 8.09998L11.7001 23.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="menu-title ml-2"> Packages </span>
+            </a>
+          </li>
+          @endif
+
           <!-- @if(view_permission('home')) -->
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/home">

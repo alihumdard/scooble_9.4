@@ -1,3 +1,14 @@
+@php
+    use App\Models\User;
+
+    $user = null;
+    if (session()->has('user_details')) {
+        $user_id = session('user_details')->id;
+        $user = User::find($user_id);
+    }
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,10 +46,18 @@
               <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 4rem;"" class=" nav-link"
                 href="#">About </a>
             </li>
+            @if($user)
             <li class="nav-item ">
               <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 3rem;"" class=" nav-link"
-                href="#">Price </a>
+                href="/">Dashboard </a>
             </li>
+            @endif
+            @if(!$user)
+            <li class="nav-item ">
+              <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 3rem;"" class=" nav-link"
+                href="/login">Login </a>
+            </li>
+            @endif
           </ul>
         </div>
     </div>
