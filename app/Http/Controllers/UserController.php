@@ -118,7 +118,8 @@ class UserController extends Controller
             }
         }
         else {
-            return view('login');
+            $package = Package::orderBy('id', 'ASC')->get()->toArray();
+            return view('home', ['data' => $package]);
         }
     }
     
@@ -218,14 +219,14 @@ class UserController extends Controller
 
         if ($request->has('id')) {
             
-            if(isset($user->role) && $user->role == user_roles('1')){   
+            if(isset($user->role) && ($user->role == user_roles('1'))){   
                 $trip = Trip::with(['addresses' => function ($query) {
                     $query->orderBy('order_no', 'ASC');
                 }])->find($request->id);
                 
                 $tripData = $trip->toArray();
                 $tripData['addresses'] = $trip->addresses->toArray();
-                
+
                 $client_list = User::where(['role' => 'Client'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
                 $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
                 return view('create_trip',['data'=>$tripData, 'user'=>$user ,'driver_list'=>$deriver_list, 'client_list'=>$client_list]);
@@ -368,6 +369,28 @@ class UserController extends Controller
 
             $announcmnents = Announcement::orderBy('id', 'desc')->get()->toArray();
             return view('announcements', ['data' => $announcmnents, 'user' => $user]);
+        }
+    
+    }
+
+    public function packages(Request $request)
+    {
+        $user = auth()->user();
+        $page_name = 'packages';
+        
+        if (!view_permission($page_name)) {
+            return redirect()->back();
+        }
+    
+        if ($request->has('id')) {
+            
+            $package  = Package::where('id',$request->id)->get()->toArray();
+            $packages = Package::orderBy('id', 'DESC')->get()->toArray();
+            return view('packages', ['data' => $packages, 'user' => $user, 'package'=>$package[0]]);
+        } 
+        else {
+            $packages = Package::orderBy('id', 'DESC')->get()->toArray();
+            return view('packages', ['data' => $packages, 'user' => $user]);
         }
     
     }

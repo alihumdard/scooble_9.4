@@ -472,12 +472,17 @@ class APIController extends Controller
             // Save associated addresses
             if ($request->has('address')) {
 
-                $addresses = $request->input('address');
+                $addresses = $request->address;
                 $existingAddressIds = [];
+
                 foreach ($addresses as $index => $addressData) {
-                    if (isset($addressData['id'])) {
+
+                    if (isset($addressData['id']) && !empty($addressData['id'])) {
+
                         $address = Address::find($addressData['id']);
+                        
                         if ($address) {
+
                             $address->title = $addressData['title'];
                             $address->desc = $addressData['desc'];
                             $address->status = $addressData['status'];
@@ -488,10 +493,14 @@ class APIController extends Controller
                             $address->order_no = $index +1 ;
                             $address->created_by = Auth::id();
                             $address->save();
+
                             $existingAddressIds[] = $address->id;
 
                         }
-                    } else {
+
+                    } 
+                    else {
+
                         $address = new Address();
                         $address->title = $addressData['title'];
                         $address->desc = $addressData['desc'];
@@ -507,14 +516,19 @@ class APIController extends Controller
                         $existingAddressIds[] = $address->id;
                     }
                 }
-        
+
                 Address::where('trip_id', $trip->id)
                     ->whereNotIn('id', $existingAddressIds)
                     ->delete();
+                    
+                $message = $isExistingTrip ? 'Trip updated successfully' : 'Trip added successfully';
+                return response()->json(['status' => 'success', 'message' => $message, 'data' => $save]);
+            
             }
-    
-            $message = $isExistingTrip ? 'Trip updated successfully' : 'Trip added successfully';
-            return response()->json(['status' => 'success', 'message' => $message, 'data' => $save]);
+
+            else{
+                return response()->json(['status' => 'error', 'message' => 'trip is not save no address']);
+            }
     
         } catch (\Exception $e) {
             return response()->json(['status' => 'error', 'message' => 'Error storing trip', 'error' => $e->getMessage()], 500);

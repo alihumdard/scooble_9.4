@@ -27,6 +27,7 @@ Route::match(['post','get'],'/calender', [UserController::class, 'calender']);
 Route::match(['post','get'],'/calendar_maintable', [UserController::class, 'calendar_maintable']);
 Route::match(['post','get'],'/users', [UserController::class, 'users']);
 Route::match(['post','get'],'/announcements', [UserController::class, 'announcements']);
+Route::match(['post','get'],'/packages', [UserController::class, 'packages']);
 Route::match(['post','get'],'/notifications', [UserController::class, 'notifications']);
 Route::match(['post','get'],'/settings', [UserController::class, 'settings']);
 Route::match(['post','get'],'/edit/{id}', [UserController::class, 'user_edit']);
