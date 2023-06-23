@@ -28,6 +28,8 @@ use App\Models\Address;
 use Omnipay\Omnipay;
 use App\Models\Payment;
 use App\Jobs\SendSubscriptionPurchasedEmail;
+use App\Jobs\SendEmailVerificationJob;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -452,6 +454,8 @@ class UserController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
+            $verificationToken = Str::random(20);
+
             ($request->id) ? $user = User::find($request->id) : $user = new User();
             $user->name     = $request->name;
             $user->email    = $request->email;
@@ -460,9 +464,24 @@ class UserController extends Controller
             $user->com_pic  = $request->company_logo;
             $user->address  = $request->address;
             $user->role     = $request->role;
+            $user->status   = 4;
+            $user->remember_token   = $verificationToken;
             $user->password = Hash::make($request->password);
             $save = $user->save();
-            return redirect('/');
+            if($save){
+
+                $emailData = [
+                    'hash'  => $verificationToken,
+                    'email' => $request->email,
+                    'name'  => $request->name,
+                    'body'  => 'Congratulations! You have successfully subscribed to our package.',
+                ];
+
+                SendEmailVerificationJob::dispatch($emailData)->onQueue('emails');
+                
+                return redirect('/login')->with('success', 'Please Check your Email for Verification');
+            }
+            
         } else {
             return view('register');
         }
@@ -516,6 +535,7 @@ class UserController extends Controller
             }
         } else {
             if (isset($req['email']) && !empty($req['email'])) {
+
                 $user = User::where('email', $req['email'])->first();
                 if ($user) {
                     $otp = str_pad(random_int(0, 99999), 5, '0', STR_PAD_LEFT);
@@ -540,7 +560,12 @@ class UserController extends Controller
                         echo "Failed to send email: " . $e->getMessage();
                     }
                 } else {
-                    Session::flash('message', 'Enter your correct Email.');
+
+                    Session::flash('status', 'invalid');
+                    Session::flash('message', 'this email is invalid');
+                    Session::flash('email', $req['email']);
+                    
+
                     return view('forgotPassword', ['email' => $req['email']]);
                 }
             } else {
@@ -549,21 +574,33 @@ class UserController extends Controller
         }
     }
 
-    public function set_password(REQUEST $request)
+    public function set_password(Request $request)
     {
         $req['email'] = ($request->email) ? $request->email : session('email_temp');
         if ($req['email']) {
-            if (isset($request->password)) {
+            if ($request->has('password')) {
+                $validator = Validator::make($request->all(), [
+                    'password' => 'required',
+                    'confirm_password' => 'required|same:password',
+                    'email' => 'required'
+                ]);
+    
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput();
+                }
+    
                 $user = User::where('email', $req['email'])->first();
                 $user->password = Hash::make($request->password);
                 $save = $user->save();
-                if($save){ return redirect('/'); } 
-                
+    
+                if ($save) {
+                    return redirect('/login');
+                }
             } else {
                 return view('setPassword', ['email' => $req['email']]);
             }
         } else {
-            return redirect('/');
+            return view('setPassword', ['email' => $req['email']]);
         }
     }
 
@@ -727,5 +764,25 @@ class UserController extends Controller
             $payment->save();
         }
     }
+
+    public function verify(Request $request, $hash)
+    {
+        $user = User::where('remember_token', $hash)->first();
+    
+        if ($user) {
+            if (!$user->hasVerifiedEmail()) {
+                $user->markEmailAsVerified();
+                $user->status = 3; // Update the status to pendding
+                $user->save();
+    
+                return redirect('/login')->with('success', 'Email verified successfully. Please log in.');
+            } else {
+                return redirect('/login')->with('info', 'Email already verified.');
+            }
+        } else {
+            return redirect('/login')->with('error', 'Invalid verification link.');
+        }
+    }
+    
 
 }

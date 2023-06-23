@@ -25,6 +25,12 @@ function user_roles($role_no){
     }    
 }
 
+function auth_users(){
+    //1 for active , 2 for deactive, 3 for pending , 4 for unverified...
+    $user_status =  [1, 3];
+    return $user_status;   
+}
+
 function user_role_no($role_no){
     switch ($role_no) {
         case 'Admin':

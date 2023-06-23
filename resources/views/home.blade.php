@@ -57,6 +57,11 @@
               <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 3rem;"" class=" nav-link"
                 href="/login">Login </a>
             </li>
+            @else
+            <li class="nav-item ">
+              <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 3rem;"" class=" nav-link"
+                href="/logout">Log Out </a>
+            </li>
             @endif
           </ul>
         </div>

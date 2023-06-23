@@ -107,17 +107,55 @@ class APIController extends Controller
 
     public function user_login(Request $request): JsonResponse
     {
-        try {
-            $credentials = $request->only('email', 'password');
-            if ($user = User::where('email', $credentials['email'])->whereIn('status', [1, 2])->first()) {
-                if (Auth::attempt($credentials)) {
-                    $token = $user->createToken('MyApp')->plainTextToken;
-                    session(['user_details' => $user]);
-                    return response()->json(['status' => 'success', 'message' => 'User successfully logged in', 'token' => $token]);
-                }
-            }
+        $validator = Validator::make($request->all(), [
+            'password' => 'required',
+            'email' => 'required',
+        ]);
     
-            return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'message' => $validator->errors()]);
+        }
+
+        try {
+
+            $credentials = $request->only('email', 'password');
+            $user = User::where('email', $credentials['email'])->first();
+
+            if ($user) {
+
+                if (in_array($user->status, auth_users())) {
+
+                    if(isset($user->role) && $user->role == user_roles('3')){
+                
+                        $client = User::where(['role' => 'Client', 'id' => $user->client_id])->first();
+                        
+                        if($client){
+                            
+                            if(!in_array($client->status, auth_users())){
+                                return response()->json(['status' => 'Deactive', 'message' => 'You are Unauthorized to Login, Contact to the Owner']);
+                            }
+                        }
+                        else{
+                            return response()->json(['status' => 'Deactive', 'message' => 'You are assigned  to any client']);
+                        }
+                    }
+                    
+                    if (Auth::attempt($credentials)) {
+                        $token = $user->createToken('MyApp')->plainTextToken;
+                        session(['user_details' => $user]);
+                        return response()->json(['status' => 'success', 'message' => 'User successfully logged in', 'token' => $token]);
+                    }
+                } 
+                else if ($user->status == 4) {
+                    return response()->json(['status' => 'Unverfied', 'message' => 'User is unverified, Please Check Your Email']);
+                } 
+                else {
+                    return response()->json(['status' => 'Deactive', 'message' => 'You are Unauthorized to Login']);
+                }
+            }else{
+                 return response()->json(['status' => 'invalid', 'message' => 'User does not exist'], 401);
+            }
+            
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
@@ -587,7 +625,7 @@ class APIController extends Controller
         ]);
     
         if ($validator->fails()) {
-            return response()->json(['status' => 'error', 'message' => $validator->errors()], 400);
+            return response()->json(['status' => 'error', 'message' => $validator->errors()]);
         }
     
         try {

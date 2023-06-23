@@ -54,6 +54,7 @@ Route::match(['post','get'],'/change_status', [UserController::class, 'change_st
     Route::match(['post','get'],'/register', [UserController::class, 'user_register']);
     Route::match(['post','get'],'/logout', [UserController::class, 'logout']);
     Route::match(['post','get'],'/home', [UserController::class, 'home']);
+    Route::match(['post', 'get'], '/verify/{hash}', [UserController::class, 'verify'])->name('verify');
 
 
 

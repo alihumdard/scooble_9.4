@@ -188,7 +188,12 @@
                 </div>
                 <div class="row d-flex justify-content-center  mt-4">
                     <form action="/set_password" method="post" style="width: 500px !important;">
-                    <input type="hidden" name="email" value="{{session('email_temp')}}"/>
+                    <input type="hidden" name="email" value="{{ session('email_temp') ?? old('email') }}"/>
+                    <div class="col-lg-12">
+                        @error('email')
+                            <span class="text-danger"> * {{ $message }}</span>
+                        @enderror
+                    </div>
                     @csrf    
                     <div class="row">
                             <div class="w-100" style="padding-left: 15px;">
@@ -207,12 +212,17 @@
 
                                     </span>
                                 </div>
-                                <input id="password" type="password" name="password" placeholder="Enter your password" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
+                                <input id="password" type="password" value="{{ old('password') }}" name="password" placeholder="Enter your password" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white px-4 border-md border-right-0 border-left-0 border-top-0 border-dark" style="border-radius: 0px !important;">
                                         <button style="border: none;background: none; cursor: pointer;" type="button" id="eye"><i class="fa fa-eye text-muted"></i></button>
                                     </span>
                                 </div>
+                                <div class="col-lg-12">
+                                        @error('password')
+                                            <span class="text-danger"> * {{ $message }}</span>
+                                        @enderror
+                                </div> 
                             </div>
                             <!-- Password Confirmation -->
                             <div class="input-group col-lg-12 mb-4">
@@ -225,12 +235,17 @@
 
                                     </span>
                                 </div>
-                                <input id="passwordConfirmation" type="password" name="confirm_password" placeholder="Confirm your password" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
+                                <input id="passwordConfirmation" type="password" name="confirm_password" value="{{ old('confirm_password') }}" placeholder="Confirm your password" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white px-4 border-md border-right-0 border-left-0 border-top-0 border-dark" style="border-radius: 0px !important;">
                                         <button style="border: none;background: none; cursor: pointer;" type="button" id="eye2"><i class="fa fa-eye text-muted"></i></button>
                                     </span>
                                 </div>
+                                <div class="col-lg-12">
+                                        @error('confirm_password')
+                                            <span class="text-danger"> * {{ $message }}</span>
+                                        @enderror
+                                </div> 
                             </div>
 
                             <!-- Submit Button -->
