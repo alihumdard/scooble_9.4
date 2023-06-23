@@ -26,8 +26,8 @@ function user_roles($role_no){
 }
 
 function auth_users(){
-    //1 for active , 2 for deactive, 3 for pending , 4 for unverified...
-    $user_status =  [1, 3];
+    //1 for active , 2 for pending, 3 for suspended , 4 for unverified...
+    $user_status =  [1, 2];
     return $user_status;   
 }
 
