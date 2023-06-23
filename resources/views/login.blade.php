@@ -223,7 +223,10 @@
                     </svg>
                   </span>
                 </div>
-                <input id="email" type="email" name="email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
+                <input id="email"  type="email" name="email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
+                <div class="col-lg-12">
+                <div class="validation-error-email"></div>
+                </div> 
               </div>
               <!-- password -->
               <div class="input-group col-lg-12 mb-2">
@@ -235,7 +238,7 @@
 
                   </span>
                 </div>
-                <input id="password" type="password" name="password" placeholder="Enter your password" class="border-top-0 border-right-0 form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;" />
+                <input id="password"  type="password" name="password" placeholder="Enter your password" class="border-top-0 border-right-0 form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;" />
                 <div class="input-group-append">
                   <span class="input-group-text bg-white border-md border-top-0 border-right-0 border-left-0 border-dark" style="border-radius: 0px !important;">
                     <button style="border: none; background: none; cursor: pointer;" type="button" id="eye">
@@ -243,6 +246,9 @@
                     </button>
                   </span>
                 </div>
+                <div class="col-lg-12">
+                <div class="validation-error-password"></div>
+                </div> 
               </div>
               <div class="input-group-append col-lg-12 mb-4 d-flex justify-content-between">
                 <div class="input-group-text bg-white border-0">
@@ -255,7 +261,7 @@
               </div>
               <!-- Submit Button -->
               <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
-                <button type="submit" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
+                <button type="submit" id="btn_user_login" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
                   <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
                   <span id="text">Sign In</span>
                 </button>
