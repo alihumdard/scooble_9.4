@@ -32,8 +32,31 @@
                 </div>
                 <div class="col-lg-12 mt-2">
                     <label for="desc">@lang('lang.message'):</label>
-                    <textarea name="desc" id="desc" cols="30" rows="10" class="form-control" placeholder="@lang('lang.message')...">{{ $announcmnent['desc'] ?? '' }}</textarea>
+                    <textarea name="desc" id="desc" cols="30"  class="form-control" placeholder="@lang('lang.message')...">{{ $announcmnent['desc'] ?? '' }}</textarea>
                 </div>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+                    <script>
+                              $('#desc').summernote({
+                                      placeholder: "@lang('lang.message')...",
+                                      tabsize: 2,
+                                      height: 180,
+                                toolbar: [
+                                      ['style', ['style']],
+                                      ['font', ['bold', 'italic', 'underline', 'clear']],
+                                      // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                                      //['fontname', ['fontname']],
+                                      ['fontsize', ['fontsize']],
+                                      ['color', ['color']],
+                                      ['para', ['ul', 'ol', 'paragraph']],
+                                      ['height', ['height']],
+                                      ['table', ['table']],
+                                      ['insert', ['link', 'picture', 'hr']],
+                                      //['view', ['fullscreen', 'codeview']],
+                                      // ['help', ['help']]
+                                    ],
+                              });
+                    </script>
                 <div class="col-lg-2 mt-4 text-center">
                     <input type="radio" name="type" id="type" value="Mandatory" {{ ($announcmnent['type'] ?? '') === 'Mandatory' ? 'checked' : '' }}> @lang('lang.mandatory')
                 </div>
@@ -77,7 +100,9 @@
                   <tr style="font-size: small;">
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $value['title'] }}</td>
-                    <td>{{ $value['desc'] }}</td>
+                    <td> 
+                    {{ (isset($value['desc']) ? preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($value['desc']))) : '') ?? '' }}
+                    </td>
                     <td>{{ $value['type'] }}</td>
                     <td>{{ $value['start_date'] }}</td>
                     <td>{{ $value['end_date'] }}</td>
