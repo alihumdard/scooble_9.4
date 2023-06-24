@@ -51,6 +51,20 @@ class UserController extends Controller
         $this->gateway->setTestMode(true);
     }
 
+    private function updateAppLocaleConfig($locale)
+    {
+        $configFile = base_path('config/app.php');
+
+        if (file_exists($configFile)) {
+            $config = require $configFile;
+            $config['locale'] = $locale;
+
+            $content = "<?php\n\nreturn " . var_export($config, true) . ";\n";
+
+            file_put_contents($configFile, $content);
+        }
+    }
+
     public function lang_change(Request $request)
     {
         try {
@@ -65,20 +79,6 @@ class UserController extends Controller
             return redirect()->back();
         } catch (ValidationException $exception) {
             return redirect()->back()->withErrors($exception->errors());
-        }
-    }
-    
-    private function updateAppLocaleConfig($locale)
-    {
-        $configFile = base_path('config/app.php');
-
-        if (file_exists($configFile)) {
-            $config = require $configFile;
-            $config['locale'] = $locale;
-
-            $content = "<?php\n\nreturn " . var_export($config, true) . ";\n";
-
-            file_put_contents($configFile, $content);
         }
     }
 
