@@ -82,18 +82,18 @@
                             <div class="row">
                                 @csrf
                                 <div class="col-lg-3 my-2">
-                                    <label for="title">Title:</label>
+                                    <label for="title">@lang('lang.title'):</label>
                                     <input required type="text" name="title" id="title" value="{{ $data['title'] ?? '' }}" placeholder="@lang('lang.title')" class="form-control">
                                     <input type="hidden" name="id" id="trip_id" value="{{ $data['id'] ?? '' }}" />
                                 </div>
 
                                 <div class="col-lg-3 my-2">
-                                    <label for="trip_date">Date:</label>
+                                    <label for="trip_date">@lang('lang.date'):</label>
                                     <input required type="date" name="trip_date" id="trip_date" value="{{ $data['trip_date'] ?? '' }}" class="form-control">
                                 </div>
 
                                 <div class="col-lg-3 my-2">
-                                    <label for="driver_id">Drivers:</label>
+                                    <label for="driver_id">@lang('lang.drivers'):</label>
                                     <select required name="driver_id" id="driver_id" class="form-select">
                                         <option disabled selected>@lang('lang.select_driver')</option>
                                         @foreach($driver_list as $value)
@@ -119,12 +119,12 @@
                                 @endif
 
                                 <div class="col-lg-12 mb-2">
-                                    <label for="trip_desc">Trip Description:</label>
+                                    <label for="trip_desc">@lang('lang.trip_description'):</label>
                                     <textarea required name="desc" id="trip_desc" class="form-control" placeholder="@lang('lang.trip_description')">{{ $data['desc'] ?? '' }} </textarea>
                                 </div>
 
                                 <div class="col-lg-4">
-                                    <label for="start_address">Start Point:</label>
+                                    <label for="start_address">@lang('lang.start_point'):</label>
                                     <select required name="start_point" id="start_address" class="form-select">
                                         @if(isset($data['start_point']) && $data['start_point'] != '')
                                         <option value="{{ $data['start_point'] }}" selected>{{ $data['start_point'] }}</option>
@@ -134,7 +134,7 @@
                                 </div>
 
                                 <div class="col-lg-4">
-                                    <label for="end_address">End Point:</label>
+                                    <label for="end_address">@lang('lang.end_point'):</label>
                                     <select name="end_point" id="end_address" class="form-select">
                                         @if(isset($data['end_point']) && $data['end_point'] != '')
                                         <option value="{{ $data['end_point'] }}" selected>{{ $data['end_point'] }}</option>
@@ -152,7 +152,7 @@
                                                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M22.8 14.4C22.4817 14.4 22.1765 14.5264 21.9515 14.7515C21.7264 14.9765 21.6 15.2817 21.6 15.6V20.4C21.6 20.7183 21.4736 21.0235 21.2485 21.2485C21.0235 21.4736 20.7183 21.6 20.4 21.6H3.6C3.28174 21.6 2.97652 21.4736 2.75147 21.2485C2.52643 21.0235 2.4 20.7183 2.4 20.4V15.6C2.4 15.2817 2.27357 14.9765 2.04853 14.7515C1.82348 14.5264 1.51826 14.4 1.2 14.4C0.88174 14.4 0.576515 14.5264 0.351472 14.7515C0.126428 14.9765 0 15.2817 0 15.6V20.4C0 21.3548 0.379285 22.2705 1.05442 22.9456C1.72955 23.6207 2.64522 24 3.6 24H20.4C21.3548 24 22.2705 23.6207 22.9456 22.9456C23.6207 22.2705 24 21.3548 24 20.4V15.6C24 15.2817 23.8736 14.9765 23.6485 14.7515C23.4235 14.5264 23.1183 14.4 22.8 14.4ZM11.148 16.452C11.2621 16.5612 11.3967 16.6469 11.544 16.704C11.6876 16.7675 11.843 16.8003 12 16.8003C12.157 16.8003 12.3124 16.7675 12.456 16.704C12.6033 16.6469 12.7379 16.5612 12.852 16.452L17.652 11.652C17.878 11.426 18.0049 11.1196 18.0049 10.8C18.0049 10.4804 17.878 10.174 17.652 9.948C17.426 9.72204 17.1196 9.59509 16.8 9.59509C16.4804 9.59509 16.174 9.72204 15.948 9.948L13.2 12.708V1.2C13.2 0.88174 13.0736 0.576515 12.8485 0.351472C12.6235 0.126428 12.3183 0 12 0C11.6817 0 11.3765 0.126428 11.1515 0.351472C10.9264 0.576515 10.8 0.88174 10.8 1.2V12.708L8.052 9.948C7.94011 9.83611 7.80729 9.74736 7.6611 9.68681C7.51491 9.62626 7.35823 9.59509 7.2 9.59509C7.04177 9.59509 6.88509 9.62626 6.7389 9.68681C6.59271 9.74736 6.45989 9.83611 6.348 9.948C6.23611 10.0599 6.14736 10.1927 6.08681 10.3389C6.02626 10.4851 5.99509 10.6418 5.99509 10.8C5.99509 10.9582 6.02626 11.1149 6.08681 11.2611C6.14736 11.4073 6.23611 11.5401 6.348 11.652L11.148 16.452Z" fill="white" />
                                                 </svg>
-                                                Import
+                                                @lang('lang.import')
                                             </label>
                                             <input type="file" id="importAddress" multiple size="50" style="display: none;">
                                             <div>
@@ -246,7 +246,7 @@
                                 <div class="col-lg-4 float-right text-right">
                                     <button type="submit" id="btn_save_trip" class="btn text-white" style="background-color: rgb(35, 58, 133); width: 100%; border-radius: 8px;">
                                         <div class="btn_spinner spinner-border spinner-border-sm text-white d-none" ></div>
-                                        <span id="text">Save Trip</span>
+                                        <span id="text">@lang('lang.save_trip')</span>
                                      </button>
                                 </div>
                             </div>
@@ -282,20 +282,20 @@
                             <div class="form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" id="addressPicture" type="checkbox" />
-                                    <label class="form-check-label" for="pictureCheckbox">Picture</label>
+                                    <label class="form-check-label" for="pictureCheckbox">@lang('lang.picture')</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" id="addressSignature" type="checkbox">
-                                    <label class="form-check-label" for="signatureCheckbox">Signature</label>
+                                    <label class="form-check-label" for="signatureCheckbox">@lang('lang.signature')</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" id="addressNote" type="checkbox">
-                                    <label class="form-check-label" for="noteCheckbox">Note</label>
+                                    <label class="form-check-label" for="noteCheckbox">@lang('lang.note')</label>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <button type="button" id="btn_address_detail" data-row-id='' class="btn btn-primary mr-3 ml-auto px-4 mb-3" style="background-color: #E45F00; border-radius: 5px;">Save</button>
+                    <button type="button" id="btn_address_detail" data-row-id='' class="btn btn-primary mr-3 ml-auto px-4 mb-3" style="background-color: #E45F00; border-radius: 5px;">@lang('lang.save')</button>
                 </div>
             </div>
         </div>
@@ -317,7 +317,7 @@
                     </div>
                     <div class="row mt-3 text-center">
                         <div class="col-lg-12">
-                            <button type="button" id="address_confirm" data-dismiss="modal" class="btn text-white" style="background-color: #233A85; width: 70%;">Confirm Location</button>
+                            <button type="button" id="address_confirm" data-dismiss="modal" class="btn text-white" style="background-color: #233A85; width: 70%;">@lang('lang.confirm_location')</button>
                         </div>
                     </div>
                 </div>

@@ -72,12 +72,12 @@
               <table id="users-table" class="display" style="width:100%">
                 <thead class="text-secondary" style="background-color: #E9EAEF;">
                   <tr style="font-size: small;">
-                    <th>Sr.</th>
-                    <th> Name </th>
-                    <th> Address </th>
-                    <th> Company Name </th>
-                    <th> Status </th>
-                    <th> Joining Date </th>
+                    <th>@lang('lang.sr').</th>
+                    <th> @lang('lang.name') </th>
+                    <th> @lang('lang.address') </th>
+                    <th> @lang('lang.company_name') </th>
+                    <th> @lang('lang.status') </th>
+                    <th> @lang('lang.joining_date') </th>
                     <th>@lang('lang.actions')</th>
                   </tr>
                 </thead>
@@ -93,19 +93,19 @@
                     @if($value['status'] == 1)
                     <td>
                       <button class="btn btn_status">
-                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #31A6132E; color: #31A613;"> Active </span>
+                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #31A6132E; color: #31A613;"> @lang('lang.active') </span>
                       </button>
                     </td>
                     @elseif($value['status'] == 2)
                     <td>
                       <button class="btn btn_status">
-                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #4D4D4D1F; color: #8F9090;"> Pendding </span>
+                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #4D4D4D1F; color: #8F9090;"> @lang('lang.pending') </span>
                       </button>
                     </td>
                     @else
                     <td>
                       <button class="btn btn_status">
-                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #F5222D30; color: #F5222D;"> Suspend </span>
+                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #F5222D30; color: #F5222D;"> @lang('lang.suspend') </span>
                       </button>
                     </td>
                     @endif
@@ -302,8 +302,8 @@
               <rect x="4" y="4" width="48" height="48" rx="24" stroke="#ECFDF3" stroke-width="8" />
             </svg>
             <select name="status" id="status" class="form-select mt-3">
-              <option value="1">Activate</option>
-              <option value="3">Suspend</option>
+              <option value="1">@lang('lang.activate')</option>
+              <option value="3">@lang('lang.suspend')</option>
             </select>
           </div>
           <div class="modal-footer">

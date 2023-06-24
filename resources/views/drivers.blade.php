@@ -70,12 +70,12 @@
                 <thead class="text-secondary" style="background-color: #E9EAEF;">
                   <tr style="font-size: small;">
                     <th>#</th>
-                    <th>@lang('lang.drivers') Names</th>
+                    <th>@lang('lang.drivers')</th>
                     <th>@lang('lang.joining_date')</th>
                     <th>@lang('lang.address')</th>
 
                     @if($user->role != 'Client')
-                    <th>@lang('lang.drivers') client</th>
+                    <th>@lang('lang.drivers')</th>
                     @endif
 
                     <th>@lang('lang.status')</th>
@@ -97,19 +97,19 @@
                     @if($value['status'] == 1)
                     <td>
                       <button class="btn btn_status">
-                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #31A6132E; color: #31A613;"> Active </span>
+                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #31A6132E; color: #31A613;"> @lang('lang.active') </span>
                       </button>
                     </td>
                     @elseif($value['status'] == 2)
                     <td>
                       <button class="btn btn_status">
-                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #4D4D4D1F; color: #8F9090;"> Pendding </span>
+                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #4D4D4D1F; color: #8F9090;"> @lang('lang.pending') </span>
                       </button>
                     </td>
                     @else
                     <td>
                       <button class="btn btn_status">
-                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #F5222D30; color: #F5222D;"> Suspend </span>
+                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #F5222D30; color: #F5222D;"> @lang('lang.suspend') </span>
                       </button>
                     </td>
                     @endif
@@ -285,8 +285,8 @@
               <rect x="4" y="4" width="48" height="48" rx="24" stroke="#ECFDF3" stroke-width="8" />
             </svg>
             <select name="status" id="status" class="form-select mt-3">
-              <option value="1">Activate</option>
-              <option value="3">Suspend</option>
+              <option value="1">@lang('lang.activate')</option>
+              <option value="3">@lang('lang.suspend')</option>
             </select>
           </div>
           <div class="modal-footer">
