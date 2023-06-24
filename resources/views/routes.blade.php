@@ -108,13 +108,13 @@
                     @if($value['status'] == 'on')
                     <td>
                       <button class="btn btn_status">
-                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #31A6132E; color: #31A613;"> Active </span>
+                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #31A6132E; color: #31A613;"> @lang('lang.active') </span>
                       </button>
                     </td>
                     @else
                     <td>
                       <button class="btn btn_status">
-                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #F5222D30; color: #F5222D;"> Suspend </span>
+                        <span class="badge" data-client_id="{{$value['id']}}" style="background-color: #F5222D30; color: #F5222D;"> @lang('lang.suspend') </span>
                       </button>
                     </td>
                     @endif
@@ -179,7 +179,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #452C88;">
-          <h5 class="modal-title text-white" id="edittripLabel">Trip Detail</h5>
+          <h5 class="modal-title text-white" id="edittripLabel">@lang('lang.trip_detail')</h5>
           <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -192,7 +192,7 @@
                   <img src="assets/images/pic.jpg" style="width: 100px; height: 100px; border-radius: 30px;" alt="text">
                 </div>
                 <div class="col-lg-8 mb-3">
-                  <label for="client_name" style="color: #452C88;">Client Name</label>
+                  <label for="client_name" style="color: #452C88;">@lang('lang.client_name')</label>
                   <input type="text" name="client_name" class="form-control" id="client_name">
                 </div>
               </div>
@@ -203,7 +203,7 @@
                   <img src="assets/images/pic.jpg" style="width: 100px; height: 100px; border-radius: 30px;" alt="text">
                 </div>
                 <div class="col-lg-8 mb-3">
-                  <label for="client_name" style="color: #452C88;">Client Name</label>
+                  <label for="client_name" style="color: #452C88;">@lang('lang.client_name')</label>
                   <input type="text" name="client_name" class="form-control" id="client_name">
                 </div>
               </div>

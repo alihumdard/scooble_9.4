@@ -25,7 +25,7 @@
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M2.54 0H5.92C7.33 0 8.46 1.15 8.46 2.561V5.97C8.46 7.39 7.33 8.53 5.92 8.53H2.54C1.14 8.53 0 7.39 0 5.97V2.561C0 1.15 1.14 0 2.54 0ZM2.54 11.4697H5.92C7.33 11.4697 8.46 12.6107 8.46 14.0307V17.4397C8.46 18.8497 7.33 19.9997 5.92 19.9997H2.54C1.14 19.9997 0 18.8497 0 17.4397V14.0307C0 12.6107 1.14 11.4697 2.54 11.4697ZM17.4601 0H14.0801C12.6701 0 11.5401 1.15 11.5401 2.561V5.97C11.5401 7.39 12.6701 8.53 14.0801 8.53H17.4601C18.8601 8.53 20.0001 7.39 20.0001 5.97V2.561C20.0001 1.15 18.8601 0 17.4601 0ZM14.0801 11.4697H17.4601C18.8601 11.4697 20.0001 12.6107 20.0001 14.0307V17.4397C20.0001 18.8497 18.8601 19.9997 17.4601 19.9997H14.0801C12.6701 19.9997 11.5401 18.8497 11.5401 17.4397V14.0307C11.5401 12.6107 12.6701 11.4697 14.0801 11.4697Z" fill="white" />
             </svg>
-          </span> Dashboard
+          </span> @lang('lang.dashboard')
         </h3>
       </div>
       <div class="container-fluid">
@@ -36,7 +36,7 @@
             -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 style="color: #452C88;">Revenue</h5>
+                  <h5 style="color: #452C88;">@lang('lang.revenue')</h5>
                   <h3 style="color: #E45F00;">500</h3>
                 </div>
                 <div>
@@ -54,7 +54,7 @@
             -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 style="color: #452C88;">Drivers</h5>
+                  <h5 style="color: #452C88;">@lang('lang.drivers')</h5>
                   <h3 style="color: #E45F00;">500</h3>
                 </div>
                 <div>
@@ -78,7 +78,7 @@
             -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 style="color: #452C88;">Users</h5>
+                  <h5 style="color: #452C88;">@lang('lang.users')</h5>
                   <h3 style="color: #E45F00;">500</h3>
                 </div>
                 <div>
@@ -100,7 +100,7 @@
             -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 style="color: #452C88;">Total Routes</h5>
+                  <h5 style="color: #452C88;">@lang('lang.total_routes')</h5>
                   <h3 style="color: #E45F00;">500</h3>
                 </div>
                 <div>
@@ -119,7 +119,7 @@
               -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 style="color: #452C88;">Completed Trips</h5>
+                  <h5 style="color: #452C88;">@lang('lang.completed_trips')</h5>
                   <h3 style="color: #E45F00;">500</h3>
                 </div>
                 <div>
@@ -137,7 +137,7 @@
               -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 style="color: #452C88;">Clients</h5>
+                  <h5 style="color: #452C88;">@lang('lang.clients')</h5>
                   <h3 style="color: #E45F00;">500</h3>
                 </div>
                 <div>
@@ -173,7 +173,7 @@
                 <div class="prgrss-chart" style="box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25); 
             -webkit-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);
             -moz-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);">
-                  <p class="progress_para pt-2">Active Trips </p>
+                  <p class="progress_para pt-2">@lang('lang.active_trips') </p>
                   <canvas id="myChart2" style="height: auto !important;"></canvas>
                 </div>
               </div>
@@ -181,7 +181,7 @@
                 <div class="prgrss-chart" style="box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25); 
             -webkit-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);
             -moz-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);">
-                  <p class="progress_para pt-2">Completed Trips </p>
+                  <p class="progress_para pt-2">@lang('lang.completed_trips')</p>
                   <canvas id="myChart" style="height: auto !important;"></canvas>
                 </div>
               </div>
@@ -189,7 +189,7 @@
                 <div class="prgrss-chart" style="box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25); 
             -webkit-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);
             -moz-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);">
-                  <p class="progress_para pt-2">Pending Trips </p>
+                  <p class="progress_para pt-2">@lang('lang.pending_trips') </p>
                   <canvas id="myChart3" style="height: auto !important;"></canvas>
                 </div>
               </div>
@@ -211,7 +211,7 @@
               <div class="col-lg-8">
                 <form action="" method="#">
                   <select name="" class="form-select" id="">
-                    <option disabled selected value="null">Filter by clients</option>
+                    <option disabled selected value="null">@lang('lang.filter_by_clients')</option>
                     <option value=""><i class="fa fa-edit"></i> Earth</option>
                     <option value="">B</option>
                     <option value="">C</option>
