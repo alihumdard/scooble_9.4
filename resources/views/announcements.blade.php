@@ -50,7 +50,7 @@
                     <input type="radio" name="type" id="type" value="News" {{ ($announcmnent['type'] ?? '') === 'News' ? 'checked' : '' }}> @lang('lang.news')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <button class="btn px-5 text-white" name="submit" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
+                    <button class="btn px-5 text-white" name="submit" style="background-color: #E45F00; border-radius: 8px;">{{($announcmnent['id']  ?? '') !== '' ? __('lang.update') : __('lang.add')}} </button>
                 </div>
             </div>
         </form>
