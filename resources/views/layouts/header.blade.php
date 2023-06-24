@@ -106,7 +106,7 @@
 
     .preloader .logo {
       max-width: 150px;
-      animation: pulse 1.5s infinite ease-in-out;
+      animation: pulse 1.1s infinite ease-in-out;
     }
 
     @keyframes pulse {
