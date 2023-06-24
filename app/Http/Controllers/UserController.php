@@ -30,6 +30,8 @@ use App\Models\Payment;
 use App\Jobs\SendSubscriptionPurchasedEmail;
 use App\Jobs\SendEmailVerificationJob;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Config;
 
 class UserController extends Controller
 {
@@ -49,11 +51,35 @@ class UserController extends Controller
         $this->gateway->setTestMode(true);
     }
 
-    public function lang_change(REQUEST $request)
+    public function lang_change(Request $request)
     {
-        app()->setlocale($request->lang);
-        session(["lang" => $request->lang]);
-        return redirect()->back();
+        try {
+            $request->validate([
+                'lang' => 'required|in:en,es', 
+            ]);
+            $lang = $request->lang;
+            app()->setLocale($lang);
+            session(['lang' => $lang]);
+            $this->updateAppLocaleConfig($lang);
+
+            return redirect()->back();
+        } catch (ValidationException $exception) {
+            return redirect()->back()->withErrors($exception->errors());
+        }
+    }
+    
+    private function updateAppLocaleConfig($locale)
+    {
+        $configFile = base_path('config/app.php');
+
+        if (file_exists($configFile)) {
+            $config = require $configFile;
+            $config['locale'] = $locale;
+
+            $content = "<?php\n\nreturn " . var_export($config, true) . ";\n";
+
+            file_put_contents($configFile, $content);
+        }
     }
 
     public function index(Request $request)

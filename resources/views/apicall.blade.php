@@ -400,9 +400,10 @@
                         $('#spinner').addClass('d-none');
                         if (responseArray.status === 'success') {
                             showAlert("Success", "Login Successfully", "success");
-                            setInterval(function() {
-                                window.location.href = '/';
-                            }, 500);
+                            
+                            setTimeout(function() {
+                                window.location.replace('/');
+                            }, 1200);
                         } 
                         else if(responseArray.status === 'error'){ 
                         // console.log(response.message);
@@ -818,7 +819,7 @@
         }
 
         function showAlert(title, message, type) {  
-            setTimeout(function() {
+            
                 swal({
                     title: title,
                     text: message,
@@ -840,7 +841,7 @@
                         $('.swal2-popup').css('animation', 'swal2-hide 0.5s');
                     }
                 });
-            }, 2000);
+            
         }
 
 
