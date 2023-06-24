@@ -74,7 +74,7 @@
               @csrf
               <select id="lang-select" class="form-select" style="" name="lang" onchange="this.form.submit()">
                 <option value="en" <?= (session('lang') == 'en') ? 'selected' : ''; ?>>English</option>
-                <option value="es" <?= (session('lang') == 'es') ? 'selected' : ''; ?>>Spanish</option>
+                <option value="es" <?= (session('lang') == 'es') ? 'selected' : ''; ?>>Turkish</option>
               </select>
             </form>
           </li>
