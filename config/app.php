@@ -7,7 +7,7 @@ return array (
   'url' => 'http://localhost',
   'asset_url' => NULL,
   'timezone' => 'UTC',
-  'locale' => 'es',
+  'locale' => 'en',
   'fallback_locale' => 'en',
   'faker_locale' => 'en_US',
   'key' => 'base64:aRIcM3NOqb5gtijkgjBJEZQclc3ny6nbyntCZT+ThFE=',

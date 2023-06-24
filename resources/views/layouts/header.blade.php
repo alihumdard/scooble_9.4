@@ -56,10 +56,89 @@
     .nav-link:hover {
       color: black !important;
     }
+
+    /*
+     .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preloader .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }  */
+
+   .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #452C88, #ff4f1a);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .preloader .logo {
+      max-width: 150px;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+     
   </style>
 </head>
 
 <body>
+<div class="preloader">
+<!-- <div class="spinner"></div> -->
+<img class="logo" src="assets/images/Logo.png" alt="Logo">
+</div>
+
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -340,3 +419,23 @@
           @endif
         </ul>
       </nav>
+
+      <script>
+        // Show the preloader when the page starts loading
+        showPreloader();
+
+        // Hide the preloader when the page finishes loading
+        $(window).on('load', function() {
+          hidePreloader();
+        });
+
+        function showPreloader() {
+          $('.preloader').show(); // Show the preloader element
+        }
+
+        function hidePreloader() {
+          $('.preloader').fadeOut('fast', function() {
+            $(this).remove();
+          });
+        }
+      </script>
