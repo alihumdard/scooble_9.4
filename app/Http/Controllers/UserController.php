@@ -67,19 +67,16 @@ class UserController extends Controller
 
     public function lang_change(Request $request)
     {
-        try {
-            $request->validate([
-                'lang' => 'required|in:en,es', 
-            ]);
+       
             $lang = $request->lang;
             app()->setLocale($lang);
+            session()->forget('lang');
+
             session(['lang' => $lang]);
             $this->updateAppLocaleConfig($lang);
 
             return redirect()->back();
-        } catch (ValidationException $exception) {
-            return redirect()->back()->withErrors($exception->errors());
-        }
+       
     }
 
     public function index(Request $request)
@@ -525,6 +522,7 @@ class UserController extends Controller
                 if($data['status']== "success"){
                     $data['token'] = json_decode($login->getContent())->token;
                     session(['user' => $data['token']]);
+                    session(['lang' => 'en']);
                 }
 
                 echo($login->getContent());       
@@ -538,6 +536,7 @@ class UserController extends Controller
 
     public function logout(REQUEST $request)
     {
+        session()->forget('lang');
         session()->flush();
         return redirect('/home');
     }
