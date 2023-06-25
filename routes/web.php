@@ -41,7 +41,6 @@ Route::match(['post','get'],'/change_status', [UserController::class, 'change_st
 
 })->withoutMiddleware([CheckSubscription::class])->group(function () {
     Route::match(['post','get'],'/subscription', [UserController::class, 'subscription']);
-    Route::match(['post','get'],'/paypal/pay', [UserController::class, 'pay'])->name('paypal.pay');;
     Route::match(['post','get'],'/payment_success', [UserController::class, 'payment_success']);
     Route::match(['post','get'],'/payment_cancel', [UserController::class, 'payment_cancel']);
 
@@ -55,20 +54,15 @@ Route::match(['post','get'],'/change_status', [UserController::class, 'change_st
     Route::match(['post','get'],'/logout', [UserController::class, 'logout']);
     Route::match(['post','get'],'/home', [UserController::class, 'home']);
     Route::match(['post', 'get'], '/verify/{hash}', [UserController::class, 'verify'])->name('verify');
+    Route::match(['post','get'],'/paypal/pay', [UserController::class, 'pay'])->name('paypal.pay');;
 
+    Route::get('/subscription-expired', function () {
+        return view('subscription_expired');
+    });
 
-
-
-
-
-
-Route::get('/subscription-expired', function () {
-    return view('subscription_expired');
-});
-
-Route::get('/subscription-expired_driver', function () {
-    return view('sub_expired_driver');
-});
+    Route::get('/subscription-expired_driver', function () {
+        return view('sub_expired_driver');
+    });
 
 
 
