@@ -24,24 +24,18 @@ use App\Jobs\UserProfileEmail;
 use Illuminate\Support\Str;
 use App\Models\Event;
 
+
 class APIController extends Controller
 {
     public function index(){
 
     }
-
-    class APIController extends Controller
-{
-    public function index()
-    {
-    }
-
+    
     public function storeEvent(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'event_date' => 'required|date',
-            // Add validation rules for other event fields if needed
         ]);
 
         if ($validator->fails()) {
@@ -52,7 +46,6 @@ class APIController extends Controller
             $event = new Event();
             $event->title = $request->title;
             $event->event_date = $request->event_date;
-            // Assign other event fields as needed
 
             $event->save();
 
@@ -62,7 +55,6 @@ class APIController extends Controller
         }
     }
 
-  
     public function clients(): JsonResponse
     {
         try {
