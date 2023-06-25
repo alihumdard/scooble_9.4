@@ -258,19 +258,35 @@
 					var droppedEvent = info.draggedEl.innerText;
 
 					// Make an AJAX request to store the event in the database
+
+					var apiname = 'events';
+					var apiurl = "{{ end_url('') }}" + apiname;
+					const payload = {
+						title: droppedEvent,
+						event_date: '2023-06-16'
+					};
+					var bearerToken = "{{session('user')}}";
 					$.ajax({
-						url: 'your-api-endpoint', // Replace with your API endpoint
+						url: apiurl,
 						type: 'POST',
-						data: {
-							event: droppedEvent
+						data: JSON.stringify(payload),
+						headers: {
+							'Content-Type': 'application/json',
+                    		'Authorization': 'Bearer ' + bearerToken
 						},
+						contentType: false,
+						processData: false,
 						success: function(response) {
-							console.log('Event stored successfully:', response);
+							console.log(formData);
+							if (response.status === 'success') {
+
+							} else {}
 						},
 						error: function(xhr, status, error) {
-							console.error('Error storing event:', error);
+							showAlert("Error", response.message, response.status);
 						}
 					});
+
 					// is the "remove after drop" checkbox checked?
 					if (checkbox.checked) {
 						// if so, remove the element from the "Draggable Events" list

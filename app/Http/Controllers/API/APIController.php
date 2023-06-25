@@ -22,6 +22,7 @@ use App\Models\Address;
 use Illuminate\Foundation\Auth\Authenticatable;
 use App\Jobs\UserProfileEmail;
 use Illuminate\Support\Str;
+use App\Models\Event;
 
 class APIController extends Controller
 {
@@ -29,6 +30,39 @@ class APIController extends Controller
 
     }
 
+    class APIController extends Controller
+{
+    public function index()
+    {
+    }
+
+    public function storeEvent(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'event_date' => 'required|date',
+            // Add validation rules for other event fields if needed
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'message' => $validator->errors()], 400);
+        }
+
+        try {
+            $event = new Event();
+            $event->title = $request->title;
+            $event->event_date = $request->event_date;
+            // Assign other event fields as needed
+
+            $event->save();
+
+            return response()->json(['status' => 'success', 'message' => 'Event saved successfully', 'data' => $event]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error storing event', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+  
     public function clients(): JsonResponse
     {
         try {
