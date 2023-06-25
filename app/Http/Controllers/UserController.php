@@ -662,45 +662,50 @@ class UserController extends Controller
 
     public function pay(Request $request)
     {
-        try {
+        $user = auth()->user();
+        if ($user) {
+            try {
 
-            $payment = new Payment();
-            $payment->amount = $request->amount;
-            $payment->currency = env('PAYPAL_CURRENCY');
-            $payment->package_id = $request->package_id;
-            $payment->payment_method = 'PayPal';
-            $payment->created_by = Auth::id();
-            $payment->save();
-
-            $payment = Payment::where('created_by', Auth::id())->latest()->first();
-
-            $response = $this->gateway->purchase(array(
-                'amount'    => $request->amount,
-                'currency'  => env('PAYPAL_CURRENCY'),
-                'returnUrl' => url('payment_success'),
-                'cancelUrl' => url('payment_cancel')
-            ))->send();
+                $payment = new Payment();
+                $payment->amount = $request->amount;
+                $payment->currency = env('PAYPAL_CURRENCY');
+                $payment->package_id = $request->package_id;
+                $payment->payment_method = 'PayPal';
+                $payment->created_by = Auth::id();
+                $payment->save();
     
-            if ($response->isRedirect()) {
-                    $response->redirect();
-            } 
-
-            else {
-
-                if ($payment) {
-                    $this->fail_trans($response->getMessage(), null, null, 'error');
+                $payment = Payment::where('created_by', Auth::id())->latest()->first();
+    
+                $response = $this->gateway->purchase(array(
+                    'amount'    => $request->amount,
+                    'currency'  => env('PAYPAL_CURRENCY'),
+                    'returnUrl' => url('payment_success'),
+                    'cancelUrl' => url('payment_cancel')
+                ))->send();
+        
+                if ($response->isRedirect()) {
+                        $response->redirect();
+                } 
+    
+                else {
+    
+                    if ($payment) {
+                        $this->fail_trans($response->getMessage(), null, null, 'error');
+                    }
+    
+                    return redirect()->back()->with('error', 'Payment could not proceed futher contact to Admin!!.');
                 }
-
-                return redirect()->back()->with('error', 'Payment could not proceed futher contact to Admin!!.');
+    
+            } catch (\Throwable $th) {
+    
+                if ($payment) {
+                    $this->fail_trans(null, $th->getMessage(), null, 'server_error');
+                }
+    
+                return redirect()->back()->with('error', 'PayPal is declined to Connet. Check Your Network or Contact to Admin.');
             }
-
-        } catch (\Throwable $th) {
-
-            if ($payment) {
-                $this->fail_trans(null, $th->getMessage(), null, 'server_error');
-            }
-
-            return redirect()->back()->with('error', 'PayPal is declined to Connet. Check Your Network or Contact to Admin.');
+        }else{
+            return redirect('/login');
         }
     }
     
