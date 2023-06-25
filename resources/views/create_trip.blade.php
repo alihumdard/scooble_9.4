@@ -91,19 +91,6 @@
                                     <label for="trip_date">@lang('lang.date'):</label>
                                     <input required type="date" name="trip_date" id="trip_date" value="{{ $data['trip_date'] ?? '' }}" class="form-control">
                                 </div>
-
-                                <div class="col-lg-3 my-2">
-                                    <label for="driver_id">@lang('lang.drivers'):</label>
-                                    <select required name="driver_id" id="driver_id" class="form-select">
-                                        <option disabled selected>@lang('lang.select_driver')</option>
-                                        @foreach($driver_list as $value)
-                                        <option value="{{ $value['id'] }}" {{ isset($data['driver_id']) && $data['driver_id'] == $value['id'] ? 'selected' : '' }}>
-                                            {{ $value['name'] }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
                                 @if(isset($client_list) && $client_list != '')
                                     <div class="col-lg-3 my-2">
                                         <label for="client_id">Clients :</label>
@@ -117,7 +104,17 @@
                                         </select>
                                     </div>
                                 @endif
-
+                                <div class="col-lg-3 my-2">
+                                    <label for="driver_id">@lang('lang.drivers'):</label>
+                                    <select required name="driver_id" id="driver_id" class="form-select">
+                                        <option disabled selected>@lang('lang.select_driver')</option>
+                                        @foreach($driver_list as $value)
+                                        <option value="{{ $value['id'] }}" {{ isset($data['driver_id']) && $data['driver_id'] == $value['id'] ? 'selected' : '' }}>
+                                            {{ $value['name'] }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="col-lg-12 mb-2">
                                     <label for="trip_desc">@lang('lang.trip_description'):</label>
                                     <textarea required name="desc" id="trip_desc" class="form-control" placeholder="@lang('lang.trip_description')">{{ $data['desc'] ?? '' }} </textarea>
