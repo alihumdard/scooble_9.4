@@ -25,6 +25,12 @@ function user_roles($role_no){
     }    
 }
 
+function auth_users(){
+    //1 for active , 2 for pending, 3 for suspended , 4 for unverified...
+    $user_status =  [1, 2];
+    return $user_status;   
+}
+
 function user_role_no($role_no){
     switch ($role_no) {
         case 'Admin':
@@ -56,6 +62,7 @@ function view_permission($page_name) {
                 case 'create_trip':     
             // case 'announcements_alerts': 
                 case 'pdf_templates': 
+                case 'packages': 
                 case 'logout': 
 
                     return true;

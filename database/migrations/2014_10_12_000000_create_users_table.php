@@ -29,6 +29,9 @@ return new class extends Migration
             $table->integer('otp')->nullable();;
             $table->integer('added_user_id')->nullable();
             $table->integer('client_id')->nullable();
+            $table->integer('sub_id')->nullable()->default(null);
+            $table->date('sub_exp_date')->nullable()->default(null);
+            $table->integer('sub_package_id')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
         });

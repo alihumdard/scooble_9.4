@@ -354,54 +354,86 @@
 
         // loadTables('users','Client');
         // loadTables('users','Admin');
-        //login user through API ....        
+        //login user through API .... 
+        var login_alert;
+
         $('#login-form').on('submit', function(e) {
 
             e.preventDefault();
 
-            var apiurl = $(this).attr('action');
-            var csrfToken = '{{ csrf_token() }}';
-            var formData = {
-                email: $('#email').val(),
-                password: $('#password').val(),
-                _token: csrfToken
-            };
+            var email = $('#email').val();
+            var password = $('#password').val();
 
-            $.ajax({
+            if (email === '' || password === '') {
+                (email === '') ? $('.validation-error-email').empty().append('<label class="text-danger">* email is required</label>') : $('.validation-error-email').empty();
+                (password === '') ? $('.validation-error-password').empty().append('<label class="text-danger">* password  is required</label>') : $('.validation-error-password').empty();
+            } 
+            else {
+                $('.validation-error-email').empty();
+                $('.validation-error-password').empty();
+                $('#btn_user_login').prop('disabled', true);
 
-                url: "/" + apiurl,
-                type: 'POST',
-                data: formData,
-                beforeSend: function() {
-                    $('#spinner').removeClass('d-none');
-                    $('#text').addClass('d-none');
-                },
-                success: function(response) {
-                    
-                    var responseArray = JSON.parse(response);
-                    console.log(responseArray);
-                    $('#text').removeClass('d-none');
-                    $('#spinner').addClass('d-none');
-                    if (responseArray.status === 'success') {
-                        showAlert("Success", "Login Successfully", "success");
-                        setInterval(function() {
-                            window.location.href = '/';
-                        }, 500);
-                    } else {
-                        showAlert(response.status, "Invalid Credentiials", "warning");
+                var apiurl = $(this).attr('action');
+                var csrfToken = '{{ csrf_token() }}';
+                var formData = {
+                    email: $('#email').val(),
+                    password: $('#password').val(),
+                    _token: csrfToken
+                };
+
+                $.ajax({
+
+                    url: "/" + apiurl,
+                    type: 'POST',
+                    data: formData,
+                    beforeSend: function() {
+                        $('#spinner').removeClass('d-none');
+                        $('#text').addClass('d-none');
+                        showlogin('Wait', 'User Login...');
+                    },
+                    success: function(response) {
+                      
+                        $('#btn_user_login').prop('disabled', false);;
+                        var responseArray = JSON.parse(response);
+                        // console.log(responseArray);
+                        $('#text').removeClass('d-none');
+                        $('#spinner').addClass('d-none');
+                        if (responseArray.status === 'success') {
+                            showAlert("Success", "Login Successfully", "success");
+                            
+                            setTimeout(function() {
+                                window.location.replace('/');
+                            }, 1200);
+                        } 
+                        else if(responseArray.status === 'error'){ 
+                        // console.log(response.message);
+                            $('.error-label').remove();
+                            $.each(responseArray.message, function(field, errorMessages) {
+                                $.each(errorMessages, function(index, errorMessage) {
+                                    (field == 'email') ? $('.validation-error-email').empty().append('<label class="text-danger">*'+errorMessage+'</label>') : $('.validation-error-email').empty();
+                                    (field == 'password') ? $('.validation-error-password').empty().append('<label class="text-danger">*'+errorMessage+'</label>') : $('.validation-error-password').empty();
+                                });
+                            });
+
+                        }
+                        else {
+                            showAlert(responseArray.status, responseArray.message, "warning");
+                        }
+                    },
+
+                    error: function(xhr, status, error) {
+                        $('#btn_user_login').prop('disabled', false);
+                        console.error(xhr.responseText);
+                        showAlert("Error", "Please contact your admin", "warning");
                     }
-                },
 
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                    showAlert("Error", "Please contact your admin", "warning");
-                }
-
-            });
+                });
+        }
         });
 
         // saving trip in through the api...
         $(document).on('submit', '#saveTrip', function(e) {
+
             e.preventDefault();
             var apiname = $(this).attr('action');
             var apiurl = "{{ end_url('') }}" + apiname;
@@ -529,9 +561,9 @@
             });
         });
 
-
         // Adding  data in through the api...
         $('#formData').on('submit', function(e) {
+
             e.preventDefault();
             var button = $(this);
             var spinner = button.find('.btn_spinner');
@@ -559,30 +591,47 @@
                      buttonText.addClass('d-none');
                 },
                 success: function(response) {
+                    // console.log(response);
                     spinner.addClass('d-none');
                     buttonText.removeClass('d-none');
                     button.prop('disabled', false);
-                    console.log(formData);
+                    // console.log(formData);
                     if (response.status === 'success') {
+
                         $('#formData')[0].reset();
-
                         $('#addclient').modal('hide');
-
                         showAlert("Success", response.message, response.status);
-                        // $('#users-table').DataTable().destroy();
-                        // $("#table_reload").load(location.href + " #table_reload");
+
                         setTimeout(function() {
                             window.location.href = window.location.href;
                         }, 1500);
-                    } else {
-                        showAlert("Warning", response.message, response.status);
+
+                    }
+                    
+                    else if(response.status === 'error'){
+
+                        console.log(response.message);
+                        $('.error-label').remove();
+
+                        $.each(response.message, function(field, errorMessages) {
+                            var inputField = $('input[name="' + field + '"]');
+
+                            $.each(errorMessages, function(index, errorMessage) {
+                                var errorLabel = $('<label class="error-label text-danger">* ' + errorMessage + '</label>');
+                                inputField.addClass('error');
+                                inputField.after(errorLabel);
+                            });
+                        });
+
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.log(status);
+
                     spinner.addClass('d-none');
                     buttonText.removeClass('d-none');
                     button.prop('disabled', false);
-                    showAlert("Error", response.message, response.status);
+                    showAlert("Error", 'Request Can not Procceed', 'Can not Procceed furhter');
                 }
             });
         });
@@ -769,13 +818,61 @@
             $('#formData')[0].reset();
         }
 
-        function showAlert(title, message, type) {
-            swal({
-                title: title,
-                text: message,
-                icon: type
-            });
+        function showAlert(title, message, type) {  
+            
+                swal({
+                    title: title,
+                    text: message,
+                    icon: type,
+                    showClass: {
+                        popup: 'swal2-show',
+                        backdrop: 'swal2-backdrop-show',
+                        icon: 'swal2-icon-show'
+                    },
+                    hideClass: {
+                        popup: 'swal2-hide',
+                        backdrop: 'swal2-backdrop-hide',
+                        icon: 'swal2-icon-hide'
+                    },
+                    onOpen: function() {
+                        $('.swal2-popup').css('animation', 'swal2-show 0.5s');
+                    },
+                    onClose: function() {
+                        $('.swal2-popup').css('animation', 'swal2-hide 0.5s');
+                    }
+                });
+            
         }
+
+
+        function showlogin(title, message) {
+            login_alert = swal({
+                title: title,
+                content: {
+                    element: "div",
+                    attributes: {
+                        class: "custom-spinner"
+                    }
+                },
+                text: message,
+                buttons: false,
+                closeOnClickOutside: false,
+                closeOnEsc: false,
+                onOpen: function() {
+                    $('.custom-spinner').addClass('spinner-border spinner-border-sm text-primary');
+                },
+                onClose: function() {
+                    $('.custom-spinner').removeClass('spinner-border spinner-border-sm text-primary');
+                }
+            });
+
+            return login_alert;
+        }
+
+        $('input').on('input', function() {
+            $(this).removeClass('error');
+            $(this).next('.error-label').remove();
+        });
 
     });
 </script>

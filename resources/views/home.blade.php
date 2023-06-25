@@ -1,3 +1,14 @@
+@php
+    use App\Models\User;
+
+    $user = null;
+    if (session()->has('user_details')) {
+        $user_id = session('user_details')->id;
+        $user = User::find($user_id);
+    }
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,10 +46,23 @@
               <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 4rem;"" class=" nav-link"
                 href="#">About </a>
             </li>
+            @if($user)
             <li class="nav-item ">
               <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 3rem;"" class=" nav-link"
-                href="#">Price </a>
+                href="/">Dashboard </a>
             </li>
+            @endif
+            @if(!$user)
+            <li class="nav-item ">
+              <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 3rem;"" class=" nav-link"
+                href="/login">Login </a>
+            </li>
+            @else
+            <li class="nav-item ">
+              <a style="color: #ACADAE; font-weight: 500; font-size:1.0625rem;margin-right: 3rem;"" class=" nav-link"
+                href="/logout">Log Out </a>
+            </li>
+            @endif
           </ul>
         </div>
     </div>
@@ -52,18 +76,12 @@
       @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
 @endif
 
 @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ session('error') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
 @endif
         <!-- ================header-text-start================ -->

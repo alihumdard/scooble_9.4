@@ -5,7 +5,7 @@
   </style>
 
   <!-- Add Client Modal -->
-  <div class="modal fade" style="height: 30rem;" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
+  <div class="modal fade" id="addclient" tabindex="-1" aria-labelledby="addclientLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content bg-white">
         <div class="modal-header pb-0" style="border-bottom: none;">
@@ -37,47 +37,73 @@
           <div class="modal-body pt-0">
             <div class="row">
               <div class="col-lg-6 mb-2">
-                <label for="user_pic">Upload Image</label>
+                <label for="user_pic">@lang('lang.upload_image')</label>
                 <div class="row">
                   <div class="col-lg-10">
-                    <input type="file" name="user_pic" id="user_pic" class="form-control">
+                    <input type="file" name="user_pic" id="user_pic" class="form-control" require>
                   </div>
                   <div class="col-lg-2">
                     <img src="abc.png" width="100%" height="100%" style="border-radius: 50%;" id="user_pic" class="d-none" alt="No image selected">
                   </div>
                 </div>
               </div>
+              @if($add_as_user == user_roles('3') && $user->role == user_roles('1'))
               <div class="col-lg-6 mb-2">
-                <label for="com_pic">Company Logo</label>
+                <label for="com_pic">@lang('lang.client')</label>
+                <select name="" id="" class="form-select">
+                  <option value=""></option>
+                </select>
+                <!-- <div class="row">
+                  <div class="col-lg-10">
+                    <input type="file" name="com_pic" id="com_pic" class="form-control" require>
+                  </div>
+                  <div class="col-lg-2">
+                    <img src="abc.png" width="100%" height="  100%" style="border-radius: 50%;" id="com_pic" class="d-none" alt="No image selected">
+                  </div>
+                </div> -->
+              </div>
+              @else
+              <div class="col-lg-6 mb-2">
+                <label for="com_pic">@lang('lang.company_logo')</label>
                 <div class="row">
                   <div class="col-lg-10">
-                    <input type="file" name="com_pic" id="com_pic" class="form-control">
+                    <input type="file" name="com_pic" id="com_pic" class="form-control" require>
                   </div>
                   <div class="col-lg-2">
                     <img src="abc.png" width="100%" height="  100%" style="border-radius: 50%;" id="com_pic" class="d-none" alt="No image selected">
                   </div>
                 </div>
               </div>
+              @endif
               <div class="col-lg-6 mt-2">
-                <label for="name">Name</label>
-                <input type="text" required name="name" id="name" class="form-control">
+                <label for="name">@lang('lang.name')</label>
+                <input type="text"  name="name" id="name" class="form-control" require>
               </div>
               <div class="col-lg-6 mt-2">
-                <label for="email">E-mail</label>
-                <input type="email" required name="email" id="email" class="form-control">
+                <label for="email">@lang('lang.email')</label>
+                <input type="email"  name="email" id="email" class="form-control" require>
               </div>
               <div class="col-lg-6 mt-2">
-                <label for="phone">Phone</label>
-                <input type="tel" name="phone" id="phone" class="form-control">
+                <label for="phone">@lang('lang.phone')</label>
+                <input type="tel" name="phone" id="phone" class="form-control" require>
               </div>
+              @if($add_as_user !== user_roles('3'))
               <div class="col-lg-6 mt-2">
-                <label for="com_name">Company Name</label>
-                <input type="text" name="com_name" id="com_name" class="form-control">
+                <label for="com_name">@lang('lang.company_name')</label>
+                <input type="text" name="com_name" id="com_name" class="form-control" require>
               </div>
+              @endif
               <div class="col-lg-6 mt-2">
-                <label for="address">Address</label>
-                <input type="text" name="address" id="address" class="form-control">
+                <label for="address">@lang('lang.address')</label>
+                <input type="text" name="address" id="address" class="form-control" require>
               </div>
+              @if($add_as_user == user_roles('3'))
+              <div class="col-lg-6 mt-2">
+                <label for="note">@lang('lang.note')</label>
+                <input type="text" name="note" id="note" class="form-control" require>
+              </div>
+              @endif
+              <div class="col-lg-6"></div>
               <div class="col-lg-6 mt-3">
                 <div class="row py-4">
                   <div class="col-lg-6">

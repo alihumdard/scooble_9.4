@@ -56,10 +56,89 @@
     .nav-link:hover {
       color: black !important;
     }
+
+    /*
+     .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preloader .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }  */
+
+   .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #452C88, #ff4f1a);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .preloader .logo {
+      max-width: 150px;
+      animation: pulse 1.2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+     
   </style>
 </head>
 
 <body>
+<div class="preloader">
+<!-- <div class="spinner"></div> -->
+<img class="logo" src="assets/images/Logo.png" alt="Logo">
+</div>
+
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -74,7 +153,7 @@
               @csrf
               <select id="lang-select" class="form-select" style="" name="lang" onchange="this.form.submit()">
                 <option value="en" <?= (session('lang') == 'en') ? 'selected' : ''; ?>>English</option>
-                <option value="es" <?= (session('lang') == 'es') ? 'selected' : ''; ?>>Spanish</option>
+                <option value="es" <?= (session('lang') == 'es') ? 'selected' : ''; ?>>Turkish</option>
               </select>
             </form>
           </li>
@@ -94,7 +173,7 @@
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="text-dark ellipsis mb-0">Notifications</h6>
+                  <h6 class="text-dark ellipsis mb-0">@lang('lang.notifications')</h6>
                 </div>
               </a>
               <div class="dropdown-divider"></div>
@@ -105,7 +184,7 @@
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="text-dark ellipsis mb-0">Profile Settings</h6>
+                  <h6 class="text-dark ellipsis mb-0">@lang('lang.profile_settings')</h6>
                 </div>
               </a>
               <div class="dropdown-divider"></div>
@@ -273,20 +352,20 @@
           @endif
 
           @if(view_permission('driver_map'))
-          <li class="nav-item mb-2 p-0">
+          <!-- <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/driver_map">
               <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.14286 0C12.9257 0 16 3.04 16 6.8C16 11.8971 9.14286 19.4286 9.14286 19.4286C9.14286 19.4286 2.28571 11.8971 2.28571 6.8C2.28571 3.04 5.36 0 9.14286 0ZM9.14286 4.57143C8.53665 4.57143 7.95527 4.81224 7.52661 5.2409C7.09796 5.66955 6.85714 6.25093 6.85714 6.85714C6.85714 7.15731 6.91626 7.45453 7.03113 7.73185C7.146 8.00916 7.31437 8.26114 7.52661 8.47339C7.95527 8.90204 8.53665 9.14286 9.14286 9.14286C9.74907 9.14286 10.3304 8.90204 10.7591 8.47339C11.1878 8.04473 11.4286 7.46335 11.4286 6.85714C11.4286 6.25093 11.1878 5.66955 10.7591 5.2409C10.3304 4.81224 9.74907 4.57143 9.14286 4.57143ZM18.2857 19.4286C18.2857 21.9543 14.1943 24 9.14286 24C4.09143 24 0 21.9543 0 19.4286C0 17.9543 1.39429 16.64 3.55429 15.8057L4.28571 16.8457C3.05143 17.36 2.28571 18.0686 2.28571 18.8571C2.28571 20.4343 5.36 21.7143 9.14286 21.7143C12.9257 21.7143 16 20.4343 16 18.8571C16 18.0686 15.2343 17.36 14 16.8457L14.7314 15.8057C16.8914 16.64 18.2857 17.9543 18.2857 19.4286Z" fill="white" />
               </svg>
               <span class="menu-title ml-2">Map</span>
             </a>
-          </li>
+          </li> -->
           @endif
 
           @if(view_permission('announcements_alerts'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/announcements_alerts">
-              <span class="menu-title ml-2">Announcements Alerts</span>
+              <span class="menu-title ml-2">@lang('lang.announcements_alerts')</span>
             </a>
           </li>
           @endif
@@ -294,26 +373,38 @@
           @if(view_permission('pdf_templates'))
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/pdf_templates">
-              <span class="menu-title ml-2">PDF Templates</span>
+              <span class="menu-title ml-2">@lang('lang.pdf_templates')</span>
             </a>
           </li>
           @endif
 
-          @if(view_permission('home'))
+          @if(view_permission('packages'))
+          <li class="nav-item mb-2 p-0">
+            <a class="nav-link svg ml-5" href="{{'/packages'}}">
+              <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.1783 16.5241L19.5521 3.01716C19.1579 1.54862 17.353 1.00759 16.2133 2.01629L13.9278 4.039C11.3845 6.28991 8.35111 7.91891 5.06775 8.79698C2.31938 9.53199 0.690561 12.3597 1.42698 15.1028C2.16341 17.8459 4.99058 19.4819 7.73896 18.7469C11.0223 17.8688 14.4654 17.7657 17.7956 18.4459L20.7882 19.0571C22.2806 19.3619 23.5725 17.9926 23.1783 16.5241Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M7.53931 8.09998L11.7001 23.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="menu-title ml-2"> @lang('lang.packages') </span>
+            </a>
+          </li>
+          @endif
+
+          <!-- @if(view_permission('home')) -->
           <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/home">
-              <span class="menu-title ml-2"> Home</span>
+              <span class="menu-title ml-2"> @lang('lang.home')</span>
             </a>
           </li>
-          @endif
+          <!-- @endif -->
 
-          @if(view_permission('subscription'))
-          <li class="nav-item mb-2 p-0">
+          <!-- @if(view_permission('subscription')) -->
+          <!-- <li class="nav-item mb-2 p-0">
             <a class="nav-link svg ml-5" href="/subscription">
               <span class="menu-title ml-2"> Subscritions </span>
             </a>
-          </li>
-          @endif
+          </li> -->
+          <!-- @endif -->
 
           @if(view_permission('logout'))
           <li class="nav-item">
@@ -328,3 +419,23 @@
           @endif
         </ul>
       </nav>
+
+      <script>
+        // Show the preloader when the page starts loading
+        showPreloader();
+
+        // Hide the preloader when the page finishes loading
+        $(window).on('load', function() {
+          hidePreloader();
+        });
+
+        function showPreloader() {
+          $('.preloader').show(); // Show the preloader element
+        }
+
+        function hidePreloader() {
+          $('.preloader').fadeOut('fast', function() {
+            $(this).remove();
+          });
+        }
+      </script>

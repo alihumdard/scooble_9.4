@@ -13,21 +13,31 @@
         width: 100%;
         bottom: 5.5rem;
     }
+    .dismiss-btn {
+        background-color: #233A85;
+        color: #FFFFFF;
+        border-radius: 10px;
+        box-shadow: 3px 4px 12px -2px rgba(35, 58, 133, 0.5);
+        -webkit-box-shadow: 3px 4px 12px -2px rgba(35, 58, 133, 0.5);
+        -moz-box-shadow: 3px 4px 12px -2px rgba(35, 58, 133, 0.5);
+        }
+
+    .dismiss-btn:hover {
+        background-color: #233A85;
+        color: #FFFFFF;
+        border-radius: 10px;
+    }
+
 </style>
+
 @foreach($announcements as $key => $val)
 @if($val['type'] == "Promotion")
-
-<script>
-    $(document).ready(function() {
-        $('#promotionmodal').modal('show');
-    });
-</script>
 
 <!-- Promotion Modal -->
 <div class="modal fade" id="promotionmodal" tabindex="-1" role="dialog" aria-labelledby="promotionmodalLabel" aria-hidden="true">
     <div class="modal-dialog mt-5 pt-5" role="document">
         <div class="modal-content bg-white p-5">
-            <div class="modal-body">
+            <div class="modal-body mt-5">
                 <div class="alert-div text-center mt-5">
                     <div class="alert-icon">
                         <svg width="148" height="148" viewBox="0 0 148 148" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,33 +47,53 @@
                             <path d="M39.375 66.6731L109.375 39.75L98.6058 98.9808L61.075 78.5085L103.99 45.1346L54.4196 74.8738L39.375 66.6731ZM60.9135 109.75V84.2592L77.0673 93.5962L60.9135 109.75Z" fill="white" />
                         </svg>
                     </div>
-                    <h4> {{$val['title']}} </h4>
+                    <h4> {!! $val['title'] !!} </h4>
                     <p>
-                        {{$val['desc']}}
+                        {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_pro px-5 mt-5" >Dismiss</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Promotion Modal End -->
+<script>
+
+    $(document).ready(function() {
+        var announcementId = '{{$val['id']}}';
+        var previousTitle = localStorage.getItem('previousTitle_' + announcementId);
+        var previousDescription = localStorage.getItem('previousDescription_' + announcementId);
+
+        var currentTitle = '{{ addslashes($val['title']) }}';
+        var currentDescription = `{!! addslashes($val['desc']) !!}`;
+
+        var shouldShowModal = previousTitle !== currentTitle || previousDescription !== currentDescription;
+
+        if (shouldShowModal) {
+            $('#promotionmodal').modal('show');
+        }
+
+        function dismissModal() {
+            $('#promotionmodal').modal('hide');
+
+            localStorage.setItem('previousTitle_' + announcementId, currentTitle);
+            localStorage.setItem('previousDescription_' + announcementId, currentDescription);
+        }
+
+        $('.dismiss-btn_pro').on('click', dismissModal);
+    });
+</script>
+
 @endif
 
 
 @if($val['type'] == "News")
-
-<script>
-    $(document).ready(function() {
-        $('#newsmodal').modal('show');
-    });
-</script>
-
 <!-- News Modal -->
 <div class="modal fade" id="newsmodal" tabindex="-1" role="dialog" aria-labelledby="newsmodalLabel" aria-hidden="true">
     <div class="modal-dialog mt-5 pt-5" role="document">
         <div class="modal-content bg-white p-5">
-            <div class="modal-body">
+            <div class="modal-body mt-5">
                 <div class="alert-div text-center mt-5">
                     <div class="alert-icon">
                         <svg width="148" height="148" viewBox="0 0 148 148" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,32 +103,51 @@
                             <path d="M84.875 98.0625C84.875 104.093 79.9684 109 73.9375 109C67.9066 109 63 104.093 63 98.0625C63 92.0316 67.9066 87.125 73.9375 87.125C79.9684 87.125 84.875 92.0316 84.875 98.0625ZM64.266 42.4452L66.1254 79.6327C66.2128 81.379 67.654 82.75 69.4025 82.75H78.4725C80.221 82.75 81.6622 81.379 81.7496 79.6327L83.609 42.4452C83.7026 40.5709 82.2084 39 80.3318 39H67.5432C65.6666 39 64.1724 40.5709 64.266 42.4452Z" fill="white" />
                         </svg>
                     </div>
-                    <h4>{{$val['title']}}</h4>
+                    <h4>{!! $val['title'] !!}</h4>
                     <p>
-                        {{$val['desc']}}
+                    {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_news px-5 mt-5"  onclick="dismissModal()">Dismiss</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- News Modal End -->
-@endif
-
-@if($val['type'] == "Mandatory")
-
 <script>
     $(document).ready(function() {
-        $('#mandatorymodal').modal('show');
+        var announcementId = '{{$val['id']}}';
+        var previousTitle = localStorage.getItem('previousTitle_' + announcementId);
+        var previousDescription = localStorage.getItem('previousDescription_' + announcementId);
+
+        var currentTitle = '{{ addslashes($val['title']) }}';
+        var currentDescription = `{!! addslashes($val['desc']) !!}`;
+
+        var shouldShowModal = previousTitle !== currentTitle || previousDescription !== currentDescription;
+
+        if (shouldShowModal) {
+            $('#newsmodal').modal('show');
+        }
+
+        function dismissModal() {
+            $('#newsmodal').modal('hide');
+
+            localStorage.setItem('previousTitle_' + announcementId, currentTitle);
+            localStorage.setItem('previousDescription_' + announcementId, currentDescription);
+        }
+
+        $('.dismiss-btn_news').on('click', dismissModal);
     });
 </script>
+@endif
+
+@if($val['type'] == "Mandatory") 
 
 <!-- Mandatory Modal -->
-<div class="modal fade" id="mandatorymodal" tabindex="-1" role="dialog" aria-labelledby="mandatorymodalLabel" aria-hidden="true">
+<div class="modal fade" id="mandatorymodal" tabindex="-1" role="dialog" aria-labelledby="mandatorymodalLabel" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog mt-5 pt-5" role="document">
         <div class="modal-content bg-white p-5">
-            <div class="modal-body">
+            <div class="modal-body mt-5">
                 <div class="alert-div text-center mt-5">
                     <div class="alert-icon">
                         <svg width="148" height="148" viewBox="0 0 148 148" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,9 +159,9 @@
                     </div>
                     <h4>{{$val['title']}}</h4>
                     <p>
-                        {{$val['desc']}}
+                    {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_mond px-5 mt-5"  onclick="dismissModal()">Dismiss</button>
                 </div>
             </div>
         </div>
@@ -120,20 +169,48 @@
 </div>
 <!-- Mandatory Modal End -->
 
+<script>
+$(document).ready(function() {
+    $('#mandatorymodal').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+
+    var announcementId = '{{ $val['id'] }}';
+    var previousTitle = localStorage.getItem('previousTitle_' + announcementId);
+    var previousDescription = localStorage.getItem('previousDescription_' + announcementId);
+
+    var currentTitle = '{{ addslashes($val['title']) }}';
+    var currentDescription = `{!! addslashes($val['desc']) !!}`;
+
+    var shouldShowModal = previousTitle !== currentTitle || previousDescription !== currentDescription;
+
+    if (shouldShowModal) {
+        $('#mandatorymodal').modal('show');
+    }
+
+    function dismissModal() {
+        $('#mandatorymodal').modal('hide');
+
+        localStorage.setItem('previousTitle_' + announcementId, currentTitle);
+        localStorage.setItem('previousDescription_' + announcementId, currentDescription);
+    }
+
+    $('.dismiss-btn_mond').on('click', dismissModal);
+});
+
+</script>
+
+
 @endif
 
 @if($val['type'] == "Maintenance")
 
-<script>
-    $(document).ready(function() {
-        $('#maintenancemodal').modal('show');
-    });
-</script>
 <!-- Maintenance Modal -->
 <div class="modal fade" id="maintenancemodal" tabindex="-1" role="dialog" aria-labelledby="maintenancemodalLabel" aria-hidden="true">
     <div class="modal-dialog mt-5 pt-5" role="document">
         <div class="modal-content bg-white p-5">
-            <div class="modal-body">
+            <div class="modal-body mt-5">
                 <div class="alert-div text-center mt-5">
                     <div class="alert-icon">
                         <svg width="148" height="148" viewBox="0 0 148 148" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -145,9 +222,9 @@
                     </div>
                     <h4> {{$val['title']}} </h4>
                     <p>
-                        {{$val['desc']}}
+                    {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_maint px-5 mt-5"  onclick="dismissModal()">Dismiss</button>
                 </div>
             </div>
         </div>
@@ -155,22 +232,41 @@
 </div>
 <!-- Maintenance Modal End -->
 
+<script>
+    $(document).ready(function() {
+        var announcementId = '{{$val['id']}}';
+        var previousTitle = localStorage.getItem('previousTitle_' + announcementId);
+        var previousDescription = localStorage.getItem('previousDescription_' + announcementId);
 
+        var currentTitle = '{{ addslashes($val['title']) }}';
+        var currentDescription = `{!! addslashes($val['desc']) !!}`;
+
+        var shouldShowModal = previousTitle !== currentTitle || previousDescription !== currentDescription;
+
+        if (shouldShowModal) {
+            $('#maintenancemodal').modal('show');
+        }
+
+        function dismissModal() {
+            $('#maintenancemodal').modal('hide');
+
+            localStorage.setItem('previousTitle_' + announcementId, currentTitle);
+            localStorage.setItem('previousDescription_' + announcementId, currentDescription);
+        }
+
+        $('.dismiss-btn_maint').on('click', dismissModal);
+    });
+
+</script>
 @endif
 
 @if($val['type'] == "Warning")
-
-<script>
-    $(document).ready(function() {
-        $('#warningmodal').modal('show');
-    });
-</script>
 
 <!-- Warning Modal -->
 <div class="modal fade" id="warningmodal" tabindex="-1" role="dialog" aria-labelledby="warningmodalLabel" aria-hidden="true">
     <div class="modal-dialog mt-5 pt-5" role="document">
         <div class="modal-content bg-white p-5">
-            <div class="modal-body">
+            <div class="modal-body mt-5">
                 <div class="alert-div text-center mt-5">
                     <div class="alert-icon">
                         <svg width="148" viewBox="0 0 148 148" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,15 +280,41 @@
                     </div>
                     <h4>{{$val['title']}}</h4>
                     <p>
-                        {{$val['desc']}}
+                    {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn px-5 mt-5" data-dismiss="modal">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_warn px-5 mt-5"  onclick="dismissModal()">Dismiss</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Warning Modal End -->
+<script>
+    $(document).ready(function() {
+        var announcementId = '{{$val['id']}}';
+        var previousTitle = localStorage.getItem('previousTitle_' + announcementId);
+        var previousDescription = localStorage.getItem('previousDescription_' + announcementId);
+
+        var currentTitle = '{{ addslashes($val['title']) }}';
+        var currentDescription = `{!! addslashes($val['desc']) !!}`;
+
+        var shouldShowModal = previousTitle !== currentTitle || previousDescription !== currentDescription;
+
+        if (shouldShowModal) {
+            $('#warningmodal').modal('show');
+        }
+
+        function dismissModal() {
+            $('#warningmodal').modal('hide');
+
+            localStorage.setItem('previousTitle_' + announcementId, currentTitle);
+            localStorage.setItem('previousDescription_' + announcementId, currentDescription);
+        }
+
+        $('.dismiss-btn_warn').on('click', dismissModal);
+    });
+
+</script>
 
 @endif
 @endforeach
