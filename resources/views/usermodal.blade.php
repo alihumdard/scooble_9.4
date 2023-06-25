@@ -47,6 +47,22 @@
                   </div>
                 </div>
               </div>
+              @if($add_as_user == user_roles('3') && $user->role == user_roles('1'))
+              <div class="col-lg-6 mb-2">
+                <label for="com_pic">@lang('lang.client')</label>
+                <select name="" id="" class="form-select">
+                  <option value=""></option>
+                </select>
+                <!-- <div class="row">
+                  <div class="col-lg-10">
+                    <input type="file" name="com_pic" id="com_pic" class="form-control" require>
+                  </div>
+                  <div class="col-lg-2">
+                    <img src="abc.png" width="100%" height="  100%" style="border-radius: 50%;" id="com_pic" class="d-none" alt="No image selected">
+                  </div>
+                </div> -->
+              </div>
+              @else
               <div class="col-lg-6 mb-2">
                 <label for="com_pic">@lang('lang.company_logo')</label>
                 <div class="row">
@@ -58,6 +74,7 @@
                   </div>
                 </div>
               </div>
+              @endif
               <div class="col-lg-6 mt-2">
                 <label for="name">@lang('lang.name')</label>
                 <input type="text"  name="name" id="name" class="form-control" require>
@@ -70,18 +87,22 @@
                 <label for="phone">@lang('lang.phone')</label>
                 <input type="tel" name="phone" id="phone" class="form-control" require>
               </div>
+              @if($add_as_user !== user_roles('3'))
               <div class="col-lg-6 mt-2">
                 <label for="com_name">@lang('lang.company_name')</label>
                 <input type="text" name="com_name" id="com_name" class="form-control" require>
               </div>
+              @endif
               <div class="col-lg-6 mt-2">
                 <label for="address">@lang('lang.address')</label>
                 <input type="text" name="address" id="address" class="form-control" require>
               </div>
+              @if($add_as_user == user_roles('3'))
               <div class="col-lg-6 mt-2">
                 <label for="note">@lang('lang.note')</label>
                 <input type="text" name="note" id="note" class="form-control" require>
               </div>
+              @endif
               <div class="col-lg-6"></div>
               <div class="col-lg-6 mt-3">
                 <div class="row py-4">
