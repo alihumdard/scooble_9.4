@@ -395,7 +395,7 @@
                       
                         $('#btn_user_login').prop('disabled', false);;
                         var responseArray = JSON.parse(response);
-                        // console.log(responseArray);
+                        console.log(responseArray);
                         $('#text').removeClass('d-none');
                         $('#spinner').addClass('d-none');
                         if (responseArray.status === 'success') {
@@ -423,7 +423,9 @@
 
                     error: function(xhr, status, error) {
                         $('#btn_user_login').prop('disabled', false);
-                        console.error(xhr.responseText);
+                        $('#spinner').addClass('d-none');
+                        $('#text').removeClass('d-none');
+                        // console.error(xhr.responseText);
                         showAlert("Error", "Please contact your admin", "warning");
                     }
 
@@ -587,13 +589,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function() {
-                     spinner.removeClass('d-none');
-                     buttonText.addClass('d-none');
+                    $('#spinner').removeClass('d-none');
+                    $('#add_btn').addClass('d-none');
+                    showlogin('Wait', 'saving......');
                 },
                 success: function(response) {
                     // console.log(response);
-                    spinner.addClass('d-none');
-                    buttonText.removeClass('d-none');
                     button.prop('disabled', false);
                     // console.log(formData);
                     if (response.status === 'success') {
@@ -654,13 +655,19 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function() {
+                    $('#addclient #btn_save').css('background-color', '#233A85');
                     $('#addclient').modal('show');
+                    $('#btn_save #spinner').removeClass('d-none');
+                    $('#btn_save #add_btn').addClass('d-none');
+                    // showlogin('Wait', 'loading......');
                 },
                 success: function(response) {
+ 
                     if (response.status === 'success') {
+                        
                         let responseData = response.data[0];
                         let formattedDateTime = moment(responseData.created_at).format("YYYY-MM-DDTHH:mm");
-                        $('#addclient #btn_save').html('save').css('background-color', '#233A85');
+                        $('#addclient #btn_save').html('<div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div><span id="add_btn">'+ "{{ trans('lang.save') }}"+'</span>').css('background-color', '#233A85');
                         $('#addclient #user_pic').attr('src', "{{ asset('storage') }}/" + responseData.user_pic).removeClass('d-none');
                         $('#addclient #com_pic').attr('src', "{{ asset('storage') }}/" + responseData.com_pic).removeClass('d-none');
                         $('#addclient #id').val(responseData.id);
@@ -672,6 +679,9 @@
                         $('#addclient #com_name').val(responseData.com_name);
                         $('#addclient #address').val(responseData.address);
                         $('#addclient #joining_date').val(formattedDateTime);
+
+                        $('#spinner').addClass('d-none');
+                        $('#add_btn').removeClass('d-none');
                     } else {
                         showAlert("Warning", response.message, response.status);
                     }
@@ -679,7 +689,7 @@
                 error: function(xhr, status, error) {
                     $('#spinner').addClass('d-none');
                     $('#add_btn').removeClass('d-none');
-                    showAlert("Error", response.message, response.status);
+                    showAlert("Error", status, error);
                 }
             });
         });
@@ -873,6 +883,45 @@
             $(this).removeClass('error');
             $(this).next('.error-label').remove();
         });
+
+
+
+
+    var passwordInputs = $("input[type='password']");
+    passwordInputs.each(function() {
+    var passwordInput = $(this);
+    var eyeButton = passwordInput.next(".input-group-append").find("#eye");
+
+    eyeButton.on("keydown", function(event) {
+      if (event.key === "Tab" && !event.shiftKey) {
+        event.preventDefault();
+        passwordInput.focus();
+      }
+    });
+
+    passwordInput.on("keydown", function(event) {
+      if (event.key === "Tab" && !event.shiftKey) {
+        event.preventDefault();
+        var formInputs = $("input");
+        var currentIndex = formInputs.index(this);
+
+        var nextInput = formInputs.eq(currentIndex + 1);
+        while (nextInput.length && !nextInput.is(":visible")) {
+          nextInput = formInputs.eq(currentIndex + 2);
+          currentIndex++;
+        }
+
+        if (nextInput.length) {
+          nextInput.focus();
+        } else {
+          formInputs.eq(0).focus();
+        }
+      }
+    });
+  });
+
+
+
 
     });
 </script>

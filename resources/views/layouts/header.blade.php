@@ -131,6 +131,7 @@
     }
      
   </style>
+  	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 </head>
 
 <body>
@@ -152,8 +153,8 @@
             <form action="/lang_change" method="post">
               @csrf
               <select id="lang-select" class="form-select" style="" name="lang" onchange="this.form.submit()">
-                <option value="en" <?= (session('lang') == 'en') ? 'selected' : ''; ?>>English</option>
-                <option value="es" <?= (session('lang') == 'es') ? 'selected' : ''; ?>>Turkish</option>
+                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                <option value="es" {{ session()->get('locale') == 'es' ? 'selected' : '' }}>Turkish</option>
               </select>
             </form>
           </li>

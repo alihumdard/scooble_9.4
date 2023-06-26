@@ -199,7 +199,7 @@
                             <div class="w-100" style="padding-left: 15px;">
                                 <p style="font-style: normal;font-weight: 500;font-size: 30px;line-height: 45px;color: #000000 !important;">WELCOME</p>
                                 <p>Create your password to create account.</p>
-                                <p>You can <a href="/" class="text-warning">Login Here !</a></p>
+                                <p>You can <a href="/login" class="text-warning">Login Here !</a></p>
                             </div>
                             <!-- Password -->
                             <div class="input-group col-lg-12 mb-4">
@@ -309,3 +309,4 @@
 </body>
 
 </html>
+@include('apicall')

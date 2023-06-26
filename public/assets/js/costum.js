@@ -33,7 +33,27 @@ $(document).ready(function () {
     // modal form functions end
 
 
-    $('#users-table').DataTable();
+    var users_table = $('#users-table').DataTable();
+
+    $('#filter_by_sts_client').on('change', function() {
+        var selectedStatus = $(this).val();
+        users_table.column(4).search(selectedStatus).draw();
+    });
+
+    $('#filter_by_sts_users').on('change', function() {
+        var selectedStatus = $(this).val();
+        users_table.column(6).search(selectedStatus).draw();
+    });
+
+    $('#filter_by_sts_drivers').on('change', function() {
+        var selectedStatus = $(this).val();
+        users_table.column(5).search(selectedStatus).draw();
+    });
+
+    $('#filter_by_sts_routes').on('change', function() {
+        var selectedStatus = $(this).val();
+        users_table.column(6).search(selectedStatus).draw();
+    });
 
     //user status
     $(document).on('click', '.btn_status', function () {
@@ -53,6 +73,9 @@ $(document).ready(function () {
             method: 'POST',
             beforeSend: function () {
                 // $('#editclient').modal('show');
+                $('#change_sts').prop('disabled', true);
+                $('#change_sts #spinner').removeClass('d-none');
+                $('#change_sts #add_btn').addClass('d-none');
             },
             data: {
                 'id': id,
@@ -61,10 +84,13 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response) {
+                    $('#change_sts').prop('disabled', false);
+                    $('#spinner').addClass('d-none');
+                    $('#add_btn').removeClass('d-none');
+
                     console.log(response);
-                    $('.btn_status').off('click');
                     $('#user_sts').off('submit');
-                    window.location.reload();
+                    location.reload();
                 }
             }
         });
