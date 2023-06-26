@@ -84,7 +84,7 @@
                     @foreach($data as $key => $value)
                     <tr style="font-size: small;">
                       <td>{{++$key}}</td>
-                      <td><img src="{{ asset('storage/' . $value['user_pic']) }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
+                      <td><img src="{{ (isset($value['user_pic'])) ? asset('storage/' . $value['user_pic']) : 'assets/images/user.png'}}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
                       <td>{{table_date($value['created_at'])}}</td>
                       <td>{{ $value['address'] }}</td>
                       <td>{{ $value['role'] }}</td>

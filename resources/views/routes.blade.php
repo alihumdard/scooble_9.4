@@ -101,11 +101,11 @@
                     <td>{{ $value['end_point'] }}</td>
 
                     @if($user->role != 'Client')
-                    <td> <img src="{{ asset('storage/' . $value['client_pic']) }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['client_name'] }} </td>
+                    <td> <img src=" {{ (isset($value['client_pic'])) ? asset('storage/' . $value['client_pic']) : 'assets/images/user.png'}}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['client_name'] }} </td>
                     @endif
 
                     @if($user->role != 'Driver')
-                    <td><img src="{{ asset('storage/' . $value['driver_pic']) }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['driver_name'] }} </td>
+                    <td><img src="{{ (isset($value['driver_pic'])) ? asset('storage/' . $value['driver_pic']) : 'assets/images/user.png'}}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['driver_name'] }} </td>
                     @endif
 
                     @if($value['status'] == 'on')
