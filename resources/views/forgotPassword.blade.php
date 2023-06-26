@@ -122,6 +122,11 @@
         .input:focus {
             border: 3px solid #ffb800;
         }
+        .empty2 {
+        border-color: red;
+        }
+
+
     </style>
 </head>
 
@@ -272,7 +277,7 @@
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
                                 <input type="submit" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit" value="Send" data-toggle="modal" />
-                                <p class="mt-4">You can <a class="text-warning" href="/">Login here !</a></p>
+                                <p class="mt-4">You can <a class="text-warning" href="/login">Login here !</a></p>
                             </div>
                             </form>
                         </div>
@@ -334,22 +339,34 @@
                         <p>{{session('email')}}</p>
                         <form action="/forgot_password" method="post">
                             @csrf
-                            <input type="hidden" name='email' value="{{session('email')}}" />
-                            <div class="inputfield mb-4">
-                                <input type="number" name='no1' maxlength="1" class="input" />
-                                <input type="number" name='no2' maxlength="1" class="input" />
-                                <input type="number" name='no3' maxlength="1" class="input" />
-                                <input type="number" name='no4' maxlength="1" class="input" />
-                                <input type="number" name='no5' maxlength="1" class="input" />
+                            <input type="hidden" name="email" value="{{ session('email') }}" />
+                            <div class="inputfield mb-4 mt-2">
+                                <input type="number" name="no1" maxlength="1" value="{{ $no[1] ?? '' }}" class="input" />
+                                <input type="number" name="no2" maxlength="1" value="{{ $no[2] ?? '' }}" class="input" />
+                                <input type="number" name="no3" maxlength="1" value="{{ $no[3] ?? '' }}" class="input" />
+                                <input type="number" name="no4" maxlength="1" value="{{ $no[4] ?? '' }}" class="input" />
+                                <input type="number" name="no5" maxlength="1" value="{{ $no[4] ?? '' }}" class="input" />
                             </div>
-
-                            <button class="btn btn-sm text-white" style="background-color: #452C88; border-radius: 8px; width: 20%;">Verify Email</button>
+                            <button id="btn_verify_opt" class="btn btn-sm text-white mt-1" style="background-color: #452C88; border-radius: 8px; width: 20%;">Verify Email</button>
                         </form>
-                        @if (Session::has('otp'))
-                        <lable class="text-danger"> {{ session('otp') }}</lable>
+                        @if (Session::has('invalid'))
+                        <div class="text-danger">
+                            <strong>{{ session('invalid') }}</strong>
+                        </div>
+                        <script>
+                              $(".input").each(function() {
+                                    $(this).addClass("empty2");
+                                });
+                        </script>
                         @endif
-                        <p>Didn’t receive the email? <a href="/forgot_password?email={{session('email')}}" style="color: #452C88;">Click to resend</a></p>
-                        <div class="py-5 mt-5">
+                        <p class="mt-1">Didn’t receive the email? <a href="/forgot_password?email={{session('email')}}" style="color: #452C88;">Click to resend</a></p>
+                        <div class="py-5 mt-4">
+                        @if (Session::has('otp'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>{{ session('otp') }}</strong>
+                        </div>
+                        @endif
                             <a href="/login" class="text-dark">
                                 <p>
                                     <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -385,84 +402,145 @@
                 console.log('hello');
             }
         }
-        //Initial references
-        const input = document.querySelectorAll(".input");
-        const inputField = document.querySelector(".inputfield");
-        const submitButton = document.getElementById("submit");
-        let inputCount = 0,
-            finalInput = "";
+        
+        
 
-        //Update input
-        const updateInputConfig = (element, disabledStatus) => {
-            if (!disabledStatus) {
-                element.focus();
-            } else {
-                element.blur();
-            }
-        };
 
-        input.forEach((element) => {
-            element.addEventListener("keyup", (e) => {
-                e.target.value = e.target.value.replace(/[^0-9]/g, "");
-                let {
-                    value
-                } = e.target;
 
-                if (value.length == 1) {
-                    updateInputConfig(e.target, true);
-                    if (inputCount <= 4 && e.key != "Backspace") {
-                        finalInput += value;
-                        if (inputCount < 4) {
-                            updateInputConfig(e.target.nextElementSibling, false);
-                        }
-                    }
-                    inputCount += 1;
-                } else if (value.length == 0 && e.key == "Backspace") {
-                    finalInput = finalInput.substring(0, finalInput.length - 1);
-                    if (inputCount == 0) {
-                        updateInputConfig(e.target, false);
-                        return false;
-                    }
-                    updateInputConfig(e.target, true);
-                    e.target.previousElementSibling.value = "";
-                    updateInputConfig(e.target.previousElementSibling, false);
-                    inputCount -= 1;
-                } else if (value.length > 1) {
-                    e.target.value = value.split("")[0];
-                }
-                submitButton.classList.add("hide");
-            });
-        });
 
-        window.addEventListener("keyup", (e) => {
-            if (inputCount > 4) {
-                submitButton.classList.remove("hide");
-                submitButton.classList.add("show");
-                if (e.key == "Backspace") {
-                    finalInput = finalInput.substring(0, finalInput.length - 1);
-                    updateInputConfig(inputField.lastElementChild, false);
-                    inputField.lastElementChild.value = "";
-                    inputCount -= 1;
-                    submitButton.classList.add("hide");
-                }
-            }
-        });
 
-        const validateOTP = () => {
-            alert("Success");
-        };
 
-        //Start
-        const startInput = () => {
-            inputCount = 0;
-            finalInput = "";
-            input.forEach((element) => {
-                element.value = "";
-            });
-            updateInputConfig(inputField.firstElementChild, false);
-        };
 
-        window.onload = startInput();
+
+// Initial references
+const input = document.querySelectorAll(".input");
+const inputField = document.querySelector(".inputfield");
+const submitButton = document.getElementById("submit");
+let inputCount = 0;
+let finalInput = "";
+
+// Update input
+const updateInputConfig = (element, disabledStatus) => {
+  if (!disabledStatus) {
+    element.focus();
+  } else {
+    element.blur();
+  }
+};
+
+const handleInput = (e) => {
+  e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  let { value } = e.target;
+
+  if (value.length === 1) {
+    updateInputConfig(e.target, true);
+    if (inputCount <= 4 && e.inputType !== "deleteContentBackward") {
+      finalInput += value;
+      if (inputCount < 4) {
+        updateInputConfig(e.target.nextElementSibling, false);
+      } else if (inputCount === 4) {
+        updateInputConfig(e.target.nextElementSibling, true);
+      }
+    }
+    inputCount += 1;
+  } else if (value.length === 0 && e.inputType === "deleteContentBackward") {
+    finalInput = finalInput.substring(0, finalInput.length - 1);
+    if (inputCount === 0) {
+      updateInputConfig(e.target, false);
+      return false;
+    }
+    updateInputConfig(e.target, true);
+    e.target.previousElementSibling.value = "";
+    updateInputConfig(e.target.previousElementSibling, false);
+    inputCount -= 1;
+  } else if (value.length > 1) {
+    e.target.value = value.split("")[0];
+  }
+  submitButton.classList.add("hide");
+};
+
+input.forEach((element) => {
+  element.addEventListener("input", handleInput);
+});
+
+const handleBackspace = (e) => {
+  const currentInput = e.target;
+  if (currentInput.value.length === 0) {
+    const previousInput = currentInput.previousElementSibling;
+    if (previousInput) {
+      previousInput.focus();
+      previousInput.value = "";
+      updateInputConfig(previousInput, false);
+      inputCount--;
+    }
+  }
+};
+
+input.forEach((element) => {
+  element.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace") {
+      handleBackspace(e);
+    }
+  });
+});
+
+// Handle paste event
+inputField.addEventListener("paste", (e) => {
+  e.preventDefault();
+  const pasteData = e.clipboardData.getData("text/plain");
+  const digits = pasteData.match(/\d/g);
+  if (digits && digits.length <= 5) {
+    input.forEach((element, index) => {
+      element.value = digits[index] || "";
+      if (index < digits.length) {
+        updateInputConfig(element, true);
+      } else {
+        updateInputConfig(element, false);
+      }
+    });
+    inputCount = digits.length;
+    finalInput = digits.join("");
+    submitButton.classList.add("show");
+    submitButton.classList.remove("hide");
+  }
+});
+
+// Start
+const startInput = () => {
+  inputCount = 0;
+  finalInput = "";
+  input.forEach((element) => {
+    element.value = "";
+  });
+  updateInputConfig(inputField.firstElementChild, false);
+};
+
+window.onload = startInput();
+
+
+$("#btn_verify_opt").click(function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    // Check if any input is empty
+    let emptyInputExists = false;
+    $(".input").each(function() {
+      const value = $(this).val();
+      if (value === "") {
+        $(this).addClass("empty2");
+        emptyInputExists = true;
+      } else {
+        $(this).removeClass("empty2");
+      }
+    });
+
+    if (emptyInputExists) {
+    } else {
+      // All inputs are filled, proceed with form submission
+      $("form").submit();
+    }
+  });
+
+        
     </script>
 </body>
 

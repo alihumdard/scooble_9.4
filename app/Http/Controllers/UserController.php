@@ -32,6 +32,7 @@ use App\Jobs\SendEmailVerificationJob;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Config;
+use App;
 
 class UserController extends Controller
 {
@@ -46,36 +47,18 @@ class UserController extends Controller
         $this->user = auth()->user();
         $this->api = new APIController();
         $this->gateway = Omnipay::create('PayPal_Rest');
-        $this->gateway->setClientId(env('PAYPAL_CLIENT_ID'));
-        $this->gateway->setSecret(env('PAYPAL_CLIENT_SECRET'));
+        $this->gateway->setClientId(config('constants.PAYPAL.CLIENT_ID'));
+        $this->gateway->setSecret(config('constants.PAYPAL.CLIENT_SECRET'));
         $this->gateway->setTestMode(true);
-    }
-
-    private function updateAppLocaleConfig($locale)
-    {
-        $configFile = base_path('config/app.php');
-
-        if (file_exists($configFile)) {
-            $config = require $configFile;
-            $config['locale'] = $locale;
-
-            $content = "<?php\n\nreturn " . var_export($config, true) . ";\n";
-
-            file_put_contents($configFile, $content);
-        }
     }
 
     public function lang_change(Request $request)
     {
        
-            $lang = $request->lang;
-            app()->setLocale($lang);
-            session()->forget('lang');
+        App::setLocale($request->lang);
+        session()->put('locale', $request->lang);
 
-            session(['lang' => $lang]);
-            $this->updateAppLocaleConfig($lang);
-
-            return redirect()->back();
+        return redirect()->back();
        
     }
 
@@ -157,7 +140,7 @@ class UserController extends Controller
             return redirect()->back();  
         }
 
-        $clients = User::where(['role' => 'Client'])->orderBy('id', 'desc')->get()->toArray();
+        $clients = User::where(['role' => user_roles('2')])->orderBy('id', 'desc')->get()->toArray();
         return view('clients', ['data' => $clients,'user'=>$user ,'add_as_user'=> user_roles('2')]);
 
     }
@@ -178,9 +161,10 @@ class UserController extends Controller
             ->select('users.*', 'c.name as client_name', 'c.user_pic as client_pic')
             ->orderBy('users.id', 'desc')
             ->get()
-            ->toArray();   
-
-            return view('drivers', ['data' => $drivers,'user'=>$user,'add_as_user'=> user_roles('3')]);
+            ->toArray();
+            $client_list = User::where(['role' => 'Client'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();   
+            
+            return view('drivers', ['data' => $drivers,'user'=>$user,'add_as_user'=> user_roles('3'), 'client_list'=>$client_list]);
         } 
         else{
 
@@ -510,30 +494,28 @@ class UserController extends Controller
         }
     }
   
-    public function user_login(REQUEST $request)
+    public function user_login(Request $request)
     {
         $user = auth()->user();
-        if(!$user){
-            if($request->all()){
-
+        if (!$user) {
+            if ($request->all()) {
                 $login = $this->api->user_login($request);
-                $data['status'] = json_decode($login->getContent())->status;
-
-                if($data['status']== "success"){
-                    $data['token'] = json_decode($login->getContent())->token;
-                    session(['user' => $data['token']]);
+                $responseData = json_decode($login->getContent(), true);
+    
+                if ($responseData['status'] == "success") {
+                    session(['user' => $responseData['token']]);
                     session(['lang' => 'en']);
                 }
-
-                echo($login->getContent());       
-            }else{
+    
+                echo $login->getContent();
+            } else {
                 return view('login');
             }
-        }else{
-                return redirect('/');
+        } else {
+            return redirect('/');
         }
     }
-
+    
     public function logout(REQUEST $request)
     {
         session()->forget('lang');
@@ -543,6 +525,7 @@ class UserController extends Controller
 
     public function forgot_password(REQUEST $request)
     {
+
         $req = $request->all();
         if (isset($req['no1']) || isset($req['no2']) || isset($req['no3']) || isset($req['no4']) || isset($req['no5'])) {
             $array = [$req["no1"], $req["no2"], $req["no3"], $req["no4"], $req["no5"]];
@@ -552,11 +535,12 @@ class UserController extends Controller
             if ($user) {
                 Session::flash('email_temp', $user->email);
                 return redirect('/set_password');
-            } else {
-                Session::flash('otp', "OTP is not Correct");
+            } else {             
+        
+                Session::flash('invalid', "OTP is not Correct");
                 Session::flash('email', $req['email']);
 
-                return view('forgotPassword', ['email' => $req['email']]);
+                return view('forgotPassword', ['email' => $req['email'] , 'no'=>$array]);
             }
         } else {
             if (isset($req['email']) && !empty($req['email'])) {
@@ -665,10 +649,9 @@ class UserController extends Controller
         $user = auth()->user();
         if ($user) {
             try {
-
                 $payment = new Payment();
                 $payment->amount = $request->amount;
-                $payment->currency = env('PAYPAL_CURRENCY');
+                $payment->currency = config('constants.PAYPAL.CURRENCY');
                 $payment->package_id = $request->package_id;
                 $payment->payment_method = 'PayPal';
                 $payment->created_by = Auth::id();
@@ -678,7 +661,7 @@ class UserController extends Controller
     
                 $response = $this->gateway->purchase(array(
                     'amount'    => $request->amount,
-                    'currency'  => env('PAYPAL_CURRENCY'),
+                    'currency'  => config('constants.PAYPAL.CURRENCY'),
                     'returnUrl' => url('payment_success'),
                     'cancelUrl' => url('payment_cancel')
                 ))->send();
@@ -732,7 +715,7 @@ class UserController extends Controller
                     $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
                     $payment->payer_email = $arr['payer']['payer_info']['email'];
                     $payment->amount = $arr['transactions'][0]['amount']['total'];
-                    $payment->currency = env('PAYPAL_CURRENCY');
+                    $payment->currency = config('constants.PAYPAL.CURRENCY');
                     $payment->payment_status = $arr['state'];
                     $payment->transaction_status = $arr['state'];
                     $payment->payment_token = $request->input('token');;
@@ -741,6 +724,7 @@ class UserController extends Controller
                     $user->sub_id  = $payment->id;
                     $user->sub_exp_date  = $payment->exp_date;
                     $user->sub_package_id = $payment->package_id;
+                    $user->status = 1;
                     $saved = $user->save();
 
                     if($saved){
@@ -785,7 +769,6 @@ class UserController extends Controller
     public function fail_trans($transaction_error=null, $server_error=null, $token=null, $status=null){
         
         $payment = Payment::where('created_by', Auth::id())->latest()->first();
-        
         if ($payment) {
             $payment->transaction_error = $transaction_error;
             $payment->server_error      = $server_error;    
@@ -802,7 +785,7 @@ class UserController extends Controller
         if ($user) {
             if (!$user->hasVerifiedEmail()) {
                 $user->markEmailAsVerified();
-                $user->status = 2; // Update the status to pendding
+                $user->status = 1; // Update the status to pendding
                 $user->save();
     
                 return redirect('/login')->with('success', 'Email verified successfully. Please log in.');

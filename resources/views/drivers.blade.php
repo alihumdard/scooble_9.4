@@ -22,12 +22,12 @@
           </h3>
           <div class="row mb-2">
             <div class="col-lg-4"></div>
-            <div class="col-lg-8">
+            <div class="col-lg-12">
               <div class="row mx-1">
-                <div class="col-lg-4 px-1" style="text-align: right;">
-                  <button class="btn btn-md text-white" data-toggle="modal" data-target="#addclient" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.add_driver')</button>
+                <div class="col-lg-9 px-1 py-1" style="text-align: right;">
+                  <button class="btn btn-md text-white py-2" data-toggle="modal" data-target="#addclient" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.add_driver')</button>
                 </div>
-                <div class="col-lg-4 px-1">
+                <div class="col-lg-3 px-1">
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <div class="input-group-text bg-white" style="border-right: none; border: 1px solid #DDDDDD;">
@@ -36,14 +36,17 @@
                         </svg>
                       </div>
                     </div>
-                    <select name="filter_by_sts" id="filter_by_sts" class="form-select" style="border-left: none;">
+                    <select name="filter_by_sts" id="filter_by_sts_drivers" class="form-select" style="border-left: none;">
                       <option value="">
                         @lang('lang.filter_by_status')
                       </option>
+                      @foreach(config('constants.STATUS_OPTIONS') as $key => $value)
+                        <option value="{{$value}}">{{ $value }}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-4 px-1">
+                <!-- <div class="col-lg-4 px-1">
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <div class="input-group-text bg-white" style="border-right: none; border: 1px solid #DDDDDD;">
@@ -60,6 +63,7 @@
                     </select>
                   </div>
                 </div>
+                 -->
               </div>
             </div>
           </div>
@@ -85,7 +89,7 @@
                 <tbody>
                   @foreach($data as $key => $value)
                   <tr style="font-size: small;">
-                    <td>{{$value['id']}}</td>
+                    <td>{{++$key}}</td>
                     <td><img src="{{ asset('storage/' . $value['user_pic']); }}" style="width: 45px; height: 43px; border-radius: 38px;" alt="text"> {{ $value['name'] }} </td>
                     <td>{{table_date($value['created_at'])}}</td>
                     <td>{{ $value['address'] }}</td>

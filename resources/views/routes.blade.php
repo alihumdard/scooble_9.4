@@ -21,16 +21,16 @@
           </h3>
           <div class="row mb-2">
             <div class="col-lg-4"></div>
-            <div class="col-lg-8">
+            <div class="col-lg-12">
               <div class="row mx-1">
-                <div class="col-lg-4 px-1" style="text-align: right;">
+                <div class="col-lg-9 px-1 py-1" style="text-align: right;">
                 @if($user->role != 'Driver')
                   <a href="/create_trip">
-                    <button class="btn btn-md text-white" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.create_trip')</button>
+                    <button class="btn btn-md text-white py-2" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.create_trip')</button>
                   </a>
                 @endif
                 </div>
-                <div class="col-lg-4 px-1">
+                <div class="col-lg-3 px-1">
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <div class="input-group-text bg-white" style="border-right: none; border: 1px solid #DDDDDD;">
@@ -39,14 +39,17 @@
                         </svg>
                       </div>
                     </div>
-                    <select name="filter_by_sts" id="filter_by_sts" class="form-select" style="border-left: none;">
+                    <select name="filter_by_sts" id="filter_by_sts_routes" class="form-select" style="border-left: none;">
                       <option value="">
                         @lang('lang.filter_by_status')
                       </option>
+                      @foreach(config('constants.STATUS_OPTIONS') as $key => $value)
+                        <option value="{{$value}}">{{ $value }}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-4 px-1">
+                <!-- <div class="col-lg-4 px-1">
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <div class="input-group-text bg-white" style="border-right: none; border: 1px solid #DDDDDD;">
@@ -62,7 +65,7 @@
                       </option>
                     </select>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

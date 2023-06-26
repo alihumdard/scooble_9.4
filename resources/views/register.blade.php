@@ -188,7 +188,7 @@
                             <!-- Email Address -->
                             <div class="w-100" style="padding-left: 15px;">
                                 <p style="font-style: normal;font-weight: 400;font-size: 16px;line-height: 24px;color: #000000;margin-bottom: 0px !important;">If you already have an account register</p>
-                                <p>You can <a href="/" class="text-warning ml-2">Login Here !</a></p>
+                                <p>You can <a href="/login" class="text-warning ml-2">Login Here !</a></p>
                             </div>
                             <div class="input-group col-lg-12 mb-4">
                                 <div class="input-group-prepend">
@@ -332,3 +332,4 @@
 </body>
 
 </html>
+@include('apicall')

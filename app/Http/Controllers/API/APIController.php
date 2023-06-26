@@ -25,6 +25,11 @@ use Illuminate\Support\Str;
 use App\Models\Event;
 
 
+
+
+
+
+
 class APIController extends Controller
 {
     public function index(){
@@ -152,7 +157,7 @@ class APIController extends Controller
                 if (in_array($user->status, auth_users())) {
 
                     if(isset($user->role) && $user->role == user_roles('3')){
-                
+
                         $client = User::where(['role' => 'Client', 'id' => $user->client_id])->first();
                         
                         if($client){
@@ -167,9 +172,12 @@ class APIController extends Controller
                     }
                     
                     if (Auth::attempt($credentials)) {
+
                         $token = $user->createToken('MyApp')->plainTextToken;
                         session(['user_details' => $user]);
                         return response()->json(['status' => 'success', 'message' => 'User successfully logged in', 'token' => $token]);
+                    }else{
+                        return response()->json(['status' => 'invalid', 'message' => 'Invalid Credentails or Contact to Admin']); 
                     }
                 } 
                 else if ($user->status == 4) {
@@ -179,6 +187,7 @@ class APIController extends Controller
                     return response()->json(['status' => 'Deactive', 'message' => 'You are Unauthorized to Login']);
                 }
             }else{
+
                  return response()->json(['status' => 'invalid', 'message' => 'User does not exist'], 401);
             }
             
