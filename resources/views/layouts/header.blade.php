@@ -57,7 +57,7 @@
       color: black !important;
     }
 
-    /*
+    
      .preloader {
       position: fixed;
       top: 0;
@@ -87,8 +87,8 @@
       100% {
         transform: rotate(360deg);
       }
-    }  */
-
+    }  
+/* 
    .preloader {
       position: fixed;
       top: 0;
@@ -128,7 +128,7 @@
       100% {
         opacity: 0;
       }
-    }
+    } */
      
   </style>
   	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
@@ -136,8 +136,8 @@
 
 <body>
 <div class="preloader">
-<!-- <div class="spinner"></div> -->
-<img class="logo" src="assets/images/Logo.png" alt="Logo">
+<div class="spinner"></div>
+<!-- <img class="logo" src="assets/images/Logo.png" alt="Logo"> -->
 </div>
 
   <div class="container-scroller">

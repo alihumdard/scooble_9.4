@@ -146,6 +146,7 @@ return [
   "promotion_head_line" => "Promotion head line",
   "maintenance_head_line" => "Maintenance head line",
   "mandatory_head_line" => "Mandatory head line",
-  "news_alert_head_line" => "News alert head line"
+  "news_alert_head_line" => "News alert head line",
+  "add_address" => "Add Address"
 
 ];

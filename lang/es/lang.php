@@ -145,6 +145,7 @@ return [
   "promotion_head_line" => "Promosyon başlığı",
   "maintenance_head_line" => "Bakım ana hattı",
   "mandatory_head_line" => "Zorunlu başlık satırı",
-  "news_alert_head_line" => "Haber uyarısı başlık satırı"
+  "news_alert_head_line" => "Haber uyarısı başlık satırı",
+  "add_address" => "Adres Ekle"
 
 ];
