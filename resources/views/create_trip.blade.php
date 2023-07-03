@@ -60,6 +60,14 @@
     .custom-button:active {
         background-color: #233A85;
     }
+    #addAddressModal .modal-header {
+        padding: 0.5rem 1rem;
+    }
+
+    #addAddressModal .modal-title {
+        font-size: 1rem; 
+        margin-bottom: 0; 
+    }
 </style>
 
 <div class="main-panel">
@@ -154,7 +162,7 @@
                                             <input type="file" id="importAddress" multiple size="50" style="display: none;">
                                             <div>
                                             </div>
-                                            <p class="float-right mr-3" style="font-size: smaller;"><a href="" download="template_for_scooble.xlsx">Download sample!</a></p>
+                                            <p class="float-right mr-3" style="font-size: smaller;"><a href="{{ asset('storage/excel_files/template_for_scooble.xlsx') }}"  download="template_for_scooble.xlsx">Download sample!</a></p>
                                         </div>
                                     </div>
 
@@ -257,6 +265,12 @@
         <div class="modal fade" style="height: 30rem;" id="addAddressModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content bg-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">@lang('lang.add_address')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
