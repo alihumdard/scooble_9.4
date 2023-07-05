@@ -241,7 +241,7 @@
                       line-height: 45px;
                       color: #000000 !important;
                     ">
-                                    Forgot Password?
+                                    @lang('lang.forgot_password')?
                                 </p>
                             </div>
                             <!-- Email Address -->
@@ -254,7 +254,7 @@
                       color: #000000;
                       margin-bottom: 0px !important;
                     ">
-                                    Please enter the email associated with your account and we'll send an email with link, where you can change your password.
+                                    @lang('lang.Peteawyaawsaewlyccyp');
                                 </p>
                                 <form action="/forgot_password" method="post">
                                     @csrf
@@ -267,7 +267,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input id="email" required type="email" name="email" placeholder="Enter your email address" value="{{session('email')}}" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
+                                <input id="email" required type="email" name="email" placeholder="@lang('lang.enter_your_email_address')" value="{{session('email')}}" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
                                 <div class="col-lg-12">
                                     @if(session('status') == 'invalid')
                                             <span class="text-danger"> * {{ session('message') }}</span>
@@ -277,7 +277,7 @@
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
                                 <input type="submit" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit" value="Send" data-toggle="modal" />
-                                <p class="mt-4">You can <a class="text-warning" href="/login">Login here !</a></p>
+                                <p class="mt-4">@lang('lang.you_can') <a class="text-warning" href="/login">@lang('login_here') !</a></p>
                             </div>
                             </form>
                         </div>
@@ -334,8 +334,8 @@
                             <path d="M37.75 16H18.25C17.0073 16 16 17.3431 16 19V37C16 38.6569 17.0073 40 18.25 40H37.75C38.9927 40 40 38.6569 40 37V19C40 17.3431 38.9927 16 37.75 16ZM37.75 19V21.5503C36.699 22.6915 35.0234 24.466 31.4412 28.2059C30.6518 29.0339 29.0881 31.0229 28 30.9998C26.9121 31.0232 25.3479 29.0336 24.5588 28.2059C20.9772 24.4666 19.3012 22.6917 18.25 21.5503V19H37.75ZM18.25 37V25.3999C19.3241 26.5406 20.8473 28.1413 23.169 30.5653C24.1935 31.6406 25.9877 34.0144 28 33.9999C30.0024 34.0144 31.7739 31.675 32.8306 30.5658C35.1522 28.1418 36.6759 26.5407 37.75 25.3999V37H18.25Z" fill="#0F771A" />
                             <rect x="4" y="4" width="48" height="48" rx="24" stroke="#ECFDF3" stroke-width="8" />
                         </svg>
-                        <h3 class="mt-3">Check your email</h3>
-                        <p class="mb-0">We sent a verification code to</p>
+                        <h3 class="mt-3">@lang('lang.check_your_email')</h3>
+                        <p class="mb-0">@lang('lang.we_sent_a_verification_code_to')</p>
                         <p>{{session('email')}}</p>
                         <form action="/forgot_password" method="post">
                             @csrf
@@ -347,7 +347,7 @@
                                 <input type="number" name="no4" maxlength="1" value="{{ $no[4] ?? '' }}" class="input" />
                                 <input type="number" name="no5" maxlength="1" value="{{ $no[4] ?? '' }}" class="input" />
                             </div>
-                            <button id="btn_verify_opt" class="btn btn-sm text-white mt-1" style="background-color: #452C88; border-radius: 8px; width: 20%;">Verify Email</button>
+                            <button id="btn_verify_opt" class="btn btn-sm text-white mt-1" style="background-color: #452C88; border-radius: 8px; width: 20%;">@lang('lang.verify_email')</button>
                         </form>
                         @if (Session::has('invalid'))
                         <div class="text-danger">
@@ -359,7 +359,7 @@
                                 });
                         </script>
                         @endif
-                        <p class="mt-1">Didn’t receive the email? <a href="/forgot_password?email={{session('email')}}" style="color: #452C88;">Click to resend</a></p>
+                        <p class="mt-1">@lang('lang.didn’t_receive_the_email')? <a href="/forgot_password?email={{session('email')}}" style="color: #452C88;">@lang('lang.click_to_resend')</a></p>
                         <div class="py-5 mt-4">
                         @if (Session::has('otp'))
                         <div class="alert alert-success">
@@ -373,7 +373,7 @@
                                         <path d="M8.5 16L1 8.5L8.5 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M2.0415 8.5H17.2498" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                    Back to Login
+                                    @lang('lang.back_to_login')
                                 </p>
                             </a>
                         </div>

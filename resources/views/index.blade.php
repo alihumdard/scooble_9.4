@@ -160,7 +160,7 @@
             <div class="row">
               <div class="col-lg-5 col-md-5">
                 <div>
-                  <span class="text-muted font-weight-semibold">Show:</span>
+                  <span class="text-muted font-weight-semibold">@lang('lang.show'):</span>
                   <b>03-09, December 2023</b>
                   <span style="border: 1px solid #ACADAE; cursor: pointer ;padding: 0px 6px;">
                     <i class="fa fa-caret-down"></i>
@@ -197,7 +197,7 @@
             <div class="row mt-4 text-right">
               <div class="offset-lg-7 col-lg-5 col-md-5">
                 <div>
-                  <span class="text-muted font-weight-semibold">Previous Month:</span>
+                  <span class="text-muted font-weight-semibold">@lang('lang.previous_month'):</span>
                   <b>Feburary,2023</b>
                   <span style="border: 1px solid #ACADAE; cursor: pointer ;padding: 0px 6px;">
                     <i class="fa fa-caret-down"></i>
@@ -221,7 +221,7 @@
               </div>
               <div class="col-lg-4">
                 <span class="">
-                  <a class="text-muted font-weight-semibold" href="#">Show more..</a>
+                  <a class="text-muted font-weight-semibold" href="#">@lang('lang.show_more')..</a>
                 </span>
               </div>
             </div>

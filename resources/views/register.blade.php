@@ -183,12 +183,12 @@
                         <input type="hidden" name="role" value="Client" id="role" />
                         <div class="row">
                             <div class="w-100" style="padding-left: 15px;">
-                                <p style="font-style: normal;font-weight: 500;font-size: 30px;line-height: 45px;color: #000000 !important;">Sign Up</p>
+                                <p style="font-style: normal;font-weight: 500;font-size: 30px;line-height: 45px;color: #000000 !important;">@lang('lang.signup')</p>
                             </div>
                             <!-- Email Address -->
                             <div class="w-100" style="padding-left: 15px;">
-                                <p style="font-style: normal;font-weight: 400;font-size: 16px;line-height: 24px;color: #000000;margin-bottom: 0px !important;">If you already have an account register</p>
-                                <p>You can <a href="/login" class="text-warning ml-2">Login Here !</a></p>
+                                <p style="font-style: normal;font-weight: 400;font-size: 16px;line-height: 24px;color: #000000;margin-bottom: 0px !important;">@lang('lang.if_you_already_have_an_account_register')</p>
+                                <p>@lang('lang.you_can') <a href="/login" class="text-warning ml-2">@lang('lang.login_here') !</a></p>
                             </div>
                             <div class="input-group col-lg-12 mb-4">
                                 <div class="input-group-prepend">
@@ -199,7 +199,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                    <input id="username" type="text" value="{{ old('name') }}" name="name" placeholder="Enter your Full Name" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;">                      
+                                    <input id="username" type="text" value="{{ old('name') }}" name="name" placeholder="@lang('lang.enter_your_full_name')" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;">                      
                                     <div class="col-lg-12">
                                         @error('name')
                                             <span class="text-danger"> * {{ $message }}</span>
@@ -217,7 +217,7 @@
 
                                     </span>
                                 </div>
-                                <input id="email" type="email" value="{{ old('email') }}" name="email" placeholder="Enter your E-mail" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;">
+                                <input id="email" type="email" value="{{ old('email') }}" name="email" placeholder="@lang('lang.enter_your_email')" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;">
                                 <div class="col-lg-12">
                                         @error('email')
                                             <span class="text-danger"> * {{ $message }}</span>
@@ -235,7 +235,7 @@
 
                                     </span>
                                 </div>
-                                <input id="password" type="password" value="{{ old('password') }}"  name="password" placeholder="Enter your password" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
+                                <input id="password" type="password" value="{{ old('password') }}"  name="password" placeholder="@lang('lang.enter_your_password')" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white px-4 border-md border-right-0 border-left-0 border-top-0 border-dark" style="border-radius: 0px !important;">
                                         <button style="border: none;background: none; cursor: pointer;" type="button" id="eye"><i class="fa fa-eye text-muted"></i></button>
@@ -258,7 +258,7 @@
 
                                     </span>
                                 </div>
-                                <input id="passwordConfirmation" value="{{ old('confirm_password') }}" type="password" name="confirm_password" placeholder="Confirm your password" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
+                                <input id="passwordConfirmation" value="{{ old('confirm_password') }}" type="password" name="confirm_password" placeholder="@lang('confirm_your_password')" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white px-4 border-md border-right-0 border-left-0 border-top-0 border-dark" style="border-radius: 0px !important;">
                                         <button style="border: none;background: none; cursor: pointer;" type="button" id="eye2"><i class="fa fa-eye text-muted"></i></button>
@@ -273,7 +273,7 @@
 
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-5" style="margin-top: 60px;">
-                                <input type="submit" class="font-weight-bold sign_up btn btn-primary btn-block py-2" name="submit" value="Create your account">
+                                <input type="submit" class="font-weight-bold sign_up btn btn-primary btn-block py-2" name="submit" value="@lang('lang.create_your_account')">
                             </div>
                         </div>
                     </form>

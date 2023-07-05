@@ -101,9 +101,9 @@
                                 </div>
                                 @if(isset($client_list) && $client_list != '')
                                     <div class="col-lg-3 my-2">
-                                        <label for="client_id">Clients :</label>
+                                        <label for="client_id">@lang('lang.clients') :</label>
                                         <select required name="client_id" id="client_id" class="form-select">
-                                            <option disabled selected>select_client </option>
+                                            <option disabled selected>@lang('lang.select_client') </option>
                                             @foreach($client_list as $value)
                                             <option value="{{ $value['id'] }}" {{ isset($data['client_id']) && $data['client_id'] == $value['id'] ? 'selected' : '' }}>
                                                 {{ $value['name'] }}
@@ -162,7 +162,7 @@
                                             <input type="file" id="importAddress" multiple size="50" style="display: none;">
                                             <div>
                                             </div>
-                                            <p class="float-right mr-3" style="font-size: smaller;"><a href="{{ asset('storage/excel_files/template_for_scooble.xlsx') }}"  download="template_for_scooble.xlsx">Download sample!</a></p>
+                                            <p class="float-right mr-3" style="font-size: smaller;"><a href="{{ asset('storage/excel_files/template_for_scooble.xlsx') }}"  download="template_for_scooble.xlsx">@lang('lang.download_sample')!</a></p>
                                         </div>
                                     </div>
 
@@ -275,7 +275,7 @@
                         <form>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" required id="addressTile" class="form-control" placeholder="Enter Address Name" style="border-right: none;">
+                                    <input type="text" required id="addressTile" class="form-control" placeholder="@lang('lang.enter_address_name')" style="border-right: none;">
                                     <div class="input-group-append">
                                         <button type="button" id="map_button" data-toggle="modal" data-target="#viewlocation" onclick="initMap()" class="input-group-text bg-white p-2" style="border: 1px solid #CED4DA; border-left: none;">
                                             <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -287,7 +287,7 @@
                                 <div class="validation-error-title"></div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" required="" id="addressDesc" placeholder="Enter Address Description"></textarea>
+                                <textarea class="form-control" required="" id="addressDesc" placeholder="@lang('lang.enter_address_description')"></textarea>
                                 <div class="validation-error-desc"></div>
                             </div>
                             <div class="form-group">

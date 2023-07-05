@@ -195,7 +195,7 @@
                       line-height: 45px;
                       color: #000000 !important;
                     ">
-                  Log In
+                  @lang('lang.login')
                 </p>
               </div>
               <!-- Email Address -->
@@ -208,11 +208,11 @@
                       color: #000000;
                       margin-bottom: 0px !important;
                     ">
-                  If you don't have an account
+                  @lang('lang.If_you_dont_have_an_account')
                 </p>
                 <p>
-                  You can
-                  <a href="/register" class="text-warning ml-2">Register here!</a>
+                  @lang('lang.you_can')
+                  <a href="/register" class="text-warning ml-2">@lang('lang.register_here')!</a>
                 </p>
               </div>
               <div class="input-group col-lg-12 mb-4">
@@ -223,7 +223,7 @@
                     </svg>
                   </span>
                 </div>
-                <input id="email"  type="email" name="email" placeholder="Enter your email address" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
+                <input id="email"  type="email" name="email" placeholder="@lang('lang.enter_your_email_address')" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
                 <div class="col-lg-12">
                 <div class="validation-error-email"></div>
                 </div> 
@@ -238,7 +238,7 @@
 
                   </span>
                 </div>
-                <input id="password"  type="password" name="password" placeholder="Enter your password" class="border-top-0 border-right-0 form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;" />
+                <input id="password"  type="password" name="password" placeholder="@lang('lang.enter_your_password')" class="border-top-0 border-right-0 form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;" />
                 <div class="input-group-append">
                   <span class="input-group-text bg-white border-md border-top-0 border-right-0 border-left-0 border-dark" style="border-radius: 0px !important;">
                     <button style="border: none; background: none; cursor: pointer;" type="button" id="eye">
@@ -253,17 +253,17 @@
               <div class="input-group-append col-lg-12 mb-4 d-flex justify-content-between">
                 <div class="input-group-text bg-white border-0">
                   <input type="checkbox" id="remember-me" name="remember_me" />
-                  <label for="remember-me" class="m-0 ml-1">Remember me</label>
+                  <label for="remember-me" class="m-0 ml-1">@lang('lang.remember_me')</label>
                 </div>
                 <div>
-                  <a href="/forgot_password" class="btn btn-link ml-2">Forgot Password?</a>
+                  <a href="/forgot_password" class="btn btn-link ml-2">@lang('lang.forgot_password')?</a>
                 </div>
               </div>
               <!-- Submit Button -->
               <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
                 <button type="submit" id="btn_user_login" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
                   <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
-                  <span id="text">Sign In</span>
+                  <span id="text">@lang('lang.signin')</span>
                 </button>
               </div>
             </div>

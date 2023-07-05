@@ -53,7 +53,7 @@
               <div class="col-lg-6 mb-2">
                 <label for="com_pic">@lang('lang.client')</label>
                 <select required name="client_id" id="client_id" class="form-select">
-                  <option disabled selected>select_client </option>
+                  <option disabled selected>@lang('lang.select_client') </option>
                        @foreach($client_list as $value)
                       <option value="{{ $value['id'] }}" {{ isset($data['client_id']) && $data['client_id'] == $value['id'] ? 'selected' : '' }}>
                           {{ $value['name'] }}
