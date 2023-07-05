@@ -48,7 +48,7 @@
             <h5 class="mb-0">
                 <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <div class="d-flex flex-column">
-                        <span class="mb-1" style="font-style: normal;font-weight: 700;font-size: 14px;line-height: 17px;letter-spacing: 0.01em;color: #323C47;">Trip Title</span>
+                        <span class="mb-1" style="font-style: normal;font-weight: 700;font-size: 14px;line-height: 17px;letter-spacing: 0.01em;color: #323C47;">@lang('lang.trip_title')</span>
                         <span class="text-secondary text-small" style="font-style: normal;font-weight: 400;font-size: 14px;line-height: 17px;letter-spacing: 0.01em;color: #9FA2B4;">
                             23 December, 2023
                         </span>
@@ -58,7 +58,7 @@
         </div>
         <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body p-2 aside_body">
-                Trip Description...
+                @lang('lang.trip_description')...
             </div>
         </div>
         <div class="card-header aside_bottom" role="tab" id="">

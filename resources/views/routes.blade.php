@@ -81,11 +81,11 @@
                     <th>@lang('lang.end_point')</th>
                     
                     @if($user->role != 'Client')
-                    <th>Client Name</th>
+                    <th>@lang('lang.client_name')</th>
                     @endif
                     
                     @if($user->role != 'Driver')
-                    <th>Driver Name</th>
+                    <th>@lang('lang.driver_name')</th>
                     @endif
 
                     <th>@lang('lang.status')</th>

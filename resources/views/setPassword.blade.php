@@ -197,9 +197,9 @@
                     @csrf    
                     <div class="row">
                             <div class="w-100" style="padding-left: 15px;">
-                                <p style="font-style: normal;font-weight: 500;font-size: 30px;line-height: 45px;color: #000000 !important;">WELCOME</p>
-                                <p>Create your password to create account.</p>
-                                <p>You can <a href="/login" class="text-warning">Login Here !</a></p>
+                                <p style="font-style: normal;font-weight: 500;font-size: 30px;line-height: 45px;color: #000000 !important;">@lang('lang.welcome')</p>
+                                <p>@lang('lang.create_your_password_to_create_account').</p>
+                                <p>You can <a href="/login" class="text-warning">@lang('lang.login_here') !</a></p>
                             </div>
                             <!-- Password -->
                             <div class="input-group col-lg-12 mb-4">
@@ -212,7 +212,7 @@
 
                                     </span>
                                 </div>
-                                <input id="password" type="password" value="{{ old('password') }}" name="password" placeholder="Enter your password" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
+                                <input id="password" type="password" value="{{ old('password') }}" name="password" placeholder="@lang('lang.enter_your_password')" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white px-4 border-md border-right-0 border-left-0 border-top-0 border-dark" style="border-radius: 0px !important;">
                                         <button style="border: none;background: none; cursor: pointer;" type="button" id="eye"><i class="fa fa-eye text-muted"></i></button>
@@ -235,7 +235,7 @@
 
                                     </span>
                                 </div>
-                                <input id="passwordConfirmation" type="password" name="confirm_password" value="{{ old('confirm_password') }}" placeholder="Confirm your password" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
+                                <input id="passwordConfirmation" type="password" name="confirm_password" value="{{ old('confirm_password') }}" placeholder="@lang('lang.confirm_your_password')" class="border-top-0 border-right-0  form-control bg-white border-left-0 border-md border-dark" style="border-radius: 0px !important;">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-white px-4 border-md border-right-0 border-left-0 border-top-0 border-dark" style="border-radius: 0px !important;">
                                         <button style="border: none;background: none; cursor: pointer;" type="button" id="eye2"><i class="fa fa-eye text-muted"></i></button>
@@ -250,7 +250,7 @@
 
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
-                                <input type="submit" style="background-color: #452C88;" class="font-weight-bold sign_up btn text-white btn-block py-2" name="submit" value="Set Password">
+                                <input type="submit" style="background-color: #452C88;" class="font-weight-bold sign_up btn text-white btn-block py-2" name="submit" value="@lang('lang.set_password')">
                                 <!-- <a href="#" class="sign_up btn btn-primary btn-block py-2">
                                     <span class="font-weight-bold">Create your account</span>
                                 </a> -->

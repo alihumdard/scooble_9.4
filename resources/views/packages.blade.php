@@ -13,46 +13,46 @@
                 <path d="M23.1783 16.5241L19.5521 3.01716C19.1579 1.54862 17.353 1.00759 16.2133 2.01629L13.9278 4.039C11.3845 6.28991 8.35111 7.91891 5.06775 8.79698C2.31938 9.53199 0.690561 12.3597 1.42698 15.1028C2.16341 17.8459 4.99058 19.4819 7.73896 18.7469C11.0223 17.8688 14.4654 17.7657 17.7956 18.4459L20.7882 19.0571C22.2806 19.3619 23.5725 17.9926 23.1783 16.5241Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M7.53931 8.09998L11.7001 23.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-            </span> Packages
+            </span> @lang('lang.packages')
           </h3>
           <form action="packageStore" id="formData" method="post">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 ">
-                    <label for="title">Title:</label>
+                    <label for="title">@lang('lang.title'):</label>
                     <input type="hidden" name="id" id="id"  value="{{ $package['id'] ?? '' }}" >
                     <input type="text" required name="title" id="title" class="form-control" value="{{ $package['title'] ?? '' }}" placeholder="@lang('lang.title')">
                 </div>
                 <div class="row">
                   <div class="col-lg-3">
-                      <label for="price"> Price:</label>
-                      <input type="number" required name="price" id="price" value="{{ $package['price'] ?? '' }}" class="form-control" placeholder="Enter price">
+                      <label for="price"> @lang('lang.price'):</label>
+                      <input type="number" required name="price" id="price" value="{{ $package['price'] ?? '' }}" class="form-control" placeholder="@lang('lang.enter_price')">
                   </div>
                   <div class="col-lg-3">
-                      <label for="users"> Users:</label>
-                      <input type="number" required name="users" id="users" value="{{ $package['users'] ?? '' }}" class="form-control" placeholder="Enter users">
+                      <label for="users"> @lang('lang.users'):</label>
+                      <input type="number" required name="users" id="users" value="{{ $package['users'] ?? '' }}" class="form-control" placeholder="@lang('lang.enter_users')">
                   </div>
                   <div class="col-lg-3">
-                      <label for="drivers"> Drivers:</label>
-                      <input type="number" required name="drivers" id="drivers" value="{{ $package['drivers'] ?? '' }}" class="form-control" placeholder="Enter drivers">
+                      <label for="drivers"> @lang('lang.drivers'):</label>
+                      <input type="number" required name="drivers" id="drivers" value="{{ $package['drivers'] ?? '' }}" class="form-control" placeholder="@lang('lang.enter_drivers')">
                   </div>
                   <div class="col-lg-3">
-                      <label for="map_api_call"> Map API Call:</label>
-                      <input type="number" required name="map_api_call" id="map_api_call" value="{{ $package['map_api_call'] ?? '' }}" class="form-control" placeholder="Enter map_api_call">
+                      <label for="map_api_call"> @lang('lang.map_api_call'):</label>
+                      <input type="number" required name="map_api_call" id="map_api_call" value="{{ $package['map_api_call'] ?? '' }}" class="form-control" placeholder="@lang('lang.map_api_call')">
                   </div>
                 </div>               
 
                 <div class="col-lg-12 mt-2">
-                    <label for="desc"> Description:</label>
+                    <label for="desc"> @lang('lang.description'):</label>
                     <textarea name="desc" required id="desc" cols="30" rows="10" class="form-control" placeholder="@lang('lang.message')...">{{ $package['desc'] ?? '' }}</textarea>
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <input type="radio" required name="type" id="type" value="Advance" {{ ($package['type'] ?? '') === 'Advance' ? 'checked' : '' }}> Advance
+                    <input type="radio" required name="type" id="type" value="Advance" {{ ($package['type'] ?? '') === 'Advance' ? 'checked' : '' }}> @lang('lang.advance')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <input type="radio" required  name="type" id="type" value="Medium" {{ ($package['type'] ?? '') === 'Medium' ? 'checked' : '' }}> Medium
+                    <input type="radio" required  name="type" id="type" value="Medium" {{ ($package['type'] ?? '') === 'Medium' ? 'checked' : '' }}> @lang('lang.medium')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <input type="radio" required name="type" id="type" value="Basic" {{ ($package['type'] ?? '') === 'Basic' ? 'checked' : '' }}> Basic
+                    <input type="radio" required name="type" id="type" value="Basic" {{ ($package['type'] ?? '') === 'Basic' ? 'checked' : '' }}> @lang('lang.basic')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
                     <button class="btn px-5 text-white" name="submit" style="background-color: #E45F00; border-radius: 8px;">@lang('lang.add')</button>
@@ -67,15 +67,15 @@
               <table id="users-table" class="display" style="width:100%">
                 <thead class="text-secondary" style="background-color: #E9EAEF;">
                   <tr style="font-size: small;">
-                    <th>Sr.</th>
-                    <th> Title </th>
-                    <th> Description </th>
-                    <th> Price </th>
-                    <th> Users </th>
-                    <th> Drivers </th>
-                    <th> Map API Call </th>
-                    <th> Pack Category </th>
-                    <th> Created Date </th>
+                    <th>@lang('lang.sr').</th>
+                    <th> @lang('lang.title') </th>
+                    <th> @lang('lang.description') </th>
+                    <th> @lang('lang.price') </th>
+                    <th> @lang('lang.users') </th>
+                    <th> @lang('lang.drivers') </th>
+                    <th> @lang('lang.map_api_call') </th>
+                    <th> @lang('lang.pack_category') </th>
+                    <th> @lang('lang.created_date') </th>
                     <th>@lang('lang.actions')</th>
                   </tr>
                 </thead>

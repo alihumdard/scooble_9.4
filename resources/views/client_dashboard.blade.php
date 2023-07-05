@@ -51,7 +51,7 @@
                     <p>
                         {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn dismiss-btn_pro px-5 mt-5" >Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_pro px-5 mt-5" >@lang('lang.dismiss')</button>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
                     <p>
                     {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn dismiss-btn_news px-5 mt-5"  onclick="dismissModal()">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_news px-5 mt-5"  onclick="dismissModal()">@lang('lang.dismiss')</button>
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@
                     <p>
                     {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn dismiss-btn_mond px-5 mt-5"  onclick="dismissModal()">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_mond px-5 mt-5"  onclick="dismissModal()">@lang('lang.dismiss')</button>
                 </div>
             </div>
         </div>
@@ -224,7 +224,7 @@ $(document).ready(function() {
                     <p>
                     {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn dismiss-btn_maint px-5 mt-5"  onclick="dismissModal()">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_maint px-5 mt-5"  onclick="dismissModal()">@lnag('lang.dismiss')</button>
                 </div>
             </div>
         </div>
@@ -282,7 +282,7 @@ $(document).ready(function() {
                     <p>
                     {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn dismiss-btn_warn px-5 mt-5"  onclick="dismissModal()">Dismiss</button>
+                    <button class="btn dismiss-btn dismiss-btn_warn px-5 mt-5"  onclick="dismissModal()">@lang('lang.dismiss')</button>
                 </div>
             </div>
         </div>
@@ -328,7 +328,7 @@ $(document).ready(function() {
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.54 0H5.92C7.33 0 8.46 1.15 8.46 2.561V5.97C8.46 7.39 7.33 8.53 5.92 8.53H2.54C1.14 8.53 0 7.39 0 5.97V2.561C0 1.15 1.14 0 2.54 0ZM2.54 11.4697H5.92C7.33 11.4697 8.46 12.6107 8.46 14.0307V17.4397C8.46 18.8497 7.33 19.9997 5.92 19.9997H2.54C1.14 19.9997 0 18.8497 0 17.4397V14.0307C0 12.6107 1.14 11.4697 2.54 11.4697ZM17.4601 0H14.0801C12.6701 0 11.5401 1.15 11.5401 2.561V5.97C11.5401 7.39 12.6701 8.53 14.0801 8.53H17.4601C18.8601 8.53 20.0001 7.39 20.0001 5.97V2.561C20.0001 1.15 18.8601 0 17.4601 0ZM14.0801 11.4697H17.4601C18.8601 11.4697 20.0001 12.6107 20.0001 14.0307V17.4397C20.0001 18.8497 18.8601 19.9997 17.4601 19.9997H14.0801C12.6701 19.9997 11.5401 18.8497 11.5401 17.4397V14.0307C11.5401 12.6107 12.6701 11.4697 14.0801 11.4697Z" fill="white" />
                         </svg>
-                    </span> Dashboard
+                    </span> @lang('dashboard')
                 </h3>
             </div>
             <div class="container-fluid">
@@ -339,7 +339,7 @@ $(document).ready(function() {
 -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h6 style="color: #452C88;">Active Drivers</h6>
+                                    <h6 style="color: #452C88;">@lang('lang.active_drivers')</h6>
                                     <h5 style="color: #E45F00;">20</h5>
                                 </div>
                                 <div>
@@ -363,7 +363,7 @@ $(document).ready(function() {
 -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h6 class="mb-0" style="color: #452C88;">Active Routes</h6>
+                                    <h6 class="mb-0" style="color: #452C88;">@lang('active_routes')</h6>
                                     <h5 class="mb-0" style="color: #E45F00;">10</h5>
                                 </div>
                                 <div>
@@ -382,7 +382,7 @@ $(document).ready(function() {
 -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h6 class="mb-0" style="color: #452C88;">Completed Trips</h6>
+                                    <h6 class="mb-0" style="color: #452C88;">@lang('lang.completed_trips')</h6>
                                     <h5 class="mb-0" style="color: #E45F00;">500</h5>
                                 </div>
                                 <div>
@@ -400,9 +400,9 @@ $(document).ready(function() {
 -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h6 class="mb-0" style="color: #452C88;">Days Left</h6>
+                                    <h6 class="mb-0" style="color: #452C88;">@lang('lang.days_left')</h6>
                                     <h5 class="mb-0" style="color: #E45F00;">500</h5>
-                                    <p class="mb-0" style="font-size: 12px;">Expiry Date: <span style="color: #452C88;">5/15/2023</span></p>
+                                    <p class="mb-0" style="font-size: 12px;">@lang('lnag.expiry_date'): <span style="color: #452C88;">5/15/2023</span></p>
                                 </div>
                                 <div>
                                     <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -420,7 +420,7 @@ $(document).ready(function() {
                         <div class="row">
                             <div class="col-lg-5 col-md-5">
                                 <div>
-                                    <span class="text-muted font-weight-semibold">Show:</span>
+                                    <span class="text-muted font-weight-semibold">@lang('lang.show'):</span>
                                     <b>03-09, December 2023</b>
                                     <span style="border: 1px solid #ACADAE; cursor: pointer ;padding: 0px 6px;">
                                         <i class="fa fa-caret-down"></i>
@@ -433,7 +433,7 @@ $(document).ready(function() {
                                 <div class="prgrss-chart" style="box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25); 
             -webkit-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);
             -moz-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);">
-                                    <p class="progress_para pt-2">Active Trips </p>
+                                    <p class="progress_para pt-2">@lang('lang.active_trips') </p>
                                     <canvas id="myChart2" style="height: auto !important;"></canvas>
                                 </div>
                             </div>
@@ -441,7 +441,7 @@ $(document).ready(function() {
                                 <div class="prgrss-chart" style="box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25); 
             -webkit-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);
             -moz-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);">
-                                    <p class="progress_para pt-2">Completed Trips </p>
+                                    <p class="progress_para pt-2">@lang('lang.completed_trips') </p>
                                     <canvas id="myChart" style="height: auto !important;"></canvas>
                                 </div>
                             </div>
@@ -449,7 +449,7 @@ $(document).ready(function() {
                                 <div class="prgrss-chart" style="box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25); 
             -webkit-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);
             -moz-box-shadow: 0px 0px 3px 0.75px rgba(0,0,0,0.25);">
-                                    <p class="progress_para pt-2">Pending Trips </p>
+                                    <p class="progress_para pt-2">@lang('lang.pending_trips') </p>
                                     <canvas id="myChart3" style="height: auto !important;"></canvas>
                                 </div>
                             </div>
@@ -457,7 +457,7 @@ $(document).ready(function() {
                         <div class="row mt-4 text-right">
                             <div class="offset-lg-7 col-lg-5 col-md-5">
                                 <div>
-                                    <span class="text-muted font-weight-semibold">Previous Month:</span>
+                                    <span class="text-muted font-weight-semibold">@lang('lang.previous_month'):</span>
                                     <b>Feburary,2023</b>
                                     <span style="border: 1px solid #ACADAE; cursor: pointer ;padding: 0px 6px;">
                                         <i class="fa fa-caret-down"></i>
@@ -476,7 +476,7 @@ $(document).ready(function() {
                             <div class="col-lg-8">
                                 <form action="" method="#">
                                     <select name="" class="form-select" id="">
-                                        <option disabled selected value="null">Filter by clients</option>
+                                        <option disabled selected value="null">@lang('lang.filter_by_clients')</option>
                                         <option value=""><i class="fa fa-edit"></i> Earth</option>
                                         <option value="">B</option>
                                         <option value="">C</option>
@@ -486,7 +486,7 @@ $(document).ready(function() {
                             </div>
                             <div class="col-lg-4">
                                 <span class="">
-                                    <a class="text-muted font-weight-semibold" href="#">Show more..</a>
+                                    <a class="text-muted font-weight-semibold" href="#">@lang('lang.show_more')..</a>
                                 </span>
                             </div>
                         </div>
