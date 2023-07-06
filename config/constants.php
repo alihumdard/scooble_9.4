@@ -4,7 +4,7 @@ return [
     'STATUS_OPTIONS' => [
         1 => 'Active',
         2 => 'Pending',
-        3 => 'Deactive',
+        3 => 'Suspend',
         4 => 'Unverified',
     ],
 

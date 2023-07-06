@@ -695,133 +695,133 @@
         });
 
         // loading tables 
-        function loadTables(apiname, role) {
+        // function loadTables(apiname, role) {
 
-            var apiurl = "{{ end_url('') }}" + apiname;
+        //     var apiurl = "{{ end_url('') }}" + apiname;
 
-            if (role == 'Client') {
-                $('#users-table').DataTable({
-                    ajax: {
-                        url: apiurl,
-                        type: 'GET',
-                        dataType: 'json',
-                        beforeSend: function(xhr) {
-                            var token = '{{ session('
-                            user ') }}';
-                            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-                        },
-                        dataSrc: 'data',
-                        data: {
-                            role: role
-                        }
-                    },
-                    columns: [{
-                            data: 'id'
-                        },
-                        {
-                            data: 'name'
-                        },
-                        {
-                            data: 'address'
-                        },
-                        {
-                            data: 'com_name'
-                        },
-                        {
-                            data: 'status',
-                            render: function(data) {
-                                if (data == 1) {
-                                    return '<span class="badge" style="background-color: #31A6132E; color: #31A613;">Active</span>';
-                                } else if (data == 2) {
-                                    return '<span class="badge" style="background-color: #4D4D4D1F; color: #8F9090;">Pending</span>';
-                                } else if (data == 3) {
-                                    return '<span class="badge" style="background-color: #F5222D30; color: #F5222D;">Suspend</span>';
-                                } else {
-                                    return '';
-                                }
-                            }
-                        },
-                        {
-                            data: 'created_at',
-                            render: function(data) {
-                                var date = new Date(data);
-                                var options = {
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: 'numeric'
-                                };
-                                return date.toLocaleDateString('en-US', options);
-                            }
-                        },
-                    ],
-                });
-            }
+        //     if (role == 'Client') {
+        //         $('#users-table').DataTable({
+        //             ajax: {
+        //                 url: apiurl,
+        //                 type: 'GET',
+        //                 dataType: 'json',
+        //                 beforeSend: function(xhr) {
+        //                     var token = '{{ session('
+        //                     user ') }}';
+        //                     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        //                 },
+        //                 dataSrc: 'data',
+        //                 data: {
+        //                     role: role
+        //                 }
+        //             },
+        //             columns: [{
+        //                     data: 'id'
+        //                 },
+        //                 {
+        //                     data: 'name'
+        //                 },
+        //                 {
+        //                     data: 'address'
+        //                 },
+        //                 {
+        //                     data: 'com_name'
+        //                 },
+        //                 {
+        //                     data: 'status',
+        //                     render: function(data) {
+        //                         if (data == 1) {
+        //                             return '<span class="badge" style="background-color: #31A6132E; color: #31A613;">Active</span>';
+        //                         } else if (data == 2) {
+        //                             return '<span class="badge" style="background-color: #4D4D4D1F; color: #8F9090;">Pending</span>';
+        //                         } else if (data == 3) {
+        //                             return '<span class="badge" style="background-color: #F5222D30; color: #F5222D;">Suspend</span>';
+        //                         } else {
+        //                             return '';
+        //                         }
+        //                     }
+        //                 },
+        //                 {
+        //                     data: 'created_at',
+        //                     render: function(data) {
+        //                         var date = new Date(data);
+        //                         var options = {
+        //                             year: 'numeric',
+        //                             month: 'short',
+        //                             day: 'numeric'
+        //                         };
+        //                         return date.toLocaleDateString('en-US', options);
+        //                     }
+        //                 },
+        //             ],
+        //         });
+        //     }
 
-            if (role == 'Admin') {
-                $('#admin-table').DataTable({
-                    ajax: {
-                        url: apiurl,
-                        type: 'GET',
-                        dataType: 'json',
-                        beforeSend: function(xhr) {
-                            var token = '{{ session('
-                            user ') }}';
-                            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-                        },
-                        dataSrc: 'data',
-                        data: {
-                            role: role
-                        }
-                    },
-                    columns: [{
-                            data: 'name'
-                        },
-                        {
-                            data: 'created_at',
-                            render: function(data) {
-                                var date = new Date(data);
-                                var options = {
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: 'numeric'
-                                };
-                                return date.toLocaleDateString('en-US', options);
-                            }
-                        },
-                        {
-                            data: 'address'
-                        },
-                        {
-                            data: 'role'
-                        },
-                        {
-                            data: 'email'
-                        },
-                        {
-                            data: 'status',
-                            render: function(data) {
-                                if (data == 1) {
-                                    return '<span class="badge" style="background-color: #31A6132E; color: #31A613;">Active</span>';
-                                } else if (data == 2) {
-                                    return '<span class="badge" style="background-color: #4D4D4D1F; color: #8F9090;">Pending</span>';
-                                } else if (data == 3) {
-                                    return '<span class="badge" style="background-color: #F5222D30; color: #F5222D;">Suspend</span>';
-                                } else {
-                                    return '';
-                                }
-                            }
-                        },
-                        {
-                            data: null,
-                            render: function(data) {
-                                return '<span class="badge" style="background-color: #F5222D30; color: #F5222D;"><i class="fa fa-edit"></i> Edit</span> <span class="badge" style="background-color: #F5222D30; color: #F5222D;"><i class="fa fa-trash"></i> Delete</span>';
-                            }
-                        }
-                    ],
-                });
-            }
+        //     if (role == 'Admin') {
+        //         $('#admin-table').DataTable({
+        //             ajax: {
+        //                 url: apiurl,
+        //                 type: 'GET',
+        //                 dataType: 'json',
+        //                 beforeSend: function(xhr) {
+        //                     var token = '{{ session('
+        //                     user ') }}';
+        //                     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        //                 },
+        //                 dataSrc: 'data',
+        //                 data: {
+        //                     role: role
+        //                 }
+        //             },
+        //             columns: [{
+        //                     data: 'name'
+        //                 },
+        //                 {
+        //                     data: 'created_at',
+        //                     render: function(data) {
+        //                         var date = new Date(data);
+        //                         var options = {
+        //                             year: 'numeric',
+        //                             month: 'short',
+        //                             day: 'numeric'
+        //                         };
+        //                         return date.toLocaleDateString('en-US', options);
+        //                     }
+        //                 },
+        //                 {
+        //                     data: 'address'
+        //                 },
+        //                 {
+        //                     data: 'role'
+        //                 },
+        //                 {
+        //                     data: 'email'
+        //                 },
+        //                 {
+        //                     data: 'status',
+        //                     render: function(data) {
+        //                         if (data == 1) {
+        //                             return '<span class="badge" style="background-color: #31A6132E; color: #31A613;">Active</span>';
+        //                         } else if (data == 2) {
+        //                             return '<span class="badge" style="background-color: #4D4D4D1F; color: #8F9090;">Pending</span>';
+        //                         } else if (data == 3) {
+        //                             return '<span class="badge" style="background-color: #F5222D30; color: #F5222D;">Suspend</span>';
+        //                         } else {
+        //                             return '';
+        //                         }
+        //                     }
+        //                 },
+        //                 {
+        //                     data: null,
+        //                     render: function(data) {
+        //                         return '<span class="badge" style="background-color: #F5222D30; color: #F5222D;"><i class="fa fa-edit"></i> Edit</span> <span class="badge" style="background-color: #F5222D30; color: #F5222D;"><i class="fa fa-trash"></i> Delete</span>';
+        //                     }
+        //                 }
+        //             ],
+        //         });
+        //     }
 
-        }
+        // }
 
         function dismissModal(modle_id) {
             $('#addclient').modal('hide');
@@ -887,41 +887,99 @@
 
 
 
-    var passwordInputs = $("input[type='password']");
-    passwordInputs.each(function() {
-    var passwordInput = $(this);
-    var eyeButton = passwordInput.next(".input-group-append").find("#eye");
+        var passwordInputs = $("input[type='password']");
+        passwordInputs.each(function() {
+            var passwordInput = $(this);
+            var eyeButton = passwordInput.next(".input-group-append").find("#eye");
 
-    eyeButton.on("keydown", function(event) {
-      if (event.key === "Tab" && !event.shiftKey) {
-        event.preventDefault();
-        passwordInput.focus();
-      }
-    });
+            eyeButton.on("keydown", function(event) {
+            if (event.key === "Tab" && !event.shiftKey) {
+                event.preventDefault();
+                passwordInput.focus();
+            }
+            });
 
-    passwordInput.on("keydown", function(event) {
-      if (event.key === "Tab" && !event.shiftKey) {
-        event.preventDefault();
-        var formInputs = $("input");
-        var currentIndex = formInputs.index(this);
+            passwordInput.on("keydown", function(event) {
+            if (event.key === "Tab" && !event.shiftKey) {
+                event.preventDefault();
+                var formInputs = $("input");
+                var currentIndex = formInputs.index(this);
 
-        var nextInput = formInputs.eq(currentIndex + 1);
-        while (nextInput.length && !nextInput.is(":visible")) {
-          nextInput = formInputs.eq(currentIndex + 2);
-          currentIndex++;
-        }
+                var nextInput = formInputs.eq(currentIndex + 1);
+                while (nextInput.length && !nextInput.is(":visible")) {
+                nextInput = formInputs.eq(currentIndex + 2);
+                currentIndex++;
+                }
 
-        if (nextInput.length) {
-          nextInput.focus();
-        } else {
-          formInputs.eq(0).focus();
-        }
-      }
-    });
-  });
-
-
+                if (nextInput.length) {
+                nextInput.focus();
+                } else {
+                formInputs.eq(0).focus();
+                }
+            }
+            });
+        });
 
 
+     //user status
+        $(document).on('click', '.btn_status', function () {
+         var id = $(this).find('span').attr('data-client_id');
+            $('#user_sts_modal').modal('show');
+            $('#user_sts').data('id', id);
+        });
+    
+        $(document).on('submit', '#user_sts', function (event) {
+            event.preventDefault();
+            var id = $('#user_sts').data('id');
+            var status = $('#status').val();
+            var _token = $(this).find('input[name="_token"]').val();
+        
+            $.ajax({
+                url: '/change_status',
+                method: 'POST',
+                beforeSend: function () {
+
+                    $('#change_sts').prop('disabled', true);
+                    $('#change_sts #spinner').removeClass('d-none');
+                    $('#change_sts #add_btn').addClass('d-none');
+                },
+                data: {
+                    'id': id,
+                    '_token': _token,
+                    'status': status
+                },
+                success: function (response) {
+                    if (response) {
+                        
+                        $('#change_sts').prop('disabled', false);
+                        $('#spinner').addClass('d-none');
+                        $('#add_btn').removeClass('d-none');
+
+                        console.log(response);
+                        $('#user_sts').off('submit');
+                        window.location.href = window.location.href;
+                    }
+                }
+            });
+        });
+    
+
+
+        // datatables only for client table and users table
+        var users_table = $('#users-table').DataTable();
+
+        $('#filter_by_sts_client').on('change', function() {
+            var selectedStatus = $(this).val();
+            users_table.column(4).search(selectedStatus).draw();
+        });
+
+        $('#filter_by_sts_users').on('change', function() {
+            var selectedStatus = $(this).val();
+            users_table.column(6).search(selectedStatus).draw();
+        });
+
+        $('#btn_cancel').click(function() {
+            $('#addclient').modal('hide');
+        });
     });
 </script>

@@ -32,81 +32,13 @@ $(document).ready(function () {
 
     // modal form functions end
 
-
-    var users_table = $('#users-table').DataTable();
-
-    $('#filter_by_sts_client').on('change', function() {
-        var selectedStatus = $(this).val();
-        users_table.column(4).search(selectedStatus).draw();
-    });
-
-    $('#filter_by_sts_users').on('change', function() {
-        var selectedStatus = $(this).val();
-        users_table.column(6).search(selectedStatus).draw();
-    });
-
-    $('#filter_by_sts_drivers').on('change', function() {
-        var selectedStatus = $(this).val();
-        users_table.column(5).search(selectedStatus).draw();
-    });
-
-    $('#filter_by_sts_routes').on('change', function() {
-        var selectedStatus = $(this).val();
-        users_table.column(6).search(selectedStatus).draw();
-    });
-
-    //user status
-    $(document).on('click', '.btn_status', function () {
-        var id = $(this).find('span').attr('data-client_id');
-        $('#user_sts').modal('show');
-            $('#user_sts').data('id', id);
-    });
-    
-    $(document).on('submit', '#user_sts', function (event) {
-        event.preventDefault();
-        var id = $('#user_sts').data('id');
-        var status = $('#status').val();
-        var _token = $(this).find('input[name="_token"]').val();
-    
-        $.ajax({
-            url: '/change_status',
-            method: 'POST',
-            beforeSend: function () {
-                // $('#editclient').modal('show');
-                $('#change_sts').prop('disabled', true);
-                $('#change_sts #spinner').removeClass('d-none');
-                $('#change_sts #add_btn').addClass('d-none');
-            },
-            data: {
-                'id': id,
-                '_token': _token,
-                'status': status
-            },
-            success: function (response) {
-                if (response) {
-                    $('#change_sts').prop('disabled', false);
-                    $('#spinner').addClass('d-none');
-                    $('#add_btn').removeClass('d-none');
-
-                    console.log(response);
-                    $('#user_sts').off('submit');
-                    location.reload();
-                }
-            }
-        });
-    });
-    
+ 
     
 
 
 
 
 
-    $('#btn_cancel').click(function() {
-        alert();
-        // Dismiss the modal
-        $('#addclient').modal('hide');
-      });
 
 
 

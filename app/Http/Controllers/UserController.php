@@ -785,7 +785,7 @@ class UserController extends Controller
         if ($user) {
             if (!$user->hasVerifiedEmail()) {
                 $user->markEmailAsVerified();
-                $user->status = 1; // Update the status to pendding
+                $user->status = 1;
                 $user->save();
     
                 return redirect('/login')->with('success', 'Email verified successfully. Please log in.');
