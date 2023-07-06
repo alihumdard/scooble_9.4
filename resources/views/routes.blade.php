@@ -72,7 +72,7 @@
           <hr>
           <div class="px-2">
             <div class="table-responsive">
-              <table id="users-table" class="display" style="width:100%">
+              <table id="routes-table" class="display" style="width:100%">
                 <thead class="text-secondary" style="background-color: #E9EAEF;">
                   <tr style="font-size: small;">
                     <th>@lang('lang.trip_title')</th>
@@ -141,6 +141,7 @@
                         </svg>
                       </button>
                       @endif
+                      @if($value['status'] != 'on')
                       <button class="btn p-0">
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <circle opacity="0.1" cx="18" cy="18" r="18" fill="#452C88" />
@@ -151,6 +152,7 @@
                           <path d="M15.1429 12H13V16.2857H13.8571V15H15.1429C15.3701 14.9997 15.5879 14.9093 15.7486 14.7486C15.9093 14.5879 15.9997 14.3701 16 14.1429V12.8571C15.9998 12.6299 15.9094 12.412 15.7487 12.2513C15.588 12.0907 15.3701 12.0003 15.1429 12ZM13.8571 14.1429V12.8571H15.1429L15.1433 14.1429H13.8571Z" fill="#452C88" />
                         </svg>
                       </button>
+                      @endif
 
                       @if($user->role == 'Driver')
                       <form method="POST" action="/driver_map" class="mb-0">
@@ -334,5 +336,22 @@
     </div>
   </div>
   <!-- Delete Client Modal End -->
+  @if($user->role == 'Admin')
+  <script>
+    var users_table = $('#routes-table').DataTable();
+    $('#filter_by_sts_routes').on('change', function() {
+        var selectedStatus = $(this).val();
+        users_table.column(6).search(selectedStatus).draw();
+    });
+  </script>
 
+  @else
+  <script>
+    var users_table = $('#routes-table').DataTable();
+    $('#filter_by_sts_routes').on('change', function() {
+        var selectedStatus = $(this).val();
+        users_table.column(5).search(selectedStatus).draw();
+    });
+  </script>
+  @endif
   @endsection
