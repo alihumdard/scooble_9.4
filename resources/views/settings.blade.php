@@ -96,46 +96,44 @@
             <div class="row px-3">
               <div class="row">
                 <div class="col-lg-6">
-                  <label style="color: #452C88;" for="name"><b>@lang('lang.full_name')</b></label>
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="name"><b>@lang('lang.full_name')</b></label>
                   <input type="text" class="form-control" value="{{$user->name}}" name="name" id="name" placeholder="@lang('lang.enter_your_name')">
                 </div>
                 <div class="col-lg-6">
-                  <label style="color: #452C88;" for="phone"><b>@lang('lang.phone_number')</b></label>
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="phone"><b>@lang('lang.phone_number')</b></label>
                   <input type="text" class="form-control" value="{{$user->phone}}" name="phone" id="phone" placeholder="@lang('lang.enter_your_number')">
                 </div>
                 <div class="col-lg-6">
-                  <label style="color: #452C88;" for="country"><b>@lang('lang.country')</b></label>
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="country"><b>@lang('lang.country')</b></label>
                   <input type="text" class="form-control" value="{{ $user->address }}" name="address" id="country" placeholder="@lang('lang.enter_country')">
                 </div>
                 <div class="col-lg-6">
-                  <label style="color: #452C88;" for="city"><b>@lang('lang.city')</b></label>
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="city"><b>@lang('lang.city')</b></label>
                   <input type="text" class="form-control" name="city" id="city" placeholder="@lang('lang.enter_city')">
                 </div>
                 <div class="col-lg-6">
-                  <label style="color: #452C88;" for="state"><b>@lang('lang.state')</b></label>
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="state"><b>@lang('lang.state')</b></label>
                   <input type="text" class="form-control" name="state" id="state" placeholder="@lang('lang.state')">
                 </div>
                 <div class="col-lg-6">
-                  <label style="color: #452C88;" for="zip_code"><b>@lang('lang.zip_code')</b></label>
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="zip_code"><b>@lang('lang.zip_code')</b></label>
                   <input type="text" class="form-control" name="zip_code" id="zip_code" placeholder="@lang('lang.enter_zip_code')">
                 </div>
-                <div class="col-lg-4">
-                  <label style="color: #452C88;" for="old_password"><b>@lang('lang.old_password')</b></label>
+                <!-- <div class="col-lg-4">
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="old_password"><b>@lang('lang.old_password')</b></label>
                   <input type="text" class="form-control" name="old_password" id="old_password" placeholder="@lang('lang.enter_old_password')">
-                </div>
+                </div> -->
                 <div class="col-lg-4">
-                  <label style="color: #452C88;" for="new_password"><b>@lang('lang.new_password')</b></label>
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="new_password"><b>@lang('lang.new_password')</b></label>
                   <input type="password" class="form-control" name="password" id="password" placeholder="@lang('lang.enter_new_password')">
                 </div>
                 <div class="col-lg-4">
-                  <label style="color: #452C88;" for="confirm_password"><b>@lang('lang.confirm_password')</b></label>
+                  <label class="mb-0 mt-1" style="color: #452C88;" for="confirm_password"><b>@lang('lang.confirm_password')</b></label>
                   <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="@lang('lang.confirm_password')">
                   <small id="passwordError" style="color: red;"></small> <!-- Error message element -->
                   <small id="passwordSuccess" style="color: green;"></small> <!-- Success message element -->
                 </div>
 
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
                 <div class="col-lg-4 my-4 text-center">
                   <button class="btn text-white btn-sm" type="submit" name="update" style="background-color: #E45F00; width: 100%;" onclick="validateForm(event)">
                     <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
