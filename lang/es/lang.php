@@ -196,5 +196,5 @@ return [
   "basic" => "Temel",
   "pack_category" => "Paket Kategorisi",
   "created_date" => "Oluşturulma Tarihi",
-
+  "unverified" => "Doğrulanmamış",
 ];

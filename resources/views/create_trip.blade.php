@@ -150,7 +150,7 @@
                                 <div class="col-lg-4 mt-4">
                                     <div class="row pt-2">
                                         <div class="col-lg-6">
-                                            <button type="button" data-toggle="modal" data-target="#addAddressModal" class="btn btn-sm text-white" style="background-color: #E45F00; width: 100%; border-radius: 8px;">@lang('lang.add_new_address')</button>
+                                            <button type="button" data-toggle="modal" data-target="#addAddressModal" data-backdrop="static" class="btn btn-sm text-white" style="background-color: #E45F00; width: 100%; border-radius: 8px;">@lang('lang.add_new_address')</button>
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="importAddress" class="custom-button pt-1 mb-0">

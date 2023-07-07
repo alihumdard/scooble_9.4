@@ -197,6 +197,7 @@ return [
   "basic" => "Basic",
   "pack_category" => "Pack Category",
   "created_date" => "Created Date",
+  "unverified" => "Unverified",
   
   "draggable_events" => "Draggable Events",
 

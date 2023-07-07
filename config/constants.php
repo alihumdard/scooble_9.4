@@ -1,11 +1,17 @@
 <?php
 
 return [
-    'STATUS_OPTIONS' => [
+    'STATUS_OPTIONS_en' => [
         1 => 'Active',
         2 => 'Pending',
         3 => 'Suspend',
         4 => 'Unverified',
+    ],
+    'STATUS_OPTIONS_es' => [
+        1 => 'Aktif',
+        2 => 'Askıda olması',
+        3 => 'Askıya almak',
+        4 => 'Doğrulanmamış',
     ],
 
     'PAYPAL' =>[

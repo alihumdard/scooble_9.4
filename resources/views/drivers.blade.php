@@ -40,7 +40,7 @@
                       <option value="">
                         @lang('lang.filter_by_status')
                       </option>
-                      @foreach(config('constants.STATUS_OPTIONS') as $key => $value)
+                      @foreach(config('constants.STATUS_OPTIONS_' . app()->getLocale()) as $key => $value)
                         <option value="{{$value}}">{{ $value }}</option>
                       @endforeach
                     </select>
