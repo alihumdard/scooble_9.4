@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="col-lg-12 mb-2">
                                     <label for="trip_desc">@lang('lang.trip_description'):</label>
-                                    <textarea required name="desc" id="trip_desc" class="form-control" placeholder="@lang('lang.trip_description')">{{ $data['desc'] ?? '' }} </textarea>
+                                    <textarea name="desc" id="trip_desc" class="form-control" placeholder="@lang('lang.trip_description')">{{ $data['desc'] ?? '' }} </textarea>
                                 </div>
 
                                 <div class="col-lg-4">
@@ -262,7 +262,7 @@
         </div>
 
         <!--add address Modal -->
-        <div class="modal fade" style="height: 30rem;" id="addAddressModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content bg-white">
                 <div class="modal-header">

@@ -197,4 +197,7 @@ return [
   "pack_category" => "Paket Kategorisi",
   "created_date" => "Oluşturulma Tarihi",
   "unverified" => "Doğrulanmamış",
+  "draggable_events" => "Sürüklenebilir Etkinlikler",
+  "add_route" => "Rota Ekle",
+
 ];
