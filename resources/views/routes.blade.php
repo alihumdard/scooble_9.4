@@ -23,10 +23,10 @@
             <div class="col-lg-4"></div>
             <div class="col-lg-12">
               <div class="row mx-1">
-                <div class="col-lg-9 px-1 py-1" style="text-align: right;">
+                <div class="col-lg-9" style="text-align: right;">
                 @if($user->role != 'Driver')
                   <a href="/create_trip">
-                    <button class="btn btn-md text-white py-2" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.create_trip')</button>
+                    <button class="btn btn-md text-white" style="background-color: #E45F00; padding: 10px;"><i class="fa fa-plus"></i> @lang('lang.create_trip')</button>
                   </a>
                 @endif
                 </div>

@@ -131,6 +131,21 @@ $user = User::find($user_id);
         opacity: 0;
       }
     } */
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #452C85;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #F5F5F5;
+
+
+    }
   </style>
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 </head>
@@ -153,10 +168,9 @@ $user = User::find($user_id);
           <li class="nav-item d-none d-lg-block mt-3">
             <form action="/lang_change" method="post">
               @csrf
-              <select id="lang-select" class="form-select" style="" name="lang" onchange="this.form.submit()">
+              <select id="lang-select" class="form-select" style="font-size: 12px;" name="lang" onchange="this.form.submit()">
                 <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
                 <option value="es" {{ session()->get('locale') == 'es' ? 'selected' : '' }}>Turkish</option>
-                <option value=""></option>
               </select>
             </form>
           </li>
@@ -241,16 +255,48 @@ $user = User::find($user_id);
           <li class="nav-item d-none d-lg-block mx-1">
             <a class="preview-item" href="/notifications">
               <div class="preview-thumbnail">
-                <i class="mdi mdi-bell" style="font-size: xx-large; color:#67748E;"></i>
+                <i class="mdi mdi-bell" style="font-size: xx-large; color:#67748E; position: relative;"></i>
+                <span class="badge bg-danger text-white" style="position: absolute; top: 1.4rem; right: 4.5rem; border-radius: 50%;">0</span>
               </div>
             </a>
           </li>
-          <li class="nav-item d-none d-lg-block mx-1">
-            <a class="preview-item" href="/settings">
-              <div class="preview-thumbnail">
-                <img style="border-radius: 50% !important; width: 35px;  height: 35px;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle mx-1" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+              <div class="nav-profile-image">
+                <div class="preview-thumbnail">
+                  <img style="border-radius: 50% !important; width: 35px;  height: 35px;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
+                </div>
               </div>
             </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item" href="/settings">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon">
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M25.5028 16.9751C25.9499 17.2126 26.2948 17.5876 26.5375 17.9626C27.0102 18.7376 26.9719 19.6876 26.512 20.5251L25.6178 22.0251C25.1451 22.8251 24.2637 23.3251 23.3567 23.3251C22.9096 23.3251 22.4114 23.2001 22.0026 22.9501C21.6705 22.7376 21.2872 22.6626 20.8785 22.6626C19.6138 22.6626 18.5535 23.7001 18.5152 24.9376C18.5152 26.3751 17.3399 27.5001 15.8709 27.5001H14.1335C12.6517 27.5001 11.4764 26.3751 11.4764 24.9376C11.4509 23.7001 10.3906 22.6626 9.12594 22.6626C8.70439 22.6626 8.32115 22.7376 8.00179 22.9501C7.59301 23.2001 7.08203 23.3251 6.6477 23.3251C5.72793 23.3251 4.8465 22.8251 4.37384 22.0251L3.4924 20.5251C3.01975 19.7126 2.9942 18.7376 3.46685 17.9626C3.67125 17.5876 4.05448 17.2126 4.48881 16.9751C4.8465 16.8001 5.07644 16.5126 5.2936 16.1751C5.93233 15.1001 5.54909 13.6876 4.46326 13.0501C3.19859 12.3376 2.78981 10.7501 3.51795 9.51262L4.37384 8.03762C5.11476 6.80012 6.69879 6.36262 7.97624 7.08762C9.08762 7.68762 10.5311 7.28762 11.1826 6.22512C11.387 5.87512 11.502 5.50012 11.4764 5.12512C11.4509 4.63762 11.5914 4.17512 11.8341 3.80012C12.3068 3.02512 13.1627 2.52512 14.0952 2.50012H15.8964C16.8417 2.50012 17.6976 3.02512 18.1703 3.80012C18.4002 4.17512 18.5535 4.63762 18.5152 5.12512C18.4896 5.50012 18.6046 5.87512 18.809 6.22512C19.4605 7.28762 20.904 7.68762 22.0282 7.08762C23.2928 6.36262 24.8896 6.80012 25.6178 8.03762L26.4737 9.51262C27.2146 10.7501 26.8058 12.3376 25.5284 13.0501C24.4425 13.6876 24.0593 15.1001 24.7108 16.1751C24.9152 16.5126 25.1451 16.8001 25.5028 16.9751ZM11.387 15.0126C11.387 16.9751 13.0094 18.5376 15.015 18.5376C17.0206 18.5376 18.6046 16.9751 18.6046 15.0126C18.6046 13.0501 17.0206 11.4751 15.015 11.4751C13.0094 11.4751 11.387 13.0501 11.387 15.0126Z" fill="#452C88" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.settings')</p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item" href="/logout">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon">
+                    <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M16.3488 6.7V3.85C16.3488 3.09413 16.0548 2.36922 15.5315 1.83475C15.0081 1.30027 14.2983 1 13.5581 1H3.7907C3.05056 1 2.34073 1.30027 1.81738 1.83475C1.29402 2.36922 1 3.09413 1 3.85V20.95C1 21.7059 1.29402 22.4308 1.81738 22.9653C2.34073 23.4997 3.05056 23.8 3.7907 23.8H13.5581C14.2983 23.8 15.0081 23.4997 15.5315 22.9653C16.0548 22.4308 16.3488 21.7059 16.3488 20.95V18.1" stroke="#452C88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M5.46542 12.4H25.0003M25.0003 12.4L20.8143 8.125M25.0003 12.4L20.8143 16.675" stroke="#452C88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.logout')</p>
+                </div>
+              </a>
+            </div>
           </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
