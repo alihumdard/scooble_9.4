@@ -45,7 +45,7 @@
                     <input type="file" name="user_pic" id="user_pic" class="form-control" require>
                   </div>
                   <div class="col-lg-2">
-                    <img src="abc.png" width="100%" height="100%" style="border-radius: 50%;" id="user_pic" class="d-none" alt="No image selected">
+                    <img src="" width="40px" height="40px" style="border-radius: 50%;" id="user_pic" class="d-none">
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@
                     <input type="file" name="com_pic" id="com_pic" class="form-control" require>
                   </div>
                   <div class="col-lg-2">
-                    <img src="abc.png" width="100%" height="  100%" style="border-radius: 50%;" id="com_pic" class="d-none" alt="No image selected">
+                    <img src="" width="40px" height="40px" style="border-radius: 50%;" id="com_pic" class="d-none">
                   </div>
                 </div>
               </div>
