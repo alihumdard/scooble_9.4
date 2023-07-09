@@ -668,8 +668,16 @@
                         let responseData = response.data[0];
                         let formattedDateTime = moment(responseData.created_at).format("YYYY-MM-DDTHH:mm");
                         $('#addclient #btn_save').html('<div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div><span id="add_btn">'+ "{{ trans('lang.save') }}"+'</span>').css('background-color', '#233A85');
-                        $('#addclient #user_pic').attr('src', "{{ asset('storage') }}/" + responseData.user_pic).removeClass('d-none');
-                        $('#addclient #com_pic').attr('src', "{{ asset('storage') }}/" + responseData.com_pic).removeClass('d-none');
+                        if(responseData.user_pic){
+                            $('#addclient #user_pic').attr('src', "{{ asset('storage') }}/" + responseData.user_pic).removeClass('d-none');
+                        }else{
+                            $('#addclient #user_pic').attr('src', "assets/images/user.png").removeClass('d-none');
+                        }
+                        if(responseData.com_pic){
+                            $('#addclient #com_pic').attr('src', "{{ asset('storage') }}/" + responseData.com_pic).removeClass('d-none');
+                        }else{
+                            $('#addclient #com_pic').attr('src', "assets/images/user.png").removeClass('d-none');
+                        }
                         $('#addclient #id').val(responseData.id);
                         $('#addclient #client_id').val(responseData.client_id);
                         $('#addclient #role').val(responseData.role);
