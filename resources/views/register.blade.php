@@ -272,7 +272,7 @@
                             </div>
 
                             <!-- Submit Button -->
-                            <div class="form-group col-lg-12 mx-auto mb-5" style="margin-top: 60px;">
+                            <div class="form-group col-lg-12 mx-auto" style="">
                                 <button type="submit" id="btn_user_register" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
                                     <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
                                     <span id="text">@lang('lang.create_your_account')</span>
@@ -307,6 +307,31 @@
     <script>
         // For Demo Purpose [Changing input group text on focus]
         $(document).ready(function() {
+
+            $('#username').on('input', function() {
+            if ($(this).val().trim() !== '') {
+                $(this).closest('.input-group').find('.text-danger').hide();
+            }
+        });
+
+        $('#email').on('input', function() {
+            if ($(this).val().trim() !== '') {
+                $(this).closest('.input-group').find('.text-danger').hide();
+            }
+        });
+
+        $('#password').on('input', function() {
+            if ($(this).val().trim() !== '') {
+                $(this).closest('.input-group').find('.text-danger').hide();
+            }
+        });
+
+        $('#passwordConfirmation').on('input', function() {
+            if ($(this).val().trim() !== '') {
+                $(this).closest('.input-group').find('.text-danger').hide();
+            }
+        });
+
             $("#eye").on('click', function() {
                 var passwordField = $("#password");
                 var passwordFieldType = passwordField.attr('type');

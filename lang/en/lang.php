@@ -200,5 +200,6 @@ return [
   "unverified" => "Unverified",
   "draggable_events" => "Draggable Events",
   "add_route" => "Add Route",
+  "send" => "Send",
 
 ];

@@ -254,7 +254,7 @@
                       color: #000000;
                       margin-bottom: 0px !important;
                     ">
-                                    @lang('lang.Peteawyaawsaewlyccyp');
+                                    @lang('lang.Peteawyaawsaewlyccyp')
                                 </p>
                                 <form action="/forgot_password" method="post">
                                     @csrf
@@ -267,16 +267,20 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input id="email" required type="email" name="email" placeholder="@lang('lang.enter_your_email_address')" value="{{session('email')}}" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
+                                <input id="email"  type="email" name="email" placeholder="@lang('lang.enter_your_email_address')" value="{{session('email')}}" class="border-top-0 border-right-0 border-dark form-control bg-white border-left-0 border-md" style="border-radius: 0px !important;" />
                                 <div class="col-lg-12">
+                                    <p id="email-error" class="text-danger d-none">*Please enter your email.</p>
                                     @if(session('status') == 'invalid')
-                                            <span class="text-danger"> * {{ session('message') }}</span>
+                                            <span id="email-error" class="text-danger"> * {{ session('message') }}</span>
                                      @enderror  
                                 </div>                          
                             </div>
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
-                                <input type="submit" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit" value="Send" data-toggle="modal" />
+                            <button type="submit" id="btn_reset_pass" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
+                                    <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
+                                    <span id="text">@lang('lang.send')</span>
+                                </button>
                                 <p class="mt-4">@lang('lang.you_can') <a class="text-warning" href="/login">@lang('login_here') !</a></p>
                             </div>
                             </form>
@@ -385,6 +389,23 @@
     <!-- forgetpassword Button Modal End -->
 
     <script>
+
+$('#btn_reset_pass').on('click',function () {
+
+    var email_input = $('#email').val().trim();
+    
+    if (email_input === '') {
+        event.preventDefault();
+        $('#email-error').text('*Please enter your email.').removeClass('d-none');
+    } else {
+        $('#spinner').removeClass('d-none');
+    $('#text').addClass('d-none');   
+    }
+    $('#email').on('input', function() {
+    $('#email-error').addClass('d-none');
+});
+});
+
         function showiconss() {
             const inputpass = document.getElementById('inputpassword');
             const hideicon = document.getElementById('hideicon');
@@ -539,7 +560,6 @@ $("#btn_verify_opt").click(function(e) {
       $("form").submit();
     }
   });
-
         
     </script>
 </body>

@@ -199,5 +199,6 @@ return [
   "unverified" => "Doğrulanmamış",
   "draggable_events" => "Sürüklenebilir Etkinlikler",
   "add_route" => "Rota Ekle",
+  "send" => "Göndermek",
 
 ];
