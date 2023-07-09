@@ -102,7 +102,7 @@
                                 @if(isset($client_list) && $client_list != '')
                                     <div class="col-lg-3 my-2">
                                         <label for="client_id">@lang('lang.clients') :</label>
-                                        <select required name="client_id" id="client_id" class="form-select">
+                                        <select required name="client_id" id="client_id" class="form-select" onchange="getDrivers(this.value)">
                                             <option disabled selected>@lang('lang.select_client') </option>
                                             @foreach($client_list as $value)
                                             <option value="{{ $value['id'] }}" {{ isset($data['client_id']) && $data['client_id'] == $value['id'] ? 'selected' : '' }}>
@@ -116,11 +116,14 @@
                                     <label for="driver_id">@lang('lang.drivers'):</label>
                                     <select required name="driver_id" id="driver_id" class="form-select">
                                         <option disabled selected>@lang('lang.select_driver')</option>
-                                        @foreach($driver_list as $value)
-                                        <option value="{{ $value['id'] }}" {{ isset($data['driver_id']) && $data['driver_id'] == $value['id'] ? 'selected' : '' }}>
-                                            {{ $value['name'] }}
-                                        </option>
-                                        @endforeach
+                                        @forelse($driver_list as $value)
+                                            <option value="{{ $value['id'] }}" {{ isset($data['driver_id']) && $data['driver_id'] == $value['id'] ? 'selected' : '' }}>
+                                                {{ $value['name'] }}
+                                            </option>
+                                        @empty
+                                            <!-- Code to handle the case when $driver_list is empty or null -->
+                                        @endforelse
+
                                     </select>
                                 </div>
                                 <div class="col-lg-12 mb-2">
@@ -424,6 +427,30 @@
                 });
             }
         });
+
+
+        function getDrivers(clientId) {
+            $.ajax({
+                url: '/get_drivers/' + clientId,
+                type: 'GET',
+                success: function(response) {
+                    var drivers = response;
+
+                    var options = '';
+                    drivers.forEach(function(driver) {
+                        options += '<option value="' + driver.id + '">' + driver.name + '</option>';
+                    });
+
+                    $('#driver_id').html(options);
+                },
+                error: function(xhr, status, error) {
+                    // Handle the error
+                }
+            });
+        }
+
+
+
 
     </script>
 
