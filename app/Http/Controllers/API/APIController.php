@@ -236,8 +236,10 @@ class APIController extends Controller
             if ($request->password) {
                 $user->password = Hash::make($request->password);
             } else {
+                if(!$isExistingUser){
                 $randomPassword = Str::random(8);
                 $user->password = Hash::make($randomPassword);
+                }
             }
             
 
@@ -270,15 +272,17 @@ class APIController extends Controller
                 if ($request->password) {
 
                 }else{
-                    $emailData = [
-                        'password' => $randomPassword,
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'body' => "Congratulations! You profile has been created successfully on this Email.",
-                    ];
 
-                    UserProfileEmail::dispatch($emailData)->onQueue('emails');
-
+                    if(!$isExistingUser){
+                        $emailData = [
+                            'password' => $randomPassword,
+                            'name' => $request->name,
+                            'email' => $request->email,
+                            'body' => "Congratulations! You profile has been created successfully on this Email.",
+                        ];
+    
+                        UserProfileEmail::dispatch($emailData)->onQueue('emails');
+                    }
                 }
             }
             $message = $isExistingUser ? 'User updated successfully' : 'User added successfully';
