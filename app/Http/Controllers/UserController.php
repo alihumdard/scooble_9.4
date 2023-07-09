@@ -236,8 +236,8 @@ class UserController extends Controller
                 $tripData = $trip->toArray();
                 $tripData['addresses'] = $trip->addresses->toArray();
 
-                $client_list = User::where(['role' => 'Client'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
-                $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
+                $client_list = User::where(['role' => 'Client', 'status'=>auth_users()])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
+                $deriver_list = [];
                 return view('create_trip',['data'=>$tripData, 'user'=>$user ,'driver_list'=>$deriver_list, 'client_list'=>$client_list]);
             }
             
@@ -255,8 +255,8 @@ class UserController extends Controller
         }
         else{
             if(isset($user->role) && $user->role == user_roles('1')){    
-                $deriver_list = User::where(['role' => 'Driver'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
-                $client_list = User::where(['role' => 'Client'])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
+                $deriver_list = [];
+                $client_list = User::where(['role' => 'Client','status' => auth_users()])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
                 return view('create_trip',['user'=>$user ,'driver_list'=>$deriver_list , 'client_list'=>$client_list]);
             }else{
                 $deriver_list = User::where(['role' => 'Driver','client_id' => $user->id])->orderBy('id', 'desc')->get()->toArray();
@@ -264,6 +264,17 @@ class UserController extends Controller
             }
         }
     }
+
+    public function get_drivers(Request $request)
+    {
+        $driver_list = User::where(['role' => 'Driver', 'client_id' => $request->id])
+            ->orderBy('id', 'desc')
+            ->get()
+            ->toArray();
+    
+        return response()->json($driver_list);
+    }
+    
 
     public function driver_map(Request $request)
     {
