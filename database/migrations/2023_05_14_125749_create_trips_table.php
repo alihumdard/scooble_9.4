@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('desc');
+            $table->string('desc')->nullable();;
             $table->string('start_point');
             $table->string('end_point');
             $table->date('trip_date');

@@ -34,7 +34,7 @@ class UserProfile extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Scooble Porfile',
+            subject: 'Scooble Profile',
         );
     }
 
