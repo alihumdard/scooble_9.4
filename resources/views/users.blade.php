@@ -20,8 +20,8 @@
             <div class="col-lg-4"></div>
             <div class="col-lg-12">
               <div class="row mx-1">
-                <div class="col-lg-9 px-1 py-1 " style="text-align: right;">
-                  <button class="btn btn-md py-2 text-white" data-toggle="modal" data-target="#addclient" style="background-color: #E45F00;"><i class="fa fa-plus"></i> @lang('lang.add_user')</button>
+                <div class="col-lg-9" style="text-align: right;">
+                  <button class="btn btn-md text-white" data-toggle="modal" data-target="#addclient" style="background-color: #E45F00; padding: 10px;"><i class="fa fa-plus"></i> @lang('lang.add_user')</button>
                 </div>
                 <div class="col-lg-3 px-1">
                   <div class="input-group">
