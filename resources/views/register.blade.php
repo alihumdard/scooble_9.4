@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SASCO Enterprises Ltd</title>
+    <title>Register </title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css">
     <!-- <script src="https://kit.fontawesome.com/c35c4a5799.js" crossorigin="anonymous"></script> -->
@@ -273,7 +273,10 @@
 
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-5" style="margin-top: 60px;">
-                                <input type="submit" class="font-weight-bold sign_up btn btn-primary btn-block py-2" name="submit" value="@lang('lang.create_your_account')">
+                                <button type="submit" id="btn_user_register" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
+                                    <div class="spinner-border spinner-border-sm text-white d-none" id="spinner"></div>
+                                    <span id="text">@lang('lang.create_your_account')</span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -329,6 +332,70 @@
             });
         });
     </script>
+
+<script>
+    window.onload = function() {
+        var alertPopup = document.getElementById('alertPopup');
+        var alertMessage = document.getElementById('alertMessage');
+        var closeAlert = document.getElementById('closeAlert');
+
+        var successMessage = '{{ session('success') }}';
+
+        if (successMessage) {
+            swal({
+                    title: 'Account Created Successfully!',
+                    text: successMessage,
+                    icon: 'success',
+                    showClass: {
+                        popup: 'swal2-show',
+                        backdrop: 'swal2-backdrop-show',
+                        icon: 'swal2-icon-show'
+                    },
+                    hideClass: {
+                        popup: 'swal2-hide',
+                        backdrop: 'swal2-backdrop-hide',
+                        icon: 'swal2-icon-hide'
+                    },
+                    onOpen: function() {
+                        $('.swal2-popup').css('animation', 'swal2-show 0.5s');
+                    },
+                    onClose: function() {
+                        $('.swal2-popup').css('animation', 'swal2-hide 0.5s');
+                    }
+                });
+        }
+
+        closeAlert.addEventListener('click', function() {
+            alertPopup.classList.remove('show');
+        });
+    }
+$('#btn_user_register').on('click',function () {
+    $('#spinner').removeClass('d-none');
+    $('#text').addClass('d-none');
+
+    swal({
+                title: 'wait',
+                content: {
+                    element: "div",
+                    attributes: {
+                        class: "custom-spinner"
+                    }
+                },
+                text: 'Regitering',
+                buttons: false,
+                closeOnClickOutside: false,
+                closeOnEsc: false,
+                onOpen: function() {
+                    $('.custom-spinner').addClass('spinner-border spinner-border-sm text-primary');
+                },
+                onClose: function() {
+                    $('.custom-spinner').removeClass('spinner-border spinner-border-sm text-primary');
+                }
+            });
+});
+
+</script>
+
 </body>
 
 </html>
