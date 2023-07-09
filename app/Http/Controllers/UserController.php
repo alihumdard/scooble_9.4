@@ -486,7 +486,7 @@ class UserController extends Controller
 
                 SendEmailVerificationJob::dispatch($emailData)->onQueue('emails');
                 
-                return redirect('/login')->with('success', 'Please Check your Email for Verification');
+                return redirect('/register')->with('success', 'Please Check your Email for Verification');
             }
             
         } else {
