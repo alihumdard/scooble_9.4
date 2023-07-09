@@ -60,14 +60,13 @@
     .custom-button:active {
         background-color: #233A85;
     }
-
     #addAddressModal .modal-header {
         padding: 0.5rem 1rem;
     }
 
     #addAddressModal .modal-title {
-        font-size: 1rem;
-        margin-bottom: 0;
+        font-size: 1rem; 
+        margin-bottom: 0; 
     }
 </style>
 
@@ -95,6 +94,7 @@
                                 <input required type="text" name="title" id="title" value="{{ $data['title'] ?? '' }}" placeholder="@lang('lang.title')" class="form-control">
                                 <span id="title_error" class="error-message text-danger"></span>
                                 <input type="hidden" name="id" id="trip_id" value="{{ $data['id'] ?? '' }}" />
+
                             </div>
 
                             <div class="col-lg-3 my-2">
@@ -414,7 +414,6 @@ $(document).ready(function() {
 
         // Initialize the marker variable
         var marker = null;
-
         // Add a click event listener to the map
         map.addListener('click', function(event) {
             // Retrieve the clicked coordinates
