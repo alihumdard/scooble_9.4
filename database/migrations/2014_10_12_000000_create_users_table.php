@@ -25,6 +25,12 @@ return new class extends Migration
             $table->string('user_pic')->nullable();
             $table->string('com_name')->nullable();
             $table->string('com_pic')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('reset_pswd_attempt')->nullable();
+            $table->string('reset_pswd_time')->nullable();
             $table->string('status')->default('2');
             $table->integer('otp')->nullable();;
             $table->integer('added_user_id')->nullable();

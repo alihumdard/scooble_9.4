@@ -105,27 +105,27 @@
                 </div>
                 <div class="col-lg-6 mt-3">
                   <label class="mb-0" style="color: #452C88;" for="country"><b>@lang('lang.country')</b></label>
-                  <input type="text" class="form-control" value="{{ $user->address }}" name="address" id="country" placeholder="@lang('lang.enter_country')">
+                  <input type="text" class="form-control" value="{{$user->country}}" name="country" id="country" placeholder="@lang('lang.enter_country')">
                 </div>
                 <div class="col-lg-6 mt-3">
                   <label class="mb-0" style="color: #452C88;" for="city"><b>@lang('lang.city')</b></label>
-                  <input type="text" class="form-control" name="city" id="city" placeholder="@lang('lang.enter_city')">
+                  <input type="text" class="form-control" name="city"   value="{{$user->city}}" id="city" placeholder="@lang('lang.enter_city')">
                 </div>
                 <div class="col-lg-6 mt-3">
                   <label class="mb-0" style="color: #452C88;" for="state"><b>@lang('lang.state')</b></label>
-                  <input type="text" class="form-control" name="state" id="state" placeholder="@lang('lang.state')">
+                  <input type="text" class="form-control"  value="{{$user->state}}" name="state" id="state" placeholder="@lang('lang.state')">
                 </div>
                 <div class="col-lg-6 mt-3">
                   <label class="mb-0" style="color: #452C88;" for="zip_code"><b>@lang('lang.zip_code')</b></label>
-                  <input type="text" class="form-control" name="zip_code" id="zip_code" placeholder="@lang('lang.enter_zip_code')">
+                  <input type="text" class="form-control" value="{{$user->zip_code}}" name="zip_code" id="zip_code" placeholder="@lang('lang.enter_zip_code')">
                 </div>
                 <!-- <div class="col-lg-4 mt-3">
                   <label class="mb-0" style="color: #452C88;" for="old_password"><b>@lang('lang.old_password')</b></label>
                   <input type="text" class="form-control" name="old_password" id="old_password" placeholder="@lang('lang.enter_old_password')">
                 </div> -->
                 <div class="col-lg-4 mt-3">
-                  <label class="mb-0" style="color: #452C88;" for="new_password"><b>@lang('lang.address')</b></label>
-                  <input type="text" class="form-control" name="address" id="address" placeholder="@lang('lang.address')">
+                  <label class="mb-0" style="color: #452C88;" for="address"><b>@lang('lang.address')</b></label>
+                  <input type="text" class="form-control"  value="{{$user->address}}" name="address" id="address" placeholder="@lang('lang.address')">
                 </div>
                 <div class="col-lg-4 mt-3">
                   <label class="mb-0" style="color: #452C88;" for="new_password"><b>@lang('lang.new_password')</b></label>

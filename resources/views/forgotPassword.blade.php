@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css" />
     <!-- <script src="https://kit.fontawesome.com/c35c4a5799.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="assets/font-web/css/all.css" />
-    <title>Login</title>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <title>Forgot Password</title>
     <style>
         /*
         *
@@ -275,6 +276,58 @@
                                      @enderror  
                                 </div>                          
                             </div>
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                            @if(isset($remainingTime))
+    <script>
+var remainingTime = {{ $remainingTime }};
+var message = '{{ $forgot_pass }}';
+var countdownInterval;
+
+function startCountdown() {
+    var countdownElement = document.getElementById('countdown');
+
+    countdownInterval = setInterval(function() {
+        var minutes = Math.floor(remainingTime / 60);
+        var seconds = remainingTime % 60;
+
+        countdownElement.textContent = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+
+        if (remainingTime <= 0) {
+            clearInterval(countdownInterval);
+            countdownElement.textContent = 'Time expired';
+            showAlert('Remaining Time:', message, 'warning');
+        }
+
+        remainingTime--;
+    }, 1000);
+}
+
+var minutesRemaining = Math.ceil(remainingTime / 60);
+
+function showAlert(title, message, type) {
+    Swal.fire({
+        title: title,
+        html: message + ' ' + minutesRemaining + ' minutes ',
+        icon: type,
+        timer: remainingTime * 1000,
+        timerProgressBar: true,
+        onBeforeOpen: function() {
+            startCountdown();
+        },
+        onClose: function() {
+            clearInterval(countdownInterval);
+        }
+    });
+}
+
+showAlert('Limit Exceed', message, 'warning');
+
+    </script>
+@endif
+
+
+
                             <!-- Submit Button -->
                             <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
                             <button type="submit" id="btn_reset_pass" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
@@ -562,6 +615,10 @@ $("#btn_verify_opt").click(function(e) {
   });
         
     </script>
+
+<script>
+       
+</script>
 </body>
 
 </html>
