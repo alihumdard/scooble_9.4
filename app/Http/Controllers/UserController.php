@@ -571,36 +571,36 @@ class UserController extends Controller
 
                                     
                 
-try {
-    $user->reset_pswd_attempt = $user->reset_pswd_attempt ? ++$user->reset_pswd_attempt : 1;
+                    try {
+                        $user->reset_pswd_attempt = $user->reset_pswd_attempt ? ++$user->reset_pswd_attempt : 1;
 
-    if ($user->reset_pswd_attempt > 3) {
-        $resetTime = $user->reset_pswd_time ? Carbon::parse($user->reset_pswd_time) : null;
-        $currentTime = Carbon::now();
+                        if ($user->reset_pswd_attempt > 3) {
+                            $resetTime = $user->reset_pswd_time ? Carbon::parse($user->reset_pswd_time) : null;
+                            $currentTime = Carbon::now();
 
-        if (!$resetTime || $resetTime->addMinutes(5)->isPast()) {
-            $user->reset_pswd_attempt = 1;
-            $user->reset_pswd_time = $currentTime;
-        } else {
-            Session::forget(['status', 'message','otp']);
-            $remainingTime = $resetTime->diffInSeconds($currentTime);
-            return view('forgotPassword', ['email' => $req['email'], 'forgot_pass' => 'You have exceeded the maximum password reset attempts. Please try again after ', 'remainingTime' => $remainingTime]);
-        }
-    }
+                            if (!$resetTime || $resetTime->addMinutes(5)->isPast()) {
+                                $user->reset_pswd_attempt = 1;
+                                $user->reset_pswd_time = $currentTime;
+                            } else {
+                                Session::forget(['status', 'message','otp']);
+                                $remainingTime = $resetTime->diffInSeconds($currentTime);
+                                return view('forgotPassword', ['email' => $req['email'], 'forgot_pass' => 'You have exceeded the maximum password reset attempts. Please try again after ', 'remainingTime' => $remainingTime]);
+                            }
+                        }
 
-    Mail::to($user->email)->send($mail);
+                        Mail::to($user->email)->send($mail);
 
-    $user->otp = $otp;
-    $user->reset_pswd_time = Carbon::now();
-    $user->save();
+                        $user->otp = $otp;
+                        $user->reset_pswd_time = Carbon::now();
+                        $user->save();
 
-    Session::flash('otp', "Email sent successfully!");
-    Session::flash('email', $user->email);
+                        Session::flash('otp', "Email sent successfully!");
+                        Session::flash('email', $user->email);
 
-    return view('forgotPassword', ['email' => $req['email']]);
-} catch (\Exception $e) {
-    echo "Failed to send email: " . $e->getMessage();
-}
+                        return view('forgotPassword', ['email' => $req['email']]);
+                    } catch (\Exception $e) {
+                        echo "Failed to send email: " . $e->getMessage();
+                    }
 
                 } else {
 
@@ -637,7 +637,7 @@ try {
                 $save = $user->save();
     
                 if ($save) {
-                    return redirect('/login');
+                    return redirect('/login')->with('password_changed', "Password is successfully changed");;
                 }
             } else {
                 return view('setPassword', ['email' => $req['email']]);

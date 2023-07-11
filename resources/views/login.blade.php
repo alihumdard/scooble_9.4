@@ -259,6 +259,12 @@
                   <a href="/forgot_password" class="btn btn-link ml-2">@lang('lang.forgot_password')?</a>
                 </div>
               </div>
+              @if (Session::has('password_changed'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>{{ session('password_changed') }}</strong>
+                        </div>
+              @endif
               <!-- Submit Button -->
               <div class="form-group col-lg-12 mx-auto mb-0" style="margin-top: 60px;">
                 <button type="submit" id="btn_user_login" class="font-weight-bold sign_up btn btn-block py-2 text-white" style="background-color: #452C88;" name="submit">
