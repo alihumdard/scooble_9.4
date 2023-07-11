@@ -235,9 +235,8 @@ class UserController extends Controller
                 
                 $tripData = $trip->toArray();
                 $tripData['addresses'] = $trip->addresses->toArray();
-
                 $client_list = User::where(['role' => 'Client', 'status'=>auth_users()])->orderBy('id', 'desc')->select('id','name')->get()->toArray();
-                $deriver_list = [];
+                $deriver_list = User::where(['role' => 'Driver','client_id' => $tripData['client_id']])->orderBy('id', 'desc')->get()->toArray();
                 return view('create_trip',['data'=>$tripData, 'user'=>$user ,'driver_list'=>$deriver_list, 'client_list'=>$client_list]);
             }
             
@@ -538,7 +537,8 @@ class UserController extends Controller
     {
 
         $req = $request->all();
-        if (isset($req['no1']) || isset($req['no2']) || isset($req['no3']) || isset($req['no4']) || isset($req['no5'])) {
+        if (isset($req['no1']) || isset($req['no2']) || isset($req['no3']) || isset($req['no4']) || isset($req['no5'])) 
+        {
             $array = [$req["no1"], $req["no2"], $req["no3"], $req["no4"], $req["no5"]];
             $otp = implode('', $array);
 
@@ -553,7 +553,10 @@ class UserController extends Controller
 
                 return view('forgotPassword', ['email' => $req['email'] , 'no'=>$array]);
             }
-        } else {
+        } 
+
+        else {
+
             if (isset($req['email']) && !empty($req['email'])) {
 
                 $user = User::where('email', $req['email'])->first();
@@ -566,19 +569,39 @@ class UserController extends Controller
                     ];
                     $mail = new otpVerifcation($emailData);
 
-                    try {
-                        Mail::to($user->email)->send($mail);
+                                    
+                
+try {
+    $user->reset_pswd_attempt = $user->reset_pswd_attempt ? ++$user->reset_pswd_attempt : 1;
 
-                        $user->otp = $otp;
-                        $save = $user->save();
+    if ($user->reset_pswd_attempt > 3) {
+        $resetTime = $user->reset_pswd_time ? Carbon::parse($user->reset_pswd_time) : null;
+        $currentTime = Carbon::now();
 
-                        Session::flash('otp', "Email sent successfully!");
-                        Session::flash('email', $user->email);
+        if (!$resetTime || $resetTime->addMinutes(5)->isPast()) {
+            $user->reset_pswd_attempt = 1;
+            $user->reset_pswd_time = $currentTime;
+        } else {
+            Session::forget(['status', 'message','otp']);
+            $remainingTime = $resetTime->diffInSeconds($currentTime);
+            return view('forgotPassword', ['email' => $req['email'], 'forgot_pass' => 'You have exceeded the maximum password reset attempts. Please try again after ', 'remainingTime' => $remainingTime]);
+        }
+    }
 
-                        return view('forgotPassword', ['email' => $req['email']]);
-                    } catch (\Exception $e) {
-                        echo "Failed to send email: " . $e->getMessage();
-                    }
+    Mail::to($user->email)->send($mail);
+
+    $user->otp = $otp;
+    $user->reset_pswd_time = Carbon::now();
+    $user->save();
+
+    Session::flash('otp', "Email sent successfully!");
+    Session::flash('email', $user->email);
+
+    return view('forgotPassword', ['email' => $req['email']]);
+} catch (\Exception $e) {
+    echo "Failed to send email: " . $e->getMessage();
+}
+
                 } else {
 
                     Session::flash('status', 'invalid');

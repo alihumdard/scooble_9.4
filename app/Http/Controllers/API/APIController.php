@@ -224,14 +224,20 @@ class APIController extends Controller
              
             $isExistingUser = $user->exists;
 
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->com_name = $request->com_name;
-            $user->address = $request->address;
-            $user->role = $request->role;
-            $user->added_user_id = Auth::id();
-            $user->client_id = $request->client_id;
+            $user->name               = $request->name;
+            $user->email              = $request->email;
+            $user->phone              = $request->phone;
+            $user->com_name           = $request->com_name;
+            $user->address            = $request->address;
+            $user->role               = $request->role;
+            $user->country            = $request->country;
+            $user->zip_code           = $request->zip_code;
+            $user->city               = $request->city;
+            $user->state              = $request->state;
+            $user->reset_pswd_attempt = $request->reset_pswd_attempt;
+            $user->reset_pswd_time    = $request->reset_pswd_time;
+            $user->added_user_id      = Auth::id();
+            $user->client_id          = $request->client_id;
             
             if ($request->password) {
                 $user->password = Hash::make($request->password);
