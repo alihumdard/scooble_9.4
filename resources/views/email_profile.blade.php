@@ -30,18 +30,30 @@
             margin-top: 40px;
             text-align: center;
         }
+        .logo {
+            text-align: left;
+        }
+        .logo img {
+            display: block;
+            margin: 0;
+            max-width: 200px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h3>Dear, {{ $emailData['name'] }}</h3>
+        <div class="logo">
+            <img src="{{ $message->embed(public_path('assets/images/Logo.png')) }}" alt="logo" />
+        </div>
+        <h3>Dear, {{ $emailData['name'] }} ali</h3>
         <div class="message">
             <h3>{{ $emailData['body'] }}</h3>
-            <p>Your defualt  password is that now you can login: <strong>{{ $emailData['password'] }}</strong>.</p>
-            <p>Your can login your account through this link <strong><a href="{{ URL::to('/login') }}">Login</a></strong>.</p>
+            <p>Your default password is: <strong>{{ $emailData['password'] }}</strong>.</p>
+            <p>You can log in to your account through this link: <strong><a href="{{ URL::to('/login') }}">Login</a></strong>.</p>
         </div>
         <div class="footer">
-        <h3>Thank you for choosing our services!</h3>
+            <h3>Thank you for choosing our services!</h3>
         </div>
     </div>
 </body>

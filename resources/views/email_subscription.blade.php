@@ -30,10 +30,22 @@
             margin-top: 40px;
             text-align: center;
         }
+        .logo {
+            text-align: left;
+        }
+        .logo img {
+            display: block;
+            margin: 0;
+            max-width: 200px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+    <div class="logo">
+            <img src="{{ $message->embed(public_path('assets/images/Logo.png')) }}" alt="logo" />
+        </div>
         <h3>Dear, {{ $emailData['name'] }}</h3>
         <div class="message">
             <h3>{{ $emailData['body'] }}</h3>
