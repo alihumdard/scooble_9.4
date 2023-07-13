@@ -17,7 +17,7 @@
           </h3>
           <form action="packageStore" id="formData" method="post">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 ">
+                <div class="col-lg-12 col-lg-offset-2 ">
                     <label for="title">@lang('lang.title'):</label>
                     <input type="hidden" name="id" id="id"  value="{{ $package['id'] ?? '' }}" >
                     <input type="text" required name="title" id="title" class="form-control" value="{{ $package['title'] ?? '' }}" placeholder="@lang('lang.title')">

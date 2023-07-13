@@ -20,7 +20,7 @@
             </svg>
             Add {{$add_as_user}}
           </h4>
-          <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" id="closeicon" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>

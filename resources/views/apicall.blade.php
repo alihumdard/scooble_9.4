@@ -611,6 +611,7 @@
                         }else{
                             $('#tableData').load(location.href + " #tableData > *");
                             $('#formData').load(location.href + " #formData > *");
+                            $('#closeicon').trigger('click');
                         }
                        
                         $('#addclient').modal('hide');
