@@ -17,14 +17,14 @@
           </h3>
           <form action="packageStore" id="formData" method="post">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 ">
+                <div class="col-lg-12 col-lg-offset-2 ">
                     <label for="title">@lang('lang.title'):</label>
                     <input type="hidden" name="id" id="id"  value="{{ $package['id'] ?? '' }}" >
                     <input type="text" required name="title" id="title" class="form-control" value="{{ $package['title'] ?? '' }}" placeholder="@lang('lang.title')">
                 </div>
                 <div class="row">
                   <div class="col-lg-3">
-                      <label for="price"> @lang('lang.price'):</label>
+                      <label for="price"> @lang('lang.enter_price'):</label>
                       <input type="number" required name="price" id="price" value="{{ $package['price'] ?? '' }}" class="form-control" placeholder="@lang('lang.enter_price')">
                   </div>
                   <div class="col-lg-3">

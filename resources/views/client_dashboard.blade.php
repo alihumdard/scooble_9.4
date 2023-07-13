@@ -224,7 +224,7 @@ $(document).ready(function() {
                     <p>
                     {!! $val['desc'] !!}
                     </p>
-                    <button class="btn dismiss-btn dismiss-btn_maint px-5 mt-5"  onclick="dismissModal()">@lnag('lang.dismiss')</button>
+                    <button class="btn dismiss-btn dismiss-btn_maint px-5 mt-5"  onclick="dismissModal()">@lang('lang.dismiss')</button>
                 </div>
             </div>
         </div>

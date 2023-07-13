@@ -603,12 +603,15 @@
                         // $('#formData')[0].reset();
                         
                         const lastSegment = location.href.substring(location.href.lastIndexOf("/") + 1);
-
-                        if(lastSegment =='settings'){
-                            location.reload();
+                        
+                        if(lastSegment =='settings' || lastSegment == 'announcements'){
+                            setTimeout(function() {
+                            window.location.href = window.location.href;
+                        }, 1500);
                         }else{
                             $('#tableData').load(location.href + " #tableData > *");
                             $('#formData').load(location.href + " #formData > *");
+                            $('#closeicon').trigger('click');
                         }
                        
                         $('#addclient').modal('hide');
