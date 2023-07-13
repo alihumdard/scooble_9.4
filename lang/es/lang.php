@@ -200,5 +200,8 @@ return [
   "draggable_events" => "Sürüklenebilir Etkinlikler",
   "add_route" => "Rota Ekle",
   "send" => "Göndermek",
+  "select_client_error" => "Lütfen bir Müşteri Seçin",
+  "name_error" => "Lütfen bir ad girin",
+  "email_error" => "Lütfen bir e-posta girin",
 
 ];

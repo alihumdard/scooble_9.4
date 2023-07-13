@@ -277,7 +277,7 @@ $user = User::find($user_id);
             <a class="nav-link count-indicator dropdown-toggle mx-1" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <div class="nav-profile-image">
                 <div class="preview-thumbnail">
-                  <img style="border-radius: 50% !important; width: 31px;  height: 31px;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
+                  <img style="border-radius: 50% !important; width: 30px;  height: 30px;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
                 </div>
               </div>
             </a>

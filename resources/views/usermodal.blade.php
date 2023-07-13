@@ -30,7 +30,7 @@
           <input type="hidden" id="id" name="id">
           @php
           if(isset($add_as_user) && $add_as_user != user_roles('3')){
-              $user->id = '';
+          $user->id = '';
           }
           @endphp
           @if($add_as_user == user_roles('3') && $user->role != user_roles('1'))
@@ -52,14 +52,15 @@
               @if($add_as_user == user_roles('3') && $user->role == user_roles('1'))
               <div class="col-lg-6 mb-2">
                 <label for="com_pic">@lang('lang.client')</label>
-                <select required name="client_id" id="client_id" class="form-select">
+                <select name="client_id" id="client_id" class="form-select">
                   <option disabled selected>@lang('lang.select_client') </option>
-                       @foreach($client_list as $value)
-                      <option value="{{ $value['id'] }}" {{ isset($data['client_id']) && $data['client_id'] == $value['id'] ? 'selected' : '' }}>
-                          {{ $value['name'] }}
-                      </option>
+                  @foreach($client_list as $value)
+                  <option value="{{ $value['id'] }}" {{ isset($data['client_id']) && $data['client_id'] == $value['id'] ? 'selected' : '' }}>
+                    {{ $value['name'] }}
+                  </option>
                   @endforeach
                 </select>
+                <div id="clientError" class="text-danger d-none">*@lang('lang.select_client_error')</div>
               </div>
               @else
               @if($add_as_user !== user_roles('3'))
@@ -78,25 +79,27 @@
               @endif
               <div class="col-lg-6 mt-2">
                 <label for="name">@lang('lang.name')</label>
-                <input type="text"  name="name" id="name" class="form-control" require>
+                <input type="text" name="name" id="name" class="form-control">
+                <div id="nameError" class="text-danger d-none">@lang('lang.name_error')</div>
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="email">@lang('lang.email')</label>
-                <input type="email"  name="email" id="email" class="form-control" require>
+                <input type="email" name="email" id="email" class="form-control">
+                <div id="emailError" class="text-danger d-none">@lang('lang.email_error')</div>
               </div>
               <div class="col-lg-6 mt-2">
                 <label for="phone">@lang('lang.phone')</label>
-                <input type="tel" name="phone" id="phone" class="form-control" require>
+                <input type="tel" name="phone" id="phone" class="form-control">
               </div>
               @if($add_as_user == user_roles('2'))
               <div class="col-lg-6 mt-2">
                 <label for="com_name">@lang('lang.company_name')</label>
-                <input type="text" name="com_name" id="com_name" class="form-control" require>
+                <input type="text" name="com_name" id="com_name" class="form-control">
               </div>
               @endif
               <div class="col-lg-6 mt-2">
                 <label for="address">@lang('lang.address')</label>
-                <input type="text" name="address" id="address" class="form-control" require>
+                <input type="text" name="address" id="address" class="form-control">
               </div>
               @if($add_as_user == user_roles('3'))
               <div class="col-lg-6 mt-2">
@@ -125,8 +128,8 @@
   </div>
   <!-- Add Client Modal End -->
 
-   <!-- User Status Modal -->
-   <div class="modal fade" id="user_sts_modal" tabindex="-1" aria-labelledby="user_stsLabel" aria-hidden="true">
+  <!-- User Status Modal -->
+  <div class="modal fade" id="user_sts_modal" tabindex="-1" aria-labelledby="user_stsLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content bg-white">
         <div class="modal-header">
@@ -161,3 +164,67 @@
     </div>
   </div>
   <!-- User Status Modal End -->
+  <script>
+    $(document).ready(function() {
+  // Add a click event handler to the submit button
+  $('#btn_save').click(function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var isValid = true;
+
+    // Check if the client select element has a value
+    if ($('#client_id').val() === null) {
+      $('#clientError').removeClass('d-none'); // Display the error message
+      isValid = false;
+    } else {
+      $('#clientError').addClass('d-none'); // Hide the error message
+    }
+
+    // Validate email field
+    var email = $('#email').val();
+    if (!validateEmail(email)) {
+      $('#emailError').removeClass('d-none'); // Display the email error message
+      isValid = false;
+    } else {
+      $('#emailError').addClass('d-none'); // Hide the email error message
+    }
+
+    // Validate name field
+    var name = $('#name').val();
+    if (name.trim() === '') {
+      $('#nameError').removeClass('d-none'); // Display the name error message
+      isValid = false;
+    } else {
+      $('#nameError').addClass('d-none'); // Hide the name error message
+    }
+
+    if (isValid) {
+      $('#formData').submit(); // Trigger the form submission if all fields are valid
+    }
+  });
+
+  // Add input event handlers to the name and email fields
+  $('#name').on('input', function() {
+    $('#nameError').addClass('d-none'); // Hide the name error message when input is provided
+  });
+
+  $('#email').on('input', function() {
+    $('#emailError').addClass('d-none'); // Hide the email error message when input is provided
+  });
+
+  // Add a change event handler to the client select element
+  $('#client_id').change(function() {
+    if ($(this).val() !== null) {
+      $('#clientError').addClass('d-none'); // Hide the error message when client is selected
+    }
+  });
+});
+
+// Email validation function
+function validateEmail(email) {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
+
+  </script>

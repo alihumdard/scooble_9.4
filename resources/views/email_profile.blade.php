@@ -7,12 +7,12 @@
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
         }
-        .container {
+        /* .container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             background-color: #ffffff;
-        }
+        } */
         h3 {
             color: #333333;
             margin-bottom: 20px;
@@ -41,10 +41,10 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="logo">
-            <img src="{{ $message->embed(public_path('assets/images/Logo.png')) }}" alt="logo" />
+<body style="background-color: #f9f9f9;">
+    <div class="container" style="text-align: center;">
+        <div class="logo" style="margin-left: 44%;">
+            <img src="{{ $message->embed(public_path('assets/images/scooble.png')) }}" alt="logo" />
         </div>
         <h3>Dear, {{ $emailData['name'] }} ali</h3>
         <div class="message">
