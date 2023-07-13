@@ -236,7 +236,11 @@ class APIController extends Controller
             $user->state              = $request->state;
             $user->reset_pswd_attempt = $request->reset_pswd_attempt;
             $user->reset_pswd_time    = $request->reset_pswd_time;
-            $user->added_user_id      = Auth::id();
+            if($user->added_user_id ){
+                $user->added_user_id      = $user->added_user_id;
+            }else{
+                $user->added_user_id      = Auth::id();
+            }
             $user->client_id          = $request->client_id;
             
             if ($request->password) {

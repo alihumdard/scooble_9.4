@@ -603,7 +603,7 @@
                         // $('#formData')[0].reset();
                         
                         const lastSegment = location.href.substring(location.href.lastIndexOf("/") + 1);
-
+                        
                         if(lastSegment =='settings' || lastSegment == 'announcements'){
                             setTimeout(function() {
                             window.location.href = window.location.href;
