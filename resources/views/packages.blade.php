@@ -24,7 +24,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-3">
-                      <label for="price"> @lang('lang.price'):</label>
+                      <label for="price"> @lang('lang.enter_price'):</label>
                       <input type="number" required name="price" id="price" value="{{ $package['price'] ?? '' }}" class="form-control" placeholder="@lang('lang.enter_price')">
                   </div>
                   <div class="col-lg-3">
