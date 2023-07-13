@@ -601,8 +601,16 @@
                     if (response.status === 'success') {
 
                         // $('#formData')[0].reset();
-                        $('#tableData').load(location.href + " #tableData > *");
-                        $('#formData').load(location.href + " #formData > *");
+                        
+                        const lastSegment = location.href.substring(location.href.lastIndexOf("/") + 1);
+
+                        if(lastSegment =='settings'){
+                            location.reload();
+                        }else{
+                            $('#tableData').load(location.href + " #tableData > *");
+                            $('#formData').load(location.href + " #formData > *");
+                        }
+                       
                         $('#addclient').modal('hide');
                         showAlert("Success", response.message, response.status);
                         // $('#formData').trigger('reset');

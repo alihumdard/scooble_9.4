@@ -74,6 +74,11 @@
             <input type="hidden" name="id" value="{{$user->id}}">
             <input type="hidden" name="role" value="{{$user->role}}">
             <input type="hidden" name="email" value="{{$user->email}}">
+            <input type="hidden" name="email" value="{{$user->email}}">
+            @if( $user->role == user_roles('3'))
+              <input type="hidden" id="client_id" name="client_id" value="{{isset($user->client_id) ? $user->client_id : ''}}">
+              <input type="hidden" id="added_user_id" name="added_user_id" value="{{isset($user->added_user_id) ? $user->added_user_id : ''}}">
+            @endif
             <div class="row mb-3">
               <div class="col-lg-12 text-center">
                 <div id="dropzone" class="dropzone">
