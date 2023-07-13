@@ -183,6 +183,8 @@ $user = User::find($user_id);
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+             
+             @if(view_permission('clients'))
               <div class="dropdown-divider"></div>
               <a class="dropdown-item preview-item" href="/client">
                 <div class="preview-thumbnail">
@@ -198,9 +200,12 @@ $user = User::find($user_id);
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.add_client')</p>
+                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.clients')</p>
                 </div>
               </a>
+             @endif
+
+             @if(view_permission('drivers'))
               <div class="dropdown-divider"></div>
               <a class="dropdown-item preview-item" href="/drivers">
                 <div class="preview-thumbnail">
@@ -217,9 +222,12 @@ $user = User::find($user_id);
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.add_driver')</p>
+                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.drivers')</p>
                 </div>
               </a>
+              @endif
+
+              @if(view_permission('routes'))
               <div class="dropdown-divider"></div>
               <a class="dropdown-item preview-item" href="/routes">
                 <div class="preview-thumbnail">
@@ -231,9 +239,12 @@ $user = User::find($user_id);
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.add_route')</p>
+                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.routes')</p>
                 </div>
               </a>
+              @endif
+
+              @if(view_permission('users'))
               <div class="dropdown-divider"></div>
               <a class="dropdown-item preview-item" href="/users">
                 <div class="preview-thumbnail">
@@ -246,9 +257,11 @@ $user = User::find($user_id);
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.add_user')</p>
+                  <p class="ellipsis mb-0 mx-4" style="color: #452C88;">@lang('lang.users')</p>
                 </div>
               </a>
+              @endif
+
               <div class="dropdown-divider"></div>
             </div>
           </li>
@@ -345,7 +358,7 @@ $user = User::find($user_id);
                 <path d="M5.14237 5.98446C4.61469 5.98446 4.13162 5.71825 3.77729 5.28788C3.40127 4.83115 3.16864 4.1931 3.16864 3.48206C3.16864 2.73797 3.24281 2.07559 3.53204 1.63218C3.79503 1.22902 4.28284 0.979618 5.14237 0.979618C6.00195 0.979618 6.48977 1.22902 6.75274 1.63218C7.04193 2.07557 7.11607 2.73797 7.11607 3.48206C7.11607 4.19315 6.88346 4.83118 6.50744 5.28792C6.15313 5.71827 5.67009 5.98446 5.14237 5.98446ZM3.02347 5.90778C3.56079 6.5604 4.3096 6.96408 5.14237 6.96408C5.97517 6.96408 6.72396 6.56041 7.26127 5.90781C7.7768 5.28162 8.0957 4.42355 8.0957 3.48206C8.0957 2.57365 7.98877 1.73985 7.57162 1.10029C7.1282 0.420497 6.38419 0 5.14237 0C3.90062 0 3.15662 0.420497 2.71318 1.10029C2.29599 1.73984 2.18903 2.57365 2.18903 3.48206C2.18903 4.42354 2.50793 5.28162 3.02347 5.90778Z" fill="white" />
                 <path d="M0.982648 11.7404C1.00385 10.4001 1.09307 9.5513 1.47643 9.02564C1.82673 8.5453 2.48539 8.26609 3.64459 8.03867C3.90819 8.24402 4.40047 8.52014 5.14238 8.52014C5.88438 8.52014 6.37671 8.244 6.64031 8.03865C7.38683 8.18514 7.92575 8.35323 8.30848 8.58278C8.18059 8.20153 8.09799 7.80454 8.06068 7.40337C7.64704 7.25757 7.15791 7.13877 6.57761 7.03403L6.29235 6.98254L6.11076 7.20814C6.11 7.20908 5.85092 7.54052 5.14237 7.54052C4.43396 7.54052 4.17487 7.20908 4.17411 7.20814L3.99253 6.98254L3.70726 7.03403C2.13658 7.31755 1.23347 7.70391 0.688143 8.45166C0.15285 9.18565 0.0311854 10.1865 0.00685173 11.7251L0.00576688 11.7924C0.00287438 11.9705 0 12.1469 0 12.1559L0.0574159 12.3836C0.0598745 12.3883 0.876932 14.0266 5.14236 14.0266C5.29525 14.0266 5.4432 14.0243 5.58736 14.0202C5.65512 13.6778 5.74807 13.3442 5.87641 13.0309C5.64669 13.0413 5.40255 13.047 5.14237 13.047C2.07971 13.047 1.19102 12.2702 0.979779 12.0112C0.980104 11.8958 0.980827 11.8524 0.98155 11.8077L0.982648 11.7404Z" fill="white" />
               </svg>
-              <span class="menu-title ml-2"> @lang('lang.client') </span>
+              <span class="menu-title ml-2"> @lang('lang.clients') </span>
             </a>
           </li>
           @endif
