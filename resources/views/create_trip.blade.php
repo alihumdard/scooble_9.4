@@ -199,7 +199,7 @@
                                     <tr>
                                         <td class="draggable-row">
                                             <div class="d-none">{{$address['id']}}</div>
-                                            <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="30" height="40" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <circle cx="19" cy="6" r="5.5" stroke="#230B34" />
                                                 <circle cx="1.875" cy="2.25" r="1.25" fill="#9FA2B4" />
                                                 <circle cx="5.625" cy="2.25" r="1.25" fill="#9FA2B4" />
@@ -254,6 +254,8 @@
                                     </tr>
                                     @endforeach
                                     @endisset
+                                    <br>
+                                    <br>
                                 </tbody>
 
                             </table>

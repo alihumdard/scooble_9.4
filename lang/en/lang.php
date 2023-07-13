@@ -201,5 +201,8 @@ return [
   "draggable_events" => "Draggable Events",
   "add_route" => "Add Route",
   "send" => "Send",
+  "select_client_error" => "Please Select a Client",
+  "name_error" => "Please enter a name",
+  "email_error" => "Please enter an email",
 
 ];

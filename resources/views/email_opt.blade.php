@@ -7,12 +7,12 @@
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
         }
-        .container {
+        /* .container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             background-color: #ffffff;
-        }
+        } */
         h1 {
             color: #333333;
             margin-bottom: 20px;
@@ -41,15 +41,17 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-    <div class="logo">
-            <img src="{{ $message->embed(public_path('assets/images/Logo.png')) }}" alt="logo" />
+<body style="background-color: #f9f9f9;">
+    <div class="container" style="text-align: center;">
+        <div class="logo" style="margin-left: 44%;">
+            <img src="{{ $message->embed(public_path('assets/images/scooble.png')) }}" alt="logo" />
         </div>
         <h3>Dear, {{ $emailData['name'] }}</h3>
         <div class="message">
             <p>{{ $emailData['body'] }}</p>
+            @if($emailData['otp'] !== 'Account Activation')
             <h3>Your OTP for verification is: <strong>{{ $emailData['otp'] }}</strong></h3>
+            @endif
         </div>
         <div class="footer">
             <h3>Thank you for choosing our services!</h3>
