@@ -21,19 +21,23 @@
                     <label for="title">@lang('lang.title'):</label>
                     <input type="hidden" name="id" id="id"  value="{{ $announcmnent['id'] ?? '' }}" >
                     <input type="text" name="title" id="title" class="form-control" value="{{ $announcmnent['title'] ?? '' }}" placeholder="@lang('lang.title')" required>
-                </div>
+                    <div class="text-danger error-message" id="title-error"></div>
+                  </div>
                 <div class="col-lg-2">
                     <label for="start_date">@lang('lang.start_date'):</label>
                     <input type="date" name="start_date" id="start_date" value="{{ $announcmnent['start_date'] ?? '' }}" class="form-control" placeholder="@lang('lang.start_date')" required>
-                </div>
+                    <div class="text-danger error-message" id="start-date-error"></div>
+                  </div>
                 <div class="col-lg-2">
                     <label for="end_date">@lang('lang.end_date'):</label>
                     <input type="date" name="end_date" id="end_date" value="{{ $announcmnent['end_date'] ?? '' }}" class="form-control" required>
-                </div>
+                    <div class="text-danger error-message" id="end-date-error"></div>
+                  </div>
                 <div class="col-lg-12 mt-2">
                     <label for="desc">@lang('lang.message'):</label>
                     <textarea name="desc" id="desc" cols="30"  class="form-control" placeholder="@lang('lang.message')..." required>{{ $announcmnent['desc'] ?? '' }}</textarea>
-                </div>
+                    <div class="text-danger error-message" id="desc-error"></div>
+                  </div>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
                     <script>
@@ -73,8 +77,9 @@
                     <input type="radio" name="type" id="type" required value="News" {{ ($announcmnent['type'] ?? '') === 'News' ? 'checked' : '' }}> @lang('lang.news')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <button class="btn px-5 text-white" name="submit" style="background-color: #E45F00; border-radius: 8px;">{{($announcmnent['id']  ?? '') !== '' ? __('lang.update') : __('lang.add')}} </button>
+                    <button class="btn px-5 text-white" name="submit" id="submitBtn" style="background-color: #E45F00; border-radius: 8px;">{{($announcmnent['id']  ?? '') !== '' ? __('lang.update') : __('lang.add')}} </button>
                 </div>
+                <div class="text-danger error-message" id="type-error"></div>
             </div>
         </form>
 
@@ -140,6 +145,77 @@
       </div>
     </div>
     <!-- content-wrapper ends -->
+    <script>
+  $(document).ready(function() {
+    // Add input event handler to clear error messages
+    $('#title, #start_date, #end_date, #desc').on('input', function() {
+      $(this).removeClass('is-invalid');
+      $(this).next('.error-message').text('');
+    });
+
+    $('#submitBtn').on('click', function(e) {
+      e.preventDefault();
+
+      // Reset the error messages and styles
+      $('.error-message').text('');
+      $('.is-invalid').removeClass('is-invalid');
+
+      // Flag to track if any validation error occurs
+      var hasErrors = false;
+
+      // Validate the title input
+      var titleInput = $('#title');
+      var titleError = $('#title-error');
+      if (titleInput.val().trim() === '') {
+        titleError.text('*Title is required.');
+        hasErrors = true;
+      }
+
+      // Validate the start date input
+      var startDateInput = $('#start_date');
+      var startDateError = $('#start-date-error');
+      if (startDateInput.val().trim() === '') {
+        startDateError.text('*Start date is required.');
+        hasErrors = true;
+      }
+
+      // Validate the end date input
+      var endDateInput = $('#end_date');
+      var endDateError = $('#end-date-error');
+      if (endDateInput.val().trim() === '') {
+        endDateError.text('*End date is required.');
+        hasErrors = true;
+      }
+
+      // Validate the description input
+      var descInput = $('#desc');
+      var descError = $('#desc-error');
+      if (descInput.val().trim() === '') {
+        descError.text('*Description is required.');
+        hasErrors = true;
+      }
+
+      var typeInput = $('#type');
+      var typeError = $('#type-error');
+      if (descInput.val().trim() === '') {
+        typeError.text('*Select one of them.');
+        hasErrors = true;
+      }
+
+      // Scroll to the first error message
+      if (hasErrors) {
+        $('html, body').animate({
+          scrollTop: $('.is-invalid:first').offset().top
+        }, 500);
+      } else {
+        // If no errors, allow form submission
+        $('#formData').submit();
+      }
+    });
+  });
+</script>
+
+
     <script>
   var today = new Date().toISOString().split('T')[0];
   document.getElementById("start_date").setAttribute("min", today);
