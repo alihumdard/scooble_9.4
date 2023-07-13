@@ -600,14 +600,12 @@
 
                     if (response.status === 'success') {
 
-                        $('#formData')[0].reset();
+                        // $('#formData')[0].reset();
+                        $('#tableData').load(location.href + " #tableData > *");
+                        $('#formData').load(location.href + " #formData > *");
                         $('#addclient').modal('hide');
                         showAlert("Success", response.message, response.status);
-
-                        setTimeout(function() {
-                            window.location.href = window.location.href;
-                        }, 1500);
-
+                        // $('#formData').trigger('reset');
                     }
                     
                     else if(response.status === 'error'){

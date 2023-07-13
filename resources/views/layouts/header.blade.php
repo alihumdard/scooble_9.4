@@ -168,7 +168,7 @@ $user = User::find($user_id);
           <li class="nav-item d-none d-lg-block mt-3">
             <form action="/lang_change" method="post">
               @csrf
-              <select id="lang-select" class="form-select" style="font-size: 12px;" name="lang" onchange="this.form.submit()">
+              <select id="lang-select" class="form-select" style="font-size: 11px;" name="lang" onchange="this.form.submit()">
                 <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
                 <option value="es" {{ session()->get('locale') == 'es' ? 'selected' : '' }}>Turkish</option>
               </select>
@@ -277,7 +277,7 @@ $user = User::find($user_id);
             <a class="nav-link count-indicator dropdown-toggle mx-1" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <div class="nav-profile-image">
                 <div class="preview-thumbnail">
-                  <img style="border-radius: 50% !important; width: 35px;  height: 35px;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
+                  <img style="border-radius: 50% !important; width: 31px;  height: 31px;" src="{{ (isset($user->user_pic)) ? asset('storage/' . $user->user_pic) : 'assets/images/user.png'}}" alt="profile">
                 </div>
               </div>
             </a>
@@ -532,6 +532,7 @@ $user = User::find($user_id);
           </li>
           @endif
         </ul>
+        <p class="text-center" style="font-size: 0.875rem;">v 1.0.0</p>
       </nav>
 
       <script>

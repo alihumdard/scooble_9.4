@@ -72,7 +72,7 @@
               <table id="users-table" class="display" style="width:100%">
                 <thead class="text-secondary" style="background-color: #E9EAEF;">
                   <tr style="font-size: small;">
-                    <th>@lang('lang.sr').</th>
+                    <th>#</th>
                     <th> @lang('lang.name') </th>
                     <th> @lang('lang.address') </th>
                     <th> @lang('lang.company_name') </th>
@@ -81,7 +81,7 @@
                     <th>@lang('lang.actions')</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableData">
 
                   @foreach($data as $key => $value)
                   <tr style="font-size: small;">
