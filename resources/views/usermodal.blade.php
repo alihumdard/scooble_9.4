@@ -88,7 +88,7 @@
                 <label for="phone">@lang('lang.phone')</label>
                 <input type="tel" name="phone" id="phone" class="form-control" require>
               </div>
-              @if($add_as_user !== user_roles('3'))
+              @if($add_as_user == user_roles('2'))
               <div class="col-lg-6 mt-2">
                 <label for="com_name">@lang('lang.company_name')</label>
                 <input type="text" name="com_name" id="com_name" class="form-control" require>
