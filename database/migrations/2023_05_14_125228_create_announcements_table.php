@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('desc');
             $table->string('type');
-            $table->datetime('start_date');
-            $table->datetime('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('status')->default('on');
             $table->integer('created_by');
             $table->timestamps();
