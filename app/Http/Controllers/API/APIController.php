@@ -205,8 +205,8 @@ class APIController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'com_pic' => 'image',
-            'user_pic' => 'image',
+            'com_pic' => 'image|max:1024',
+            'user_pic' => 'image|max:1024',
             'email' => [
                 'required',
                 'email',

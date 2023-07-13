@@ -594,9 +594,10 @@
                     showlogin('Wait', 'saving......');
                 },
                 success: function(response) {
-                    // console.log(response);
-                    button.prop('disabled', false);
-                    // console.log(formData);
+
+                    $('#spinner').addClass('d-none');
+                    $('#add_btn').removeClass('d-none').prop('disabled', false);
+
                     if (response.status === 'success') {
 
                         $('#formData')[0].reset();
@@ -610,7 +611,8 @@
                     }
                     
                     else if(response.status === 'error'){
-
+                       
+                        showAlert("Warning", "Please fill the form correctly", response.status);
                         console.log(response.message);
                         $('.error-label').remove();
 
