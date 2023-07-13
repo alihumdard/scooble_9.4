@@ -141,8 +141,7 @@
                         </svg>
                       </button>
                       @endif
-                      @if($value['status'] != 'on')
-                      <button class="btn p-0">
+                      <button class="btn p-0" onclick="window.location.href='{{ asset('storage/pdf_templates.pdf') }}'" download>
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <circle opacity="0.1" cx="18" cy="18" r="18" fill="#452C88" />
                           <path d="M23.2857 12.8571V12H20.7143V16.2857H21.5714V14.5714H22.8572V13.7143H21.5714V12.8571H23.2857Z" fill="#452C88" />
@@ -152,7 +151,6 @@
                           <path d="M15.1429 12H13V16.2857H13.8571V15H15.1429C15.3701 14.9997 15.5879 14.9093 15.7486 14.7486C15.9093 14.5879 15.9997 14.3701 16 14.1429V12.8571C15.9998 12.6299 15.9094 12.412 15.7487 12.2513C15.588 12.0907 15.3701 12.0003 15.1429 12ZM13.8571 14.1429V12.8571H15.1429L15.1433 14.1429H13.8571Z" fill="#452C88" />
                         </svg>
                       </button>
-                      @endif
 
                       @if($user->role == 'Driver')
                       <form method="POST" action="/driver_map" class="mb-0">

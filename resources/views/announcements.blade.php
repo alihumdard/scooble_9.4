@@ -20,19 +20,19 @@
                 <div class="col-lg-8">
                     <label for="title">@lang('lang.title'):</label>
                     <input type="hidden" name="id" id="id"  value="{{ $announcmnent['id'] ?? '' }}" >
-                    <input type="text" name="title" id="title" class="form-control" value="{{ $announcmnent['title'] ?? '' }}" placeholder="@lang('lang.title')">
+                    <input type="text" name="title" id="title" class="form-control" value="{{ $announcmnent['title'] ?? '' }}" placeholder="@lang('lang.title')" required>
                 </div>
                 <div class="col-lg-2">
                     <label for="start_date">@lang('lang.start_date'):</label>
-                    <input type="datetime-local" name="start_date" id="start_date" value="{{ $announcmnent['start_date'] ?? '' }}" class="form-control" placeholder="@lang('lang.start_date')">
+                    <input type="date" name="start_date" id="start_date" value="{{ $announcmnent['start_date'] ?? '' }}" class="form-control" placeholder="@lang('lang.start_date')" required>
                 </div>
                 <div class="col-lg-2">
                     <label for="end_date">@lang('lang.end_date'):</label>
-                    <input type="datetime-local" name="end_date" id="end_date" value="{{ $announcmnent['end_date'] ?? '' }}" class="form-control">
+                    <input type="date" name="end_date" id="end_date" value="{{ $announcmnent['end_date'] ?? '' }}" class="form-control" required>
                 </div>
                 <div class="col-lg-12 mt-2">
                     <label for="desc">@lang('lang.message'):</label>
-                    <textarea name="desc" id="desc" cols="30"  class="form-control" placeholder="@lang('lang.message')...">{{ $announcmnent['desc'] ?? '' }}</textarea>
+                    <textarea name="desc" id="desc" cols="30"  class="form-control" placeholder="@lang('lang.message')..." required>{{ $announcmnent['desc'] ?? '' }}</textarea>
                 </div>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
@@ -58,19 +58,19 @@
                               });
                     </script>
                 <div class="col-lg-2 mt-4 text-center">
-                    <input type="radio" name="type" id="type" value="Mandatory" {{ ($announcmnent['type'] ?? '') === 'Mandatory' ? 'checked' : '' }}> @lang('lang.mandatory')
+                    <input type="radio" name="type" id="type" required value="Mandatory" {{ ($announcmnent['type'] ?? '') === 'Mandatory' ? 'checked' : '' }}> @lang('lang.mandatory')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <input type="radio" name="type" id="type" value="Warning" {{ ($announcmnent['type'] ?? '') === 'Warning' ? 'checked' : '' }}> @lang('lang.warning')
+                    <input type="radio" name="type" id="type" required value="Warning" {{ ($announcmnent['type'] ?? '') === 'Warning' ? 'checked' : '' }}> @lang('lang.warning')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <input type="radio" name="type" id="type" value="Promotion" {{ ($announcmnent['type'] ?? '') === 'Promotion' ? 'checked' : '' }}> @lang('lang.promotion')
+                    <input type="radio" name="type" id="type" required value="Promotion" {{ ($announcmnent['type'] ?? '') === 'Promotion' ? 'checked' : '' }}> @lang('lang.promotion')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <input type="radio" name="type" id="type" value="Maintenance" {{ ($announcmnent['type'] ?? '') === 'Maintenance' ? 'checked' : '' }}> @lang('lang.maintenance')
+                    <input type="radio" name="type" id="type" required value="Maintenance" {{ ($announcmnent['type'] ?? '') === 'Maintenance' ? 'checked' : '' }}> @lang('lang.maintenance')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
-                    <input type="radio" name="type" id="type" value="News" {{ ($announcmnent['type'] ?? '') === 'News' ? 'checked' : '' }}> @lang('lang.news')
+                    <input type="radio" name="type" id="type" required value="News" {{ ($announcmnent['type'] ?? '') === 'News' ? 'checked' : '' }}> @lang('lang.news')
                 </div>
                 <div class="col-lg-2 mt-4 text-center">
                     <button class="btn px-5 text-white" name="submit" style="background-color: #E45F00; border-radius: 8px;">{{($announcmnent['id']  ?? '') !== '' ? __('lang.update') : __('lang.add')}} </button>
@@ -85,7 +85,7 @@
               <table id="users-table" class="display" style="width:100%">
                 <thead class="text-secondary" style="background-color: #E9EAEF;">
                   <tr style="font-size: small;">
-                    <th>@lang('lang.sr').</th>
+                    <th>#</th>
                     <th> @lang('lang.title') </th>
                     <th> @lang('lang.description') </th>
                     <th> @lang('lang.type') </th>
@@ -94,7 +94,7 @@
                     <th>@lang('lang.actions')</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableData">
 
                   @foreach($data as $key => $value)
                   <tr style="font-size: small;">
@@ -140,7 +140,17 @@
       </div>
     </div>
     <!-- content-wrapper ends -->
+    <script>
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("start_date").setAttribute("min", today);
+</script>
+<script>
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
+  var endDateInput = document.getElementById("end_date");
+  endDateInput.setAttribute("min", tomorrow.toISOString().split('T')[0]);
+</script>
     <script>
       // Function to scroll to the form
       function scrollToForm() {
