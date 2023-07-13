@@ -329,7 +329,7 @@ $user = User::find($user_id);
                 <span class="login-status online"></span>
                 <!--change to offline or busy as needed-->
               </div>
-              <div class="nav-profile-text d-flex flex-column">
+              <div class="nav-profile-text d-flex flex-column text-wrap">
                 <span class="font-weight-bold mb-2">{{(isset($user->name)) ? $user->name : 'Guest'}}</span>
                 <span class="text-secondary text-small">{{(isset($user->role)) ? $user->role : 'Guest'}}</span>
               </div>

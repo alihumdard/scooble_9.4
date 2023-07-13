@@ -203,5 +203,6 @@ return [
   "select_client_error" => "Lütfen bir Müşteri Seçin",
   "name_error" => "Lütfen bir ad girin",
   "email_error" => "Lütfen bir e-posta girin",
+  "price" => "Fiyat",
 
 ];

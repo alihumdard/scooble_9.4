@@ -363,7 +363,7 @@ $(document).ready(function() {
 -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.3);">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h6 class="mb-0" style="color: #452C88;">@lang('active_routes')</h6>
+                                    <h6 class="mb-0" style="color: #452C88;">@lang('lang.active_routes')</h6>
                                     <h5 class="mb-0" style="color: #E45F00;">10</h5>
                                 </div>
                                 <div>

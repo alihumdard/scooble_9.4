@@ -189,6 +189,7 @@ return [
   "select_client" => "Select Client",
   "download_sample" => "Download sample",
   "enter_price" => "Enter price",
+  "price" => "Price",
   "enter_users" => "Enter Users",
   "enter_drivers" => "Enter Drivers",
   "map_api_call" => "Map API Call",
