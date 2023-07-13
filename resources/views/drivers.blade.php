@@ -86,7 +86,7 @@
                     <th>@lang('lang.actions')</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableData">
                   @foreach($data as $key => $value)
                   <tr style="font-size: small;">
                     <td>{{++$key}}</td>

@@ -104,7 +104,6 @@
                 <!-- <input type="text" name="note" id="note" class="form-control" require> -->
               </div>
               @endif
-              <div class="col-lg-6"></div>
               <div class="col-lg-6 mt-3">
                 <div class="row py-4">
                   <div class="col-lg-6">
